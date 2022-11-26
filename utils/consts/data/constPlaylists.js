@@ -1,4 +1,4 @@
-import { API_BASE_URL_DEV, API_BASE_URL_PROD } from '../outros/urlApi';
+import { API_BASE_URL_DEV, API_BASE_URL_PROD } from '../../api/urlApi';
 
 const ENDPOINTS = {
     GET_TODOS: 'api/Playlists/todos',

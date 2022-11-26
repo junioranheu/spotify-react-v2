@@ -1,4 +1,4 @@
-import Styles from '../styles/home.module.css';
+import Styles from '../styles/home.module.scss';
 
 export default function Index() {
     return (
