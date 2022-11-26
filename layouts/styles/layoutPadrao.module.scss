@@ -1,6 +1,11 @@
 .wrapper {
     // background-color: red !important;
     display: flex;
+
+    .div100 {
+        // background-color: red;
+        width: 100%;
+    }
 }
 
 /* =-=-=-=-=-=-=-=-=-=-=-=- Media queries =-=-=-=-=-=-=-=-=-=-=-=- */

@@ -21,7 +21,7 @@ export default function LayoutPadrao({ Component, pageProps }: any) {
             <section className={Styles.wrapper}>
                 <Sidebar />
 
-                <section>
+                <section className={Styles.div100}>
                     <NavbarPadrao />
                     <Component {...pageProps} />
                 </section>
