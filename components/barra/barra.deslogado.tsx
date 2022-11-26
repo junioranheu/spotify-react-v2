@@ -1,5 +1,5 @@
 import Botao from '../../components/outros/botao';
-import Styles from './styles/barra.deslogado.module.scss';
+import Styles from './barra.deslogado.module.scss';
 
 export default function BarraDeslogado() {
     return (
