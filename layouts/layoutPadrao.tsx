@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import Barra from '../components/barra/barra';
 import NavbarPadrao from '../components/navbar/navbar-padrao/navbar-padrao';
 import Sidebar from '../components/navbar/sidebar/sidebar';
+import Loop from '../components/svg/barra.player/loop';
 import verificarTokenValido from '../utils/api/verificarTokenValido';
 import { UsuarioContext } from '../utils/context/usuarioContext';
 import Styles from './styles/LayoutPadrao.module.scss';
@@ -20,6 +21,8 @@ export default function LayoutPadrao({ Component, pageProps }: any) {
         <section className='main semHighlight'>
             <section className={Styles.wrapper}>
                 <Sidebar />
+
+                <Loop cor={'black'} />
 
                 <section className={Styles.div100}>
                     <NavbarPadrao />

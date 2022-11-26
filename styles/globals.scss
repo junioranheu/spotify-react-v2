@@ -241,6 +241,13 @@ img {
     }
 }
 
+.svg16px {
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+  }
+
 /* =-=-=-=-=-=-=-=-=-=-= Scroll =-=-=-=-=-=-=-=-=-=-= */
 body::-webkit-scrollbar {
     width: 0px !important;
