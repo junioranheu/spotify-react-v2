@@ -24,6 +24,7 @@ body {
     scroll-behavior: smooth !important;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     overflow-x: hidden !important;
+    overflow-y: hidden !important;
 }
 
 .main {
@@ -192,27 +193,28 @@ img {
     display: flex;
     overflow: hidden;
     height: 40px;
-    padding: 0 1em;
+    margin: 8px 0 12px;
+    padding: 8px 48px;
     border: none;
-    margin: 0;
-    background: var(--cor-principal-gradient);
-    border-radius: 2px;
-    /* color: var(--branco); */
-    color: #FFFFFF;
+    background: var(--branco);
+    border-radius: 500px;
+    color: var(--preto);
     cursor: pointer;
     font: inherit;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 180px;
     white-space: nowrap;
     outline: none;
     place-content: center;
     place-items: center;
     -webkit-transition: opacity .2s;
     transition: opacity .2s;
+    text-transform: uppercase;
 
     &:hover {
-        opacity: 0.5;
+        transform: scale(1.05);
+        transition: all 0.3s;
     }
 
     &:disabled {

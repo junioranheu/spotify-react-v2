@@ -14,7 +14,7 @@ export default function Sidebar() {
     return (
         <Resizable
             defaultSize={{
-                width: 280,
+                width: 300,
                 height: 0
             }}
 

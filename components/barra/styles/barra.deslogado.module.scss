@@ -1,0 +1,109 @@
+/* =-=-=-=-=-=-=-=-=-=-= Deslogado =-=-=-=-=-=-=-=-=-=-= */
+.barraDeslogado {
+    background-image: linear-gradient(90deg, #af2896, #509bf5);
+
+    position: fixed;
+    bottom: 0;
+
+    width: 100vw;
+    height: 85px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+
+    padding-left: 40px;
+    padding-right: 40px;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    span {
+        // background-color: pink; 
+        color: #fff;
+        font-size: 1rem;
+        letter-spacing: normal;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .titulo {
+        font-size: 0.85rem !important;
+        text-transform: uppercase;
+    }
+
+    .botaoCustom {
+        button {
+            color: #2e77d0;
+        }
+    }
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=- Media queries =-=-=-=-=-=-=-=-=-=-=-=- */
+/* hi-res laptops and desktops */
+@media (max-width:1281px) {}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width:1025px) {
+    .barraDeslogado {
+        .botaoCustom {
+            button {
+                width: 220px;
+                font-size: 11px;
+            }
+        }
+
+        .titulo {
+            display: none !important;
+        }
+
+        .barraDeslogado {
+            span {
+                /* Reticências após a segunda linha */
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width:801px) {
+    .barraDeslogado {
+        .divEsquerda {
+            display: none;
+        }
+
+        .botaoCustom {
+            margin: auto !important;
+
+            button {
+                width: 300px;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (max-width:600px) {}
+
+/* smartphones, Android phones, landscape iPhone */
+@media (max-width:480px) {
+    .barraDeslogado {
+        .botaoCustom {
+            button {
+                width: 80vw;
+                font-size: 10px;
+            }
+        }
+    }
+}
