@@ -1,0 +1,90 @@
+.sidebar {
+    background-color: var(--super-preto);
+    width: 100%;
+    height: 100vh;
+
+    color: var(--branco);
+
+    padding-left: 1.55rem;
+    padding-right: 1.55rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.4rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    span {
+        /* background-color: pink; */
+        font-size: 0.875rem;
+        line-height: 1rem;
+        text-transform: none;
+        letter-spacing: normal;
+        font-weight: 600;
+        opacity: 0.8;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+            -webkit-transition: opacity .3s;
+            transition: opacity .3s;
+            opacity: 1;
+        }
+    }
+
+    .divIcones {
+        // background-color: red;
+        margin-top: 1rem;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        span,
+        a {
+            // background-color: pink;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .quadrado {
+            max-width:  1.5rem;
+            max-height: 1.5rem;
+            min-width: 1.5rem;
+            min-height: 1.5rem;
+            border-radius: 1px;
+
+            display: flex;
+            justify-content: center;
+
+            &.quadradoBranco {
+                background: #fff;
+            }
+
+            &.quadradoColorido {
+                background: linear-gradient(135deg, #450af5, #c4efd9);
+            }
+        }
+    }
+
+    .divisao {
+        border-bottom: 1px solid rgba(42, 42, 42, 100);
+        margin-top: 0.95rem;
+        margin-bottom: 0.95rem;
+    }
+
+    .divPlaylists {
+        // background-color: blue; 
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+
+        span {
+            font-weight: 400;
+        }
+    }
+}

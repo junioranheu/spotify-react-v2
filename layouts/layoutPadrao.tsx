@@ -1,8 +1,10 @@
 import { useContext, useEffect } from 'react';
-// import Footer from '../components/footer/footer';
-// import NavbarPadrao from '../components/navbar/padrao/navbar.padrao';
+import NavbarPadrao from '../components/navbar/navbar-padrao/navbar-padrao';
+import Sidebar from '../components/navbar/sidebar/sidebar';
+import Player from '../components/player/player/player';
 import verificarTokenValido from '../utils/api/verificarTokenValido';
 import { UsuarioContext } from '../utils/context/usuarioContext';
+import Styles from './styles/LayoutPadrao.module.scss';
 
 export default function LayoutPadrao({ Component, pageProps }: any) {
 
@@ -16,13 +18,15 @@ export default function LayoutPadrao({ Component, pageProps }: any) {
 
     return (
         <section className='main semHighlight'>
-            {/* <NavbarPadrao /> */}
+            <section className={Styles.wrapper}>
+                <Sidebar />
 
-            <section className='sessaoPrincipal'>
-                <Component {...pageProps} />
+                <section>
+                    <NavbarPadrao />
+                    <Component {...pageProps} />
+                    <Player />
+                </section>    
             </section>
-
-            {/* <Footer /> */}
         </section>
     )
 }

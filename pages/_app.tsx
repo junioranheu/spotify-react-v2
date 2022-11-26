@@ -13,7 +13,6 @@ export default function App({ Component, pageProps }: AppProps) {
     const { asPath } = useRouter();
     const [url, setUrl] = useState('');
     useEffect(() => {
-        // Setar url no Hook, para usar em verificarLayout();
         setUrl(asPath);
     }, [asPath]);
 
@@ -37,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Head>
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
                     <meta name='description' content={`${CONSTS_SISTEMA.NOME_SISTEMA} — ${CONSTS_SISTEMA.SLOGAN}`} />
-                    <meta name='keywords' content='geek, produtos, compra, troca, venda, e-commerce' />
+                    <meta name='keywords' content='spotify, música, anheu, junioranheu' />
                     <meta name='author' content='@junioranheu' />
                     <meta name='theme-color' content='#99FDAD' />
                 </Head>
