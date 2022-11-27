@@ -4,7 +4,7 @@ import NavbarPadrao from '../components/navbar/navbar-padrao/navbar-padrao';
 import Sidebar from '../components/navbar/sidebar/sidebar';
 import verificarTokenValido from '../utils/api/verificarTokenValido';
 import { UsuarioContext } from '../utils/context/usuarioContext';
-import Styles from './styles/LayoutPadrao.module.scss';
+import Styles from './styles/layoutPadrao.module.scss';
 
 export default function LayoutPadrao({ Component, pageProps }: any) {
 
