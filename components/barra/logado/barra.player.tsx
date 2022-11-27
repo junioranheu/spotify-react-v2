@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 import TesteImagem from '../../../assets/image/cinza.webp';
+import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
 import Coracao from '../../outros/coracao';
 import Aleatorio from '../../svg/barra.player/aleatorio';
@@ -17,6 +18,7 @@ import Loop from '../../svg/barra.player/loop';
 import Microfone from '../../svg/barra.player/microfone';
 import Toggle from '../../svg/barra.player/toggle';
 import Styles from './barra.player.module.scss';
+import ProgressBarPlayer from './outros/progressBar.player';
 import ProgressBarVolume from './outros/progressBar.volume';
 import ProgressBarVolumeIcone from './outros/progressBar.volume.icone';
 
@@ -117,15 +119,7 @@ export default function BarraPlayer() {
                 </div>
 
                 <div className={Styles.divPlayerInner}>
-                    {/* <ProgressBarPlayer
-                        isPlaying={isPlaying}
-                        volume={volume}
-                        arquivoMusica={arquivoMusica}
-                        musicaContext={musicaContext}
-                        handleAvancar={handleAvancar}
-                        isModoLoop={isModoLoop}
-                        isPodeAvancar={isPodeAvancar}
-                    /> */}
+                    <ProgressBarPlayer />
                 </div>
             </div>
 
@@ -136,8 +130,8 @@ export default function BarraPlayer() {
                 </span>
 
                 <span className={Styles.spanIcone} title='Visualizar fila'>
-                    <Link href={'/fila'}>
-                        <Fila cor={(url === '/fila' ? 'var(--cor-principal)' : '')} />
+                    <Link href={CONSTS_TELAS.FILA}>
+                        <Fila cor={(url === CONSTS_TELAS.FILA ? 'var(--cor-principal)' : '')} />
                     </Link>
                 </span>
 

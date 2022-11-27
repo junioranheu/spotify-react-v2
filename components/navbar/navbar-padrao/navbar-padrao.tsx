@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import { Fragment, useContext, useEffect, useState } from 'react';
+import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { Auth, UsuarioContext } from '../../../utils/context/usuarioContext';
 import Botao from '../../outros/botao';
 import SetinhaBaixo from '../../svg/setinhaBaixo';
@@ -43,7 +44,7 @@ export default function NavbarPadrao() {
     return (
         <nav className={Styles.navbar}>
             <div className={Styles.exibirLogoSeWidthPequeno}>
-                <Link href={'/'}><SpotifyLogo width='100px' /></Link>
+                <Link href={CONSTS_TELAS.INDEX}><SpotifyLogo width='100px' /></Link>
             </div>
 
             <div className={Styles.divDireita}>
@@ -67,7 +68,7 @@ export default function NavbarPadrao() {
                         </Fragment>
                     ) : (
                         <div className={Styles.botaoCustom}>
-                            <Botao texto='Entrar' url='/entrar' isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
+                            <Botao texto='Entrar' url={CONSTS_TELAS.ENTRAR} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
                         </div>
                     )
                 }

@@ -1,4 +1,5 @@
 import Botao from '../../../components/outros/botao';
+import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import Styles from './barra.deslogado.module.scss';
 
 export default function BarraDeslogado() {
@@ -10,7 +11,7 @@ export default function BarraDeslogado() {
             </div>
 
             <div className={Styles.botaoCustom}>
-                <Botao texto='Registre-se já gratuitamente' url='/entrar' isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
+                <Botao texto='Registre-se já gratuitamente' url={CONSTS_TELAS.ENTRAR} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
             </div>
         </section>
     )

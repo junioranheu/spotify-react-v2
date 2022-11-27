@@ -1,6 +1,7 @@
 import { loremIpsum } from 'lorem-ipsum';
 import Link from 'next/link';
 import { Resizable } from 're-resizable';
+import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import Biblioteca from '../../svg/biblioteca';
 import Casa from '../../svg/casa';
 import Coracao from '../../svg/coracao';
@@ -24,12 +25,12 @@ export default function Sidebar() {
         >
             <aside className={Styles.sidebar}>
                 <div>
-                    <Link href={'/'}><SpotifyLogo width='130px' /></Link>
+                    <Link href={CONSTS_TELAS.INDEX}><SpotifyLogo width='130px' /></Link>
                 </div>
 
                 <div className={Styles.divIcones}>
                     <span>
-                        <Link href={'/'}>
+                        <Link href={CONSTS_TELAS.INDEX}>
                             <Casa width='24px' /> <span>Início</span>
                         </Link>
                     </span>
@@ -39,7 +40,7 @@ export default function Sidebar() {
                     </span>
 
                     <span>
-                        <Link href={'/fila'}>
+                        <Link href={CONSTS_TELAS.FILA}>
                             <Biblioteca width='24px' /> <span>Sua fila</span>
                         </Link>
                     </span>
@@ -70,10 +71,10 @@ export default function Sidebar() {
                 <div className={Styles.divisao}></div>
 
                 <div className={Styles.divPlaylists}>
-                    <span><Link href={'/'}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
-                    <span><Link href={'/'}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
-                    <span><Link href={'/'}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
-                    <span><Link href={'/'}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
                 </div>
             </aside>
         </Resizable>
