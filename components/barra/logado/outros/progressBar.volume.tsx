@@ -15,6 +15,8 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
     const [volumeControleInterno, setVolumeControleInterno] = useState<number>(0);
     const [widthElemento, setWidthElemento] = useState<number>(0);
 
+    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
+    // Função utilizada no inicio e no resize;
     function conteudoSetWidthElementoEVolumeControleInterno() {
         // Pegar uma vez o tamanho do elemento;
         var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
@@ -39,6 +41,8 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
         conteudoSetWidthElementoEVolumeControleInterno();
     }, [tamanhoTela?.width]);
 
+    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
+    // Função utilizada no click e no bindProgressBar;
     function conteudoHandleClickEHandleMouseMove(e: any) {
         e.preventDefault();
         var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
@@ -72,16 +76,16 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
     }
 
     const callback = useCallback((e: any) => {
-        console.log('Long pressed!');
+        // console.log('Click longo ativado! - Infelizmente é necessário manter esse callback "inútil" para que o bind funcione');
     }, []);
 
     const [isMoving, setIsMoving] = useState<boolean>(false);
-    const bindProgressBar = useLongPress(callback, {
+    const bindProgressBar = useLongPress((callback), {
         onStart: event => setIsMoving(true),
         onFinish: event => setIsMoving(false),
         onCancel: event => setIsMoving(false),
         onMove: event => (isMoving && conteudoHandleClickEHandleMouseMove(event)),
-        filterEvents: event => true, 
+        filterEvents: event => true,
         threshold: 500,
         captureEvent: true,
         cancelOnMovement: false
