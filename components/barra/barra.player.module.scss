@@ -1,0 +1,218 @@
+/* =-=-=-=-=-=-=-=-=-=-= Player (usuário logado) =-=-=-=-=-=-=-=-=-=-= */
+.barraPlayer {
+    background-color: var(--preto);
+
+    position: fixed;
+    bottom: 0;
+
+    width: 100vw;
+    height: 5.3125rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-top: 1px solid #282828;
+
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    svg {
+        fill: #B3B3B3;
+        cursor: pointer;
+
+        &:hover {
+            fill: #FFFFFF;
+        }
+    }
+
+    .spanIcone {
+        // background-color: purple;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Div 1 =-=-=-=-=-=-=-=-=-=-= */
+.divInfo {
+    background-color: pink;
+    width: 33%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0px;
+
+    .divInner {
+        background-color: red !important;
+        display: flex;
+        justify-content: center;
+
+        margin-right: 5px;
+    }
+
+    .iconeCoracao {
+        background-color: rebeccapurple;
+        margin-left: 10px;
+    }
+
+    img {
+        cursor: pointer;
+    }
+
+    .infoMusica {
+        background-color: blue !important;
+        margin-left: 10px;
+
+        /* min-width: 150px !important; */
+        max-width: 150px !important;
+
+        display: flex;
+        flex-direction: column;
+
+        .infoTitulo {
+            /* color: peru !important; */
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-size: 0.85rem;
+            line-height: 1.1rem;
+            font-weight: 400;
+            color: var(--branco);
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+
+        .infoDescricao {
+            /* color: red !important; */
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-size: 0.6875rem;
+            line-height: 1rem;
+            font-weight: 400;
+            color: #b3b3b3;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Div 2 =-=-=-=-=-=-=-=-=-=-= */
+.divPlayer {
+    /* background-color: red !important; */
+    width: 33%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .divPlayerIcones {
+        // background-color: pink;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .btnPlay {
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        align-items: center;
+        background-color: #fff;
+        border: none;
+        border-radius: 32px;
+        color: #000;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        -webkit-transition: none 33ms cubic-bezier(.3, 0, .7, 1);
+        transition: none 33ms cubic-bezier(.3, 0, .7, 1);
+        -webkit-transition-property: all;
+        transition-property: all;
+        min-width: 30px;
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+
+        &:active {
+            -webkit-transform: scale(.9);
+            transform: scale(.9);
+        }
+    }
+
+    .divPlayerInner {
+        /* background-color: pink; */
+        width: 100%;
+        margin-top: 8px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 15px;
+    }
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Div 3 =-=-=-=-=-=-=-=-=-=-= */
+.divOpcoes {
+    /* background-color: blue; */
+    width: 33%;
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+
+    .divVolume {
+        /* background-color: pink; */
+        width: 120px;
+        margin-left: 5px;
+        margin-right: 5px;
+
+        display: flex;
+        align-items: center;
+    }
+
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=- Media queries =-=-=-=-=-=-=-=-=-=-=-=- */
+/* hi-res laptops and desktops */
+@media (max-width:1281px) {}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width:1025px) {
+    .barraPlayer {
+        // background-color: pink;
+        overflow-x: auto !important;
+    }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width:801px) {}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (max-width:600px) {}
+
+/* smartphones, Android phones, landscape iPhone */
+@media (max-width:480px) {}

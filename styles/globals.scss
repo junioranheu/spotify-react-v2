@@ -187,6 +187,33 @@ img {
     line-height: 1.3;
 }
 
+/* =-=-=-=-=-=-=-=-=-=-= Coração =-=-=-=-=-=-=-=-=-=-= */
+.coracao {
+    /* background-color: red; */
+    background-image: url('../assets/image/coracao-animacao.png');
+    background-repeat: no-repeat;
+    background-size: 2900%;
+    background-position: left;
+    height: 50px;
+    width: 50px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.animarCoracao {
+    animation: heart-burst .8s steps(28) forwards;
+}
+
+@keyframes heart-burst {
+    0% {
+        background-position: left;
+    }
+
+    100% {
+        background-position: right;
+    }
+}
+
 /* =-=-=-=-=-=-=-=-=-=-= Botão =-=-=-=-=-=-=-=-=-=-= */
 .botao {
     position: relative;
@@ -246,7 +273,7 @@ img {
     min-height: 16px;
     max-width: 16px;
     max-height: 16px;
-  }
+}
 
 /* =-=-=-=-=-=-=-=-=-=-= Scroll =-=-=-=-=-=-=-=-=-=-= */
 body::-webkit-scrollbar {
