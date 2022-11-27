@@ -1,19 +1,38 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment } from 'react';
-import TesteImagem from '../../assets/image/cinza.webp';
-import handleFullScreen from '../../utils/outros/handleFullScreen';
-import Coracao from '../outros/coracao';
-import BotaoAvancar from '../svg/barra.player/botaoAvancar';
-import BotaoPlay from '../svg/barra.player/botaoPlay';
-import BotaoVoltar from '../svg/barra.player/botaoVoltar';
-import Dispositivo from '../svg/barra.player/dispositivo';
-import FullScreen from '../svg/barra.player/fullscreen';
-import Microfone from '../svg/barra.player/microfone';
-import Toggle from '../svg/barra.player/toggle';
+import { useRouter } from 'next/router';
+import { Fragment, useEffect, useState } from 'react';
+import TesteImagem from '../../../assets/image/cinza.webp';
+import handleFullScreen from '../../../utils/outros/handleFullScreen';
+import Coracao from '../../outros/coracao';
+import BotaoAvancar from '../../svg/barra.player/botaoAvancar';
+import BotaoPlay from '../../svg/barra.player/botaoPlay';
+import BotaoVoltar from '../../svg/barra.player/botaoVoltar';
+import Dispositivo from '../../svg/barra.player/dispositivo';
+import Fila from '../../svg/barra.player/fila';
+import FullScreen from '../../svg/barra.player/fullscreen';
+import Microfone from '../../svg/barra.player/microfone';
+import Toggle from '../../svg/barra.player/toggle';
+import Volume1 from '../../svg/barra.player/volume1';
+import Volume2 from '../../svg/barra.player/volume2';
+import Volume3 from '../../svg/barra.player/volume3';
+import Volume4 from '../../svg/barra.player/volume4';
 import Styles from './barra.player.module.scss';
+import ProgressBarVolume from './outros/progressBar.volume';
 
 export default function BarraPlayer() {
+
+    const asPath = useRouter();
+    const [url, setUrl] = useState('');
+    useEffect(() => {
+        setUrl(asPath.pathname);
+    }, [asPath]);
+
+    const [volume, setVolume] = useState(50);
+    function handleVolume(vol: number) {
+        setVolume(Math.floor(vol));
+    }
+
     return (
         <section className={Styles.barraPlayer}>
             {/* =-=-=-=-=-=-=-=-=-=-=-= Primeira div, esquerda =-=-=-=-=-=-=-=-=-=-=-= */}
@@ -21,28 +40,24 @@ export default function BarraPlayer() {
                 {
                     // musicaContext?.musicaId > 0 && (
                     <Fragment>
-                        <div className={Styles.divInner}>
-                            <div>
-                                <Image src={TesteImagem} width={56} height={56} alt='' />
-                            </div>
+                        <Image src={TesteImagem} width={56} height={56} alt='' />
 
-                            <div className={Styles.infoMusica}>
-                                <span className={Styles.infoTitulo} title={'xxxxxx'}>
-                                    {/* {musicaContext.nome} */}
-                                    Isso é um teste
-                                </span>
+                        <div className={Styles.infoMusica}>
+                            <span className={Styles.infoTitulo} title={'xxxxxx'}>
+                                {/* {musicaContext.nome} */}
+                                Isso é um teste
+                            </span>
 
-                                {/* <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
+                            {/* <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
                                     {(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}
                                 </span> */}
 
-                                <span className={Styles.infoDescricao}>
-                                    Alooooo oi né?
-                                </span>
-                            </div>
+                            <span className={Styles.infoDescricao}>
+                                Alooooo oi né?
+                            </span>
                         </div>
 
-                        <span className={`${Styles.spanIcone} ${Styles.iconeCoracao}`} onClick={() => null} title='Curtir/descurtir música'>
+                        <span className={Styles.spanIcone} onClick={() => null} title='Curtir/descurtir música'>
                             <Coracao isMusicaCurtida={true} />
                         </span>
 
@@ -106,7 +121,7 @@ export default function BarraPlayer() {
 
                 <span className={Styles.spanIcone} title='Visualizar fila'>
                     <Link href={'/fila'}>
-                        {/* <Fila cor={(url === '/fila' ? 'var(--verde)' : '')} /> */}
+                        <Fila cor={(url === '/fila' ? 'var(--cor-principal)' : '')} />
                     </Link>
                 </span>
 
@@ -115,7 +130,7 @@ export default function BarraPlayer() {
                 </span>
 
                 <span className={Styles.spanIcone} onClick={() => null}>
-                    {/* {
+                    {
                         volume >= 65 ? (
                             <Volume4 />
                         ) : volume >= 30 && volume < 65 ? (
@@ -125,11 +140,11 @@ export default function BarraPlayer() {
                         ) : (
                             <Volume1 />
                         )
-                    } */}
+                    }
                 </span>
 
-                <div className={Styles.divVolume} title={`Volume 1000000000`}>
-                    {/* <ProgressBarVolume getVolume={getVolume} volume={volume} /> */}
+                <div className={Styles.divVolume} title={`Volume ${volume}`}>
+                    <ProgressBarVolume handleVolume={handleVolume} volume={volume} />
                 </div>
 
                 <span className={Styles.spanIcone} onClick={() => handleFullScreen()}>

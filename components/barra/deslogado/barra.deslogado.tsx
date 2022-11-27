@@ -1,4 +1,4 @@
-import Botao from '../../components/outros/botao';
+import Botao from '../../../components/outros/botao';
 import Styles from './barra.deslogado.module.scss';
 
 export default function BarraDeslogado() {

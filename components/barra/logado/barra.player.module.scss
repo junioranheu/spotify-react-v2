@@ -30,7 +30,7 @@
     }
 
     .spanIcone {
-        // background-color: purple;
+        background-color: purple;
         display: flex;
         justify-content: center;
     }
@@ -38,37 +38,21 @@
 
 /* =-=-=-=-=-=-=-=-=-=-= Div 1 =-=-=-=-=-=-=-=-=-=-= */
 .divInfo {
-    background-color: pink;
+    // background-color: pink;
     width: 33%;
 
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 0px;
-
-    .divInner {
-        background-color: red !important;
-        display: flex;
-        justify-content: center;
-
-        margin-right: 5px;
-    }
-
-    .iconeCoracao {
-        background-color: rebeccapurple;
-        margin-left: 10px;
-    }
+    gap: 1rem;
 
     img {
         cursor: pointer;
     }
 
     .infoMusica {
-        background-color: blue !important;
-        margin-left: 10px;
-
-        /* min-width: 150px !important; */
-        max-width: 150px !important;
+        // background-color: blue !important;
+        max-width: 9.375rem !important;
 
         display: flex;
         flex-direction: column;
@@ -129,7 +113,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 25px;
+        gap: 1.55rem;
     }
 
     .btnPlay {
@@ -163,21 +147,21 @@
     }
 
     .divPlayerInner {
-        /* background-color: pink; */
+        background-color: red;
         width: 100%;
-        margin-top: 8px;
+        margin-top: 0.5rem;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
-        gap: 15px;
+        gap: 1rem;
     }
 }
 
 /* =-=-=-=-=-=-=-=-=-=-= Div 3 =-=-=-=-=-=-=-=-=-=-= */
 .divOpcoes {
-    /* background-color: blue; */
+    background-color: blue;
     width: 33%;
 
     display: flex;

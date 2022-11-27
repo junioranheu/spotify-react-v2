@@ -45,7 +45,7 @@ export default function Sidebar() {
                     </span>
 
                     <span className='pointer' onClick={() => window.open('https://github.com/junioranheu', '_blank')}>
-                        <Github width='24px' /> <span>Github</span>
+                        <Github width='24px' /> <span>GitHub</span>
                     </span>
                 </div>
 

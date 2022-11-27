@@ -4,7 +4,7 @@
     --branco: #FFFFFF;
     --cinza: #121212;
     --bege: #f4f2f0;
-    --cor-principal: #99FDAD;
+    --cor-principal: #1DD05E;
 
     --toastify-color-progress-light: var(--cor-principal) !important;
     --toastify-color-progress-warning: var(--cor-principal) !important;
@@ -189,13 +189,13 @@ img {
 
 /* =-=-=-=-=-=-=-=-=-=-= Coração =-=-=-=-=-=-=-=-=-=-= */
 .coracao {
-    /* background-color: red; */
+    // background-color: red;
     background-image: url('../assets/image/coracao-animacao.png');
     background-repeat: no-repeat;
     background-size: 2900%;
     background-position: left;
-    height: 50px;
-    width: 50px;
+    height: 3.125rem;
+    width: 3.125rem;
     margin: 0 auto;
     cursor: pointer;
 }
