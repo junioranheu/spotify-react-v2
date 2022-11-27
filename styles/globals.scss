@@ -282,19 +282,20 @@ body::-webkit-scrollbar {
 
 ::-webkit-scrollbar {
     width: 7px;
+    height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--branco);
+    background: var(--preto);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--cinza);
+    background: var(--super-preto);
     border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #949799;
+    background: var(--cor-principal);
 }
 
 /* =-=-=-=-=-=-=-=-=-=-= Margens =-=-=-=-=-=-=-=-=-=-= */

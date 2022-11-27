@@ -1,4 +1,4 @@
-/* =-=-=-=-=-=-=-=-=-=-= Player (usuário logado) =-=-=-=-=-=-=-=-=-=-= */
+/* =-=-=-=-=-=-=-=-=-=-= Player =-=-=-=-=-=-=-=-=-=-= */
 .barraPlayer {
     background-color: var(--preto);
 
@@ -39,7 +39,8 @@
 /* =-=-=-=-=-=-=-=-=-=-= Div 1 =-=-=-=-=-=-=-=-=-=-= */
 .divInfo {
     // background-color: pink;
-    width: 33%;
+    width: 33.33%;
+    min-width: 15rem;
 
     display: flex;
     justify-content: flex-start;
@@ -95,13 +96,13 @@
             }
         }
     }
-
 }
 
 /* =-=-=-=-=-=-=-=-=-=-= Div 2 =-=-=-=-=-=-=-=-=-=-= */
 .divPlayer {
-    /* background-color: red !important; */
-    width: 33%;
+    // background-color: red !important;
+    width: 33.33%;
+    min-width: 15rem;
 
     display: flex;
     justify-content: center;
@@ -147,7 +148,7 @@
     }
 
     .divPlayerInner {
-        background-color: red;
+        background-color: purple;
         width: 100%;
         margin-top: 0.5rem;
 
@@ -162,7 +163,8 @@
 /* =-=-=-=-=-=-=-=-=-=-= Div 3 =-=-=-=-=-=-=-=-=-=-= */
 .divOpcoes {
     // background-color: blue;
-    width: 33%;
+    width: 33.33%;
+    min-width: 15rem;
 
     display: flex;
     justify-content: flex-end;
