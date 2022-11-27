@@ -1,4 +1,5 @@
-import { MouseEvent, useEffect, useRef, useState } from 'react';
+import { MouseEvent, useCallback, useEffect, useState } from 'react';
+import { useLongPress } from 'use-long-press'; // https://www.npmjs.com/package/use-long-press
 import useWindowSize from '../../../../hooks/outros/useWindowSize';
 import Styles from './progressBar.module.scss';
 
@@ -13,9 +14,8 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
     const elementoId = 'progressWrapperVolume';
     const [volumeControleInterno, setVolumeControleInterno] = useState<number>(0);
     const [widthElemento, setWidthElemento] = useState<number>(0);
-    const refPointer = useRef(null);
 
-    function handleSetWidthElementoEVolumeControleInterno() {
+    function conteudoSetWidthElementoEVolumeControleInterno() {
         // Pegar uma vez o tamanho do elemento;
         var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
         const widthElemento = rect?.width ?? 0;
@@ -30,16 +30,16 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
 
     // Verificar valores ao iniciar componente;
     useEffect(() => {
-        handleSetWidthElementoEVolumeControleInterno();
+        conteudoSetWidthElementoEVolumeControleInterno();
     }, [document, volume]);
 
     // Verificar valores ao resize da tela;
     const tamanhoTela = useWindowSize();
     useEffect(() => {
-        handleSetWidthElementoEVolumeControleInterno();
+        conteudoSetWidthElementoEVolumeControleInterno();
     }, [tamanhoTela?.width]);
 
-    function handleClick(e: MouseEvent<HTMLElement>) {
+    function conteudoHandleClickEHandleMouseMove(e: any) {
         e.preventDefault();
         var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
 
@@ -67,10 +67,30 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
         setVolumeControleInterno(posicaoClick);
     }
 
+    function handleClick(e: MouseEvent<HTMLElement>) {
+        conteudoHandleClickEHandleMouseMove(e);
+    }
+
+    const callback = useCallback((e: any) => {
+        console.log('Long pressed!');
+    }, []);
+
+    const [isMoving, setIsMoving] = useState<boolean>(false);
+    const bindProgressBar = useLongPress(callback, {
+        onStart: event => setIsMoving(true),
+        onFinish: event => setIsMoving(false),
+        onCancel: event => setIsMoving(false),
+        onMove: event => (isMoving && conteudoHandleClickEHandleMouseMove(event)),
+        filterEvents: event => true, 
+        threshold: 500,
+        captureEvent: true,
+        cancelOnMovement: false
+    });
+
     return (
-        <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)}>
+        <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)} {...bindProgressBar()}>
             <div className={Styles.progress} style={{ width: volumeControleInterno }}>
-                <div className={Styles.pointer} ref={refPointer}>
+                <div className={Styles.pointer}>
                     <div className={Styles.toast}></div>
                 </div>
             </div>
