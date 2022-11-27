@@ -23,15 +23,17 @@ import ProgressBarVolume from './outros/progressBar.volume';
 export default function BarraPlayer() {
 
     const asPath = useRouter();
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState<string>('');
     useEffect(() => {
         setUrl(asPath.pathname);
     }, [asPath]);
 
-    const [volume, setVolume] = useState(50);
+    const [volume, setVolume] = useState<number>(50);
     function handleVolume(vol: number) {
         setVolume(Math.floor(vol));
     }
+
+    const [isCurtido, setIsCurtido] = useState<boolean>(false);
 
     return (
         <section className={Styles.barraPlayer}>
@@ -57,8 +59,8 @@ export default function BarraPlayer() {
                             </span>
                         </div>
 
-                        <span className={Styles.spanIcone} onClick={() => null} title='Curtir/descurtir música'>
-                            <Coracao isMusicaCurtida={true} />
+                        <span className={Styles.spanIcone} onClick={() => setIsCurtido(!isCurtido)} title='Curtir/descurtir música'>
+                            <Coracao isMusicaCurtida={isCurtido} />
                         </span>
 
                         <span className={Styles.spanIcone} onClick={() => null} title='Ativar/desativar modo picture-in-picture'>

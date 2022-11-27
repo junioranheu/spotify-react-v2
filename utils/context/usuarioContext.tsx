@@ -11,8 +11,8 @@ const _item = 'auth';
 export const UsuarioContext = createContext<iContext | null>(null);
 
 export const UsuarioProvider = (props: any) => {
-    const [isAuth, setIsAuth] = useState(Auth.get() ? true : false);
-    const [isFotoPerfilChanged, setIsFotoPerfilChanged] = useState(false);
+    const [isAuth, setIsAuth] = useState<boolean>(Auth.get() ? true : false);
+    const [isFotoPerfilChanged, setIsFotoPerfilChanged] = useState<boolean>(false);
 
     return (
         <UsuarioContext.Provider value={{

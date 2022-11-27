@@ -11,8 +11,8 @@ interface iParametros {
 export default function ProgressBarVolume({ handleVolume, volume }: iParametros) {
 
     const elementoId = 'progressWrapperVolume';
-    const [volumeControleInterno, setVolumeControleInterno] = useState(0);
-    const [widthElemento, setWidthElemento] = useState(0);
+    const [volumeControleInterno, setVolumeControleInterno] = useState<number>(0);
+    const [widthElemento, setWidthElemento] = useState<number>(0);
     const refPointer = useRef(null);
 
     function handleSetWidthElementoEVolumeControleInterno() {

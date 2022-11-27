@@ -15,7 +15,7 @@ export default function NavbarPadrao() {
 
     const nomeUsuario = Auth?.get()?.nomeUsuarioSistema ?? '';
 
-    const [isExibirSubmenu, setIsExibirSubmenu] = useState(false);
+    const [isExibirSubmenu, setIsExibirSubmenu] = useState<boolean>(false);
     function handleMostrarSubmenu() {
         setIsExibirSubmenu(!isExibirSubmenu);
     }

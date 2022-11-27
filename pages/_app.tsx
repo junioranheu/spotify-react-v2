@@ -11,7 +11,7 @@ import { UsuarioProvider } from '../utils/context/usuarioContext';
 export default function App({ Component, pageProps }: AppProps) {
 
     const { asPath } = useRouter();
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState<string>('');
     useEffect(() => {
         setUrl(asPath);
     }, [asPath]);
