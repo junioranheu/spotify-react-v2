@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
+import useWindowSize from '../../../../hooks/outros/useWindowSize';
 import Styles from './progressBar.module.scss';
 
 interface iParametros {
@@ -9,24 +10,38 @@ interface iParametros {
 // https://codesandbox.io/s/quirky-hopper-jfcx9?file=/src/progress.js:0-2097
 export default function ProgressBarVolume({ handleVolume, volume }: iParametros) {
 
+    const elementoId = 'progressWrapperVolume';
     const [volumeControleInterno, setVolumeControleInterno] = useState(0);
     const [widthElemento, setWidthElemento] = useState(0);
     const refPointer = useRef(null);
 
-    useEffect(() => {
+    function handleSetWidthElementoEVolumeControleInterno() {
         // Pegar uma vez o tamanho do elemento;
-        var rect = document?.querySelector('#progressWrapperVolume')?.getBoundingClientRect();
+        var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
         const widthElemento = rect?.width ?? 0;
         setWidthElemento(widthElemento);
 
-        // Definir o volume ao carregar, com base em props.volume;
+        // Definir o volume ao carregar (useEffect), com base em volume (parâmetro) e o width do elemento;
+        // Exemplo #1: 50 de volume e 100 de with >>> (50 * 100) / 100;
+        // Exemplo #2: 50 de volume e 120 de with >>> (50 * 120) / 100;
         const volumeInicial = (volume * widthElemento) / 100;
         setVolumeControleInterno(volumeInicial);
+    }
+
+    // Verificar valores ao iniciar componente;
+    useEffect(() => {
+        handleSetWidthElementoEVolumeControleInterno();
     }, [document, volume]);
 
-    function handleClick(e: any) {
+    // Verificar valores ao resize da tela;
+    const tamanhoTela = useWindowSize();
+    useEffect(() => {
+        handleSetWidthElementoEVolumeControleInterno();
+    }, [tamanhoTela?.width]);
+
+    function handleClick(e: MouseEvent<HTMLElement>) {
         e.preventDefault();
-        var rect = document?.querySelector('#progressWrapperVolume')?.getBoundingClientRect();
+        var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
 
         if (!rect) {
             return false;
@@ -53,7 +68,7 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
     }
 
     return (
-        <div className={Styles.progressWrapper} id='progressWrapperVolume' onClick={(e) => handleClick(e)}>
+        <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)}>
             <div className={Styles.progress} style={{ width: volumeControleInterno }}>
                 <div className={Styles.pointer} ref={refPointer}>
                     <div className={Styles.toast}></div>
