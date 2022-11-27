@@ -5,12 +5,15 @@ import { Fragment, useEffect, useState } from 'react';
 import TesteImagem from '../../../assets/image/cinza.webp';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
 import Coracao from '../../outros/coracao';
+import Aleatorio from '../../svg/barra.player/aleatorio';
 import BotaoAvancar from '../../svg/barra.player/botaoAvancar';
 import BotaoPlay from '../../svg/barra.player/botaoPlay';
+import BotaoStop from '../../svg/barra.player/botaoStop';
 import BotaoVoltar from '../../svg/barra.player/botaoVoltar';
 import Dispositivo from '../../svg/barra.player/dispositivo';
 import Fila from '../../svg/barra.player/fila';
 import FullScreen from '../../svg/barra.player/fullscreen';
+import Loop from '../../svg/barra.player/loop';
 import Microfone from '../../svg/barra.player/microfone';
 import Toggle from '../../svg/barra.player/toggle';
 import Styles from './barra.player.module.scss';
@@ -41,49 +44,53 @@ export default function BarraPlayer() {
         }
     }
 
+    const [musicaId, setMusicaId] = useState<number>(1);
     const [isCurtido, setIsCurtido] = useState<boolean>(false);
+    const [isModoAleatorio, setIsModoAleatorio] = useState<boolean>(false);
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [isModoLoop, setIsModoLoop] = useState<boolean>(false);
 
     return (
         <section className={Styles.barraPlayer}>
             {/* =-=-=-=-=-=-=-=-=-=-=-= Primeira div, esquerda =-=-=-=-=-=-=-=-=-=-=-= */}
             <div className={Styles.divInfo}>
                 {
-                    // musicaContext?.musicaId > 0 && (
-                    <Fragment>
-                        <Image src={TesteImagem} width={56} height={56} alt='' />
+                    musicaId > 0 && (
+                        <Fragment>
+                            <Image src={TesteImagem} width={56} height={56} alt='' />
 
-                        <div className={Styles.infoMusica}>
-                            <span className={Styles.infoTitulo} title={'xxxxxx'}>
-                                {/* {musicaContext.nome} */}
-                                Isso é um teste
-                            </span>
+                            <div className={Styles.infoMusica}>
+                                <span className={Styles.infoTitulo} title={'xxxxxx'}>
+                                    {/* {musicaContext.nome} */}
+                                    Chaleco klo
+                                </span>
 
-                            {/* <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
+                                {/* <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
                                     {(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}
                                 </span> */}
 
-                            <span className={Styles.infoDescricao}>
-                                Alooooo oi né?
+                                <span className={Styles.infoDescricao}>
+                                    Oi né?
+                                </span>
+                            </div>
+
+                            <span className={Styles.spanIcone} onClick={() => setIsCurtido(!isCurtido)} title='Curtir/descurtir música'>
+                                <Coracao isMusicaCurtida={isCurtido} />
                             </span>
-                        </div>
 
-                        <span className={Styles.spanIcone} onClick={() => setIsCurtido(!isCurtido)} title='Curtir/descurtir música'>
-                            <Coracao isMusicaCurtida={isCurtido} />
-                        </span>
-
-                        <span className={Styles.spanIcone} onClick={() => null} title='Ativar/desativar modo picture-in-picture'>
-                            <Toggle />
-                        </span>
-                    </Fragment>
-                    // )
+                            <span className={Styles.spanIcone} onClick={() => null} title='Ativar/desativar modo picture-in-picture'>
+                                <Toggle />
+                            </span>
+                        </Fragment>
+                    )
                 }
             </div>
 
             {/* =-=-=-=-=-=-=-=-=-=-=-= Segunda div, meio =-=-=-=-=-=-=-=-=-=-=-= */}
             <div className={Styles.divPlayer}>
                 <div className={Styles.divPlayerIcones}>
-                    <span className={Styles.spanIcone} onClick={() => null} title='Ativar/desativar modo aleatório'>
-                        {/* <Aleatorio cor={(isModoAleatorio ? 'var(--verde)' : '')} /> */}
+                    <span className={Styles.spanIcone} onClick={() => null} title={`${isModoAleatorio ? 'Desativar' : 'Ativado'} modo aleatório`}>
+                        <Aleatorio cor={(isModoAleatorio ? 'var(--verde)' : '')} />
                     </span>
 
                     <span className={Styles.spanIcone} onClick={() => null} title='Voltar uma música'>
@@ -91,22 +98,21 @@ export default function BarraPlayer() {
                     </span>
 
                     <span className={Styles.btnPlay} onClick={() => null} >
-                        {/* {
+                        {
                             isPlaying ? (
                                 <BotaoStop />
                             ) : (
                                 <BotaoPlay />
                             )
-                        } */}
-                        <BotaoPlay />
+                        }
                     </span>
 
                     <span className={Styles.spanIcone} onClick={() => null} title='Avançar uma música'>
                         <BotaoAvancar />
                     </span>
 
-                    <span className={Styles.spanIcone} onClick={() => null} title='Ativar/desativar modo loop'>
-                        {/* <Loop cor={(isModoLoop ? 'var(--verde)' : '')} /> */}
+                    <span className={Styles.spanIcone} onClick={() => null} title={`${isModoLoop ? 'Desativar' : 'Ativado'} modo loop`}>
+                        <Loop cor={(isModoLoop ? 'var(--verde)' : '')} />
                     </span>
                 </div>
 
