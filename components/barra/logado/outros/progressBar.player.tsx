@@ -125,7 +125,7 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
             try {
                 nProgress.start();
                 const nomePasta = 'music';
-                const nomeArquivo = '1.mp3';
+                const nomeArquivo = '2.mp3';
                 const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM}/nomePasta=${nomePasta}&nomeArquivo=${nomeArquivo}`;
                 const stream = await Fetch.getApiStream(url);
                 // console.log(stream);
@@ -183,34 +183,34 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
     // #4.3 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
         const intervalo = setInterval(() => {
-            // console.table([props.isPlaying, tempoSegundosMaximo, refMusica?.current?.currentTime, props.isModoLoop]);
-
-            // @ts-ignore;
-            if (isPlaying && arquivoMusica && tempoSegundosMaximo > refMusica?.current?.currentTime) {
-                const tempoAtual = refMusica?.current?.currentTime;
-                setTempoSegundosAtual(tempoAtual ?? 0);
-            } else {
-                if (arquivoMusica) {
-                    if (isPlaying) {
-                        // if (isModoLoop) {
-                        //     // console.log('Modo loop ativado');
-                        //     refMusica?.current?.currentTime = 0;
-                        //     setTempoAtual(0);
-                        //     refMusica?.current?.play();
-                        // } else {
-                        // console.log('Pular para a próxima música');
-                        // props.handleAvancar();
-                        // }
-                    } else {
-                        // console.log(`Música "${props.musicaContext?.nome}" pausada`);
-                        console.log(`Música pausada`);
+            if (refMusica?.current) {
+                if (isPlaying && arquivoMusica && tempoSegundosMaximo > refMusica?.current?.currentTime) {
+                    const tempoAtual = refMusica?.current?.currentTime;
+                    setTempoSegundosAtual(tempoAtual ?? 0);
+                    process.env.NODE_ENV === 'development' && console.log(`Música tocando: ${tempoAtual}s`);
+                } else {
+                    if (arquivoMusica) {
+                        if (isPlaying) {
+                            // if (isModoLoop) {
+                            //     // console.log('Modo loop ativado');
+                            //     refMusica?.current?.currentTime = 0;
+                            //     setTempoAtual(0);
+                            //     refMusica?.current?.play();
+                            // } else {
+                            // console.log('Pular para a próxima música');
+                            // props.handleAvancar();
+                            // }
+                        } else {
+                            // console.log(`Música "${props.musicaContext?.nome}" pausada`);
+                            process.env.NODE_ENV === 'development' && console.log(`Música pausada`);
+                        }
                     }
                 }
             }
         }, 100);
 
         return () => clearInterval(intervalo);
-    }, [isPlaying, arquivoMusica, tempoSegundosMaximo])
+    }, [isPlaying, refMusica?.current, arquivoMusica, tempoSegundosMaximo])
 
     return (
         <Fragment>
