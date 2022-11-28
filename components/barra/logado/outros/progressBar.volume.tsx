@@ -12,9 +12,9 @@ interface iParametros {
 export default function ProgressBarVolume({ handleVolume, volume }: iParametros) {
 
     const elementoId = 'progressWrapperVolume';
-    const [volumeControleInterno, setVolumeControleInterno] = useState<number>(0);
     const [rectLeft, setRectLeft] = useState<number>(0);
     const [rectWidth, setRectWidth] = useState<number>(0);
+    const [volumeControleInterno, setVolumeControleInterno] = useState<number>(0);
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
     // Verificar valores ao iniciar componente e resize da tela;

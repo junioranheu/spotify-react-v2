@@ -139,11 +139,15 @@ export default function BarraPlayer() {
                     <Dispositivo />
                 </span>
 
+                {
+                    process.env.NODE_ENV === 'development' && <small>{volume}</small>
+                }
+
                 <span className={Styles.spanIcone} onClick={() => handleMutarDesmutar()}>
                     <ProgressBarVolumeIcone volume={volume} />
                 </span>
 
-                <div className={Styles.divVolume} title={`Volume ${volume}`}>  
+                <div className={Styles.divVolume} title={`Volume ${volume}`}>
                     <ProgressBarVolume handleVolume={handleVolume} volume={volume} />
                 </div>
 
