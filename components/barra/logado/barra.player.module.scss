@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 3rem;
+    gap: 5rem;
 
     border-top: 1px solid #282828;
 
@@ -165,7 +165,7 @@
 .divOpcoes {
     // background-color: blue;
     width: 33.33%;
-    min-width: 15rem;
+    min-width: 20rem;
 
     display: flex;
     justify-content: flex-end;
@@ -175,6 +175,7 @@
     .divVolume {
         // background-color: pink !important;
         width: 120px;
+        min-width: 120px;
 
         display: flex;
         align-items: center;

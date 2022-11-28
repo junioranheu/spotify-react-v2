@@ -13,57 +13,46 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
 
     const elementoId = 'progressWrapperVolume';
     const [volumeControleInterno, setVolumeControleInterno] = useState<number>(0);
-    const [widthElemento, setWidthElemento] = useState<number>(0);
+    const [rectLeft, setRectLeft] = useState<number>(0);
+    const [rectWidth, setRectWidth] = useState<number>(0);
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
-    // Função utilizada no inicio e no resize;
-    function conteudoSetWidthElementoEVolumeControleInterno() {
-        // Pegar uma vez o tamanho do elemento;
-        var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
-        const widthElemento = rect?.width ?? 0;
-        setWidthElemento(widthElemento);
-
-        // Definir o volume ao carregar (useEffect), com base em volume (parâmetro) e o width do elemento;
-        // Exemplo #1: 50 de volume e 100 de with >>> (50 * 100) / 100;
-        // Exemplo #2: 50 de volume e 120 de with >>> (50 * 120) / 100;
-        const volumeInicial = (volume * widthElemento) / 100;
-        setVolumeControleInterno(volumeInicial);
-    }
-
-    // Verificar valores ao iniciar componente;
-    useEffect(() => {
-        conteudoSetWidthElementoEVolumeControleInterno();
-    }, [document, volume]);
-
-    // Verificar valores ao resize da tela;
+    // Verificar valores ao iniciar componente e resize da tela;
     const tamanhoTela = useWindowSize();
     useEffect(() => {
-        conteudoSetWidthElementoEVolumeControleInterno();
-    }, [tamanhoTela?.width]);
+        function handleVolumeControleInterno() {
+            // Definir o volume proporcional com base em volume (parâmetro) e o width do elemento;
+            // Exemplo #1: 50 de volume e 100 de with >>> (50 * 100) / 100;
+            // Exemplo #2: 50 de volume e 120 de with >>> (50 * 120) / 100;
+            const volumeInicial = (volume * rectWidth) / 100;
+            setVolumeControleInterno(volumeInicial);
+        }
+
+        // Ajustar o rect.left e rect.width (tamanho do elemento) ao iniciar e resize;
+        var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
+        setRectLeft(rect?.left ?? 0);
+        setRectWidth(rect?.width ?? 0);
+
+        // Definir o volume proporcional ao iniciar; 
+        handleVolumeControleInterno();
+    }, [tamanhoTela?.width, document, volume]);
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
     // Função utilizada no click e no bindProgressBar;
-    function conteudoHandleClickEHandleMouseMove(e: any) {
+    function conteudoHandleClickEHandleMouseMove(e: MouseEvent<HTMLElement> | any) {
         e.preventDefault();
-        var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
-
-        if (!rect) {
-            return false;
-        }
-
-        let posicaoClick = e.clientX - rect?.left;
+        let posicaoClick = e.clientX - rectLeft;
 
         // Ajustar caso seja menor que 0;
         posicaoClick = posicaoClick < 0 ? 0 : posicaoClick;
 
         // Calcular o volume real, já que o volume pode passar de 100;
-        let volumeRealCalculo = ((posicaoClick / (widthElemento - 1)) * 100);
+        let volumeRealCalculo = ((posicaoClick / (rectWidth - 1)) * 100);
         handleVolume(volumeRealCalculo);
 
         // Corrigir bug do "100";
         if (volumeRealCalculo >= 99) {
-            // console.log('100!!!' + widthElemento);
-            posicaoClick = widthElemento;
+            posicaoClick = rectWidth;
             setVolumeControleInterno(100);
         }
 
@@ -75,8 +64,9 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
         conteudoHandleClickEHandleMouseMove(e);
     }
 
-    const callback = useCallback((e: any) => {
-        // console.log('Click longo ativado! - Infelizmente é necessário manter esse callback "inútil" para que o bind funcione');
+    // callback e bind para simular o long press;
+    const callback = useCallback(() => {
+        // console.log('Long press ativado! - Infelizmente é necessário manter esse callback "inútil" para que o bind funcione');
     }, []);
 
     const [isMoving, setIsMoving] = useState<boolean>(false);
