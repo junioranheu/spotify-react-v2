@@ -1,6 +1,7 @@
 import { Fragment, MouseEvent, useCallback, useEffect, useState } from 'react';
 import { useLongPress } from 'use-long-press'; // https://www.npmjs.com/package/use-long-press
 import useWindowSize from '../../../../hooks/outros/useWindowSize';
+import UUID from '../../../../utils/outros/UUID';
 import Styles from '../outros/progressBar.module.scss';
 
 // https://codesandbox.io/s/quirky-hopper-jfcx9?file=/src/progress.js:0-2097
@@ -13,6 +14,7 @@ export default function ProgressBarPlayer() {
     const [rectLeft, setRectLeft] = useState<number>(0);
     const [rectWidth, setRectWidth] = useState<number>(0);
     const [posicaoClick, setPosicaoClick] = useState<number>(0);
+    const [sectionBarraPlayerDeltaX, setSectionBarraPlayerDeltaX] = useState<string>('');
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
     // Verificar valores ao iniciar componente e resize da tela;
@@ -22,7 +24,10 @@ export default function ProgressBarPlayer() {
         var rect = document?.querySelector(`#${elementoId}`)?.getBoundingClientRect();
         setRectLeft(rect?.left ?? 0);
         setRectWidth(rect?.width ?? 0);
-    }, [tamanhoTela?.width, tamanhoTela?.height, document]);
+
+        // console.log('rect?.left: ', rect?.left);
+        // console.log('rect?.width: ', rect?.width);
+    }, [document, tamanhoTela?.width, tamanhoTela?.height, sectionBarraPlayerDeltaX]);
 
     useEffect(() => {
         function handlePosicaoInicial() {
@@ -78,6 +83,25 @@ export default function ProgressBarPlayer() {
         captureEvent: true,
         cancelOnMovement: false
     });
+
+    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
+    // Gambi/lógica para corrigir um bug super específico em relação ao mau comportamento da #sectionBarraPlayer;
+    // Quando a tela é redimensionada de forma que se pode usar os scroll X do elemento, por algum motivo desconhecido, os valores se bugam (provalvemente o rect?.left);
+    // Pra isso... ao usar o scroll x, é necessário recontar os valores!
+    useEffect(() => {
+        const element = document.querySelector('#sectionBarraPlayer');
+
+        element?.addEventListener('scroll', (e: any) => {
+            // if (e?.deltaY !== 0) {
+            //     console.log('vertical();');
+            // }
+
+            if (e?.deltaX !== 0) {
+                // console.log('horizontal();');
+                setSectionBarraPlayerDeltaX(UUID());
+            }
+        })
+    }, [document]);
 
     return (
         <Fragment>

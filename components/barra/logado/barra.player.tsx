@@ -53,7 +53,7 @@ export default function BarraPlayer() {
     const [isModoLoop, setIsModoLoop] = useState<boolean>(false);
 
     return (
-        <section className={Styles.barraPlayer}>
+        <section className={Styles.barraPlayer} id='sectionBarraPlayer'>
             {/* =-=-=-=-=-=-=-=-=-=-=-= Primeira div, esquerda =-=-=-=-=-=-=-=-=-=-=-= */}
             <div className={Styles.divInfo}>
                 {
