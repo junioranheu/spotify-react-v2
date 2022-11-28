@@ -3,10 +3,12 @@
     height: 5px;
     background: #535353;
     cursor: pointer;
+    transition: all linear;
 
     &:hover {
         .progress {
             background-color: var(--cor-principal);
+            transition: all linear;
 
             .pointer {
                 display: flex !important;
@@ -31,7 +33,7 @@
             width: 9px;
             height: 9px;
             border-radius: 50%;
-            background: #ffffff;
+            background: var(--branco);
             box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.24);
             justify-content: center;
             align-items: center;
@@ -39,7 +41,7 @@
             .toast {
                 width: 140px;
                 height: 32px;
-                background: #ffffff;
+                background: var(--branco);
                 box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
                 border-radius: 4px;
                 position: absolute;

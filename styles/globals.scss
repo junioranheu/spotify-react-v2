@@ -290,12 +290,12 @@ body::-webkit-scrollbar {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--super-preto);
-    border-radius: 0px;
+    background: var(--cor-principal);
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--cor-principal);
+    background: #1b8541;
 }
 
 /* =-=-=-=-=-=-=-=-=-=-= Margens =-=-=-=-=-=-=-=-=-=-= */

@@ -143,8 +143,6 @@ export default function BarraPlayer() {
                     <ProgressBarVolumeIcone volume={volume} />
                 </span>
 
-                <h1>{volume}</h1>
-
                 <div className={Styles.divVolume} title={`Volume ${volume}`}>  
                     <ProgressBarVolume handleVolume={handleVolume} volume={volume} />
                 </div>
