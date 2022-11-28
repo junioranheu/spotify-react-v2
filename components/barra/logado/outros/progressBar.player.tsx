@@ -11,11 +11,12 @@ import Styles from '../outros/progressBar.module.scss';
 
 interface iParametros {
     isPlaying: boolean;
+    isModoLoop: boolean;
     volume: number;
 }
 
 // https://codesandbox.io/s/quirky-hopper-jfcx9?file=/src/progress.js:0-2097
-export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
+export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iParametros) {
 
     const elementoId = 'progressWrapperPlayer';
     const refMusica = useRef<HTMLMediaElement>(null);
@@ -71,6 +72,11 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
         // Aviso.warn(`<b>%WidthElemento</b>: ${porcentagemTocadoWidthElemento}`, 5000);
         const tempoSegundosAtual = Math.round((porcentagemTocadoWidthElemento / 100) * tempoSegundosMaximo);
         setTempoSegundosAtual(tempoSegundosAtual);
+
+        // Definir a posição clicada no elemento HMTL;
+        if (refMusica?.current) {
+            refMusica.current.currentTime = tempoSegundosAtual;
+        }
 
         // console.log('porcetagemTocadoWidthElemento:', porcetagemTocadoWidthElemento);
         // console.log('tempoSegundosAtual:', tempoSegundosAtual);
@@ -187,30 +193,38 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
                 if (isPlaying && arquivoMusica && tempoSegundosMaximo > refMusica?.current?.currentTime) {
                     const tempoAtual = refMusica?.current?.currentTime;
                     setTempoSegundosAtual(tempoAtual ?? 0);
-                    process.env.NODE_ENV === 'development' && console.log(`Música tocando: ${tempoAtual}s`);
                 } else {
-                    if (arquivoMusica) {
+                    if (arquivoMusica && refMusica?.current) {
                         if (isPlaying) {
-                            // if (isModoLoop) {
-                            //     // console.log('Modo loop ativado');
-                            //     refMusica?.current?.currentTime = 0;
-                            //     setTempoAtual(0);
-                            //     refMusica?.current?.play();
-                            // } else {
-                            // console.log('Pular para a próxima música');
-                            // props.handleAvancar();
-                            // }
+                            if (isModoLoop) {
+                                // console.log('Modo loop ativado');
+                                refMusica.current.currentTime = 0;
+                                setTempoSegundosAtual(0);
+                                refMusica?.current?.play();
+                            } else {
+                                console.log('Pular para a próxima música');
+                                // props.handleAvancar();
+                            }
                         } else {
                             // console.log(`Música "${props.musicaContext?.nome}" pausada`);
-                            process.env.NODE_ENV === 'development' && console.log(`Música pausada`);
                         }
                     }
                 }
+
+                if (process.env.NODE_ENV === 'development') {
+                    const info = {
+                        'isPlaying': isPlaying,
+                        'isModoLoop': isModoLoop,
+                        'tempoSegundosAtual': formatarSegundos(tempoSegundosAtual)
+                    }
+
+                    console.table(info);
+                }
             }
-        }, 100);
+        }, 500);
 
         return () => clearInterval(intervalo);
-    }, [isPlaying, refMusica?.current, arquivoMusica, tempoSegundosMaximo])
+    }, [isPlaying, isModoLoop, refMusica?.current, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo])
 
     return (
         <Fragment>

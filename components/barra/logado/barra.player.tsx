@@ -101,7 +101,7 @@ export default function BarraPlayer() {
             <div className={Styles.divPlayer}>
                 <div className={Styles.divPlayerIcones}>
                     <span className={Styles.spanIcone} onClick={() => null} title={`${isModoAleatorio ? 'Desativar' : 'Ativado'} modo aleatório`}>
-                        <Aleatorio cor={(isModoAleatorio ? 'var(--verde)' : '')} />
+                        <Aleatorio cor={(isModoAleatorio ? 'var(--cor-principal)' : '')} />
                     </span>
 
                     <span className={Styles.spanIcone} onClick={() => null} title='Voltar uma música'>
@@ -122,14 +122,15 @@ export default function BarraPlayer() {
                         <BotaoAvancar />
                     </span>
 
-                    <span className={Styles.spanIcone} onClick={() => null} title={`${isModoLoop ? 'Desativar' : 'Ativado'} modo loop`}>
-                        <Loop cor={(isModoLoop ? 'var(--verde)' : '')} />
+                    <span className={Styles.spanIcone} onClick={() => setIsModoLoop(!isModoLoop)} title={`${isModoLoop ? 'Desativar' : 'Ativado'} modo loop`}>
+                        <Loop cor={(isModoLoop ? 'var(--cor-principal)' : '')} />
                     </span>
                 </div>
 
                 <div className={Styles.divPlayerInner}>
                     <ProgressBarPlayer
                         isPlaying={isPlaying}
+                        isModoLoop={isModoLoop}
                         volume={volume}
                     />
                 </div>
