@@ -1,8 +1,11 @@
+import 'animate.css/animate.min.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import 'nprogress/nprogress.css';
 import { Fragment, useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import LayoutPadrao from '../layouts/layoutPadrao';
 import '../styles/globals.scss';
 import CONSTS_SISTEMA from '../utils/consts/outros/sistema';

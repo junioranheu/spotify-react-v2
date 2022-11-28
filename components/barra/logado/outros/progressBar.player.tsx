@@ -48,7 +48,9 @@ export default function ProgressBarPlayer() {
 
         // Calcular a porcentagem tocada (para refletir no width do elemento) e também o tempo de segundos tocados;
         let porcentagemTocadoWidthElemento = ((posicaoClick / (rectWidth - 1)) * 100);
-        porcentagemTocadoWidthElemento = porcentagemTocadoWidthElemento > 100 ? 100 : porcentagemTocadoWidthElemento;
+        porcentagemTocadoWidthElemento = porcentagemTocadoWidthElemento < 0 ? 0 : porcentagemTocadoWidthElemento; // Se for menor que 0, set 0;
+        porcentagemTocadoWidthElemento = porcentagemTocadoWidthElemento > 100 ? 100 : porcentagemTocadoWidthElemento; // Se for maior que 100, set 100;
+        // Aviso.warn(`<b>%WidthElemento</b>: ${porcentagemTocadoWidthElemento}`, 5000);
         const tempoSegundosTocados = Math.round((porcentagemTocadoWidthElemento / 100) * propTempoSegundosMaximo);
         setPropTempoSegundosTocados(tempoSegundosTocados);
 
@@ -83,7 +85,7 @@ export default function ProgressBarPlayer() {
             <span className={Styles.tempoSpan}>{propTempoSegundosTocados ?? '0:00'}</span>
 
             {/* Meio, progress bar */}
-            <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)} {...bindProgressBar()} style={{minWidth: '120px'}}>
+            <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)} {...bindProgressBar()} style={{ minWidth: '120px' }}>
                 <div className={Styles.progress} style={{ width: posicaoClick }}>
                     <div className={Styles.pointer}>
                         <div className={Styles.toast}></div>
