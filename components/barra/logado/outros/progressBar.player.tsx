@@ -5,6 +5,7 @@ import useWindowSize from '../../../../hooks/outros/useWindowSize';
 import { Fetch } from '../../../../utils/api/fetch';
 import CONSTS_UPLOAD_PROTEGIDO from '../../../../utils/consts/data/constUploadProtegido';
 import { Aviso } from '../../../../utils/outros/aviso';
+import formatarSegundos from '../../../../utils/outros/formatarSegundos';
 import UUID from '../../../../utils/outros/UUID';
 import Styles from '../outros/progressBar.module.scss';
 
@@ -17,9 +18,9 @@ interface iParametros {
 export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
 
     const elementoId = 'progressWrapperPlayer';
-    const refMusica = useRef(null);
-    const [tempoSegundosMaximo, setTempoSegundosMaximo] = useState<number>(60);
-    const [tempoSegundosAtual, setTempoSegundosAtual] = useState<number>(10);
+    const refMusica = useRef<HTMLMediaElement>(null);
+    const [tempoSegundosMaximo, setTempoSegundosMaximo] = useState<number>(0);
+    const [tempoSegundosAtual, setTempoSegundosAtual] = useState<number>(0);
 
     const [rectLeft, setRectLeft] = useState<number>(0);
     const [rectWidth, setRectWidth] = useState<number>(0);
@@ -44,7 +45,8 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
         function handlePosicaoInicial() {
             const porcentagemTocado = (tempoSegundosAtual / tempoSegundosMaximo);
             const porcetagemTocadoWidth = rectWidth * porcentagemTocado;
-            setPosicaoClick(porcetagemTocadoWidth);
+            const porcetagemTocadoWidthOk = isNaN(porcetagemTocadoWidth) ? 0 : porcetagemTocadoWidth ?? 0;
+            setPosicaoClick(porcetagemTocadoWidthOk);
         }
 
         // Definir o volume proporcional ao resize; 
@@ -116,7 +118,7 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
     }, [document]);
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-= #4 =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
-    // #4.1 - Buscar arquivo (música) e realizar conversões e setar em "setArquivoMusica";
+    // #4.1 - Importar (fetch) arquivo (música) e realizar conversões e setar em "setArquivoMusica";
     const [arquivoMusica, setArquivoMusica] = useState<string>('');
     useEffect(() => {
         async function getMusica() {
@@ -147,6 +149,7 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
                 // console.log(objectURL);
 
                 setArquivoMusica(objectURL);
+                process.env.NODE_ENV === 'development' && Aviso.success('Musica importada com sucesso', 3000);
                 nProgress.done();
             } catch (error) {
                 Aviso.error('Houve um problema interno no processo de tratamento da música. Tente novamente mais tarde', 5000);
@@ -159,28 +162,23 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
 
     // #4.2 - Controlar "isPlaying", "volume" e duração da música;
     useEffect(() => {
-        if (refMusica?.current) {
+        if (refMusica?.current && arquivoMusica) {
             // #1 - Setar a duração da música;
-            // @ts-ignore
             const duracaoMusicaSegundos = refMusica?.current?.duration;
-             console.log(duracaoMusicaSegundos ?? 0);
-            setTempoSegundosMaximo(!isNaN(duracaoMusicaSegundos ?? 0) ? duracaoMusicaSegundos : 0);
+            const duracaoMusicaSegundosOk = isNaN(duracaoMusicaSegundos) ? 0 : duracaoMusicaSegundos ?? 0;
+            setTempoSegundosMaximo(duracaoMusicaSegundosOk);
 
             // #2 - Controlar isPlaying e Volume;
             const volumeAjustado = volume / 100;
-
-            // @ts-ignore
             refMusica.current.volume = volumeAjustado;
 
             if (isPlaying) {
-                // @ts-ignore
                 refMusica?.current?.play();
             } else {
-                // @ts-ignore
                 refMusica?.current?.pause();
             }
         }
-    }, [isPlaying, volume, refMusica?.current]);
+    }, [isPlaying, volume, refMusica?.current, arquivoMusica]);
 
     // #4.3 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
@@ -189,10 +187,8 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
 
             // @ts-ignore;
             if (isPlaying && arquivoMusica && tempoSegundosMaximo > refMusica?.current?.currentTime) {
-
-
-                // console.log(refMusica?.current?.currentTime);
-                // setTempoSegundosAtual(widthElemento);
+                const tempoAtual = refMusica?.current?.currentTime;
+                setTempoSegundosAtual(tempoAtual ?? 0);
             } else {
                 if (arquivoMusica) {
                     if (isPlaying) {
@@ -207,7 +203,7 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
                         // }
                     } else {
                         // console.log(`Música "${props.musicaContext?.nome}" pausada`);
-                        console.log(`Música  pausada`);
+                        console.log(`Música pausada`);
                     }
                 }
             }
@@ -219,7 +215,7 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
     return (
         <Fragment>
             {/* Esquerda, tempo atual */}
-            <span className={Styles.tempoSpan}>{tempoSegundosAtual ?? '0:00'}</span>
+            <span className={Styles.tempoSpan}>{formatarSegundos(tempoSegundosAtual) ?? '0:00'}</span>
 
             {/* Meio, progress bar */}
             <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)} {...bindProgressBar()} style={{ minWidth: '120px' }}>
@@ -231,7 +227,7 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
             </div>
 
             {/* Direita, tempo total da música em questão */}
-            <span className={Styles.tempoSpan}>{tempoSegundosMaximo ?? '0:00'}</span>
+            <span className={Styles.tempoSpan}>{formatarSegundos(tempoSegundosMaximo) ?? '0:00'}</span>
 
             {/* Áudio */}
             <audio ref={refMusica} src={arquivoMusica} autoPlay={false} controls={false} />

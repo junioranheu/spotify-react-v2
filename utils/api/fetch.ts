@@ -136,7 +136,7 @@ export const Fetch = {
 
             // Caso o respostaJson.status seja diferente de nulo, é porque algo deu erro...
             // Exemplo: erros 404, 400 ou 401, quando um usuário escreve na barra e procura por um ID que não existe;
-            if (respostaStream.status) {
+            if (respostaStream.status !== 200) {
                 console.log(`Erro ${respostaStream.status} em ${url}.`);
                 respostaJson = null;
             }
