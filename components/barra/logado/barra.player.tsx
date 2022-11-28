@@ -46,10 +46,19 @@ export default function BarraPlayer() {
         }
     }
 
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    function handlePlay() {
+        // if (!musicaContext?.musicaId) {
+        //     Aviso.custom('Nenhuma música foi selecionada', 5000);
+        //     return false;
+        // }
+
+        setIsPlaying(!isPlaying);
+    }
+
     const [musicaId, setMusicaId] = useState<number>(1);
     const [isCurtido, setIsCurtido] = useState<boolean>(false);
     const [isModoAleatorio, setIsModoAleatorio] = useState<boolean>(false);
-    const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [isModoLoop, setIsModoLoop] = useState<boolean>(false);
 
     return (
@@ -99,7 +108,7 @@ export default function BarraPlayer() {
                         <BotaoVoltar />
                     </span>
 
-                    <span className={Styles.btnPlay} onClick={() => null} >
+                    <span className={Styles.btnPlay} onClick={() => handlePlay()}>
                         {
                             isPlaying ? (
                                 <BotaoStop />
@@ -119,7 +128,10 @@ export default function BarraPlayer() {
                 </div>
 
                 <div className={Styles.divPlayerInner}>
-                    <ProgressBarPlayer />
+                    <ProgressBarPlayer
+                        isPlaying={isPlaying}
+                        volume={volume}
+                    />
                 </div>
             </div>
 

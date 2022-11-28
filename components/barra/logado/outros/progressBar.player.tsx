@@ -1,13 +1,23 @@
-import { Fragment, MouseEvent, useCallback, useEffect, useState } from 'react';
+import nProgress from 'nprogress';
+import { Fragment, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useLongPress } from 'use-long-press'; // https://www.npmjs.com/package/use-long-press
 import useWindowSize from '../../../../hooks/outros/useWindowSize';
+import { Fetch } from '../../../../utils/api/fetch';
+import CONSTS_UPLOAD_PROTEGIDO from '../../../../utils/consts/data/constUploadProtegido';
+import { Aviso } from '../../../../utils/outros/aviso';
 import UUID from '../../../../utils/outros/UUID';
 import Styles from '../outros/progressBar.module.scss';
 
+interface iParametros {
+    isPlaying: boolean;
+    volume: number;
+}
+
 // https://codesandbox.io/s/quirky-hopper-jfcx9?file=/src/progress.js:0-2097
-export default function ProgressBarPlayer() {
+export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
 
     const elementoId = 'progressWrapperPlayer';
+    const refMusica = useRef(null);
     const [propTempoSegundosMaximo, setPropTempoSegundosMaximo] = useState<number>(60);
     const [propTempoSegundosTocados, setPropTempoSegundosTocados] = useState<number>(10);
 
@@ -16,8 +26,8 @@ export default function ProgressBarPlayer() {
     const [posicaoClick, setPosicaoClick] = useState<number>(0);
     const [sectionBarraPlayerDeltaX, setSectionBarraPlayerDeltaX] = useState<string>('');
 
-    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
-    // Verificar valores ao iniciar componente e resize da tela;
+    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-= #1 =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
+    // #1.1 - Definir valores ao rectLeft e rectWidth ao iniciar, resize e scroll x;
     const tamanhoTela = useWindowSize();
     useEffect(() => {
         // Ajustar o rect.left e rect.width (tamanho do elemento);
@@ -29,6 +39,7 @@ export default function ProgressBarPlayer() {
         // console.log('rect?.width: ', rect?.width);
     }, [document, tamanhoTela?.width, tamanhoTela?.height, sectionBarraPlayerDeltaX]);
 
+    // #1.2 - Definir posição do progress bar com base no tempo tocado;
     useEffect(() => {
         function handlePosicaoInicial() {
             const porcentagemTocado = (propTempoSegundosTocados / propTempoSegundosMaximo);
@@ -40,8 +51,8 @@ export default function ProgressBarPlayer() {
         handlePosicaoInicial();
     }, [rectWidth, rectLeft, propTempoSegundosMaximo, propTempoSegundosTocados]);
 
-    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
-    // Função utilizada no click e no bindProgressBar;
+    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-= #2 =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
+    // #2.1 - Função utilizada no click e no bindProgressBar: definir posição do progress bar;
     function conteudoHandleClickEHandleMouseMove(e: MouseEvent<HTMLElement> | any) {
         e.preventDefault();
         let posicaoClick = e.clientX - rectLeft;
@@ -63,11 +74,12 @@ export default function ProgressBarPlayer() {
         // console.log('tempoSegundosTocados:', tempoSegundosTocados);
     }
 
+    // #2.2 - Definir posição do progress bar no click;
     function handleClick(e: MouseEvent<HTMLElement>) {
         conteudoHandleClickEHandleMouseMove(e);
     }
 
-    // callback e bind para simular o long press;
+    // #2.3 - Callback e bind para simular o long press para definir posição do progress bar ao "arrastar" o ícone do progress bar;
     const callback = useCallback(() => {
         // console.log('Long press ativado! - Infelizmente é necessário manter esse callback "inútil" para que o bind funcione');
     }, []);
@@ -84,8 +96,8 @@ export default function ProgressBarPlayer() {
         cancelOnMovement: false
     });
 
-    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
-    // Gambi/lógica para corrigir um bug super específico em relação ao mau comportamento da #sectionBarraPlayer;
+    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-= #3 =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
+    // #3.1 - Gambi/lógica para corrigir um bug super específico em relação ao mau comportamento da #sectionBarraPlayer;
     // Quando a tela é redimensionada de forma que se pode usar os scroll X do elemento, por algum motivo desconhecido, os valores se bugam (provalvemente o rect?.left);
     // Pra isso... ao usar o scroll x, é necessário recontar os valores!
     useEffect(() => {
@@ -102,6 +114,66 @@ export default function ProgressBarPlayer() {
             }
         })
     }, [document]);
+
+    // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-= #4 =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
+    // #4.1 - Buscar arquivo (música) e realizar conversões e setar em "setArquivoMusica";
+    const [arquivoMusica, setArquivoMusica] = useState<string>('');
+    useEffect(() => {
+        async function getMusica() {
+            try {
+                nProgress.start();
+                const nomePasta = 'music';
+                const nomeArquivo = '1.mp3';
+                const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM}/nomePasta=${nomePasta}&nomeArquivo=${nomeArquivo}`;
+                const stream = await Fetch.getApiStream(url);
+                // console.log(stream);
+
+                if (!stream) {
+                    nProgress.done();
+                    Aviso.error('Houve um problema interno ao baixar conteúdo da música. Tente novamente mais tarde', 5000);
+                    return false;
+                }
+
+                // Converter para blob;
+                const blob = await stream.blob();
+                // console.log(blob);
+
+                // Converter blob para mp3;
+                const arquivoMp3 = new File([blob], nomeArquivo, { type: 'audio/mpeg' });
+                // console.log(arquivoMp3);
+
+                // Converter mp3 para url;
+                const objectURL = URL.createObjectURL(arquivoMp3);
+                // console.log(objectURL);
+
+                setArquivoMusica(objectURL);
+                nProgress.done();
+            } catch (error) {
+                Aviso.error('Houve um problema interno no processo de tratamento da música. Tente novamente mais tarde', 5000);
+                nProgress.done();
+            }
+        }
+
+        getMusica();
+    }, []);
+
+    // #4.2 - Controlar "isPlaying" e "volume";
+    useEffect(() => {
+        if (refMusica.current) {
+            const volumeAjustado = volume / 100;
+
+            // @ts-ignore
+            refMusica.current.volume = volumeAjustado;
+
+            if (isPlaying) {
+                // @ts-ignore
+                refMusica.current.play();
+            } else {
+                // @ts-ignore
+                refMusica.current.pause();
+            }
+        }
+    }, [isPlaying, volume, refMusica.current]);
 
     return (
         <Fragment>
@@ -121,7 +193,7 @@ export default function ProgressBarPlayer() {
             <span className={Styles.tempoSpan}>{propTempoSegundosMaximo ?? '0:00'}</span>
 
             {/* Áudio */}
-            {/* <audio ref={refMusica} src={arquivoMusica} autoPlay={false} controls={false} /> */}
+            <audio ref={refMusica} src={arquivoMusica} autoPlay={false} controls={false} />
         </Fragment>
     )
 }

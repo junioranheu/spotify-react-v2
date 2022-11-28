@@ -117,6 +117,49 @@ export const Fetch = {
         return respostaJson;
     },
 
+    async getApiStream(url: string, isTentarRefreshToken: boolean = true) {
+        const token = Auth?.get()?.token ?? '';
+        let respostaJson;
+        let headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/octet-stream',
+            'Authorization': `Bearer ${token}`
+        }
+
+        try {
+            let respostaStream = await fetch(url, {
+                method: VERBOS_HTTP.GET,
+                headers: headers
+            });
+
+            // console.log(respostaStream);
+
+            // Caso o respostaJson.status seja diferente de nulo, é porque algo deu erro...
+            // Exemplo: erros 404, 400 ou 401, quando um usuário escreve na barra e procura por um ID que não existe;
+            if (respostaStream.status) {
+                console.log(`Erro ${respostaStream.status} em ${url}.`);
+                respostaJson = null;
+            }
+
+            return respostaStream;
+        } catch (erro: any) {
+            const e = {
+                'url': url,
+                'token': token,
+                'erro': erro.message,
+                'data': horarioBrasilia().format('YYYY-MM-DD HH:mm:ss')
+            }
+
+            console.table(e);
+            // Aviso.error('Houve uma falha na requisição GET (stream) ao servidor!', 5000);
+
+            // Se o usuário tem um token e foi erro 401, chame o end-point de refresh token;
+            respostaJson = await Fetch.refreshToken(token, erro.message, 'GET_STREAM', url, null, isTentarRefreshToken);
+        }
+
+        return respostaJson;
+    },
+
     async refreshToken(token: string, erro: any, verboHTTP: string, url: string | null, body: string | null, isTentarRefreshToken: boolean): Promise<any> {
         if (token && erro === 'Unexpected end of JSON input' && isTentarRefreshToken) {
             const urlRefreshToken = CONSTS_AUTENTICAR.API_URL_POST_REFRESH_TOKEN;
@@ -140,7 +183,7 @@ export const Fetch = {
             } as iContextDadosUsuario;
 
             Auth.update(dadosUsuario);
-            
+
             const msgRefreshTokenAtualizado = 'Refresh token atualizado';
             console.log(msgRefreshTokenAtualizado);
 
@@ -161,6 +204,8 @@ export const Fetch = {
                         respostaJson = await Fetch.putApi(url, body, false);
                     } else if (verboHTTP === VERBOS_HTTP.DELETE) {
                         respostaJson = await Fetch.deleteApi(url, body, false);
+                    } else if (verboHTTP === 'GET_STREAM') {
+                        respostaJson = await Fetch.getApiStream(url, false);
                     }
                 } catch (error) {
                     Fetch.deslogarUsuarioRefreshTokenInvalido();

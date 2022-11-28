@@ -149,13 +149,13 @@ img {
 /* =-=-=-=-=-=-=-=-=-=-= nProgress =-=-=-=-=-=-=-=-=-=-= */
 #nprogress {
     .bar {
-        background: hsl(257, 74%, 39%) !important;
+        background: var(--cor-principal) !important;
         height: 3px !important;
         box-shadow: none !important;
     }
 
     .peg {
-        box-shadow: 0 0 10px hsl(257, 74%, 39%), 0 0 5px hsl(257, 74%, 39%) !important;
+        box-shadow: 0 0 10px var(--cor-principal), 0 0 5px var(--cor-principal) !important;
         box-shadow: none !important;
         height: 3px !important;
     }
