@@ -5,6 +5,7 @@ import useWindowSize from '../../../../hooks/outros/useWindowSize';
 import { Fetch } from '../../../../utils/api/fetch';
 import CONSTS_UPLOAD_PROTEGIDO from '../../../../utils/consts/data/constUploadProtegido';
 import { Aviso } from '../../../../utils/outros/aviso';
+import converterStreamEmObjectURL from '../../../../utils/outros/converterStreamEmObjectURL';
 import formatarSegundos from '../../../../utils/outros/formatarSegundos';
 import UUID from '../../../../utils/outros/UUID';
 import Styles from '../outros/progressBar.module.scss';
@@ -130,9 +131,9 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
         async function getMusica() {
             try {
                 nProgress.start();
-                const nomePasta = 'music';
-                const nomeArquivo = '2.mp3';
-                const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM}/nomePasta=${nomePasta}&nomeArquivo=${nomeArquivo}`;
+                
+                const nomeArquivo = '2';
+                const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM}/nomePasta=music&nomeArquivo=${nomeArquivo}.mp3`;
                 const stream = await Fetch.getApiStream(url);
                 // console.log(stream);
 
@@ -142,19 +143,9 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
                     return false;
                 }
 
-                // Converter para blob;
-                const blob = await stream.blob();
-                // console.log(blob);
-
-                // Converter blob para mp3;
-                const arquivoMp3 = new File([blob], nomeArquivo, { type: 'audio/mpeg' });
-                // console.log(arquivoMp3);
-
-                // Converter mp3 para url;
-                const objectURL = URL.createObjectURL(arquivoMp3);
-                // console.log(objectURL);
-
+                const objectURL = await converterStreamEmObjectURL(stream);
                 setArquivoMusica(objectURL);
+
                 process.env.NODE_ENV === 'development' && Aviso.success('Musica importada com sucesso', 3000);
                 nProgress.done();
             } catch (error) {
@@ -212,19 +203,14 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
                 }
 
                 if (process.env.NODE_ENV === 'development') {
-                    const info = {
-                        'isPlaying': isPlaying,
-                        'isModoLoop': isModoLoop,
-                        'tempoSegundosAtual': formatarSegundos(tempoSegundosAtual)
-                    }
-
-                    console.table(info);
+                    console.log(`isPlaying: ${isPlaying} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual)}`);
                 }
             }
         }, 500);
 
         return () => clearInterval(intervalo);
     }, [isPlaying, isModoLoop, refMusica?.current, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo])
+
 
     return (
         <Fragment>
