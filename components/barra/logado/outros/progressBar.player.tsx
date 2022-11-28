@@ -18,8 +18,8 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
 
     const elementoId = 'progressWrapperPlayer';
     const refMusica = useRef(null);
-    const [propTempoSegundosMaximo, setPropTempoSegundosMaximo] = useState<number>(60);
-    const [propTempoSegundosTocados, setPropTempoSegundosTocados] = useState<number>(10);
+    const [tempoSegundosMaximo, setTempoSegundosMaximo] = useState<number>(60);
+    const [tempoSegundosAtual, setTempoSegundosAtual] = useState<number>(10);
 
     const [rectLeft, setRectLeft] = useState<number>(0);
     const [rectWidth, setRectWidth] = useState<number>(0);
@@ -42,14 +42,14 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
     // #1.2 - Definir posição do progress bar com base no tempo tocado;
     useEffect(() => {
         function handlePosicaoInicial() {
-            const porcentagemTocado = (propTempoSegundosTocados / propTempoSegundosMaximo);
+            const porcentagemTocado = (tempoSegundosAtual / tempoSegundosMaximo);
             const porcetagemTocadoWidth = rectWidth * porcentagemTocado;
             setPosicaoClick(porcetagemTocadoWidth);
         }
 
         // Definir o volume proporcional ao resize; 
         handlePosicaoInicial();
-    }, [rectWidth, rectLeft, propTempoSegundosMaximo, propTempoSegundosTocados]);
+    }, [rectWidth, rectLeft, tempoSegundosMaximo, tempoSegundosAtual]);
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-= #2 =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
     // #2.1 - Função utilizada no click e no bindProgressBar: definir posição do progress bar;
@@ -67,11 +67,11 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
         porcentagemTocadoWidthElemento = porcentagemTocadoWidthElemento < 0 ? 0 : porcentagemTocadoWidthElemento; // Se for menor que 0, set 0;
         porcentagemTocadoWidthElemento = porcentagemTocadoWidthElemento > 100 ? 100 : porcentagemTocadoWidthElemento; // Se for maior que 100, set 100;
         // Aviso.warn(`<b>%WidthElemento</b>: ${porcentagemTocadoWidthElemento}`, 5000);
-        const tempoSegundosTocados = Math.round((porcentagemTocadoWidthElemento / 100) * propTempoSegundosMaximo);
-        setPropTempoSegundosTocados(tempoSegundosTocados);
+        const tempoSegundosAtual = Math.round((porcentagemTocadoWidthElemento / 100) * tempoSegundosMaximo);
+        setTempoSegundosAtual(tempoSegundosAtual);
 
         // console.log('porcetagemTocadoWidthElemento:', porcetagemTocadoWidthElemento);
-        // console.log('tempoSegundosTocados:', tempoSegundosTocados);
+        // console.log('tempoSegundosAtual:', tempoSegundosAtual);
     }
 
     // #2.2 - Definir posição do progress bar no click;
@@ -157,9 +157,16 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
         getMusica();
     }, []);
 
-    // #4.2 - Controlar "isPlaying" e "volume";
+    // #4.2 - Controlar "isPlaying", "volume" e duração da música;
     useEffect(() => {
-        if (refMusica.current) {
+        if (refMusica?.current) {
+            // #1 - Setar a duração da música;
+            // @ts-ignore
+            const duracaoMusicaSegundos = refMusica?.current?.duration;
+             console.log(duracaoMusicaSegundos ?? 0);
+            setTempoSegundosMaximo(!isNaN(duracaoMusicaSegundos ?? 0) ? duracaoMusicaSegundos : 0);
+
+            // #2 - Controlar isPlaying e Volume;
             const volumeAjustado = volume / 100;
 
             // @ts-ignore
@@ -167,18 +174,52 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
 
             if (isPlaying) {
                 // @ts-ignore
-                refMusica.current.play();
+                refMusica?.current?.play();
             } else {
                 // @ts-ignore
-                refMusica.current.pause();
+                refMusica?.current?.pause();
             }
         }
-    }, [isPlaying, volume, refMusica.current]);
+    }, [isPlaying, volume, refMusica?.current]);
+
+    // #4.3 - "Core do Player": controla o tempo tocado;
+    useEffect(() => {
+        const intervalo = setInterval(() => {
+            // console.table([props.isPlaying, tempoSegundosMaximo, refMusica?.current?.currentTime, props.isModoLoop]);
+
+            // @ts-ignore;
+            if (isPlaying && arquivoMusica && tempoSegundosMaximo > refMusica?.current?.currentTime) {
+
+
+                // console.log(refMusica?.current?.currentTime);
+                // setTempoSegundosAtual(widthElemento);
+            } else {
+                if (arquivoMusica) {
+                    if (isPlaying) {
+                        // if (isModoLoop) {
+                        //     // console.log('Modo loop ativado');
+                        //     refMusica?.current?.currentTime = 0;
+                        //     setTempoAtual(0);
+                        //     refMusica?.current?.play();
+                        // } else {
+                        // console.log('Pular para a próxima música');
+                        // props.handleAvancar();
+                        // }
+                    } else {
+                        // console.log(`Música "${props.musicaContext?.nome}" pausada`);
+                        console.log(`Música  pausada`);
+                    }
+                }
+            }
+        }, 100);
+
+        return () => clearInterval(intervalo);
+    }, [isPlaying, arquivoMusica, tempoSegundosMaximo])
 
     return (
         <Fragment>
             {/* Esquerda, tempo atual */}
-            <span className={Styles.tempoSpan}>{propTempoSegundosTocados ?? '0:00'}</span>
+            <span className={Styles.tempoSpan}>{tempoSegundosAtual ?? '0:00'}</span>
 
             {/* Meio, progress bar */}
             <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)} {...bindProgressBar()} style={{ minWidth: '120px' }}>
@@ -190,7 +231,7 @@ export default function ProgressBarPlayer({ isPlaying, volume }: iParametros) {
             </div>
 
             {/* Direita, tempo total da música em questão */}
-            <span className={Styles.tempoSpan}>{propTempoSegundosMaximo ?? '0:00'}</span>
+            <span className={Styles.tempoSpan}>{tempoSegundosMaximo ?? '0:00'}</span>
 
             {/* Áudio */}
             <audio ref={refMusica} src={arquivoMusica} autoPlay={false} controls={false} />
