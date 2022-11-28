@@ -19,6 +19,13 @@ export default function App({ Component, pageProps }: AppProps) {
         setUrl(asPath);
     }, [asPath]);
 
+    // Scrollar pro top automaticamente;
+    useEffect(() => {
+        // console.log('useEffect fired!', {asPath: router.asPath});
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        console.clear();
+    }, [asPath]);
+
     function verificarLayout() {
         // console.log(`Url: ${url}`);
 
@@ -41,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     <meta name='description' content={`${CONSTS_SISTEMA.NOME_SISTEMA} — ${CONSTS_SISTEMA.SLOGAN}`} />
                     <meta name='keywords' content='spotify, música, anheu, junioranheu' />
                     <meta name='author' content='@junioranheu' />
-                    <meta name='theme-color' content='#99FDAD' />
+                    <meta name='theme-color' content='#1DD05E' />
                 </Head>
 
                 <UsuarioProvider>
