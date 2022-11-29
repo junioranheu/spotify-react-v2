@@ -131,9 +131,9 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
         async function getMusica() {
             try {
                 nProgress.start();
-                
-                const nomeArquivo = '2';
-                const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM}/nomePasta=music&nomeArquivo=${nomeArquivo}.mp3`;
+
+                const nomeArquivo = '1';
+                const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM_BUFFER}/nomePasta=music&nomeArquivo=${nomeArquivo}.mp3`;
                 const stream = await Fetch.getApiStream(url);
                 // console.log(stream);
 
@@ -209,8 +209,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
         }, 500);
 
         return () => clearInterval(intervalo);
-    }, [isPlaying, isModoLoop, refMusica?.current, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo])
-
+    }, [isPlaying, isModoLoop, refMusica?.current, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo]);
 
     return (
         <Fragment>
