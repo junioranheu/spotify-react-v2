@@ -4,7 +4,7 @@ const nextConfig = {
     swcMinify: true, // Habilitar minify em produção;
 
     images: {
-        domains: ['localhost', 'anheuapi.azurewebsites.net'], // Permitir imagens dos domínios;
+        domains: ['localhost', 'spotifyapi.azurewebsites.net'], // Permitir imagens dos domínios;
     },
 }
 

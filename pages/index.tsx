@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import Botao from '../components/outros/botao';
+import Playlists from '../components/playlists/playlists';
 import Styles from '../styles/home.module.scss';
 import { Fetch } from '../utils/api/fetch';
 import CONSTANTS_PLAYLISTS from '../utils/consts/data/constPlaylists';
@@ -28,14 +28,7 @@ export default function Index({ listaPlaylists }: iParametros) {
 
             <div className={Styles.div}>
                 <span className={Styles.titulo}>Playlists disponíveis no momento {emojiAleatorio()}</span>
-
-                {/* <div className={StylesPlaylist.divPlaylists}>
-                    {
-                        listaPlaylists.filter(x => x.isAtivo === true).map((p) => (
-                            <Playlists playlist={p} key={p.playlistId} />
-                        ))
-                    }
-                </div> */}
+                <Playlists listaPlaylists={listaPlaylists} />
             </div>
 
             <div className={Styles.div}>
@@ -48,14 +41,6 @@ export default function Index({ listaPlaylists }: iParametros) {
                     )
                 }
             </div>
-
-            {
-                isAuth && (
-                    <div className={Styles.botaoCustom} onClick={() => null}>
-                        <Botao texto='Importar todas as músicas' url={null} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
-                    </div>
-                )
-            }
         </section>
     )
 }

@@ -26,7 +26,6 @@
         // background-color: pink;
         display: flex;
         flex-direction: column;
-
         margin-top: 1.875rem;
 
         .titulo {
@@ -41,23 +40,10 @@
 
         .textoNormal {
             margin-top: 0.625rem;
-
             font-size: 1rem;
             line-height: 1rem;
             font-weight: 400;
             color: #A7A7A7;
-        }
-    }
-
-    .botaoCustom {
-        /* background-color: pink; */
-        margin-top: 1.25rem;
-        width: fit-content;
-    }
-
-    .botaoCustom {
-        button {
-            background-color: var(--cor-principal);
         }
     }
 }
