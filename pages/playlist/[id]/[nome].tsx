@@ -29,7 +29,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
             if (contador <= limite) {
                 // @ts-ignore;
                 const banda = pm?.musicas?.musicasBandas[0]?.bandas.nome;
-   
+
                 // Se a banda não estiver na string "bandas", adicione-a;
                 if (!bandas.includes(banda)) {
                     bandas = bandas + `, ${banda}`;
@@ -44,10 +44,21 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
 
         // Se passou do limite...
         if (isPassouLimite) {
-           return `${bandas} e mais`;
+            return `${bandas} e mais`;
         }
 
         return bandas;
+    }
+
+    function somarDuracaoPlaylist(playlist: iPlaylist) {
+        let duracao = 0;
+        playlist?.playlistsMusicas.forEach(function (pm: iPlaylistMusica) {
+            // @ts-ignore;
+            const d = pm?.musicas.duracaoSegundos;
+            duracao += d;
+        });
+
+        return formatarSegundos(duracao, true);
     }
 
     return (
@@ -77,12 +88,8 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                         <span className={Styles.span1}>Lista de reprodução</span>
                         <span className={Styles.span2}>{playlist.nome}</span>
                         <span className={Styles.span3}>{concatenarBandas(playlist)}</span>
-                        {/* <span className={Styles.span4}>
-                            {playlist.usuarios?.nomeCompleto} • {playlist.playlistsMusicas?.length} {(playlist.playlistsMusicas?.length > 1 ? 'músicas' : 'música')}, {formatarSegundos(duracaoPlaylist, true)}
-                        </span> */}
-
                         <span className={Styles.span4}>
-                            {playlist.usuarios?.nomeCompleto} • {playlist.playlistsMusicas?.length} {(playlist.playlistsMusicas?.length > 1 ? 'músicas' : 'música')}, {formatarSegundos(60, true)}
+                            {playlist.usuarios?.nomeCompleto} • {playlist.playlistsMusicas?.length} {(playlist.playlistsMusicas?.length > 1 ? 'músicas' : 'música')}, {somarDuracaoPlaylist(playlist)}
                         </span>
                     </div>
                 </div>
