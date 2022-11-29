@@ -3,7 +3,7 @@ Spotify v2 - clone por @junioranheu
 </h1>
 
 <p align="center">Um web app clone do spotify feito em React.js e Next.js. <a href="https://github.com/junioranheu/spotify-api" target="_blank">API</a> feita em .NET 7 e adequada para as necessidades do projeto.
-<br/><br/><a align="center" href="spotify-anheu-v2.vercel.app/" target="_blank">Aplicação rodando na Vercel</a>
+<br/><br/><a align="center" href="https://spotify-anheu-v2.vercel.app/" target="_blank">Aplicação rodando na Vercel</a>
 </p>
 
 ## 📃 Sobre o projeto
