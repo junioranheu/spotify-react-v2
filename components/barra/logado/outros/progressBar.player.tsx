@@ -203,7 +203,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
                 }
 
                 if (process.env.NODE_ENV === 'development') {
-                    console.log(`isPlaying: ${isPlaying} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual)}`);
+                    console.log(`isPlaying: ${isPlaying} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual, false)}`);
                 }
             }
         }, 500);
@@ -214,7 +214,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
     return (
         <Fragment>
             {/* Esquerda, tempo atual */}
-            <span className={Styles.tempoSpan}>{formatarSegundos(tempoSegundosAtual) ?? '0:00'}</span>
+            <span className={Styles.tempoSpan}>{formatarSegundos(tempoSegundosAtual, false) ?? '0:00'}</span>
 
             {/* Meio, progress bar */}
             <div className={Styles.progressWrapper} id={elementoId} onClick={(e) => handleClick(e)} {...bindProgressBar()} style={{ minWidth: '120px' }}>
@@ -226,7 +226,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
             </div>
 
             {/* Direita, tempo total da música em questão */}
-            <span className={Styles.tempoSpan}>{formatarSegundos(tempoSegundosMaximo) ?? '0:00'}</span>
+            <span className={Styles.tempoSpan}>{formatarSegundos(tempoSegundosMaximo, false) ?? '0:00'}</span>
 
             {/* Áudio */}
             <audio ref={refMusica} src={arquivoMusica} autoPlay={false} controls={false} />

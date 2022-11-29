@@ -27,24 +27,6 @@
         display: flex;
         flex-direction: column;
         margin-top: 1.875rem;
-
-        .titulo {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            font-size: 1.5rem;
-            line-height: 1.75rem;
-            letter-spacing: -0.04em;
-            font-weight: 700;
-            color: var(--branco);
-        }
-
-        .textoNormal {
-            margin-top: 0.625rem;
-            font-size: 1rem;
-            line-height: 1rem;
-            font-weight: 400;
-            color: #A7A7A7;
-        }
     }
 }
 

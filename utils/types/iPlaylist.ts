@@ -1,3 +1,4 @@
+import iPlaylistMusica from './iPlaylistMusica';
 import iUsuario from './iUsuario';
 
 export default interface iPlaylist {
@@ -12,7 +13,8 @@ export default interface iPlaylist {
 
     isAtivo: boolean;
     dataRegistro: Date;
-    playlistsMusicas: any; // ?
+    
+    playlistsMusicas: iPlaylistMusica[];
 
     erro: boolean;
     codigoErro: number | null;

@@ -1,0 +1,105 @@
+.banner {
+    // background-color: pink;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    width: 100%;
+
+    .divDireita {
+        // background-color: pink;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 5px;
+
+        .span1 {
+            font-weight: 800;
+            font-size: 0.75rem;
+            line-height: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--branco);
+            opacity: 0.85;
+        }
+
+        .span2 {
+            margin-top: 0.625rem;
+            font-size: 4rem;
+            line-height: 4rem;
+            letter-spacing: -0.04em;
+            font-weight: 900;
+            color: var(--branco);
+            opacity: 0.9;
+        }
+
+        .span3 {
+            margin-top: 1.25rem;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            max-height: 74px;
+            overflow: hidden;
+            word-break: break-word;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .span4 {
+            margin-top: 0.625rem;
+            font-size: 0.875rem;
+            line-height: 1rem;
+            text-transform: none;
+            letter-spacing: normal;
+            color: var(--branco);
+            opacity: 0.9;
+        }
+    }
+
+    .capa {
+        border-radius: 5px;
+    }
+}
+
+.divisao {
+    border-bottom: 1px solid rgba(42, 42, 42, 100);
+    margin-top: 2.5rem;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=- Media queries =-=-=-=-=-=-=-=-=-=-=-=- */
+/* hi-res laptops and desktops */
+@media (max-width:1281px) {
+    .banner {
+        .divDireita {
+            .span2 {
+                font-size: 3rem;
+                line-height: 3rem;
+            }
+        }
+    }
+}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width:1025px) {
+    .banner {
+        .divDireita {
+            .span2 {
+                font-size: 2rem;
+                line-height: 2rem;
+            }
+        }
+    }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width:801px) {
+    .banner {
+        // background-color: pink;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (max-width:600px) {}
+
+/* smartphones, Android phones, landscape iPhone */
+@media (max-width:480px) {}

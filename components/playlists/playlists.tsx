@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import ImgCinza from '../../assets/image/cinza.webp';
 import ImageWithFallback from '../../components/outros/imageWithFallback';
-import CONSTANTS_UPLOAD from '../../utils/consts/data/constUpload';
+import CONSTS_UPLOAD from '../../utils/consts/data/constUpload';
+import ajustarUrl from '../../utils/outros/ajustarUrl';
 import iPlaylist from '../../utils/types/iPlaylist';
 import BotaoPlay from '../svg/botaoPlay';
 import Styles from './playlists.module.scss';
@@ -15,13 +16,13 @@ export default function Playlists({ listaPlaylists }: iParametros) {
         <div className={Styles.divPlaylists}>
             {
                 listaPlaylists.filter(x => x.isAtivo === true).map((p) => (
-                    <Link href={`/playlist/${p.playlistId}`} passHref key={p.playlistId}>
+                    <Link href={`/playlist/${p.playlistId}/${ajustarUrl(p.nome)}`} passHref key={p.playlistId}>
                         <div className={Styles.playlist}>
                             <div className={Styles.divThumbnail}>
                                 <ImageWithFallback
                                     width={210}
                                     height={210}
-                                    src={`${CONSTANTS_UPLOAD.API_URL_GET_PLAYLIST}/${p.foto}`}
+                                    src={`${CONSTS_UPLOAD.API_URL_GET_PLAYLIST}/${p.foto}`}
                                     fallbackSrc={ImgCinza}
                                 />
                             </div>
