@@ -100,7 +100,7 @@ export default function BarraPlayer() {
             {/* =-=-=-=-=-=-=-=-=-=-=-= Segunda div, meio =-=-=-=-=-=-=-=-=-=-=-= */}
             <div className={Styles.divPlayer}>
                 <div className={Styles.divPlayerIcones}>
-                    <span className={Styles.spanIcone} onClick={() => null} title={`${isModoAleatorio ? 'Desativar' : 'Ativado'} modo aleatório`}>
+                    <span className={Styles.spanIcone} onClick={() => setIsModoAleatorio(!isModoAleatorio)} title={`${isModoAleatorio ? 'Desativar' : 'Ativado'} modo aleatório`}>
                         <Aleatorio cor={(isModoAleatorio ? 'var(--cor-principal)' : '')} />
                     </span>
 
