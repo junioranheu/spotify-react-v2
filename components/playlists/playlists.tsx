@@ -19,8 +19,8 @@ export default function Playlists({ listaPlaylists }: iParametros) {
                         <div className={Styles.playlist}>
                             <div className={Styles.divThumbnail}>
                                 <ImageWithFallback
-                                    width={220}
-                                    height={220}
+                                    width={210}
+                                    height={210}
                                     src={`${CONSTANTS_UPLOAD.API_URL_GET_PLAYLIST}/${p.foto}`}
                                     fallbackSrc={ImgCinza}
                                 />
