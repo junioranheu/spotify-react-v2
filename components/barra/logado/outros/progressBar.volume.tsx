@@ -35,7 +35,7 @@ export default function ProgressBarVolume({ handleVolume, volume }: iParametros)
 
         // Definir o volume proporcional ao iniciar; 
         handleVolumeControleInterno();
-    }, [tamanhoTela?.width, document, volume]);
+    }, [tamanhoTela?.width, volume, rectWidth]);
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
     // Função utilizada no click e no bindProgressBar;

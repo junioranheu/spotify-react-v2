@@ -40,7 +40,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
 
         // console.log('rect?.left: ', rect?.left);
         // console.log('rect?.width: ', rect?.width);
-    }, [document, tamanhoTela?.width, tamanhoTela?.height, sectionBarraPlayerDeltaX]);
+    }, [tamanhoTela?.width, tamanhoTela?.height, sectionBarraPlayerDeltaX]);
 
     // #1.2 - Definir posição do progress bar com base no tempo tocado;
     useEffect(() => {
@@ -122,7 +122,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
                 setSectionBarraPlayerDeltaX(UUID());
             }
         })
-    }, [document]);
+    }, []);
 
     // =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-= #4 =-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=
     // #4.1 - Importar (fetch) arquivo (música) e realizar conversões e setar em "setArquivoMusica";
@@ -175,7 +175,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
                 refMusica?.current?.pause();
             }
         }
-    }, [isPlaying, volume, refMusica?.current, arquivoMusica]);
+    }, [isPlaying, volume, arquivoMusica]);
 
     // #4.3 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
@@ -209,7 +209,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
         }, 500);
 
         return () => clearInterval(intervalo);
-    }, [isPlaying, isModoLoop, refMusica?.current, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo]);
+    }, [isPlaying, isModoLoop, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo]);
 
     return (
         <Fragment>

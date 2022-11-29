@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import nProgress from 'nprogress';
 import { Fragment } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
 import ImageWithFallback from '../../../components/outros/imageWithFallback';
@@ -20,6 +21,7 @@ interface iParametros {
 export default function Playlist({ playlist, imgCapa }: iParametros) {
 
     function concatenarBandas(playlist: iPlaylist) {
+        nProgress.start();
         let bandas = '';
         const limite = 3;
         let contador = 1;
@@ -47,10 +49,12 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
             return `${bandas} e mais`;
         }
 
+        nProgress.done();
         return bandas;
     }
 
     function somarDuracaoPlaylist(playlist: iPlaylist) {
+        nProgress.start();
         let duracao = 0;
         playlist?.playlistsMusicas.forEach(function (pm: iPlaylistMusica) {
             // @ts-ignore;
@@ -58,7 +62,10 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
             duracao += d;
         });
 
-        return formatarSegundos(duracao, true);
+        const duracaoFormatada = formatarSegundos(duracao, true);
+        nProgress.done();
+
+        return duracaoFormatada;
     }
 
     return (
