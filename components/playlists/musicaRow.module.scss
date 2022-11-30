@@ -9,7 +9,7 @@
     padding-left: 1rem;
     padding-right: 1rem;
 
-    color: #A7A7A7;
+    color: var(--cinza-claro);
     font-size: 1rem;
     line-height: 1rem;
     font-weight: 400;
@@ -19,7 +19,6 @@
     }
 
     &:hover {
-        border: 1px solid transparent;
         border-radius: 4px;
         background-color: rgba(255, 255, 255, .3);
         transition: .3s ease-in-out;
@@ -41,9 +40,15 @@
         align-items: center;
         gap: 1.5rem;
 
-        .contador {
-            // background-color: pink; 
-            min-width: 1.25rem;
+        .divContador {
+            // background-color: violet;
+            min-width: 1rem;
+            min-height: 1rem;
+
+            .contador {
+                // background-color: pink; 
+                min-width: 1.25rem;
+            }
         }
 
         .divInfoMusica {
@@ -119,8 +124,8 @@
             display: none;
         }
 
-        .divDireita{
-            .tempo{
+        .divDireita {
+            .tempo {
                 display: none;
             }
         }

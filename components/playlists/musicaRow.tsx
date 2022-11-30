@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import ImgCinza from '../../assets/image/cinza.webp';
 import Coracao from '../../components/outros/coracao';
 import Reticencias from '../../components/svg/reticencias';
@@ -48,23 +48,23 @@ export default function MusicaRow({ i, id, foto, titulo, banda, album, tempo, se
             <div className={Styles.divEsquerda}>
                 {
                     isDesativarUm ? (
-                        <Fragment>
+                        <div className={Styles.divContador}>
                             <span className={`${(i > 1 ? Styles.contador : Styles.contadorItem1)} ${(i === 1 && Styles.verde)}`}>
                                 {/* {((id === musicaContext?.musicaId && isPlayingContext) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)} */}
                                 {i}
                             </span>
 
-                            <span className={`${(i > 1 ? Styles.esconderPlay : Styles.esconderItem1)}`} onClick={(e) => setarMusica(e)}><BotaoPlay width='14' cor='#A7A7A7' /></span>
-                        </Fragment>
+                            <span className={`${(i > 1 ? Styles.esconderPlay : Styles.esconderItem1)}`} onClick={(e) => setarMusica(e)}><BotaoPlay width='14' cor='var(--cinza-claro)' /></span>
+                        </div>
                     ) : (
-                        <Fragment>
+                        <div className={Styles.divContador}>
                             <span className={Styles.contador}>
                                 {/* {((id === musicaContext?.musicaId && isPlayingContext) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)} */}
                                 {i}
                             </span>
 
-                            <span className={Styles.esconderPlay} onClick={(e) => setarMusica(e)}><BotaoPlay width='14' cor='#A7A7A7' /></span>
-                        </Fragment>
+                            <span className={Styles.esconderPlay} onClick={(e) => setarMusica(e)}><BotaoPlay width='14' cor='var(--cinza-claro)' /></span>
+                        </div>
                     )
                 }
 
@@ -88,7 +88,7 @@ export default function MusicaRow({ i, id, foto, titulo, banda, album, tempo, se
                 </span>
 
                 <span className={Styles.tempo}>{formatarSegundos(tempo ?? 0, false)}</span>
-                <span className='pointer'><Reticencias width='16' cor='#A7A7A7' /></span>
+                <span className='pointer'><Reticencias width='16' cor='var(--cinza-claro)' /></span>
             </div>
         </div>
     )
