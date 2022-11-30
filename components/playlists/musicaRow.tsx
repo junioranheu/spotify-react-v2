@@ -66,6 +66,9 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
         // Salvar no Context e no localStorage;
         MusicaStorage.set(musica);
         setMusicaContext(musica);
+
+        // Forçar play;
+        setIsPlayingContext(true);
     }
 
     return (
