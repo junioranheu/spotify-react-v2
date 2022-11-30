@@ -12,8 +12,6 @@ import UUID from '../../../../utils/outros/UUID';
 import Styles from '../outros/progressBar.module.scss';
 
 interface iParametros {
-    // isPlaying: boolean;
-    // setIsPlaying: Dispatch<boolean>;
     isModoLoop: boolean;
     volume: number;
 }
@@ -151,7 +149,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 const objectURL = await converterStreamEmObjectURL(stream);
                 setArquivoMusica(objectURL);
 
-                process.env.NODE_ENV === 'development' && Aviso.success(`Musica importada com sucesso: <b>${nome}</b>`, 3000);
+                process.env.NODE_ENV === 'development' && Aviso.success(`Música importada com sucesso: <b>${nome}</b>`, 3000);
                 nProgress.done();
             } catch (error) {
                 Aviso.error('Houve um problema interno no processo de tratamento da música. Tente novamente mais tarde', 5000);
@@ -193,15 +191,18 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
             // Voltar o tempo ao 0 no mesmo instante;
             setTempoSegundosAtual(0);
 
-            // Forçar play;
-            setTimeout(function () {
-                setIsPlayingContext(true);
-                refMusica?.current?.play();
-            }, 1000);
+            if (isPlayingContext) {
+                // Forçar play;
+                setTimeout(function () {
+                    setIsPlayingContext(true);
+                    refMusica?.current?.play();
+                    Aviso.error('refMusica?.current?.play();', 3000);
+                }, 500);
+            }
         }
-    }, [refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext, setIsPlayingContext]);
+    }, [refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext, setIsPlayingContext, isPlayingContext]);
 
-    // #4.3 - "Core do Player": controla o tempo tocado;
+    // #4.4 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
         const intervalo = setInterval(() => {
             if (refMusica?.current) {
@@ -231,7 +232,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
         }, 500);
 
         return () => clearInterval(intervalo);
-    }, [isPlayingContext, isModoLoop, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo, musicaContext?.nome]);
+    }, [isPlayingContext, isModoLoop, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo, musicaContext?.nome])
 
     return (
         <Fragment>

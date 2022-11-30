@@ -18,11 +18,8 @@ export default function App({ Component, pageProps }: AppProps) {
     const [url, setUrl] = useState<string>('');
     useEffect(() => {
         setUrl(asPath);
-    }, [asPath]);
 
-    // Scrollar pro top automaticamente;
-    useEffect(() => {
-        // console.log('useEffect fired!', {asPath: router.asPath});
+        // Scrollar pro top automaticamente;
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         console.clear();
     }, [asPath]);
