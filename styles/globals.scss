@@ -24,8 +24,8 @@ body {
     margin: 0;
     scroll-behavior: smooth !important;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .main {
@@ -132,7 +132,7 @@ img {
 }
 
 .div-padrao {
-    background-color: pink !important;
+    // background-color: pink !important;
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
@@ -318,13 +318,17 @@ img {
 }
 
 /* =-=-=-=-=-=-=-=-=-=-= Scroll =-=-=-=-=-=-=-=-=-=-= */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
 body::-webkit-scrollbar {
     width: 0px !important;
 }
 
-::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+.main::-webkit-scrollbar {
+    width: 0px !important;
 }
 
 ::-webkit-scrollbar-track {

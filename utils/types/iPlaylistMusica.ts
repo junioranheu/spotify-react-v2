@@ -5,10 +5,10 @@ export default interface iPlaylistMusica {
     playlistMusicaId: number;
 
     playlistId: number;
-    playlists: iPlaylist[];
+    playlists: iPlaylist;
 
     musicaId: number;
-    musicas: iMusica[];
+    musicas: iMusica;
 
     isAtivo: boolean;
     dataRegistro: Date | null;

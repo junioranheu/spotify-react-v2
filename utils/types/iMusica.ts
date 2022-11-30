@@ -4,7 +4,7 @@ export default interface iMusica {
     musicaId: number;
     nome: string;
     ouvintes: number;
-    duracaoSegundso: number;
+    duracaoSegundos: number;
     dataLancamento: Date | null;
 
     isAtivo: boolean;

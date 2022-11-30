@@ -3,6 +3,7 @@ import nProgress from 'nprogress';
 import { Fragment } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
 import ImageWithFallback from '../../../components/outros/imageWithFallback';
+import MusicaRow from '../../../components/playlists/musicaRow';
 import { Fetch } from '../../../utils/api/fetch';
 import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
@@ -104,23 +105,26 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                 <div className={Styles.divisao}></div>
 
                 {/* Playlist */}
-                {/* <div className='div-padrao'>
+                <div className='div-padrao'>
                     <div>
                         {
                             playlist?.playlistsMusicas?.length > 0 ? (
                                 <Fragment>
                                     {
-                                        playlist.playlistsMusicas.map((m, i) => (
+                                        playlist.playlistsMusicas.map((m: iPlaylistMusica, i: number) => (
                                             <MusicaRow
                                                 key={m.musicas.musicaId}
                                                 i={(i + 1)} // A ordem tem que começar no 1;
                                                 id={m.musicas.musicaId}
+                                                // @ts-ignore;
                                                 foto={m.musicas.musicasBandas[0]?.bandas?.foto}
                                                 titulo={m.musicas.nome}
+                                                // @ts-ignore;
                                                 banda={m.musicas.musicasBandas[0]?.bandas?.nome}
+                                                // @ts-ignore;
                                                 album={m.musicas.albunsMusicas?.albuns?.nome}
                                                 tempo={m.musicas.duracaoSegundos}
-                                                setarMusica={setarMusica}
+                                                setarMusica={null}
                                                 isDesativarUm={false}
                                             />
                                         ))
@@ -128,12 +132,12 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                 </Fragment>
                             ) : (
                                 <div>
-                                    <span className='textoNormal'>Sem músicas na sua fila de reprodução</span>
+                                    <span className='texto'>Para onde foram as músicas dessa playlist? 🤔</span>
                                 </div>
                             )
                         }
                     </div>
-                </div> */}
+                </div>
             </section>
         </Fragment>
     )
