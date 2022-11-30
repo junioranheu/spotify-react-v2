@@ -132,7 +132,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
             try {
                 nProgress.start();
 
-                const nomeArquivo = '1';
+                const nomeArquivo = '2';
                 const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM_BUFFER}/nomePasta=music&nomeArquivo=${nomeArquivo}.mp3`;
                 const stream = await Fetch.getApiStream(url);
                 // console.log(stream);

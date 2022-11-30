@@ -33,7 +33,10 @@ body {
     flex-direction: column;
     min-height: 100vh;
     max-height: 100vh;
-    background-color: var(--cinza);
+
+    background: var(--cinza);
+    background: linear-gradient(180deg, #1B1039 0%, rgba(18, 18, 18, 1) 24%, rgba(18, 18, 18, 1) 100%);
+
     color: var(--branco);
 }
 
