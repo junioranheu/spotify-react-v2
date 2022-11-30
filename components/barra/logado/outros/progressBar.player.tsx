@@ -219,14 +219,12 @@ export default function ProgressBarPlayer({ isPlaying, setIsPlaying, isModoLoop,
                                 console.log('Pular para a próxima música');
                                 // props.handleAvancar();
                             }
-                        } else {
-                            // console.log(`Música "${props.musicaContext?.nome}" pausada`);
                         }
                     }
                 }
 
                 if (process.env.NODE_ENV === 'development') {
-                    // console.log(`isPlaying: ${isPlaying} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual, false)}`);
+                    console.log(`isPlaying: ${isPlaying} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual, false)} | musicaContext?.nome: ${musicaContext?.nome}`);
                 }
             }
         }, 500);

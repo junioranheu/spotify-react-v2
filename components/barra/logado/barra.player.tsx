@@ -1,8 +1,9 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useContext, useEffect, useState } from 'react';
-import TesteImagem from '../../../assets/image/cinza.webp';
+import ImgCinza from '../../../assets/image/cinza.webp';
+import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { MusicaContext } from '../../../utils/context/musicaContext';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
@@ -60,6 +61,21 @@ export default function BarraPlayer() {
         setIsPlaying(!isPlaying);
     }
 
+    const [imagemBanda, setImagemBanda] = useState<StaticImageData | string>(ImgCinza);
+    useEffect(() => {
+        if (musicaContext?.musicaId) {
+            // @ts-ignore;
+            const foto = musicaContext?.musicasBandas[0]?.bandas?.foto;
+
+            if (foto) {
+                const img = `${CONSTS_UPLOAD.API_URL_GET_CAPA}/${foto}`;
+                setImagemBanda(img);
+            } else {
+                setImagemBanda(ImgCinza);
+            }
+        }
+    }, [musicaContext?.musicaId]);
+
     const [musicaId, setMusicaId] = useState<number>(1);
     const [isCurtido, setIsCurtido] = useState<boolean>(false);
     const [isModoAleatorio, setIsModoAleatorio] = useState<boolean>(false);
@@ -72,7 +88,7 @@ export default function BarraPlayer() {
                 {
                     musicaId > 0 && (
                         <Fragment>
-                            <Image src={TesteImagem} width={56} height={56} alt='' />
+                            <Image src={imagemBanda} width={56} height={56} alt='' />
 
                             <div className={Styles.infoMusica}>
                                 <span className={Styles.infoTitulo} title={'xxxxxx'}>
