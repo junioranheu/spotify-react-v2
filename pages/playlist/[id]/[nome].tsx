@@ -113,17 +113,17 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                     {
                                         playlist.playlistsMusicas.map((m: iPlaylistMusica, i: number) => (
                                             <MusicaRow
-                                                key={m.musicas.musicaId}
+                                                key={m.musicas?.musicaId}
                                                 i={(i + 1)} // A ordem tem que começar no 1;
-                                                id={m.musicas.musicaId}
-                                                // @ts-ignore;
-                                                foto={m.musicas.musicasBandas[0]?.bandas?.foto}
-                                                titulo={m.musicas.nome}
+                                                id={m.musicas?.musicaId ?? i}     
+                                                 // @ts-ignore;    
+                                                foto={m.musicas?.musicasBandas[0]?.bandas?.foto}
+                                                titulo={m.musicas?.nome}
                                                 // @ts-ignore;
                                                 banda={m.musicas.musicasBandas[0]?.bandas?.nome}
                                                 // @ts-ignore;
                                                 album={m.musicas.albunsMusicas?.albuns?.nome}
-                                                tempo={m.musicas.duracaoSegundos}
+                                                tempo={m.musicas?.duracaoSegundos}
                                                 setarMusica={null}
                                                 isDesativarUm={false}
                                             />

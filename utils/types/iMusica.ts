@@ -10,7 +10,7 @@ export default interface iMusica {
     isAtivo: boolean;
     dataRegistro: Date | null;
 
-    musicasBandas?: iMusicaBanda[] | null;
+    musicasBandas?: iMusicaBanda[] | iMusicaBanda | null;
 
     erro: boolean;
     codigoErro: number | null;

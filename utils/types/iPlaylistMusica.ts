@@ -8,7 +8,7 @@ export default interface iPlaylistMusica {
     playlists: iPlaylist;
 
     musicaId: number;
-    musicas: iMusica;
+    musicas?: iMusica | null;
 
     isAtivo: boolean;
     dataRegistro: Date | null;
