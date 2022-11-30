@@ -1,8 +1,9 @@
-import Image from 'next/image';
-import { useState } from 'react';
+import Image, { StaticImageData } from 'next/image';
+import { useEffect, useState } from 'react';
 import ImgCinza from '../../assets/image/cinza.webp';
 import Coracao from '../../components/outros/coracao';
 import Reticencias from '../../components/svg/reticencias';
+import CONSTS_UPLOAD from '../../utils/consts/data/constUpload';
 import formatarSegundos from '../../utils/outros/formatarSegundos';
 import BotaoPlay from '../svg/botaoPlay';
 import Styles from './musicaRow.module.scss';
@@ -28,20 +29,13 @@ export default function MusicaRow({ i, id, foto, titulo, banda, album, tempo, se
         setIsMusicaCurtida(!isMusicaCurtida);
     }
 
-    // // Quando uma música é selecionada no MusicaContext;
-    // const [musicaContext] = useContext(MusicaContext); // Context da música;
-    const [imagemBanda, setImagemBanda] = useState(ImgCinza);
-    // useEffect(() => {
-    //     // console.log(musicaContext);
-    //     // console.log(musicaContext?.musicaId);
-
-    //     // Import dinâmico: capa da música reproduzindo;
-    //     if (foto) {
-    //         // console.log('Entrou aqui com o nome de ' + foto);
-    //         const img = `${CONSTANTS_UPLOAD.API_URL_GET_CAPA}/${foto}`;
-    //         setImagemBanda(img);
-    //     }
-    // }, [musicaContext]);
+    const [imagemBanda, setImagemBanda] = useState<StaticImageData | string>(ImgCinza);
+    useEffect(() => {
+        if (foto) {
+            const img = `${CONSTS_UPLOAD.API_URL_GET_CAPA}/${foto}`;
+            setImagemBanda(img);
+        }
+    }, []);
 
     return (
         <div className={Styles.divMusica}>
