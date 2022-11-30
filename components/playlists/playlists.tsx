@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ScrollContainer from 'react-indiana-drag-scroll'; // https://www.npmjs.com/package/react-indiana-drag-scroll
 import ImgCinza from '../../assets/image/cinza.webp';
 import ImageWithFallback from '../../components/outros/imageWithFallback';
 import CONSTS_UPLOAD from '../../utils/consts/data/constUpload';
@@ -13,15 +14,15 @@ interface iParametros {
 
 export default function Playlists({ listaPlaylists }: iParametros) {
     return (
-        <div className={Styles.divPlaylists}>
+        <ScrollContainer className={Styles.divPlaylists}>
             {
                 listaPlaylists.filter(x => x.isAtivo === true).map((p) => (
                     <Link href={`/playlist/${p.playlistId}/${ajustarUrl(p.nome)}`} passHref key={p.playlistId}>
                         <div className={Styles.playlist}>
                             <div className={Styles.divThumbnail}>
                                 <ImageWithFallback
-                                    width={210}
-                                    height={210}
+                                    width={180}
+                                    height={180}
                                     src={`${CONSTS_UPLOAD.API_URL_GET_PLAYLIST}/${p.foto}`}
                                     fallbackSrc={ImgCinza}
                                 />
@@ -37,6 +38,6 @@ export default function Playlists({ listaPlaylists }: iParametros) {
                     </Link>
                 ))
             }
-        </div>
+        </ScrollContainer>
     )
 }

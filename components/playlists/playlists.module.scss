@@ -2,9 +2,9 @@
 .divPlaylists {
     // background-color: pink;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.25rem;
 
+    padding-right: 15rem; // Corrigir bug do ScrollContainer;
     width: 100%;
     margin-top: 1.5rem;
 
@@ -42,6 +42,30 @@
             }
         }
 
+        .btnPlay {
+            position: relative;
+            margin-top: -30%;
+            left: 70%;
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: var(--cor-principal);
+            box-sizing: border-box;
+            border-radius: 500px;
+
+            -webkit-box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
+            box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
+
+            visibility: hidden;
+            opacity: 0;
+            -webkit-transition: opacity 300ms, visibility 300ms;
+            transition: opacity 300ms, visibility 300ms;
+        }
+
         .tituloPlaylist {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -49,7 +73,7 @@
             line-height: 1.5rem;
             font-weight: 500;
 
-            margin-top: 1rem;
+            margin-top: 1.25rem;
 
             white-space: nowrap;
             overflow: hidden;
@@ -71,31 +95,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        /* =-=-=-=-=-=-=-=-=-=-= btnPlay =-=-=-=-=-=-=-=-=-=-= */
-        .btnPlay {
-            position: relative;
-            margin-top: -25.5%;
-            left: 73%;
-            width: 45px;
-            height: 45px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background-color: var(--cor-principal);
-            box-sizing: border-box;
-            border-radius: 500px;
-
-            -webkit-box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
-            box-shadow: 0 8px 8px rgb(0 0 0 / 30%);
-
-            visibility: hidden;
-            opacity: 0;
-            -webkit-transition: opacity 300ms, visibility 300ms;
-            transition: opacity 300ms, visibility 300ms;
-        }
     }
 }
 
@@ -104,12 +103,7 @@
 @media (max-width:1281px) {}
 
 /* big landscape tablets, laptops, and desktops */
-@media (max-width:1025px) {
-    .divPlaylists {
-        // background-color: pink !important;
-        justify-content: center;
-    }
-}
+@media (max-width:1025px) {}
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
 @media (max-width:801px) {}
