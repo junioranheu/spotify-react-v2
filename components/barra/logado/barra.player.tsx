@@ -74,7 +74,7 @@ export default function BarraPlayer() {
                 setImagemBanda(ImgCinza);
             }
         }
-    }, [musicaContext?.musicaId]);
+    }, [musicaContext?.musicaId, musicaContext?.musicasBandas]);
 
     const [musicaId, setMusicaId] = useState<number>(1);
     const [isCurtido, setIsCurtido] = useState<boolean>(false);

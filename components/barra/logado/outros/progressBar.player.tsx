@@ -199,7 +199,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 refMusica?.current?.play();
             }, 1000);
         }
-    }, [refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext]);
+    }, [refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext, setIsPlayingContext]);
 
     // #4.3 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
@@ -231,7 +231,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
         }, 500);
 
         return () => clearInterval(intervalo);
-    }, [isPlayingContext, isModoLoop, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo]);
+    }, [isPlayingContext, isModoLoop, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo, musicaContext?.nome]);
 
     return (
         <Fragment>
