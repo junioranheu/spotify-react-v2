@@ -28,6 +28,7 @@ export default function BarraPlayer() {
 
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
+    const [isPlayingContext, setIsPlayingContext] = [_musicaContext?._isPlaying[0], _musicaContext?._isPlaying[1]];
 
     const asPath = useRouter();
     const [url, setUrl] = useState<string>('');
@@ -51,14 +52,13 @@ export default function BarraPlayer() {
         }
     }
 
-    const [isPlaying, setIsPlaying] = useState<boolean>(false);
     function handlePlay() {
         // if (!musicaContext?.musicaId) {
         //     Aviso.custom('Nenhuma música foi selecionada', 5000);
         //     return false;
         // }
 
-        setIsPlaying(!isPlaying);
+        setIsPlayingContext(!isPlayingContext);
     }
 
     const [imagemBanda, setImagemBanda] = useState<StaticImageData | string>(ImgCinza);
@@ -127,7 +127,7 @@ export default function BarraPlayer() {
 
                     <span className={Styles.btnPlay} onClick={() => handlePlay()}>
                         {
-                            isPlaying ? (
+                            isPlayingContext ? (
                                 <BotaoStop />
                             ) : (
                                 <BotaoPlay />
@@ -146,8 +146,6 @@ export default function BarraPlayer() {
 
                 <div className={Styles.divPlayerInner}>
                     <ProgressBarPlayer
-                        isPlaying={isPlaying}
-                        setIsPlaying={setIsPlaying}
                         isModoLoop={isModoLoop}
                         volume={volume}
                     />

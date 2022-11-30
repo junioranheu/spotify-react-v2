@@ -32,8 +32,9 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
 
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
+    const [isPlayingContext, setIsPlayingContext] = [_musicaContext?._isPlaying[0], _musicaContext?._isPlaying[1]];
 
-    const [isMusicaCurtida, setIsMusicaCurtida] = useState(false);
+    const [isMusicaCurtida, setIsMusicaCurtida] = useState<boolean>(false);
     function handleCoracao() {
         setIsMusicaCurtida(!isMusicaCurtida);
     }
@@ -74,17 +75,17 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                     isDesativarUm ? (
                         <div className={Styles.divContador}>
                             <span className={`${(i > 1 ? Styles.contador : Styles.contadorItem1)} ${(i === 1 && Styles.verde)}`}>
-                                {((musicaId === musicaContext?.musicaId) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)}
+                                {((musicaId === musicaContext?.musicaId && isPlayingContext) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)}
                             </span>
 
                             <span className={`${(i > 1 ? Styles.esconderPlay : Styles.esconderItem1)}`} onClick={() => handleSetarMusica(musicaId)}>
-                                <BotaoPlay width='14' cor='var(--cinza-claro)' />
+                                <BotaoPlay width='14' cor='var(--cinza-claros)' />
                             </span>
                         </div>
                     ) : (
                         <div className={Styles.divContador}>
                             <span className={Styles.contador}>
-                                {((musicaId === musicaContext?.musicaId) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)}
+                                {((musicaId === musicaContext?.musicaId && isPlayingContext) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)}
                             </span>
 
                             <span className={Styles.esconderPlay} onClick={() => handleSetarMusica(musicaId)}>

@@ -3,7 +3,7 @@ import iMusica from '../types/iMusica';
 
 interface iContext {
     _musicaContext: [musicaContext: iMusica, setMusicaContext: any];
-    _xxxContext: [xxxContext: boolean, setXxxContext: any];
+    _isPlaying: [isPlayingContext: boolean, setIsPlayingContext: any];
 }
 
 const _item = '_musicContext';
@@ -11,12 +11,12 @@ export const MusicaContext = createContext<iContext | null>(null);
 
 export const MusicaProvider = (props: any) => {
     const [musicaContext, setMusicaContext] = useState<iMusica>(MusicaStorage.get() ?? null);
-    const [xxxContext, setXxxContext] = useState<boolean>(false);
+    const [isPlayingContext, setIsPlayingContext] = useState<boolean>(false); 
 
     return (
         <MusicaContext.Provider value={{
             _musicaContext: [musicaContext, setMusicaContext],
-            _xxxContext: [xxxContext, setXxxContext]
+            _isPlaying: [isPlayingContext, setIsPlayingContext]
         }}>
             {props.children}
         </MusicaContext.Provider>

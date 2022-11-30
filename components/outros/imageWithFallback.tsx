@@ -1,9 +1,9 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { useState } from 'react';
 
 const ImageWithFallback = (props: any) => {
     const { src, fallbackSrc, ...rest } = props;
-    const [imgSrc, setImgSrc] = useState(src);
+    const [imgSrc, setImgSrc] = useState<StaticImageData | string>(src);
 
     return (
         <Image
