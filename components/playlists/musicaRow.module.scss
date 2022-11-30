@@ -104,6 +104,15 @@
         overflow-x: auto;
         gap: 0px;
 
+        &:nth-child(n+2) {
+            // background-color: red;
+            margin-top: 0.5rem;
+        }
+
+        &::-webkit-scrollbar {
+            height: 3px;
+        }
+
         .divEsquerda {
             .divInfoMusica {
                 // background-color: red;

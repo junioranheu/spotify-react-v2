@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import TesteImagem from '../../../assets/image/cinza.webp';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
+import { MusicaContext } from '../../../utils/context/musicaContext';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
 import Coracao from '../../outros/coracao';
 import Aleatorio from '../../svg/barra.player/aleatorio';
@@ -23,6 +24,9 @@ import ProgressBarVolume from './outros/progressBar.volume';
 import ProgressBarVolumeIcone from './outros/progressBar.volume.icone';
 
 export default function BarraPlayer() {
+
+    const _musicaContext = useContext(MusicaContext); // Contexto da música;
+    const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
 
     const asPath = useRouter();
     const [url, setUrl] = useState<string>('');
@@ -72,16 +76,13 @@ export default function BarraPlayer() {
 
                             <div className={Styles.infoMusica}>
                                 <span className={Styles.infoTitulo} title={'xxxxxx'}>
-                                    {/* {musicaContext.nome} */}
-                                    Chaleco klo
+                                    {musicaContext?.nome}
                                 </span>
 
-                                {/* <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
+                                {/* @ts-ignore */}
+                                <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
+                                    {/* @ts-ignore */}
                                     {(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}
-                                </span> */}
-
-                                <span className={Styles.infoDescricao}>
-                                    Oi né?
                                 </span>
                             </div>
 
@@ -130,6 +131,7 @@ export default function BarraPlayer() {
                 <div className={Styles.divPlayerInner}>
                     <ProgressBarPlayer
                         isPlaying={isPlaying}
+                        setIsPlaying={setIsPlaying}
                         isModoLoop={isModoLoop}
                         volume={volume}
                     />

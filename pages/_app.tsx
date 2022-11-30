@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LayoutPadrao from '../layouts/layoutPadrao';
 import '../styles/globals.scss';
 import CONSTS_SISTEMA from '../utils/consts/outros/sistema';
+import { MusicaProvider } from '../utils/context/musicaContext';
 import { UsuarioProvider } from '../utils/context/usuarioContext';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -63,7 +64,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
                     return false;
                 }
-                
+
                 if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
                     return false;
                 }
@@ -83,11 +84,13 @@ export default function App({ Component, pageProps }: AppProps) {
                 </Head>
 
                 <UsuarioProvider>
-                    {/* Toaster de aviso */}
-                    <ToastContainer className='semHighlight' />
+                    <MusicaProvider>
+                        {/* Toaster de aviso */}
+                        <ToastContainer className='semHighlight' />
 
-                    {/* Conteúdo */}
-                    {verificarLayout()}
+                        {/* Conteúdo */}
+                        {verificarLayout()}
+                    </MusicaProvider>
                 </UsuarioProvider>
             </Fragment>
         ) : null

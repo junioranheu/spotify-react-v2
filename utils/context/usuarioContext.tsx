@@ -4,20 +4,17 @@ import iContextDadosUsuario from '../types/context.dadosUsuario';
 
 interface iContext {
     isAuthContext: [isAuth: boolean, setIsAuth: any];
-    isFotoPerfilChangedContext: [isFotoPerfilChanged: boolean, setIsFotoPerfilChanged: any];
 }
 
-const _item = 'auth';
+const _item = '_auth';
 export const UsuarioContext = createContext<iContext | null>(null);
 
 export const UsuarioProvider = (props: any) => {
     const [isAuth, setIsAuth] = useState<boolean>(Auth.get() ? true : false);
-    const [isFotoPerfilChanged, setIsFotoPerfilChanged] = useState<boolean>(false);
 
     return (
         <UsuarioContext.Provider value={{
-            isAuthContext: [isAuth, setIsAuth],
-            isFotoPerfilChangedContext: [isFotoPerfilChanged, setIsFotoPerfilChanged]
+            isAuthContext: [isAuth, setIsAuth]
         }}>
             {props.children}
         </UsuarioContext.Provider>

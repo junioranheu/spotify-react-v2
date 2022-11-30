@@ -1,9 +1,10 @@
 import nProgress from 'nprogress';
-import { Fragment, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { Dispatch, Fragment, MouseEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useLongPress } from 'use-long-press'; // https://www.npmjs.com/package/use-long-press
 import useWindowSize from '../../../../hooks/outros/useWindowSize';
 import { Fetch } from '../../../../utils/api/fetch';
 import CONSTS_UPLOAD_PROTEGIDO from '../../../../utils/consts/data/constUploadProtegido';
+import { MusicaContext } from '../../../../utils/context/musicaContext';
 import { Aviso } from '../../../../utils/outros/aviso';
 import converterStreamEmObjectURL from '../../../../utils/outros/converterStreamEmObjectURL';
 import formatarSegundos from '../../../../utils/outros/formatarSegundos';
@@ -12,12 +13,16 @@ import Styles from '../outros/progressBar.module.scss';
 
 interface iParametros {
     isPlaying: boolean;
+    setIsPlaying: Dispatch<boolean>;
     isModoLoop: boolean;
     volume: number;
 }
 
 // https://codesandbox.io/s/quirky-hopper-jfcx9?file=/src/progress.js:0-2097
-export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iParametros) {
+export default function ProgressBarPlayer({ isPlaying, setIsPlaying, isModoLoop, volume }: iParametros) {
+
+    const _musicaContext = useContext(MusicaContext); // Contexto da música;
+    const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
 
     const elementoId = 'progressWrapperPlayer';
     const refMusica = useRef<HTMLMediaElement>(null);
@@ -128,12 +133,10 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
     // #4.1 - Importar (fetch) arquivo (música) e realizar conversões e setar em "setArquivoMusica";
     const [arquivoMusica, setArquivoMusica] = useState<string>('');
     useEffect(() => {
-        async function getMusica() {
+        async function getMusica(musicaId: number, nome: string) {
             try {
                 nProgress.start();
-
-                const nomeArquivo = '2';
-                const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM_BUFFER}/nomePasta=music&nomeArquivo=${nomeArquivo}.mp3`;
+                const url = `${CONSTS_UPLOAD_PROTEGIDO.API_URL_GET_UPLOAD_PROTEGIDO_STREAM_BUFFER}/nomePasta=music&nomeArquivo=${musicaId}.mp3`;
                 const stream = await Fetch.getApiStream(url);
                 // console.log(stream);
 
@@ -143,10 +146,11 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
                     return false;
                 }
 
+                // Converter resultado para formato objectURL para setar no elemento <audio>;
                 const objectURL = await converterStreamEmObjectURL(stream);
                 setArquivoMusica(objectURL);
 
-                process.env.NODE_ENV === 'development' && Aviso.success('Musica importada com sucesso', 3000);
+                process.env.NODE_ENV === 'development' && Aviso.success(`Musica importada com sucesso: <b>${nome}</b>`, 3000);
                 nProgress.done();
             } catch (error) {
                 Aviso.error('Houve um problema interno no processo de tratamento da música. Tente novamente mais tarde', 5000);
@@ -154,28 +158,47 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
             }
         }
 
-        getMusica();
-    }, []);
+        if (musicaContext) {
+            if (musicaContext?.musicaId > 0) {
+                getMusica(musicaContext.musicaId, musicaContext.nome);
+            }
+        }
+    }, [musicaContext, musicaContext?.musicaId]);
 
-    // #4.2 - Controlar "isPlaying", "volume" e duração da música;
+    // #4.2 - Controlar "isPlaying" e "volume";
     useEffect(() => {
-        if (refMusica?.current && arquivoMusica) {
-            // #1 - Setar a duração da música;
-            const duracaoMusicaSegundos = refMusica?.current?.duration;
-            const duracaoMusicaSegundosOk = isNaN(duracaoMusicaSegundos) ? 0 : duracaoMusicaSegundos ?? 0;
-            setTempoSegundosMaximo(duracaoMusicaSegundosOk);
-
-            // #2 - Controlar isPlaying e Volume;
+        if (refMusica?.current) {
+            // Volume;
             const volumeAjustado = volume / 100;
             refMusica.current.volume = volumeAjustado;
 
+            // Play ou pause;
             if (isPlaying) {
                 refMusica?.current?.play();
             } else {
                 refMusica?.current?.pause();
             }
         }
-    }, [isPlaying, volume, arquivoMusica]);
+    }, [isPlaying, volume]);
+
+    // #4.3 - Controlar duração da música e o play ao importar nova música (musicaContext?.musicaId);
+    useEffect(() => {
+        if (refMusica?.current?.duration && musicaContext?.musicaId && arquivoMusica) {
+            // Controlar duração da música e iniciar a música ao "importar" (mudança no "musicaContext?.musicaId"); 
+            const duracaoMusicaSegundos = refMusica?.current?.duration;
+            const duracaoMusicaSegundosOk = isNaN(duracaoMusicaSegundos) ? 0 : duracaoMusicaSegundos ?? 0;
+            setTempoSegundosMaximo(duracaoMusicaSegundosOk);
+
+            // Voltar o tempo ao 0 no mesmo instante;
+            setTempoSegundosAtual(0);
+
+            // Forçar play;
+            setTimeout(function () {
+                setIsPlaying(true);
+                refMusica?.current?.play();
+            }, 1000);
+        }
+    }, [refMusica?.current?.duration, arquivoMusica, setIsPlaying, musicaContext?.musicaId]);
 
     // #4.3 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
@@ -203,7 +226,7 @@ export default function ProgressBarPlayer({ isPlaying, isModoLoop, volume }: iPa
                 }
 
                 if (process.env.NODE_ENV === 'development') {
-                    console.log(`isPlaying: ${isPlaying} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual, false)}`);
+                    // console.log(`isPlaying: ${isPlaying} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual, false)}`);
                 }
             }
         }, 500);

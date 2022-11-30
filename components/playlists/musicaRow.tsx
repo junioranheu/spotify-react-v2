@@ -1,28 +1,36 @@
 import Image, { StaticImageData } from 'next/image';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../assets/image/cinza.webp';
 import Coracao from '../../components/outros/coracao';
 import Reticencias from '../../components/svg/reticencias';
+import { Fetch } from '../../utils/api/fetch';
+import CONSTS_MUSICAS from '../../utils/consts/data/constMusicas';
 import CONSTS_UPLOAD from '../../utils/consts/data/constUpload';
+import { MusicaContext, MusicaStorage } from '../../utils/context/musicaContext';
+import { UsuarioContext } from '../../utils/context/usuarioContext';
+import { Aviso } from '../../utils/outros/aviso';
 import formatarSegundos from '../../utils/outros/formatarSegundos';
 import BotaoPlay from '../svg/botaoPlay';
 import Styles from './musicaRow.module.scss';
 
 interface iParametros {
     i: number;
-    id: number;
+    musicaId: number;
     foto?: string | null;
     titulo?: string | null;
     banda?: string | null;
     album?: string | null;
     tempo?: number | null;
-    setarMusica: any;
     isDesativarUm: boolean;
 }
 
-export default function MusicaRow({ i, id, foto, titulo, banda, album, tempo, setarMusica, isDesativarUm }: iParametros) {
+export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tempo, isDesativarUm }: iParametros) {
 
-    // const [isPlayingContext] = useContext(IsPlayingContext); // Context isPlaying;]
+    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
+    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+
+    const _musicaContext = useContext(MusicaContext); // Contexto da música;
+    const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
 
     const [isMusicaCurtida, setIsMusicaCurtida] = useState(false);
     function handleCoracao() {
@@ -35,7 +43,28 @@ export default function MusicaRow({ i, id, foto, titulo, banda, album, tempo, se
             const img = `${CONSTS_UPLOAD.API_URL_GET_CAPA}/${foto}`;
             setImagemBanda(img);
         }
-    }, []);
+    }, [foto]);
+
+    async function handleSetarMusica(musicaId: number) {
+        // Se o usuário estiver deslogado;
+        // if (!isAuth) {
+        //     Aviso.custom('Inicie uma <b>sessão</b> para escutar essa música!', 5000);
+        //      return false;
+        // }
+
+        if (!musicaId) {
+            Aviso.custom('Houve um erro ao identificar esta música', 5000);
+            return false;
+        }
+
+        const url = `${CONSTS_MUSICAS.API_URL_GET_BY_ID}/${musicaId}`;
+        const musica = await Fetch.getApi(url);
+        // console.log(musica);
+
+        // Salvar no Context e no localStorage;
+        MusicaStorage.set(musica);
+        setMusicaContext(musica);
+    }
 
     return (
         <div className={Styles.divMusica}>
@@ -48,7 +77,9 @@ export default function MusicaRow({ i, id, foto, titulo, banda, album, tempo, se
                                 {i}
                             </span>
 
-                            <span className={`${(i > 1 ? Styles.esconderPlay : Styles.esconderItem1)}`} onClick={(e) => setarMusica(e)}><BotaoPlay width='14' cor='var(--cinza-claro)' /></span>
+                            <span className={`${(i > 1 ? Styles.esconderPlay : Styles.esconderItem1)}`} onClick={() => handleSetarMusica(musicaId)}>
+                                <BotaoPlay width='14' cor='var(--cinza-claro)' />
+                            </span>
                         </div>
                     ) : (
                         <div className={Styles.divContador}>
@@ -57,7 +88,9 @@ export default function MusicaRow({ i, id, foto, titulo, banda, album, tempo, se
                                 {i}
                             </span>
 
-                            <span className={Styles.esconderPlay} onClick={(e) => setarMusica(e)}><BotaoPlay width='14' cor='var(--cinza-claro)' /></span>
+                            <span className={Styles.esconderPlay} onClick={() => handleSetarMusica(musicaId)}>
+                                <BotaoPlay width='14' cor='var(--cinza-claro)' />
+                            </span>
                         </div>
                     )
                 }
