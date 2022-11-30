@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../assets/image/cinza.webp';
+import GifEqualiser from '../../assets/image/equaliser.gif';
 import Coracao from '../../components/outros/coracao';
 import Reticencias from '../../components/svg/reticencias';
 import { Fetch } from '../../utils/api/fetch';
@@ -73,8 +74,7 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                     isDesativarUm ? (
                         <div className={Styles.divContador}>
                             <span className={`${(i > 1 ? Styles.contador : Styles.contadorItem1)} ${(i === 1 && Styles.verde)}`}>
-                                {/* {((id === musicaContext?.musicaId && isPlayingContext) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)} */}
-                                {i}
+                                {((musicaId === musicaContext?.musicaId) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)}
                             </span>
 
                             <span className={`${(i > 1 ? Styles.esconderPlay : Styles.esconderItem1)}`} onClick={() => handleSetarMusica(musicaId)}>
@@ -84,8 +84,7 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                     ) : (
                         <div className={Styles.divContador}>
                             <span className={Styles.contador}>
-                                {/* {((id === musicaContext?.musicaId && isPlayingContext) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)} */}
-                                {i}
+                                {((musicaId === musicaContext?.musicaId) ? <Image src={GifEqualiser} width={14} height={14} alt='' /> : i)}
                             </span>
 
                             <span className={Styles.esconderPlay} onClick={() => handleSetarMusica(musicaId)}>
