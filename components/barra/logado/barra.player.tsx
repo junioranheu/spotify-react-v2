@@ -6,6 +6,7 @@ import ImgCinza from '../../../assets/image/cinza.webp';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { MusicaContext } from '../../../utils/context/musicaContext';
+import { Aviso } from '../../../utils/outros/aviso';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
 import Coracao from '../../outros/coracao';
 import Aleatorio from '../../svg/barra.player/aleatorio';
@@ -53,10 +54,10 @@ export default function BarraPlayer() {
     }
 
     function handlePlay() {
-        // if (!musicaContext?.musicaId) {
-        //     Aviso.custom('Nenhuma música foi selecionada', 5000);
-        //     return false;
-        // }
+        if (!musicaContext?.musicaId) {
+            Aviso.warn('Nenhuma música foi selecionada', 5000);
+            return false;
+        }
 
         setIsPlayingContext(!isPlayingContext);
     }
@@ -76,7 +77,6 @@ export default function BarraPlayer() {
         }
     }, [musicaContext?.musicaId, musicaContext?.musicasBandas]);
 
-    const [musicaId, setMusicaId] = useState<number>(1);
     const [isCurtido, setIsCurtido] = useState<boolean>(false);
     const [isModoAleatorio, setIsModoAleatorio] = useState<boolean>(false);
     const [isModoLoop, setIsModoLoop] = useState<boolean>(false);
@@ -86,7 +86,7 @@ export default function BarraPlayer() {
             {/* =-=-=-=-=-=-=-=-=-=-=-= Primeira div, esquerda =-=-=-=-=-=-=-=-=-=-=-= */}
             <div className={Styles.divInfo}>
                 {
-                    musicaId > 0 && (
+                    musicaContext && musicaContext?.musicaId && (
                         <Fragment>
                             <Image src={imagemBanda} width={56} height={56} alt='' />
 

@@ -19,7 +19,9 @@ export default function LayoutPadrao({ Component, pageProps }: any) {
     return (
         <section className='main semHighlight'>
             <section className={Styles.wrapper}>
-                <Sidebar />
+                <section className={Styles.esconderSidebarSeMobile}>
+                    <Sidebar />
+                </section>
 
                 <section className={Styles.div100}>
                     <NavbarPadrao />

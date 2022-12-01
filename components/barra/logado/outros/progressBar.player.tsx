@@ -196,8 +196,9 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 setTimeout(function () {
                     setIsPlayingContext(true);
                     refMusica?.current?.play();
+                    nProgress.done();
                 }, 500);
-            }
+            } 
         }
     }, [refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext, setIsPlayingContext, isPlayingContext]);
 
