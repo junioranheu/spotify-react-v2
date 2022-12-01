@@ -50,7 +50,7 @@ export default function Index({ listaPlaylists }: iParametros) {
 
 export async function getStaticProps() {
     const url = CONSTS_PLAYLISTS.API_URL_GET_TODOS;
-    const listaPlaylists = await Fetch.getApi(url) as iPlaylist[];
+    const listaPlaylists = await Fetch.getApi(url) as iPlaylist[] ?? null;
     // console.log(listaPlaylists);
 
     return {

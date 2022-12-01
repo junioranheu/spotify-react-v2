@@ -180,6 +180,32 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
         }
     }, [isPlayingContext, volume]);
 
+    // useEffect(() => {
+    //     // Tentar infinitas vezes encontrar o refMusica.current.duration;
+    //     function forcarDuracao() {
+    //         if (!refMusica?.current?.duration) {
+    //             window.setTimeout(forcarDuracao, 100);
+    //             console.log('Tentando de novo');
+    //             refMusica?.current?.pause();
+    //         } else {
+    //             console.log('Ok');
+
+    //             // Volume;
+    //             const volumeAjustado = volume / 100;
+    //             refMusica.current.volume = volumeAjustado;
+
+    //             // Play ou pause;
+    //             if (isPlayingContext) {
+    //                 refMusica?.current?.play();
+    //             } else {
+    //                 refMusica?.current?.pause();
+    //             }
+    //         }
+    //     }
+
+    //     forcarDuracao();
+    // }, [isPlayingContext, volume]);
+
     // #4.3 - Controlar duração da música e o play ao importar nova música (musicaContext?.musicaId);
     useEffect(() => {
         if (refMusica?.current?.duration && musicaContext?.musicaId && arquivoMusica) {
@@ -198,7 +224,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                     refMusica?.current?.play();
                     nProgress.done();
                 }, 500);
-            } 
+            }
         }
     }, [refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext, setIsPlayingContext, isPlayingContext]);
 
@@ -226,7 +252,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 }
 
                 if (process.env.NODE_ENV === 'development') {
-                    console.log(`isPlayingContext: ${isPlayingContext} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual, false)} | musicaContext?.nome: ${musicaContext?.nome}`);
+                    // console.log(`isPlayingContext: ${isPlayingContext} | isModoLoop: ${isModoLoop} | tempoSegundosAtual: ${formatarSegundos(tempoSegundosAtual, false)} | musicaContext?.nome: ${musicaContext?.nome}`);
                 }
             }
         }, 500);
