@@ -165,6 +165,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
     }, [musicaContext, musicaContext?.musicaId]);
 
     // #4.2 - Controlar "isPlayingContext" e "volume";
+    const [UUICanPlay, setUUICanPlay] = useState<string>(''); // Hook (lógica/gambi) para corrigir bug super específico: ao selecionar uma música pela primeira vez não se tocava automáticamente... com o "UUICanPlay" agora sim toca;
     useEffect(() => {
         if (refMusica?.current && musicaContext?.musicaId) {
             // Volume;
@@ -178,7 +179,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 refMusica?.current?.pause();
             }
         }
-    }, [isPlayingContext, volume, arquivoMusica, refMusica?.current?.duration, musicaContext?.musicaId]);
+    }, [isPlayingContext, volume, arquivoMusica, refMusica?.current?.duration, musicaContext?.musicaId, UUICanPlay]);
 
     // #4.3 - Controlar duração da música e o play ao importar nova música (musicaContext?.musicaId);
     useEffect(() => {
@@ -200,7 +201,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 }, 500);
             }
         }
-    }, [refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext, setIsPlayingContext, isPlayingContext]);
+    }, [isPlayingContext, setIsPlayingContext, refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext]);
 
     // #4.4 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
@@ -252,7 +253,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
             <span className={Styles.tempoSpan}>{formatarSegundos(tempoSegundosMaximo, false) ?? '0:00'}</span>
 
             {/* Áudio */}
-            <audio ref={refMusica} src={arquivoMusica} autoPlay={false} controls={false} />
+            <audio ref={refMusica} src={arquivoMusica} autoPlay={false} controls={false} onCanPlay={() => setUUICanPlay(UUID())} />
         </Fragment>
     )
 }
