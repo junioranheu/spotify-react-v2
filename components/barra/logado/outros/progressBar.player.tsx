@@ -166,7 +166,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
 
     // #4.2 - Controlar "isPlayingContext" e "volume";
     useEffect(() => {
-        if (refMusica?.current) {
+        if (refMusica?.current && musicaContext?.musicaId) {
             // Volume;
             const volumeAjustado = volume / 100;
             refMusica.current.volume = volumeAjustado;
@@ -178,33 +178,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 refMusica?.current?.pause();
             }
         }
-    }, [isPlayingContext, volume]);
-
-    // useEffect(() => {
-    //     // Tentar infinitas vezes encontrar o refMusica.current.duration;
-    //     function forcarDuracao() {
-    //         if (!refMusica?.current?.duration) {
-    //             window.setTimeout(forcarDuracao, 100);
-    //             console.log('Tentando de novo');
-    //             refMusica?.current?.pause();
-    //         } else {
-    //             console.log('Ok');
-
-    //             // Volume;
-    //             const volumeAjustado = volume / 100;
-    //             refMusica.current.volume = volumeAjustado;
-
-    //             // Play ou pause;
-    //             if (isPlayingContext) {
-    //                 refMusica?.current?.play();
-    //             } else {
-    //                 refMusica?.current?.pause();
-    //             }
-    //         }
-    //     }
-
-    //     forcarDuracao();
-    // }, [isPlayingContext, volume]);
+    }, [isPlayingContext, volume, arquivoMusica, refMusica?.current?.duration, musicaContext?.musicaId]);
 
     // #4.3 - Controlar duração da música e o play ao importar nova música (musicaContext?.musicaId);
     useEffect(() => {
@@ -214,10 +188,10 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
             const duracaoMusicaSegundosOk = isNaN(duracaoMusicaSegundos) ? 0 : duracaoMusicaSegundos ?? 0;
             setTempoSegundosMaximo(duracaoMusicaSegundosOk);
 
-            // Voltar o tempo ao 0 no mesmo instante;
-            setTempoSegundosAtual(0);
-
             if (isPlayingContext) {
+                // Voltar o tempo ao 0 no mesmo instante;
+                // setTempoSegundosAtual(0);
+
                 // Forçar play;
                 setTimeout(function () {
                     setIsPlayingContext(true);

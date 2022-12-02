@@ -3,6 +3,7 @@ import { Fragment, useContext } from 'react';
 import Playlists from '../components/playlists/playlists';
 import Styles from '../styles/home.module.scss';
 import { Fetch } from '../utils/api/fetch';
+import HabilitarHttp from '../utils/api/habilitarHttp';
 import CONSTS_PLAYLISTS from '../utils/consts/data/constPlaylists';
 import CONSTS_SISTEMA from '../utils/consts/outros/sistema';
 import { UsuarioContext } from '../utils/context/usuarioContext';
@@ -49,6 +50,7 @@ export default function Index({ listaPlaylists }: iParametros) {
 }
 
 export async function getStaticProps() {
+    HabilitarHttp();
     const url = CONSTS_PLAYLISTS.API_URL_GET_TODOS;
     const listaPlaylists = await Fetch.getApi(url) as iPlaylist[] ?? null;
     // console.log(listaPlaylists);
