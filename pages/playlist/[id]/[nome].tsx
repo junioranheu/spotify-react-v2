@@ -81,7 +81,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
             setFilaMusicasContext(listaMusicas);
             FilaMusicasStorage.set(listaMusicas);
         }
-    }, [isMusicaClicadaParaSetarLista]);
+    }, [isMusicaClicadaParaSetarLista, playlist?.playlistsMusicas, setFilaMusicasContext]);
 
     return (
         <Fragment>
