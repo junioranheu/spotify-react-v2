@@ -5,9 +5,11 @@ import { Fragment, useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
-import { MusicaContext } from '../../../utils/context/musicaContext';
+import { MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
 import { Aviso } from '../../../utils/outros/aviso';
+import gerarNumeroAleatorio from '../../../utils/outros/gerarNumeroAleatorio';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
+import iMusica from '../../../utils/types/iMusica';
 import Coracao from '../../outros/coracao';
 import Aleatorio from '../../svg/barra.player/aleatorio';
 import BotaoAvancar from '../../svg/barra.player/botaoAvancar';
@@ -30,6 +32,7 @@ export default function BarraPlayer() {
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
     const [isPlayingContext, setIsPlayingContext] = [_musicaContext?._isPlaying[0], _musicaContext?._isPlaying[1]];
+    const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
 
     const asPath = useRouter();
     const [url, setUrl] = useState<string>('');
@@ -60,6 +63,42 @@ export default function BarraPlayer() {
         }
 
         setIsPlayingContext(!isPlayingContext);
+    }
+
+    function handleAvancar() {
+        if (filaMusicasContext && filaMusicasContext?.length > 0) {
+            let proximaMusica;
+
+            // Caso o isModoAleatorio NÃO seja true, pegue o próximo, normalmente;
+            if (!isModoAleatorio) {
+                const index = filaMusicasContext?.findIndex(m => m.musicaId === musicaContext?.musicaId);
+                proximaMusica = filaMusicasContext[index + 1]; // Avançar para a próxima;
+            }
+
+            // Caso o isModoAleatorio seja true, o handleAvancar não pode ser simplesmente "+1";
+            if (isModoAleatorio) {
+                // Caso seja a primeira tentativa (proximaMusica vazio) ou a música que foi randomizada é a mesma que já estava tocando, deve-se tentar novamente até que ache uma diferente;
+                while (!proximaMusica || proximaMusica?.musicaId === musicaContext?.musicaId) {
+                    // console.log('proximaMusica vázio ou a música random é igual a que estava tocando. Tentando randomizar novamente');
+                    const random = gerarNumeroAleatorio(0, filaMusicasContext?.length - 1);
+                    proximaMusica = filaMusicasContext[random]; // Buscar aleatóriamente; 
+                }
+            }
+
+            // Caso "proximaMusica" esteja vazia (isso é: acabaram as próximas músicas), pegue a primeira da lista novamente;
+            if (!proximaMusica) {
+                // console.log('Não existe (index + 1)... voltar para o 0');
+                proximaMusica = filaMusicasContext[0]; // Voltar para a primeira música, posição 0;
+            }
+
+            // Buscar o item "proximaMusica?.musicas" para adequar à necessidade do MusicaStorage (tipo iMusica);
+            const musica = proximaMusica?.musicas as iMusica;
+            // console.log(musica);
+
+            // Salvar no Context e no localStorage;
+            MusicaStorage.set(musica);
+            setMusicaContext(musica);
+        }
     }
 
     const [imagemBanda, setImagemBanda] = useState<StaticImageData | string>(ImgCinza);
@@ -135,7 +174,7 @@ export default function BarraPlayer() {
                         }
                     </span>
 
-                    <span className={Styles.spanIcone} onClick={() => null} title='Avançar uma música'>
+                    <span className={Styles.spanIcone} onClick={() => handleAvancar()} title='Avançar uma música'>
                         <BotaoAvancar />
                     </span>
 

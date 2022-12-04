@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
-import Barra from '../components/barra/barra';
 import NavbarPadrao from '../components/navbar/navbar-padrao/navbar-padrao';
 import Sidebar from '../components/navbar/sidebar/sidebar';
+import Barra from '../components/player/barra';
 import verificarTokenValido from '../utils/api/verificarTokenValido';
 import { UsuarioContext } from '../utils/context/usuarioContext';
 import Styles from './styles/layoutPadrao.module.scss';
