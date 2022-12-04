@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from 'next/image';
-import { useContext, useEffect, useState } from 'react';
+import { Dispatch, useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../assets/image/cinza.webp';
 import GifEqualiser from '../../assets/image/equaliser.gif';
 import Coracao from '../../components/outros/coracao';
@@ -23,9 +23,10 @@ interface iParametros {
     album?: string | null;
     tempo?: number | null;
     isDesativarUm: boolean;
+    setIsMusicaClicadaParaSetarLista?: Dispatch<boolean> | null;
 }
 
-export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tempo, isDesativarUm }: iParametros) {
+export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tempo, isDesativarUm, setIsMusicaClicadaParaSetarLista }: iParametros) {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
@@ -69,6 +70,9 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
 
         // Forçar play;
         setIsPlayingContext(true);
+
+        // Setar que o usuário clicou para ouvir uma música;
+        setIsMusicaClicadaParaSetarLista && setIsMusicaClicadaParaSetarLista(true);
     }
 
     return (

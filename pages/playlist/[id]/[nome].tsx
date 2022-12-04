@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import nProgress from 'nprogress';
-import { Fragment } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
 import ImageWithFallback from '../../../components/outros/imageWithFallback';
 import MusicaRow from '../../../components/playlists/musicaRow';
@@ -8,6 +8,7 @@ import { Fetch } from '../../../utils/api/fetch';
 import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
+import { FilaMusicasStorage, MusicaContext } from '../../../utils/context/musicaContext';
 import ajustarUrl from '../../../utils/outros/ajustarUrl';
 import formatarSegundos from '../../../utils/outros/formatarSegundos';
 import iPlaylist from '../../../utils/types/iPlaylist';
@@ -20,6 +21,9 @@ interface iParametros {
 }
 
 export default function Playlist({ playlist, imgCapa }: iParametros) {
+
+    const _musicaContext = useContext(MusicaContext); // Contexto da música;
+    const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
 
     function concatenarBandas(playlist: iPlaylist) {
         nProgress.start();
@@ -69,6 +73,16 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
         return duracaoFormatada;
     }
 
+    // Ao clicar para ouvir uma música da playlist, set essa playlist como a atual;
+    const [isMusicaClicadaParaSetarLista, setIsMusicaClicadaParaSetarLista] = useState<boolean>(false);
+    useEffect(() => {
+        if (isMusicaClicadaParaSetarLista) {
+            const listaMusicas = playlist.playlistsMusicas;
+            setFilaMusicasContext(listaMusicas);
+            FilaMusicasStorage.set(listaMusicas);
+        }
+    }, [isMusicaClicadaParaSetarLista]);
+
     return (
         <Fragment>
             <Head>
@@ -116,7 +130,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                                 key={m.musicas?.musicaId}
                                                 musicaId={m.musicas?.musicaId ?? 0}
                                                 i={(i + 1)} // A ordem tem que começar no 1;   
-                                                 // @ts-ignore;    
+                                                // @ts-ignore;    
                                                 foto={m.musicas?.musicasBandas[0]?.bandas?.foto}
                                                 titulo={m.musicas?.nome}
                                                 // @ts-ignore;
@@ -125,6 +139,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                                 album={m.musicas.albunsMusicas?.albuns?.nome}
                                                 tempo={m.musicas?.duracaoSegundos}
                                                 isDesativarUm={false}
+                                                setIsMusicaClicadaParaSetarLista={setIsMusicaClicadaParaSetarLista}
                                             />
                                         ))
                                     }
