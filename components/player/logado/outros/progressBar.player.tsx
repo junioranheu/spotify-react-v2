@@ -14,10 +14,11 @@ import Styles from '../outros/progressBar.module.scss';
 interface iParametros {
     isModoLoop: boolean;
     volume: number;
+    handleAvancar: () => void;
 }
 
 // https://codesandbox.io/s/quirky-hopper-jfcx9?file=/src/progress.js:0-2097
-export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
+export default function ProgressBarPlayer({ isModoLoop, volume, handleAvancar }: iParametros) {
 
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
@@ -189,10 +190,10 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
             const duracaoMusicaSegundosOk = isNaN(duracaoMusicaSegundos) ? 0 : duracaoMusicaSegundos ?? 0;
             setTempoSegundosMaximo(duracaoMusicaSegundosOk);
 
-            if (isPlayingContext) {
-                // Voltar o tempo ao 0 no mesmo instante;
-                // setTempoSegundosAtual(0);
+            // Voltar o tempo ao 0 no mesmo instante;
+            setTempoSegundosAtual(0);
 
+            if (isPlayingContext) {
                 // Forçar play;
                 setTimeout(function () {
                     setIsPlayingContext(true);
@@ -201,7 +202,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                 }, 500);
             }
         }
-    }, [isPlayingContext, setIsPlayingContext, refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext]);
+    }, [setIsPlayingContext, refMusica?.current?.duration, arquivoMusica, musicaContext?.musicaId, musicaContext]);
 
     // #4.4 - "Core do Player": controla o tempo tocado;
     useEffect(() => {
@@ -219,8 +220,8 @@ export default function ProgressBarPlayer({ isModoLoop, volume }: iParametros) {
                                 setTempoSegundosAtual(0);
                                 refMusica?.current?.play();
                             } else {
-                                console.log('Pular para a próxima música');
-                                // props.handleAvancar();
+                                // console.log('Pular para a próxima música');
+                                handleAvancar();
                             }
                         }
                     }

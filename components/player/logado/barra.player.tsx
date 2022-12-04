@@ -187,6 +187,7 @@ export default function BarraPlayer() {
                     <ProgressBarPlayer
                         isModoLoop={isModoLoop}
                         volume={volume}
+                        handleAvancar={handleAvancar}
                     />
                 </div>
             </div>
