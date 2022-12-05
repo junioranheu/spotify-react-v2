@@ -1,0 +1,45 @@
+.wrapper {
+    // background-color: pink;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .divErro {
+        // background-color: blue;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .titulo {
+            color: var(--cor-principal);
+            font-size: 4rem;
+            font-weight: 600;
+            line-height: 2.5rem;
+        }
+
+        .texto {
+            color: var(--branco);
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.75rem;
+        }
+    }
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Media queries =-=-=-=-=-=-=-=-=-=-= */
+/* hi-res laptops and desktops */
+@media (max-width:1281px) {}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width:1025px) {}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width:801px) {}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (max-width:600px) {}
+
+/* smartphones, Android phones, landscape iPhone */
+@media (max-width:480px) {}

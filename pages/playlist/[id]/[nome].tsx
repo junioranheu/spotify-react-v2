@@ -134,9 +134,9 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                                 foto={m.musicas?.musicasBandas[0]?.bandas?.foto}
                                                 titulo={m.musicas?.nome}
                                                 // @ts-ignore;
-                                                banda={m.musicas.musicasBandas[0]?.bandas?.nome}
+                                                banda={m.musicas?.musicasBandas[0]?.bandas?.nome}
                                                 // @ts-ignore;
-                                                album={m.musicas.albunsMusicas?.albuns?.nome}
+                                                album={m.musicas?.albunsMusicas?.albuns?.nome}
                                                 tempo={m.musicas?.duracaoSegundos}
                                                 isDesativarUm={false}
                                                 setIsMusicaClicadaParaSetarLista={setIsMusicaClicadaParaSetarLista}

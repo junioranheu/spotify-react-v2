@@ -9,7 +9,7 @@ interface iContext {
 }
 
 const _itemMusicaContext = '_musicaContext';
-const _itemListaMusicasContext = '_listaMusicasContext';
+const _itemListaMusicasContext = '_filaMusicasContext';
 export const MusicaContext = createContext<iContext | null>(null);
 
 export const MusicaProvider = (props: any) => {

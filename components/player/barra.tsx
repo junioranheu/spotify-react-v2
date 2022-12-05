@@ -10,7 +10,7 @@ export default function Barra({ isAuth }: iParametros) {
     return (
         <Fragment>
             {
-                !isAuth ? (
+                isAuth ? (
                     <BarraPlayer />
                 ) : (
                     <BarraDeslogado />

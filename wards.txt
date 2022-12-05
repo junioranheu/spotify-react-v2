@@ -3,3 +3,5 @@ Fazer lógica do botão de pra frente e pra trás
 Trocar o aviso de "inicie sessão" por um modalzinho :)
 Não mostrar a barra de play se tiver deslogado (só ajustar os ifs)
 Criar tela de login
+
+CRIAR MODALLLLLLLLLLLLLLLL EM ENTRAR E TBM NA HORA DE TOCAR E ESTAR DESLOGADO!

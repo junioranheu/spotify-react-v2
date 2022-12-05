@@ -1,0 +1,90 @@
+.container {
+    /* background-color: pink; */
+    width: 100%;
+    height: 75%;
+
+    display: flex;
+    justify-content: center;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.containerInner {
+    /* background-color: red; */
+    width: 80%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.botaoCustom button {
+    background-color: var(--cor-principal);
+    width: 100%;
+}
+
+.titulo {
+    color: var(--branco);
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+}
+
+.divCode {
+    color: var(--branco);
+    opacity: 0.8;
+}
+
+/* =-=-=-=-=-=-=-=-= Input =-=-=-=-=-=-=-=-= */
+.input {
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    padding: 0px 16px;
+    border-radius: 10px;
+
+    background-color: rgb(59, 59, 59);
+    color: #f3f3f3 !important;
+    opacity: 0.9;
+
+
+    border-radius: 12px;
+    border: none;
+    color: #111;
+    font-size: 1rem;
+    outline: 0px;
+    padding: 0px 20px;
+    transition: box-shadow 0.2s ease 0s, color 0.2s ease 0s;
+    width: 100%;
+}
+
+.input:focus {
+    box-shadow: inset 0 0 0 1px var(--cor-principal);
+    outline-width: 0px;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=- Media queries =-=-=-=-=-=-=-=-=-=-=-=- */
+/* hi-res laptops and desktops */
+@media (max-width:1281px) {}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width:1025px) {}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width:801px) {
+    .titulo {
+        font-size: 2rem;
+    }
+}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (max-width:600px) {
+    .titulo {
+        font-size: 1.5rem;
+    }
+}
+
+/* smartphones, Android phones, landscape iPhone */
+@media (max-width:480px) {}

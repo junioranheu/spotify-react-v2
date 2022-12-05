@@ -3,6 +3,7 @@ import Router, { useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
+import { FilaMusicasStorage, MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
 import { Auth, UsuarioContext } from '../../../utils/context/usuarioContext';
 import Botao from '../../outros/botao';
 import SetinhaBaixo from '../../svg/setinhaBaixo';
@@ -13,6 +14,10 @@ export default function NavbarPadrao() {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+
+    const _musicaContext = useContext(MusicaContext); // Contexto da música;
+    const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
+    const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
 
     const nomeUsuario = Auth?.get()?.nomeUsuarioSistema ?? '';
 
@@ -35,6 +40,8 @@ export default function NavbarPadrao() {
 
         // Deslogar;
         Auth.delete();
+        MusicaStorage.delete();
+        FilaMusicasStorage.delete();
         NProgress.done();
 
         // Voltar à tela principal;

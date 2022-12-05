@@ -23,7 +23,7 @@ interface iParametros {
     album?: string | null;
     tempo?: number | null;
     isDesativarUm: boolean;
-    setIsMusicaClicadaParaSetarLista?: Dispatch<boolean> | null;
+    setIsMusicaClicadaParaSetarLista?: Dispatch<boolean> | null; // Setar que o usuário clicou para ouvir uma música;
 }
 
 export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tempo, isDesativarUm, setIsMusicaClicadaParaSetarLista }: iParametros) {
