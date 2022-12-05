@@ -234,7 +234,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume, handleAvancar }:
         }, 500);
 
         return () => clearInterval(intervalo);
-    }, [isPlayingContext, isModoLoop, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo, musicaContext?.nome])
+    }, [isPlayingContext, isModoLoop, arquivoMusica, tempoSegundosAtual, tempoSegundosMaximo, musicaContext?.nome, handleAvancar])
 
     return (
         <Fragment>

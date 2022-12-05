@@ -64,7 +64,7 @@ export default function BarraPlayer() {
 
         setIsPlayingContext(!isPlayingContext);
     }
-
+ 
     function handleAvancar() {
         if (filaMusicasContext && filaMusicasContext?.length > 0) {
             let proximaMusica;
