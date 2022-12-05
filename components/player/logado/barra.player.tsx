@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
+import useIsTelaModoProibirMusicasAtributoIsJaTocada from '../../../hooks/outros/useIsTelaModoProibirMusicasAtributoIsJaTocada';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
@@ -104,7 +105,7 @@ export default function BarraPlayer() {
     }
 
     // Função modificada para não permitir musicas com o atributo "isJaTocada" === false;
-    const [modoProibirMusicasAtributoIsJaTocada, setModoProibirMusicasAtributoIsJaTocada] = useState<boolean>(true);
+    const modoProibirMusicasAtributoIsJaTocada = useIsTelaModoProibirMusicasAtributoIsJaTocada();
     function handleAvancarModoProibirMusicasAtributoIsJaTocada() {
         if (filaMusicasContext && filaMusicasContext?.length > 0) {
             let proximaMusica;
