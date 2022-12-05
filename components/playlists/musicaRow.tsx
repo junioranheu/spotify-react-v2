@@ -50,10 +50,10 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
 
     async function handleSetarMusica(musicaId: number) {
         // Se o usuário estiver deslogado;
-        // if (!isAuth) {
-        //     Aviso.custom('Inicie uma <b>sessão</b> para escutar essa música!', 5000);
-        //      return false;
-        // }
+        if (!isAuth) {
+            Aviso.custom('Inicie uma <b>sessão</b> para escutar essa música!', 5000);
+             return false;
+        }
 
         if (!musicaId) {
             Aviso.custom('Houve um erro ao identificar esta música', 5000);
@@ -86,7 +86,7 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                             </span>
 
                             <span className={`${(i > 1 ? Styles.esconderPlay : Styles.esconderItem1)}`} onClick={() => handleSetarMusica(musicaId)}>
-                                <BotaoPlay width='14' cor='var(--cinza-claros)' />
+                                <BotaoPlay width='14' cor='var(--cinza-claro)' />
                             </span>
                         </div>
                     ) : (
@@ -107,7 +107,7 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                 </div>
 
                 <div className={Styles.divInfoMusica}>
-                    <span className={`${Styles.verdeOnHover} ${(i === 1 && isDesativarUm && Styles.verde)}`}>{titulo}</span>
+                    <span className={`${Styles.verdeOnHover} ${(isDesativarUm && Styles.verde)}`}>{titulo}</span>
                     <span>{banda}</span>
                 </div>
             </div>
