@@ -1,9 +1,10 @@
 import Head from 'next/head';
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import MusicaRow from '../../components/playlists/musicaRow';
 import CONSTS_SISTEMA from '../../utils/consts/outros/sistema';
 import { MusicaContext } from '../../utils/context/musicaContext';
 import { UsuarioContext } from '../../utils/context/usuarioContext';
+import iPlaylistMusica from '../../utils/types/iPlaylistMusica';
 
 export default function Index() {
 
@@ -13,6 +14,13 @@ export default function Index() {
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
     const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
+
+    const [filaMusicasContextFiltrarIsJaTocadaFalse, setFilaMusicasContextFiltrarIsJaTocadaFalse] = useState<iPlaylistMusica[]>();
+    useEffect(() => {
+        if (filaMusicasContext) {
+            setFilaMusicasContextFiltrarIsJaTocadaFalse(filaMusicasContext.filter(x => x.musicaId !== musicaContext?.musicaId && x.isJaTocada === false));
+        }
+    }, [filaMusicasContext]);
 
     return (
         <Fragment>
@@ -65,11 +73,11 @@ export default function Index() {
 
                             <div>
                                 {
-                                    filaMusicasContext && filaMusicasContext?.length > 0 ? (
+                                    filaMusicasContextFiltrarIsJaTocadaFalse && filaMusicasContextFiltrarIsJaTocadaFalse?.length > 0 ? (
                                         <Fragment>
                                             {
                                                 // Exibir todas as músicas que não foram tocadas ainda;
-                                                filaMusicasContext.filter(x => x.musicaId !== musicaContext?.musicaId && x.isJaTocada === false).map((m, i) => (
+                                                filaMusicasContextFiltrarIsJaTocadaFalse.map((m, i) => (
                                                     <MusicaRow
                                                         key={m?.musicaId}
                                                         musicaId={m?.musicaId ?? 0}
