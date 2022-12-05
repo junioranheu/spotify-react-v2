@@ -64,7 +64,7 @@ export default function BarraPlayer() {
 
         setIsPlayingContext(!isPlayingContext);
     }
- 
+
     function handleAvancar() {
         if (filaMusicasContext && filaMusicasContext?.length > 0) {
             let proximaMusica;
@@ -93,6 +93,30 @@ export default function BarraPlayer() {
 
             // Buscar o item "proximaMusica?.musicas" para adequar à necessidade do MusicaStorage (tipo iMusica);
             const musica = proximaMusica?.musicas as iMusica;
+            // console.log(musica);
+
+            // Salvar no Context e no localStorage;
+            MusicaStorage.set(musica);
+            setMusicaContext(musica);
+        }
+    }
+
+    function handleVoltar() {
+        if (filaMusicasContext && filaMusicasContext?.length > 0) {
+            let musicaAnterior;
+
+            // Independentemente do isModoAleatorio, pegue a música anterior, normalmente;
+            const index = filaMusicasContext?.findIndex(m => m.musicaId === musicaContext?.musicaId);
+            musicaAnterior = filaMusicasContext[index - 1]; // Avançar para a próxima;
+
+            // Caso "musicaAnterior" esteja vazia (isso é: já é a primeira música), pegue a primeira da lista novamente;
+            if (!musicaAnterior) {
+                // console.log('Não existe (index - 1)... voltar para o 0');
+                musicaAnterior = filaMusicasContext[0]; // Voltar para a primeira música, posição 0;
+            }
+
+            // Buscar o item "proximaMusica?.musicas" para adequar à necessidade do MusicaStorage (tipo iMusica);
+            const musica = musicaAnterior?.musicas as iMusica;
             // console.log(musica);
 
             // Salvar no Context e no localStorage;
@@ -141,7 +165,7 @@ export default function BarraPlayer() {
                                 </span>
                             </div>
 
-                            <span className={Styles.spanIcone} onClick={() => setIsCurtido(!isCurtido)} title='Curtir/descurtir música'>
+                            <span className={Styles.spanIcone} onClick={() => setIsCurtido(!isCurtido)} title={`${isCurtido ? 'Descurtir' : 'Curtir'} música`}>
                                 <Coracao isMusicaCurtida={isCurtido} />
                             </span>
 
@@ -156,11 +180,11 @@ export default function BarraPlayer() {
             {/* =-=-=-=-=-=-=-=-=-=-=-= Segunda div, meio =-=-=-=-=-=-=-=-=-=-=-= */}
             <div className={Styles.divPlayer}>
                 <div className={Styles.divPlayerIcones}>
-                    <span className={Styles.spanIcone} onClick={() => setIsModoAleatorio(!isModoAleatorio)} title={`${isModoAleatorio ? 'Desativar' : 'Ativado'} modo aleatório`}>
+                    <span className={Styles.spanIcone} onClick={() => setIsModoAleatorio(!isModoAleatorio)} title={`${isModoAleatorio ? 'Desativar' : 'Ativar'} modo aleatório`}>
                         <Aleatorio cor={(isModoAleatorio ? 'var(--cor-principal)' : '')} />
                     </span>
 
-                    <span className={Styles.spanIcone} onClick={() => null} title='Voltar uma música'>
+                    <span className={Styles.spanIcone} onClick={() => handleVoltar()} title='Voltar uma música'>
                         <BotaoVoltar />
                     </span>
 
@@ -178,7 +202,7 @@ export default function BarraPlayer() {
                         <BotaoAvancar />
                     </span>
 
-                    <span className={Styles.spanIcone} onClick={() => setIsModoLoop(!isModoLoop)} title={`${isModoLoop ? 'Desativar' : 'Ativado'} modo loop`}>
+                    <span className={Styles.spanIcone} onClick={() => setIsModoLoop(!isModoLoop)} title={`${isModoLoop ? 'Desativar' : 'Ativar'} modo loop`}>
                         <Loop cor={(isModoLoop ? 'var(--cor-principal)' : '')} />
                     </span>
                 </div>
