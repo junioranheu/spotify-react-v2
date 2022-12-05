@@ -86,7 +86,6 @@ img {
 
 .cor-principal {
     color: var(--cor-principal) !important;
-    background: var(--cor-principal) !important;
 }
 
 .cor-principal-hover {
@@ -95,16 +94,6 @@ img {
     &:hover {
         color: var(--cor-principal) !important;
         fill: var(--cor-principal) !important;
-        opacity: 1 !important;
-        transition: .2s ease-in-out;
-    }
-}
-
-.cor-verde-hover {
-    transition: .2s ease-in-out;
-
-    &:hover {
-        color: var(--cor-principal) !important;
         opacity: 1 !important;
         transition: .2s ease-in-out;
     }
@@ -167,16 +156,17 @@ img {
 
 /* =-=-=-=-=-=-=-=-= Input, textarea e select "padrão" =-=-=-=-=-=-=-=-= */
 .input {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     height: 40px;
     padding: 0px 16px;
+    border-radius: 10px;
 
-    background-color: #e5dcfc;
-    color: #1A1A1A !important;
+    background-color: rgb(59, 59, 59);
+    color: #f3f3f3 !important;
     opacity: 0.9;
 
-    border-radius: 5px;
+    border-radius: 12px;
     border: none;
     color: #111;
     font-size: 1rem;
@@ -288,7 +278,7 @@ img {
 
     &:disabled {
         background-color: var(--preto);
-        color: var(--preto);
+        color: var(--branco);
         opacity: 0.5;
         cursor: not-allowed;
     }

@@ -102,11 +102,11 @@ export default function Index() {
                     <span className={Styles.titulo}>Bem-vindo ao {CONSTS_SISTEMA.NOME_SISTEMA}</span>
 
                     <div>
-                        <input className={`${Styles.input} margem1`} type='text' placeholder='E-mail ou nome de usuário'
+                        <input className='input margem1' type='text' placeholder='E-mail ou nome de usuário'
                             name='usuario' onChange={handleChange} ref={refUsuario} onKeyPress={handleKeyPress}
                         />
 
-                        <input className={`${Styles.input} margem1`} type='password' placeholder='Senha'
+                        <input className='input margem1' type='password' placeholder='Senha'
                             name='senha' onChange={handleChange} ref={refSenha} onKeyPress={handleKeyPress}
                         />
 
@@ -118,7 +118,7 @@ export default function Index() {
                     <div className={Styles.divCode}>
                         <code>
                             Por enquanto não é possível criar uma nova conta.<br />
-                            Entre com o usuário <b className='verde'>usuario</b> e a senha <b className='verde'>123</b>.
+                            Entre com o usuário <b className='cor-principal'>usuario</b> e a senha <b className='cor-principal'>123</b>.
                         </code>
                     </div>
                 </div>
