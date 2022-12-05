@@ -10,6 +10,7 @@ import { Aviso } from '../../../utils/outros/aviso';
 import gerarNumeroAleatorio from '../../../utils/outros/gerarNumeroAleatorio';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
 import iMusica from '../../../utils/types/iMusica';
+import iPlaylistMusica from '../../../utils/types/iPlaylistMusica';
 import Coracao from '../../outros/coracao';
 import Aleatorio from '../../svg/barra.player/aleatorio';
 import BotaoAvancar from '../../svg/barra.player/botaoAvancar';
@@ -65,6 +66,7 @@ export default function BarraPlayer() {
         setIsPlayingContext(!isPlayingContext);
     }
 
+    // Função normal;
     function handleAvancar() {
         if (filaMusicasContext && filaMusicasContext?.length > 0) {
             let proximaMusica;
@@ -89,6 +91,39 @@ export default function BarraPlayer() {
             if (!proximaMusica) {
                 // console.log('Não existe (index + 1)... voltar para o 0');
                 proximaMusica = filaMusicasContext[0]; // Voltar para a primeira música, posição 0;
+            }
+
+            // Buscar o item "proximaMusica?.musicas" para adequar à necessidade do MusicaStorage (tipo iMusica);
+            const musica = proximaMusica?.musicas as iMusica;
+            // console.log(musica);
+
+            // Salvar no Context e no localStorage;
+            MusicaStorage.set(musica);
+            setMusicaContext(musica);
+        }
+    }
+
+    // Função modificada para não permitir musicas com o atributo "isJaTocada" === false;
+    const [modoProibirMusicasAtributoIsJaTocada, setModoProibirMusicasAtributoIsJaTocada] = useState<boolean>(true);
+    function handleAvancarModoProibirMusicasAtributoIsJaTocada() {
+        if (filaMusicasContext && filaMusicasContext?.length > 0) {
+            let proximaMusica;
+            const filaMusicasContextIsJaTocadaFalse = filaMusicasContext?.filter(x => x.isAtivo === true && x.isJaTocada === false) as iPlaylistMusica[];
+
+            // Caso o isModoAleatorio NÃO seja true, pegue o próximo, normalmente;
+            if (!isModoAleatorio) {
+                proximaMusica = filaMusicasContextIsJaTocadaFalse[0]; // Avançar para a próxima música, que está obrigatoriamente na posição 0, porque as outras estão sendo filtradas acima (filaMusicasContextIsJaTocadaFalse); 
+            }
+
+            // Caso o isModoAleatorio seja true, o handleAvancar não pode ser simplesmente "+1", e sim pegar aleatóriamente;
+            else if (isModoAleatorio) {
+                proximaMusica = filaMusicasContextIsJaTocadaFalse[(Math.random() * filaMusicasContextIsJaTocadaFalse?.length) | 0];
+            }
+
+            // Caso "proximaMusica" esteja vazia (isso é: acabaram as próximas músicas), pegue o último da lista original: filaMusicasContext;
+            // Isso é mais uma preventiva para não bugar de vez...
+            if (!proximaMusica) {
+                proximaMusica = filaMusicasContext[filaMusicasContext?.length - 1 ?? 0];
             }
 
             // Buscar o item "proximaMusica?.musicas" para adequar à necessidade do MusicaStorage (tipo iMusica);
@@ -198,7 +233,7 @@ export default function BarraPlayer() {
                         }
                     </span>
 
-                    <span className={Styles.spanIcone} onClick={() => handleAvancar()} title='Avançar uma música'>
+                    <span className={Styles.spanIcone} onClick={() => (modoProibirMusicasAtributoIsJaTocada ? handleAvancarModoProibirMusicasAtributoIsJaTocada() : handleAvancar())} title='Avançar uma música'>
                         <BotaoAvancar />
                     </span>
 
@@ -211,7 +246,7 @@ export default function BarraPlayer() {
                     <ProgressBarPlayer
                         isModoLoop={isModoLoop}
                         volume={volume}
-                        handleAvancar={handleAvancar}
+                        handleAvancar={(modoProibirMusicasAtributoIsJaTocada ? handleAvancarModoProibirMusicasAtributoIsJaTocada : handleAvancar)}
                     />
                 </div>
             </div>

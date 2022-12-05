@@ -16,4 +16,7 @@ export default interface iPlaylistMusica {
     erro: boolean;
     codigoErro: number | null;
     mensagemErro: string | null;
+
+    // Adicionado para controle interno do front-end;
+    isJaTocada: boolean;
 }

@@ -92,14 +92,20 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
 
         return duracaoFormatada;
     }
-
+ 
     // Ao clicar para ouvir uma música da playlist, set essa playlist como a atual;
     const [isMusicaClicadaParaSetarLista, setIsMusicaClicadaParaSetarLista] = useState<boolean>(false);
     useEffect(() => {
         if (isMusicaClicadaParaSetarLista) {
             const listaMusicas = playlist.playlistsMusicas;
-            setFilaMusicasContext(listaMusicas);
+
+            // Setar todos isJaTocada para false, já que a lista está sendo renovada nesse momento;
+            listaMusicas.forEach((m: iPlaylistMusica) => {
+                m.isJaTocada = false;
+            });
+ 
             FilaMusicasStorage.set(listaMusicas);
+            setFilaMusicasContext(listaMusicas);
         }
     }, [isMusicaClicadaParaSetarLista, playlist?.playlistsMusicas, setFilaMusicasContext]);
 

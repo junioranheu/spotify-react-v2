@@ -1,8 +1,5 @@
-Fazer lista (???)
-Fazer lógica do botão de pra frente e pra trás
-Trocar o aviso de "inicie sessão" por um modalzinho :)
-Não mostrar a barra de play se tiver deslogado (só ajustar os ifs)
-Criar tela de login
-
+Fazer lista funcionar (tirar a musica quando ouvir)
 CRIAR MODALLLLLLLLLLLLLLLL EM ENTRAR E TBM NA HORA DE TOCAR E ESTAR DESLOGADO!
 QUANDO O USUARIO NAO TIVER AUTENTICADO NA FILA APRESENTAR MODAL TBM
+
+colocar um animate.css de leve

@@ -40,7 +40,7 @@ export default function Index() {
         refBtn.current.disabled = true;
 
         if (!formData || !formData.usuario || !formData.senha) {
-            instrucaoErro('O nome de usuário e/ou e-mail estão vazios!', true);
+            instrucaoErro('O <b>nome de usuário</b> e/ou <b>e-mail</b> estão vazios!', true);
             return false;
         }
 

@@ -25,7 +25,7 @@ interface iParametros {
     isDesativarUm: boolean;
     setIsMusicaClicadaParaSetarLista?: Dispatch<boolean> | null; // Setar que o usuário clicou para ouvir uma música;
 }
-
+ 
 export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tempo, isDesativarUm, setIsMusicaClicadaParaSetarLista }: iParametros) {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;

@@ -68,7 +68,8 @@ export default function Index() {
                                     filaMusicasContext && filaMusicasContext?.length > 0 ? (
                                         <Fragment>
                                             {
-                                                filaMusicasContext.filter(x => x.musicaId !== musicaContext?.musicaId).map((m, i) => (
+                                                // Exibir todas as músicas que não foram tocadas ainda;
+                                                filaMusicasContext.filter(x => x.musicaId !== musicaContext?.musicaId && x.isJaTocada === false).map((m, i) => (
                                                     <MusicaRow
                                                         key={m?.musicaId}
                                                         musicaId={m?.musicaId ?? 0}
