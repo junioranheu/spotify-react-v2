@@ -28,11 +28,6 @@ export default function Index() {
     const refSenha = useRef<HTMLInputElement | any>(null);
     const refBtn = useRef<HTMLButtonElement | any>(null);
 
-    if (isAuth) {
-        Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.AUTENTICADO } });
-        return false;
-    }
-
     // Ao alterar os valores dos inputs, insira os valores nas variaveis do formData;
     const [formData, setFormData] = useState<iFormData>({ usuario: '', senha: '' });
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -89,6 +84,11 @@ export default function Index() {
         if (e.key === 'Enter') {
             refBtn.current && refBtn.current.click();
         }
+    }
+
+    if (isAuth) {
+        Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.AUTENTICADO } });
+        return false;
     }
 
     return (
