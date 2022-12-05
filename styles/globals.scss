@@ -188,6 +188,15 @@ img {
     }
 }
 
+/* =-=-=-=-=-=-=-=-=-=-=-=- animate.css =-=-=-=-=-=-=-=-=-=-=-=- */
+.animate__delay03 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+    -webkit-animation-delay: calc(1s*0.3);
+    animation-delay: calc(1s*0.3);
+}
+
+
 /* =-=-=-=-=-=-=-=-=-=-= nProgress =-=-=-=-=-=-=-=-=-=-= */
 #nprogress {
     .bar {

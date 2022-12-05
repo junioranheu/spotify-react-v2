@@ -1,6 +1,4 @@
 CRIAR MODALLLLLLLLLLLLLLLL EM ENTRAR E TBM NA HORA DE TOCAR E ESTAR DESLOGADO!
 QUANDO O USUARIO NAO TIVER AUTENTICADO NA FILA APRESENTAR MODAL TBM
 
-colocar um animate.css de leve
-
->>> passar contexts para o geekspot
+>>> passar contexts para o geekspot e arrumar o padrao.tsx
