@@ -6,7 +6,7 @@ import ImgCinza from '../../../assets/image/cinza.webp';
 import useIsTelaModoProibirMusicasAtributoIsJaTocada from '../../../hooks/outros/useIsTelaModoProibirMusicasAtributoIsJaTocada';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
-import { MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
+import { FilaMusicasStorage, MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
 import { Aviso } from '../../../utils/outros/aviso';
 import gerarNumeroAleatorio from '../../../utils/outros/gerarNumeroAleatorio';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
@@ -140,6 +140,10 @@ export default function BarraPlayer() {
     function handleVoltar() {
         if (filaMusicasContext && filaMusicasContext?.length > 0) {
             let musicaAnterior;
+
+            // Setar o "isJaTocada" para false (reverso do processo normal) para controle interno (voltar à fila);
+            const listaMusicasUpdate = FilaMusicasStorage.updateIsJaTocada(musicaContext?.musicaId ?? -1, false);
+            listaMusicasUpdate && setFilaMusicasContext(listaMusicasUpdate);
 
             // Independentemente do isModoAleatorio, pegue a música anterior, normalmente;
             const index = filaMusicasContext?.findIndex(m => m.musicaId === musicaContext?.musicaId);
