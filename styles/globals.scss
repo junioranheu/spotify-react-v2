@@ -6,6 +6,7 @@
     --cinza-claro: #A7A7A7;
     --bege: #f4f2f0;
     --cor-principal: #1DD05E;
+    --background-gradient-original: linear-gradient(180deg, #1B1039 0%, rgba(18, 18, 18, 1) 24%, rgba(18, 18, 18, 1) 100%);
 
     --toastify-color-progress-light: var(--cor-principal) !important;
     --toastify-color-progress-warning: var(--cor-principal) !important;
@@ -35,7 +36,7 @@ body {
     max-height: 100vh;
 
     background: var(--cinza);
-    background: linear-gradient(180deg, #1B1039 0%, rgba(18, 18, 18, 1) 24%, rgba(18, 18, 18, 1) 100%);
+    background: var(--background-gradient-original);
 
     color: var(--branco);
 }

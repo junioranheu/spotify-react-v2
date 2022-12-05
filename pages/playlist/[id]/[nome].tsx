@@ -25,6 +25,26 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
 
+    useEffect(() => {
+        function setarCorBackground(background: string) {
+            var els = document.getElementsByClassName('main');
+            Array.prototype.forEach.call(els, function (el) {
+                el.style = background;
+            });
+        }
+
+        // Ao entrar na tela;
+        const corDominante = playlist?.corDominante ?? '';
+        if (corDominante) {
+            setarCorBackground(`background: linear-gradient(180deg, ${corDominante} 0%, rgba(18, 18, 18, 1) 24%, rgba(18, 18, 18, 1) 100%)`);
+        }
+
+        // Ao sair da tela;
+        return () => {
+            setarCorBackground(`var(--background-gradient-original)`)
+        }
+    }, [playlist?.corDominante]);
+
     function concatenarBandas(playlist: iPlaylist) {
         nProgress.start();
         let bandas = '';
