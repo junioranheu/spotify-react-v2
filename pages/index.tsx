@@ -12,10 +12,10 @@ import gerarOla from '../utils/outros/gerarOla';
 import iPlaylist from '../utils/types/iPlaylist';
 
 interface iParametros {
-    listaPlaylists: iPlaylist[];
+    listaPlaylistsAdm: iPlaylist[];
 }
 
-export default function Index({ listaPlaylists }: iParametros) {
+export default function Index({ listaPlaylistsAdm }: iParametros) {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
@@ -30,8 +30,8 @@ export default function Index({ listaPlaylists }: iParametros) {
                 <span className={Styles.bomDia}>{gerarOla()}</span>
 
                 <div className={Styles.div}>
-                    <span className='titulo'>Playlists disponíveis no momento {emojiAleatorio()}</span>
-                    <Playlists listaPlaylists={listaPlaylists} />
+                    <span className='titulo'>Playlists oficiais {emojiAleatorio()}</span>
+                    <Playlists listaPlaylists={listaPlaylistsAdm} />
                 </div>
 
                 <div className={Styles.div}>
@@ -51,13 +51,14 @@ export default function Index({ listaPlaylists }: iParametros) {
 
 export async function getStaticProps() {
     HabilitarHttp();
-    const url = CONSTS_PLAYLISTS.API_URL_GET_TODOS;
-    const listaPlaylists = await Fetch.getApi(url) as iPlaylist[] ?? null;
-    // console.log(listaPlaylists);
+    const idAdm = 1;
+    const url = `${CONSTS_PLAYLISTS.API_URL_GET_BY_USUARIO_ID}/${idAdm}`;
+    const listaPlaylistsAdm = await Fetch.getApi(url) as iPlaylist[] ?? null;
+    // console.log(listaPlaylistsAdm);
 
     return {
         props: {
-            listaPlaylists
+            listaPlaylistsAdm
         },
     }
 }
