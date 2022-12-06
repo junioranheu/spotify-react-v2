@@ -3,6 +3,8 @@ const CONSTS_TELAS = {
     ENTRAR: '/entrar',
     CRIAR_CONTA: '/criar-conta',
     FILA: '/fila',
+    SUBIR_MUSICA: '/musica/nova',
+    CRIAR_PLAYLIST: '/playlist/nova',
     ERRO: '/404'
 };
 

@@ -1,9 +1,13 @@
 import { loremIpsum } from 'lorem-ipsum';
 import Link from 'next/link';
+import Router from 'next/router';
 import { Resizable } from 're-resizable';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
+import { UsuarioContext } from '../../../utils/context/usuarioContext';
+import { Aviso } from '../../../utils/outros/aviso';
 import Biblioteca from '../../svg/biblioteca';
+import BotaoPlay from '../../svg/botaoPlay';
 import Casa from '../../svg/casa';
 import Coracao from '../../svg/coracao';
 import Github from '../../svg/github';
@@ -13,6 +17,9 @@ import SpotifyLogo from '../../svg/spotifyLogo';
 import Styles from './sidebar.module.scss';
 
 export default function Sidebar() {
+
+    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
+    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
 
     const [msg1, setMsg1] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
     const [msg2, setMsg2] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
@@ -58,12 +65,20 @@ export default function Sidebar() {
                 </div>
 
                 <div className={Styles.divIcones}>
-                    <span>
+                    <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.SUBIR_MUSICA) : Aviso.warn('Você não está logado! <b>Inicie sua sessão</b> para subir uma nova música', 7000)}>
+                        <span className={`${Styles.quadrado} ${Styles.quadradoBranco}`}>
+                            <BotaoPlay width='12px' cor='var(--preto)' />
+                        </span>
+
+                        <span className='pointer'>Subir nova música</span>
+                    </span>
+
+                    <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.CRIAR_PLAYLIST) : Aviso.warn('Você não está logado! <b>Inicie sua sessão</b> para criar uma nova playlist', 7000)}>
                         <span className={`${Styles.quadrado} ${Styles.quadradoBranco}`}>
                             <Mais width='12px' cor='var(--preto)' />
                         </span>
 
-                        <span className='pointer'>Criar lista de reprodução</span>
+                        <span className='pointer'>Criar nova playlist</span>
                     </span>
 
                     <span>

@@ -22,9 +22,6 @@ export default function NavbarPadrao() {
     const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
 
     const [isExibirSubmenu, setIsExibirSubmenu] = useState<boolean>(false);
-    function handleMostrarSubmenu() {
-        setIsExibirSubmenu(!isExibirSubmenu);
-    }
 
     const asPath = useRouter();
     useEffect(() => {
@@ -62,7 +59,7 @@ export default function NavbarPadrao() {
                 {
                     isAuth ? (
                         <Fragment>
-                            <div className={Styles.divOpcoes} onClick={() => handleMostrarSubmenu()}>
+                            <div className={Styles.divOpcoes} onClick={() => setIsExibirSubmenu(!isExibirSubmenu)}>
                                 {nomeUsuario}
                                 <SetinhaBaixo width='12' cor='var(--branco)' />
                             </div>
@@ -70,8 +67,8 @@ export default function NavbarPadrao() {
                             {
                                 isExibirSubmenu && (
                                     <div className={Styles.subMenu}>
-                                        <span>Conta</span>
-                                        <span>Perfil</span>
+                                        <span onClick={() => Router.push(CONSTS_TELAS.SUBIR_MUSICA)}>Subir música</span>
+                                        <span onClick={() => Router.push(CONSTS_TELAS.CRIAR_PLAYLIST)}>Nova playlist</span>
                                         <span onClick={() => handleDeslogar()}>Terminar sessão</span>
                                     </div>
                                 )

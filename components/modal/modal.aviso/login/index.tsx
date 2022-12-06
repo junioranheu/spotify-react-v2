@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Dispatch, useEffect, useState } from 'react';
 import CONSTS_SISTEMA from '../../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../../utils/consts/outros/telas';
@@ -53,7 +52,7 @@ export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExib
             <span className='separadorHorizontal'></span>
 
             <span className={Styles.termos}>
-                Ao entrar ou criar uma conta, você está de acordo com os <Link href={CONSTS_TELAS.INDEX}>termos de serviço e a política de privacidade</Link> do {CONSTS_SISTEMA.NOME_SISTEMA}
+                Ao entrar, criar uma conta ou ouvir nossas músicas, você está de acordo com os <a href='https://github.com/junioranheu' target='_blank'>termos de serviço e a política de privacidade</a> do {CONSTS_SISTEMA.NOME_SISTEMA}
             </span>
         </div>
     )
