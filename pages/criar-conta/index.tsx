@@ -3,14 +3,10 @@ import Link from 'next/link';
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import { ChangeEvent, Fragment, KeyboardEvent, useContext, useRef, useState } from 'react';
-import ModalAvisoLogin from '../../components/modal/modal.aviso/login';
-import ModalLayout from '../../components/modal/_modal.layout';
-import ModalWrapper from '../../components/modal/_modal.wrapper';
 import Botao from '../../components/outros/botao';
 import { Fetch } from '../../utils/api/fetch';
 import CONSTS_AUTENTICAR from '../../utils/consts/data/constAutenticar';
 import CONSTS_ERROS from '../../utils/consts/outros/erros';
-import CONSTS_MODAL from '../../utils/consts/outros/modal.tamanho';
 import CONSTS_SISTEMA from '../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../utils/consts/outros/telas';
 import { Auth, UsuarioContext } from '../../utils/context/usuarioContext';
@@ -24,7 +20,7 @@ interface iFormData {
     senha: string;
 }
 
-export default function Index() {
+export default function CriarConta() {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
@@ -32,9 +28,6 @@ export default function Index() {
     const refUsuario = useRef<HTMLInputElement | any>(null);
     const refSenha = useRef<HTMLInputElement | any>(null);
     const refBtn = useRef<HTMLButtonElement | any>(null);
-
-    const [modalAvisoLoginDescricao, setModalAvisoLoginDescricao] = useState('');
-    const [isModalAvisoLoginOpen, setIsModalAvisoLoginOpen] = useState(false);
 
     // Ao alterar os valores dos inputs, insira os valores nas variaveis do formData;
     const [formData, setFormData] = useState<iFormData>({ usuario: '', senha: '' });
@@ -61,9 +54,7 @@ export default function Index() {
 
         const resposta = await Fetch.postApi(url, dto) as iUsuario;
         if (!resposta || resposta?.erro) {
-            setModalAvisoLoginDescricao((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Provavelmente o usuário e/ou a senha estão errados'));
-            setIsModalAvisoLoginOpen(true);
-            instrucaoErro('', false);
+            instrucaoErro(resposta?.mensagemErro ?? `Parece que houve um erro. Tente novamente mais tarde`, true);
             return false;
         }
 
@@ -102,28 +93,13 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Entrar</title>
+                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Criar conta</title>
             </Head>
-
-            {/* Modal de aviso de login */}
-            <ModalWrapper isOpen={isModalAvisoLoginOpen}>
-                <ModalLayout handleModal={() => setIsModalAvisoLoginOpen(!isModalAvisoLoginOpen)} isExibirApenasLogo={true} titulo={null} tamanho={CONSTS_MODAL.PEQUENO} isCentralizado={true} isFecharModalClicandoNoFundo={false}>
-                    <ModalAvisoLogin
-                        handleModal={() => setIsModalAvisoLoginOpen(!isModalAvisoLoginOpen)}
-                        titulo={null}
-                        descricao={modalAvisoLoginDescricao}
-                        isExibirBotao={false}
-                        textoBotao={null}
-                        urlBotao={null}
-                        isNovaAba={null}
-                    />
-                </ModalLayout>
-            </ModalWrapper>
 
             {/* Conteúdo */}
             <section className={Styles.container}>
                 <div className={Styles.containerInner}>
-                    <span className={Styles.titulo}>Bem-vindo ao {CONSTS_SISTEMA.NOME_SISTEMA}</span>
+                    <span className={Styles.titulo}>Crie sua conta no {CONSTS_SISTEMA.NOME_SISTEMA}</span>
 
                     <div>
                         <input className='input margem1' type='text' placeholder='E-mail ou nome de usuário'
@@ -141,7 +117,7 @@ export default function Index() {
 
                     <div className={Styles.divCode}>
                         <code>
-                            Não tem uma conta? Crie sua conta <Link href={CONSTS_TELAS.CRIAR_CONTA} title='Criar nova conta'><b className='cor-principal'>aqui</b></Link>.
+                            Já tem uma conta? Entre agora mesmo <Link href={CONSTS_TELAS.ENTRAR} title='Criar nova conta'><b className='cor-principal'>aqui</b></Link>.
                         </code>
                     </div>
                 </div>
