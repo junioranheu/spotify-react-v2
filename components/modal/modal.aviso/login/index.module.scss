@@ -13,10 +13,11 @@
 
     .texto {
         // background-color: red;
-        width: 80%;
+        width: 90%;
         color: var(--preto);
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 400;
+        opacity: 0.8;
     }
 
     .termos {
@@ -25,15 +26,16 @@
         color: var(--preto);
         font-size: 0.7rem;
         font-weight: 400;
- 
+
         a {
             color: var(--cor-principal);
         }
     }
 
-    .botaoCustom{
-        button{
+    .botaoCustom {
+        button {
             color: var(--branco);
+            margin: 0;
         }
     }
 }
@@ -57,7 +59,7 @@
             // background-color: red;
             width: 100%;
         }
-    
+
         .termos {
             // background-color: red;
             width: 90%;

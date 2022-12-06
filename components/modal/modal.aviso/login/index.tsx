@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Dispatch } from 'react';
+import { Dispatch, useEffect, useState } from 'react';
 import CONSTS_SISTEMA from '../../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../../utils/consts/outros/telas';
 import Botao from '../../../outros/botao';
@@ -16,11 +16,24 @@ interface iParametros {
 }
 
 export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExibirBotao, textoBotao, urlBotao, isNovaAba }: iParametros) {
+
+    const [comentarioRandom, setComentarioRandom] = useState<string>('');
+    useEffect(() => {
+        function gerarComentarioRandom() {
+            const comentarios = ['Opa, pera aí...', 'Parece que algo deu errado', 'Parado aí!', 'Opa!', 'Eita!', 'Ops...', 'Calma lá!'];
+
+            const random = Math.floor(Math.random() * comentarios.length);
+            setComentarioRandom(comentarios[random]);
+        }
+
+        gerarComentarioRandom();
+    }, []);
+
     return (
         <div className={Styles.main}>
-            <span className={Styles.titulo}>{(titulo ?? 'Opa, pera aí...')}</span>
+            <span className={Styles.titulo}>{(titulo ?? comentarioRandom)}</span>
             <span className={`${Styles.texto} margem0_5`}>{descricao}</span>
- 
+
             {
                 isExibirBotao && (
                     <div className={`${Styles.botaoCustom} margem1`}>
@@ -38,6 +51,7 @@ export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExib
             }
 
             <span className='separadorHorizontal'></span>
+
             <span className={Styles.termos}>
                 Ao entrar ou criar uma conta, você está de acordo com os <Link href={CONSTS_TELAS.INDEX}>termos de serviço e a política de privacidade</Link> do {CONSTS_SISTEMA.NOME_SISTEMA}
             </span>

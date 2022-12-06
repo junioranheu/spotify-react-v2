@@ -83,7 +83,7 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
         // Setar que o usuário clicou para ouvir uma música;
         setIsMusicaClicadaParaSetarLista && setIsMusicaClicadaParaSetarLista(true);
     }
-
+ 
     return (
         <Fragment>
             {/* Modal de aviso de login */}

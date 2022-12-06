@@ -5,13 +5,16 @@ import { Fragment, useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
 import useIsTelaModoProibirMusicasAtributoIsJaTocada from '../../../hooks/outros/useIsTelaModoProibirMusicasAtributoIsJaTocada';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
+import CONSTS_MODAL from '../../../utils/consts/outros/modal.tamanho';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { FilaMusicasStorage, MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
-import { Aviso } from '../../../utils/outros/aviso';
 import gerarNumeroAleatorio from '../../../utils/outros/gerarNumeroAleatorio';
 import handleFullScreen from '../../../utils/outros/handleFullScreen';
 import iMusica from '../../../utils/types/iMusica';
 import iPlaylistMusica from '../../../utils/types/iPlaylistMusica';
+import ModalAvisoLogin from '../../modal/modal.aviso/login';
+import ModalLayout from '../../modal/_modal.layout';
+import ModalWrapper from '../../modal/_modal.wrapper';
 import Coracao from '../../outros/coracao';
 import Aleatorio from '../../svg/barra.player/aleatorio';
 import BotaoAvancar from '../../svg/barra.player/botaoAvancar';
@@ -60,7 +63,8 @@ export default function BarraPlayer() {
 
     function handlePlay() {
         if (!musicaContext?.musicaId) {
-            Aviso.warn('Nenhuma música foi selecionada', 5000);
+            setModalAvisoLoginDescricao('Nenhuma música foi selecionada. Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
+            setIsModalAvisoLoginOpen(true);
             return false;
         }
 
@@ -69,6 +73,12 @@ export default function BarraPlayer() {
 
     // Função normal;
     function handleAvancar() {
+        if (!musicaContext?.musicaId) {
+            setModalAvisoLoginDescricao('Nenhuma música foi selecionada. Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
+            setIsModalAvisoLoginOpen(true);
+            return false;
+        }
+
         if (filaMusicasContext && filaMusicasContext?.length > 0) {
             let proximaMusica;
 
@@ -138,6 +148,12 @@ export default function BarraPlayer() {
     }
 
     function handleVoltar() {
+        if (!musicaContext?.musicaId) {
+            setModalAvisoLoginDescricao('Nenhuma música foi selecionada. Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
+            setIsModalAvisoLoginOpen(true);
+            return false;
+        }
+
         if (filaMusicasContext && filaMusicasContext?.length > 0) {
             let musicaAnterior;
 
@@ -184,110 +200,131 @@ export default function BarraPlayer() {
     const [isModoAleatorio, setIsModoAleatorio] = useState<boolean>(false);
     const [isModoLoop, setIsModoLoop] = useState<boolean>(false);
 
+    const [modalAvisoLoginDescricao, setModalAvisoLoginDescricao] = useState('');
+    const [isModalAvisoLoginOpen, setIsModalAvisoLoginOpen] = useState(false);
+
     return (
-        <section className={Styles.barraPlayer} id='sectionBarraPlayer'>
-            {/* =-=-=-=-=-=-=-=-=-=-=-= Primeira div, esquerda =-=-=-=-=-=-=-=-=-=-=-= */}
-            <div className={Styles.divInfo}>
-                {
-                    musicaContext && musicaContext?.musicaId && (
-                        <Fragment>
-                            <Image src={imagemBanda} width={56} height={56} alt='' />
-
-                            <div className={Styles.infoMusica}>
-                                <span className={Styles.infoTitulo} title={'xxxxxx'}>
-                                    {musicaContext?.nome}
-                                </span>
-
-                                {/* @ts-ignore */}
-                                <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
-                                    {/* @ts-ignore */}
-                                    {(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}
-                                </span>
-                            </div>
-
-                            <span className={Styles.spanIcone} onClick={() => setIsCurtido(!isCurtido)} title={`${isCurtido ? 'Descurtir' : 'Curtir'} música`}>
-                                <Coracao isMusicaCurtida={isCurtido} />
-                            </span>
-
-                            <span className={Styles.spanIcone} onClick={() => null} title='Ativar/desativar modo picture-in-picture'>
-                                <Toggle />
-                            </span>
-                        </Fragment>
-                    )
-                }
-            </div>
-
-            {/* =-=-=-=-=-=-=-=-=-=-=-= Segunda div, meio =-=-=-=-=-=-=-=-=-=-=-= */}
-            <div className={Styles.divPlayer}>
-                <div className={Styles.divPlayerIcones}>
-                    <span className={Styles.spanIcone} onClick={() => setIsModoAleatorio(!isModoAleatorio)} title={`${isModoAleatorio ? 'Desativar' : 'Ativar'} modo aleatório`}>
-                        <Aleatorio cor={(isModoAleatorio ? 'var(--cor-principal)' : '')} />
-                    </span>
-
-                    <span className={Styles.spanIcone} onClick={() => handleVoltar()} title='Voltar uma música'>
-                        <BotaoVoltar />
-                    </span>
-
-                    <span className={Styles.btnPlay} onClick={() => handlePlay()}>
-                        {
-                            isPlayingContext ? (
-                                <BotaoStop />
-                            ) : (
-                                <BotaoPlay />
-                            )
-                        }
-                    </span>
-
-                    <span className={Styles.spanIcone} onClick={() => (modoProibirMusicasAtributoIsJaTocada ? handleAvancarModoProibirMusicasAtributoIsJaTocada() : handleAvancar())} title='Avançar uma música'>
-                        <BotaoAvancar />
-                    </span>
-
-                    <span className={Styles.spanIcone} onClick={() => setIsModoLoop(!isModoLoop)} title={`${isModoLoop ? 'Desativar' : 'Ativar'} modo loop`}>
-                        <Loop cor={(isModoLoop ? 'var(--cor-principal)' : '')} />
-                    </span>
-                </div>
-
-                <div className={Styles.divPlayerInner}>
-                    <ProgressBarPlayer
-                        isModoLoop={isModoLoop}
-                        volume={volume}
-                        handleAvancar={(modoProibirMusicasAtributoIsJaTocada ? handleAvancarModoProibirMusicasAtributoIsJaTocada : handleAvancar)}
+        <Fragment>
+            {/* Modal de aviso de login */}
+            <ModalWrapper isOpen={isModalAvisoLoginOpen}>
+                <ModalLayout handleModal={() => setIsModalAvisoLoginOpen(!isModalAvisoLoginOpen)} isExibirApenasLogo={true} titulo={null} tamanho={CONSTS_MODAL.PEQUENO} isCentralizado={true} isFecharModalClicandoNoFundo={false}>
+                    <ModalAvisoLogin
+                        handleModal={() => setIsModalAvisoLoginOpen(!isModalAvisoLoginOpen)}
+                        titulo={null}
+                        descricao={modalAvisoLoginDescricao}
+                        isExibirBotao={false}
+                        textoBotao={null}
+                        urlBotao={CONSTS_TELAS.ENTRAR}
+                        isNovaAba={null}
                     />
+                </ModalLayout>
+            </ModalWrapper>
+
+            {/* Conteúdo */}
+            <section className={Styles.barraPlayer} id='sectionBarraPlayer'>
+                {/* =-=-=-=-=-=-=-=-=-=-=-= Primeira div, esquerda =-=-=-=-=-=-=-=-=-=-=-= */}
+                <div className={Styles.divInfo}>
+                    {
+                        musicaContext && musicaContext?.musicaId && (
+                            <Fragment>
+                                <Image src={imagemBanda} width={56} height={56} alt='' />
+
+                                <div className={Styles.infoMusica}>
+                                    <span className={Styles.infoTitulo} title={'xxxxxx'}>
+                                        {musicaContext?.nome}
+                                    </span>
+
+                                    {/* @ts-ignore */}
+                                    <span className={Styles.infoDescricao} title={(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}>
+                                        {/* @ts-ignore */}
+                                        {(musicaContext?.musicasBandas ? musicaContext?.musicasBandas[0]?.bandas.nome : '')}
+                                    </span>
+                                </div>
+
+                                <span className={Styles.spanIcone} onClick={() => setIsCurtido(!isCurtido)} title={`${isCurtido ? 'Descurtir' : 'Curtir'} música`}>
+                                    <Coracao isMusicaCurtida={isCurtido} />
+                                </span>
+
+                                <span className={Styles.spanIcone} onClick={() => null} title='Ativar/desativar modo picture-in-picture'>
+                                    <Toggle />
+                                </span>
+                            </Fragment>
+                        )
+                    }
                 </div>
-            </div>
 
-            {/* =-=-=-=-=-=-=-=-=-=-=-= Terceira div, direita =-=-=-=-=-=-=-=-=-=-=-= */}
-            <div className={Styles.divOpcoes}>
-                <span className={Styles.spanIcone} onClick={() => null} title='Visualizar letra'>
-                    <Microfone />
-                </span>
+                {/* =-=-=-=-=-=-=-=-=-=-=-= Segunda div, meio =-=-=-=-=-=-=-=-=-=-=-= */}
+                <div className={Styles.divPlayer}>
+                    <div className={Styles.divPlayerIcones}>
+                        <span className={Styles.spanIcone} onClick={() => setIsModoAleatorio(!isModoAleatorio)} title={`${isModoAleatorio ? 'Desativar' : 'Ativar'} modo aleatório`}>
+                            <Aleatorio cor={(isModoAleatorio ? 'var(--cor-principal)' : '')} />
+                        </span>
 
-                <span className={Styles.spanIcone} title='Visualizar fila'>
-                    <Link href={CONSTS_TELAS.FILA}>
-                        <Fila cor={(url === CONSTS_TELAS.FILA ? 'var(--cor-principal)' : '')} />
-                    </Link>
-                </span>
+                        <span className={Styles.spanIcone} onClick={() => handleVoltar()} title='Voltar uma música'>
+                            <BotaoVoltar />
+                        </span>
 
-                <span className={Styles.spanIcone} onClick={() => null} title='Transmitir para outro dispositivo'>
-                    <Dispositivo />
-                </span>
+                        <span className={Styles.btnPlay} onClick={() => handlePlay()}>
+                            {
+                                isPlayingContext ? (
+                                    <BotaoStop />
+                                ) : (
+                                    <BotaoPlay />
+                                )
+                            }
+                        </span>
 
-                {/* {
+                        <span className={Styles.spanIcone} onClick={() => (modoProibirMusicasAtributoIsJaTocada ? handleAvancarModoProibirMusicasAtributoIsJaTocada() : handleAvancar())} title='Avançar uma música'>
+                            <BotaoAvancar />
+                        </span>
+
+                        <span className={Styles.spanIcone} onClick={() => setIsModoLoop(!isModoLoop)} title={`${isModoLoop ? 'Desativar' : 'Ativar'} modo loop`}>
+                            <Loop cor={(isModoLoop ? 'var(--cor-principal)' : '')} />
+                        </span>
+                    </div>
+
+                    <div className={Styles.divPlayerInner}>
+                        <ProgressBarPlayer
+                            isModoLoop={isModoLoop}
+                            volume={volume}
+                            handleAvancar={(modoProibirMusicasAtributoIsJaTocada ? handleAvancarModoProibirMusicasAtributoIsJaTocada : handleAvancar)}
+                        />
+                    </div>
+                </div>
+
+                {/* =-=-=-=-=-=-=-=-=-=-=-= Terceira div, direita =-=-=-=-=-=-=-=-=-=-=-= */}
+                <div className={Styles.divOpcoes}>
+                    <span className={Styles.spanIcone} onClick={() => null} title='Visualizar letra'>
+                        <Microfone />
+                    </span>
+
+                    <span className={Styles.spanIcone} title='Visualizar fila'>
+                        <Link href={CONSTS_TELAS.FILA}>
+                            <Fila cor={(url === CONSTS_TELAS.FILA ? 'var(--cor-principal)' : '')} />
+                        </Link>
+                    </span>
+
+                    <span className={Styles.spanIcone} onClick={() => null} title='Transmitir para outro dispositivo'>
+                        <Dispositivo />
+                    </span>
+
+                    {/* {
                     process.env.NODE_ENV === 'development' && <small>{volume}</small>
                 } */}
 
-                <span className={Styles.spanIcone} onClick={() => handleMutarDesmutar()}>
-                    <ProgressBarVolumeIcone volume={volume} />
-                </span>
+                    <span className={Styles.spanIcone} onClick={() => handleMutarDesmutar()}>
+                        <ProgressBarVolumeIcone volume={volume} />
+                    </span>
 
-                <div className={Styles.divVolume} title={`Volume ${volume}`}>
-                    <ProgressBarVolume handleVolume={handleVolume} volume={volume} />
+                    <div className={Styles.divVolume} title={`Volume ${volume}`}>
+                        <ProgressBarVolume handleVolume={handleVolume} volume={volume} />
+                    </div>
+
+                    <span className={Styles.spanIcone} onClick={() => handleFullScreen()}>
+                        <FullScreen />
+                    </span>
                 </div>
-
-                <span className={Styles.spanIcone} onClick={() => handleFullScreen()}>
-                    <FullScreen />
-                </span>
-            </div>
-        </section>
+            </section>
+        </Fragment>
     )
 }
