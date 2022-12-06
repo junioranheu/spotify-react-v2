@@ -15,12 +15,11 @@ export default function NavbarPadrao() {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const nomeUsuario = Auth?.get()?.nomeUsuarioSistema ?? '';
 
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
     const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
-
-    const nomeUsuario = Auth?.get()?.nomeUsuarioSistema ?? '';
 
     const [isExibirSubmenu, setIsExibirSubmenu] = useState<boolean>(false);
     function handleMostrarSubmenu() {
@@ -56,8 +55,7 @@ export default function NavbarPadrao() {
             </div>
 
             <div className={Styles.divEsquerda}>
-                <BotaoSvgRedirecionar width='1.2rem' isDisabled={false} isVoltar={true} />
-                <BotaoSvgRedirecionar width='1.2rem' isDisabled={true} isVoltar={false} />
+                <BotaoSvgRedirecionar width='1.2rem' isVoltar={true} />
             </div>
 
             <div className={Styles.divDireita}>

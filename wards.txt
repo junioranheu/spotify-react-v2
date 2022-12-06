@@ -1,2 +1,1 @@
-icone de ir e vir na navbar
 criar tela de criar conta
