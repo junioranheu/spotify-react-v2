@@ -42,7 +42,7 @@
             .texto {
                 color: var(--branco);
                 font-size: 1.1rem;
-                font-weight: 400;
+                font-weight: 500;
                 line-height: 1.75rem;
             }
         }
@@ -51,24 +51,49 @@
 
 /* =-=-=-=-=-=-=-=-=-=-= Media queries =-=-=-=-=-=-=-=-=-=-= */
 /* hi-res laptops and desktops */
-@media (max-width:1281px) {}
+@media (max-width:1281px) {
+    .wrapper {
+        // background-color: pink !important;
+
+        div {
+            // background-color: red;
+
+            &:nth-child(1) {
+                // background-color: red;
+
+                .divLottie {
+                    // background-color: blue;
+                    width: 1500% !important; // Exagerar no tamanho;
+                }
+            }
+
+            &:nth-child(2) {
+                padding: 5rem;
+
+                .texto {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+}
 
 /* big landscape tablets, laptops, and desktops */
 @media (max-width:1025px) {
     .wrapper {
         // background-color: pink !important;
-    
+
         div {
             // background-color: red;
             margin: auto !important;
-    
+
             &:nth-child(1) {
                 display: none;
             }
-    
+
             &:nth-child(2) {
-                background: linear-gradient(90deg, #af2896, #509bf5);;
-                width: 50%;
+                // background: linear-gradient(90deg, #af2896, #509bf5);
+                width: 80%;
                 padding: 3rem;
 
                 .texto {
@@ -80,9 +105,7 @@
 }
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
-@media (max-width:801px) {
- 
-}
+@media (max-width:801px) {}
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (max-width:600px) {}
