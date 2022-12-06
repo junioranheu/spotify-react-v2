@@ -24,7 +24,7 @@ export default function ModalLayout({ handleModal, isExibirApenasLogo, titulo, c
                 <div className={`${Styles.modal} ${(tamanho === 'gigante' ? Styles.modalGigante : tamanho === 'grande' ? Styles.modalGrande : tamanho === 'pequeno' ? Styles.modalPequeno : '')} animate__animated animate__fadeIn animate__faster`}>
                     <div className={Styles.divCabecalho}>
                         <BotaoFecharModal fecharModal={() => FecharModal.fecharModalClicandoNoBotao(handleModal)} />
-
+ 
                         {
                             <div className={Styles.cabecalhoTitulo}>
                                 {

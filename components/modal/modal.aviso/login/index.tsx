@@ -19,11 +19,11 @@ export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExib
     return (
         <div className={Styles.main}>
             <span className={Styles.titulo}>{(titulo ?? 'Opa, pera aí...')}</span>
-            <span className={`${Styles.texto} margem1`}>{descricao}</span>
-
+            <span className={`${Styles.texto} margem0_5`}>{descricao}</span>
+ 
             {
                 isExibirBotao && (
-                    <div className='margem1'>
+                    <div className={`${Styles.botaoCustom} margem1`}>
                         <Botao
                             texto={(textoBotao ?? 'Entrar agora mesmo')}
                             url={(urlBotao ?? CONSTS_TELAS.ENTRAR)}
