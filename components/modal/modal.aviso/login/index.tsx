@@ -52,7 +52,7 @@ export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExib
             <span className='separadorHorizontal'></span>
 
             <span className={Styles.termos}>
-                Ao entrar, criar uma conta ou ouvir nossas músicas, você está de acordo com os <a href='https://github.com/junioranheu' target='_blank'>termos de serviço e a política de privacidade</a> do {CONSTS_SISTEMA.NOME_SISTEMA}
+                Ao entrar, criar uma conta ou ouvir nossas músicas, você está de acordo com os <a href='https://github.com/junioranheu' rel='noreferrer' target='_blank'>termos de serviço e a política de privacidade</a> do {CONSTS_SISTEMA.NOME_SISTEMA}
             </span>
         </div>
     )

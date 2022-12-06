@@ -53,7 +53,7 @@ export default function Input({ titulo, placeholder, name, tipo, isDisabled, min
             // Exibir o ícone de sucesso sem tomar como base a verificação extra;
             verificarExibirIconeErro();
         }
-    }, [controleInterno, minCaracteres]);
+    }, [controleInterno, minCaracteres, handleValidacaoExtra, isExisteValidacaoExtra]);
 
     // Controle interno;
     function handleControleInterno(e: any) {
