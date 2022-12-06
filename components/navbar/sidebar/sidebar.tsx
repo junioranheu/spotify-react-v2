@@ -1,6 +1,7 @@
 import { loremIpsum } from 'lorem-ipsum';
 import Link from 'next/link';
 import { Resizable } from 're-resizable';
+import { useState } from 'react';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import Biblioteca from '../../svg/biblioteca';
 import Casa from '../../svg/casa';
@@ -12,6 +13,12 @@ import SpotifyLogo from '../../svg/spotifyLogo';
 import Styles from './sidebar.module.scss';
 
 export default function Sidebar() {
+
+    const [msg1, setMsg1] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
+    const [msg2, setMsg2] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
+    const [msg3, setMsg3] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
+    const [msg4, setMsg4] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
+
     return (
         <Resizable
             defaultSize={{
@@ -71,10 +78,10 @@ export default function Sidebar() {
                 <div className={Styles.divisao}></div>
 
                 <div className={Styles.divPlaylists}>
-                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
-                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
-                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
-                    <span><Link href={CONSTS_TELAS.INDEX}>{loremIpsum({ count: 1, sentenceUpperBound: 5 })}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{msg1}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{msg2}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{msg3}</Link></span>
+                    <span><Link href={CONSTS_TELAS.INDEX}>{msg4}</Link></span>
                 </div>
             </aside>
         </Resizable>
