@@ -54,7 +54,7 @@ export default function Index() {
 
             <section className={Styles.main}>
                 <div className={Styles.mainInner}>
-                    <TopHat Svg={<Coracao width='12px' cor='var(--branco-escuro)' />} titulo='Atualizar dados' backgroundColor='var(--super-preto)' fontColor='var(--branco-escuro)' />
+                    <TopHat Svg={<Coracao width='0.75rem' cor='var(--branco-escuro)' />} titulo='Atualizar dados' backgroundColor='var(--super-preto)' fontColor='var(--branco-escuro)' />
  
                     <div className={`${Styles.sessao} margem0_5`}>
                         <Input

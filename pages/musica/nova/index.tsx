@@ -5,7 +5,7 @@ import { ChangeEvent, Fragment, useContext, useState } from 'react';
 import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
-import BotaoPlay from '../../../components/svg/botaoPlay';
+import Musica from '../../../components/svg/musica';
 import Styles from '../../../styles/form.module.scss';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
@@ -96,7 +96,7 @@ export default function Index() {
 
             <section className={Styles.main}>
                 <div className={Styles.mainInner}>
-                    <TopHat Svg={<BotaoPlay width='12px' cor='var(--branco-escuro)' />} titulo='Subir nova música' backgroundColor='var(--super-preto)' fontColor='var(--branco-escuro)' />
+                    <TopHat Svg={<Musica width='0.8rem' />} titulo='Subir nova música' backgroundColor='var(--super-preto)' fontColor='var(--branco-escuro)' />
 
                     <div className={`${Styles.sessao} margem0_5`}>
                         <Input

@@ -7,12 +7,12 @@ import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import { Aviso } from '../../../utils/outros/aviso';
 import Biblioteca from '../../svg/biblioteca';
-import BotaoPlay from '../../svg/botaoPlay';
 import Casa from '../../svg/casa';
 import Coracao from '../../svg/coracao';
 import Github from '../../svg/github';
 import Lupa from '../../svg/lupa';
 import Mais from '../../svg/mais';
+import Musica from '../../svg/musica';
 import SpotifyLogo from '../../svg/spotifyLogo';
 import Styles from './sidebar.module.scss';
 
@@ -67,7 +67,8 @@ export default function Sidebar() {
                 <div className={Styles.divIcones}>
                     <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.SUBIR_MUSICA) : Aviso.warn('Você não está logado! <b>Inicie sua sessão</b> para subir uma nova música', 7000)}>
                         <span className={`${Styles.quadrado} ${Styles.quadradoBranco}`}>
-                            <BotaoPlay width='12px' cor='var(--preto)' />
+                            {/* <BotaoPlay width='0.75rem' cor='var(--preto)' /> */}
+                            <Musica width='0.8rem' />
                         </span>
 
                         <span className='pointer'>Subir nova música</span>
@@ -75,7 +76,7 @@ export default function Sidebar() {
 
                     <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.CRIAR_PLAYLIST) : Aviso.warn('Você não está logado! <b>Inicie sua sessão</b> para criar uma nova playlist', 7000)}>
                         <span className={`${Styles.quadrado} ${Styles.quadradoBranco}`}>
-                            <Mais width='12px' cor='var(--preto)' />
+                            <Mais width='0.75rem' cor='var(--preto)' />
                         </span>
 
                         <span className='pointer'>Criar nova playlist</span>
@@ -83,7 +84,7 @@ export default function Sidebar() {
 
                     <span>
                         <span className={`${Styles.quadrado} ${Styles.quadradoColorido}`}>
-                            <Coracao width='12px' cor='var(--branco)' />
+                            <Coracao width='0.75rem' cor='var(--branco)' />
                         </span>
 
                         <span className='pointer'>Músicas curtidas</span>
