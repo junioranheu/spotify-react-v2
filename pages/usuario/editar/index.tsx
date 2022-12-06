@@ -4,7 +4,7 @@ import { ChangeEvent, Fragment, useContext, useRef, useState } from 'react';
 import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
-import BotaoPlay from '../../../components/svg/botaoPlay';
+import Coracao from '../../../components/svg/coracao';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
@@ -12,7 +12,7 @@ import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import validarCompletoEmail from '../../../utils/outros/validacoes/validar.completo.email';
 import validarCompletoNomeCompleto from '../../../utils/outros/validacoes/validar.completo.nomeCompleto';
 import validarCompletoNomeUsuarioSistema from '../../../utils/outros/validacoes/validar.completo.nomeUsuarioSistema';
-import Styles from './nova.module.scss';
+import Styles from './editar.module.scss';
 
 interface iFormData {
     nomeCompleto: string;
@@ -41,52 +41,6 @@ export default function Index() {
         setFormDataDadosPessoais({ ...formDataDadosPessoais, [e?.target?.name]: e?.target?.value });
     }
 
-    // Ao clicar no botão para entrar;
-    async function handleSubmit() {
-        // nProgress.start();
-        // refBtn.current.disabled = true;
-
-        // if (!formData || !formData.usuario || !formData.senha) {
-        //     instrucaoErro('O <b>nome de usuário</b> e/ou <b>e-mail</b> estão vazios!', true);
-        //     return false;
-        // }
-
-        // const url = CONSTS_AUTENTICAR.API_URL_POST_LOGIN;
-        // const dto = {
-        //     email: formData.usuario,
-        //     nomeUsuarioSistema: formData.usuario,
-        //     senha: formData.senha
-        // };
-
-        // const resposta = await Fetch.postApi(url, dto) as iUsuario;
-        // if (!resposta || resposta?.erro) {
-        //     setModalAvisoLoginDescricao((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Provavelmente o usuário e/ou a senha estão errados'));
-        //     setIsModalAvisoLoginOpen(true);
-        //     instrucaoErro('', false);
-        //     return false;
-        // }
-
-        // // Voltar à tela principal;
-        // Router.push('/').then(() => {
-        //     // Atribuir autenticação ao contexto de usuário;
-        //     Auth.set(resposta as unknown as iContextDadosUsuario);
-        //     setIsAuth(true);
-        //     nProgress.done();
-        // });
-    }
-
-    // function instrucaoErro(msg: string, isExibirAviso: boolean) {
-    //     nProgress.done();
-    //     refSenha.current.value = '';
-    //     formData.senha = '';
-    //     refUsuario.current.select();
-    //     refBtn.current.disabled = false;
-
-    //     if (isExibirAviso) {
-    //         Aviso.warn(msg, 5000);
-    //     }
-    // }
-
     if (!isAuth) {
         Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.SEM_ACESSO } });
         return false;
@@ -95,13 +49,13 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Subir música</title>
+                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Atualizar dados</title>
             </Head>
 
             <section className={Styles.main}>
                 <div className={Styles.mainInner}>
-                    <TopHat Svg={<BotaoPlay width='12px' cor='var(--branco-escuro)' />} titulo='Subir nova música' backgroundColor='var(--super-preto)' fontColor='var(--branco-escuro)' />
-
+                    <TopHat Svg={<Coracao width='12px' cor='var(--branco-escuro)' />} titulo='Atualizar dados' backgroundColor='var(--super-preto)' fontColor='var(--branco-escuro)' />
+ 
                     <div className={`${Styles.sessao} margem0_5`}>
                         <Input
                             titulo='Nome completo'
@@ -190,7 +144,7 @@ export default function Index() {
 
                         <span className='separadorHorizontal'></span>
                         <div className={Styles.divBotao}>
-                            <Botao texto='Salvar alterações' url={null} isNovaAba={false} handleFuncao={() => handleSubmit()} Svg={null} refBtn={refBtn} isEnabled={true} />
+                            <Botao texto='Salvar alterações' url={null} isNovaAba={false} handleFuncao={() => null} Svg={null} refBtn={refBtn} isEnabled={false} />
                         </div>
                     </div>
                 </div>
