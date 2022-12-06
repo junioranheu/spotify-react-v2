@@ -11,13 +11,19 @@ import CONSTS_SISTEMA from '../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../utils/consts/outros/telas';
 import { Auth, UsuarioContext } from '../../utils/context/usuarioContext';
 import { Aviso } from '../../utils/outros/aviso';
+import horarioBrasilia from '../../utils/outros/horarioBrasilia';
+import padronizarNomeCompletoUsuario from '../../utils/outros/padronizarNomeCompletoUsuario';
+import validarDadosCriarConta from '../../utils/outros/validarDadosCriarConta';
 import iContextDadosUsuario from '../../utils/types/context.dadosUsuario';
 import iUsuario from '../../utils/types/iUsuario';
 import Styles from './entrar.module.scss';
 
 interface iFormData {
-    usuario: string;
+    nomeCompleto: string;
+    email: string;
+    nomeUsuarioSistema: string;
     senha: string;
+    confirmarSenha: string;
 }
 
 export default function CriarConta() {
@@ -25,12 +31,15 @@ export default function CriarConta() {
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
 
-    const refUsuario = useRef<HTMLInputElement | any>(null);
+    const refNomeCompleto = useRef<HTMLInputElement | any>(null);
+    const refEmail = useRef<HTMLInputElement | any>(null);
+    const refNomeUsuarioSistema = useRef<HTMLInputElement | any>(null);
     const refSenha = useRef<HTMLInputElement | any>(null);
+    const refConfirmarSenha = useRef<HTMLInputElement | any>(null);
     const refBtn = useRef<HTMLButtonElement | any>(null);
 
     // Ao alterar os valores dos inputs, insira os valores nas variaveis do formData;
-    const [formData, setFormData] = useState<iFormData>({ usuario: '', senha: '' });
+    const [formData, setFormData] = useState<iFormData>({ nomeCompleto: '', email: '', nomeUsuarioSistema: '', senha: '', confirmarSenha: '' });
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
@@ -40,43 +49,50 @@ export default function CriarConta() {
         nProgress.start();
         refBtn.current.disabled = true;
 
-        if (!formData || !formData.usuario || !formData.senha) {
-            instrucaoErro('O <b>nome de usuário</b> e/ou <b>e-mail</b> estão vazios!', true);
+        // Verificações;
+        const isTrocouSenha = true;
+        let isContinuarUm = validarDadosCriarConta(formData, refNomeCompleto, refEmail, refNomeUsuarioSistema, refSenha, refConfirmarSenha, isTrocouSenha);
+        if (!isContinuarUm) {
+            refBtn.current.disabled = false;
             return false;
         }
 
-        const url = CONSTS_AUTENTICAR.API_URL_POST_LOGIN;
+        // Atribuir o nome formatado para a variavel nome, novamente;
+        formData.nomeCompleto = padronizarNomeCompletoUsuario(formData.nomeCompleto);
+
+        // Criar conta;
+        const url = CONSTS_AUTENTICAR.API_URL_POST_REGISTRAR;
         const dto = {
-            email: formData.usuario,
-            nomeUsuarioSistema: formData.usuario,
-            senha: formData.senha
+            nomeCompleto: formData.nomeCompleto,
+            email: formData.email,
+            nomeUsuarioSistema: formData.nomeUsuarioSistema,
+            senha: formData.senha,
+            usuarioTipoId: 2, // Usuário comum;
+            dataCriacao: horarioBrasilia().format('YYYY-MM-DD HH:mm:ss'),
+            foto: '',
+            isAtivo: true,
+            isPremium: false,
+            IsVerificado: false
         };
 
         const resposta = await Fetch.postApi(url, dto) as iUsuario;
         if (!resposta || resposta?.erro) {
-            instrucaoErro(resposta?.mensagemErro ?? `Parece que houve um erro. Tente novamente mais tarde`, true);
+            nProgress.done();
+            refEmail.current.select();
+            refSenha.current.value = '';
+            refConfirmarSenha.current.value = '';
+            formData.senha = '';
+            refBtn.current.disabled = false;
+            Aviso.error((resposta?.mensagemErro ?? 'Parece que ocorreu um erro interno. Tente novamente mais tarde'), 10000);
             return false;
         }
 
         // Voltar à tela principal;
         Router.push('/').then(() => {
-            // Atribuir autenticação ao contexto de usuário;
             Auth.set(resposta as unknown as iContextDadosUsuario);
             setIsAuth(true);
             nProgress.done();
         });
-    }
-
-    function instrucaoErro(msg: string, isExibirAviso: boolean) {
-        nProgress.done();
-        refSenha.current.value = '';
-        formData.senha = '';
-        refUsuario.current.select();
-        refBtn.current.disabled = false;
-
-        if (isExibirAviso) {
-            Aviso.warn(msg, 5000);
-        }
     }
 
     function handleKeyPress(e: KeyboardEvent<HTMLInputElement>) {
@@ -102,12 +118,24 @@ export default function CriarConta() {
                     <span className={Styles.titulo}>Crie sua conta no {CONSTS_SISTEMA.NOME_SISTEMA}</span>
 
                     <div>
-                        <input className='input margem1' type='text' placeholder='E-mail ou nome de usuário'
-                            name='usuario' onChange={handleChange} ref={refUsuario} onKeyPress={handleKeyPress}
+                        <input className='input margem1' type='text' placeholder='Nome completo'
+                            name='nomeCompleto' onChange={handleChange} ref={refNomeCompleto} onKeyPress={handleKeyPress}
+                        />
+
+                        <input className='input margem1' type='text' placeholder='Seu melhor e-mail'
+                            name='email' onChange={handleChange} ref={refEmail} onKeyPress={handleKeyPress}
+                        />
+
+                        <input className='input margem1' type='text' placeholder='Nome de usuário'
+                            name='nomeUsuarioSistema' onChange={handleChange} ref={refNomeUsuarioSistema} onKeyPress={handleKeyPress}
                         />
 
                         <input className='input margem1' type='password' placeholder='Senha'
-                            name='senha' onChange={handleChange} ref={refSenha} onKeyPress={handleKeyPress}
+                            name='senha' onChange={handleChange} ref={refSenha} onKeyPress={handleKeyPress} 
+                        />
+
+                        <input className='input margem1' type='password' placeholder='Confirme sua senha'
+                            name='confirmarSenha' onChange={handleChange} ref={refConfirmarSenha} onKeyPress={handleKeyPress} 
                         />
 
                         <div className={`${Styles.botaoCustom} margem1`} onClick={() => handleSubmit()}>

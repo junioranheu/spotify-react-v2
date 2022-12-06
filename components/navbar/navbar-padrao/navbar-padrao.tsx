@@ -54,7 +54,7 @@ export default function NavbarPadrao() {
                 <Link href={CONSTS_TELAS.INDEX}><SpotifyLogo width='100px' /></Link>
             </div>
 
-            <div className={Styles.divEsquerda}>
+            <div className={Styles.divGap}>
                 <BotaoSvgRedirecionar width='1.2rem' isVoltar={true} />
             </div>
 
@@ -78,8 +78,14 @@ export default function NavbarPadrao() {
                             }
                         </Fragment>
                     ) : (
-                        <div className={Styles.botaoCustom}>
-                            <Botao texto='Entrar' url={CONSTS_TELAS.ENTRAR} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
+                        <div className={Styles.divGap}>
+                            <div className={`${Styles.botaoCustom2} ${Styles.esconderSeWidthPequeno}`}>
+                                <Botao texto='Registrar-se' url={CONSTS_TELAS.CRIAR_CONTA} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
+                            </div>
+
+                            <div className={Styles.botaoCustom}>
+                                <Botao texto='Iniciar sessão' url={CONSTS_TELAS.ENTRAR} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
+                            </div>
                         </div>
                     )
                 }

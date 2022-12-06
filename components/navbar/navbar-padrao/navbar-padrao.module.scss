@@ -11,7 +11,7 @@
     line-height: 1rem;
     font-weight: 700;
 
-    .divEsquerda {
+    .divGap {
         // background-color: red;
         display: flex;
         gap: 1rem;
@@ -25,6 +25,14 @@
         .botaoCustom {
             button {
                 height: 33px;
+                color: var(--cinza);
+            }
+        }
+
+        .botaoCustom2 {
+            button {
+                height: 33px;
+                background-color: var(--branco);
             }
         }
 
@@ -98,6 +106,10 @@
     .navbar {
         .exibirLogoSeWidthPequeno {
             display: block;
+        }
+
+        .esconderSeWidthPequeno {
+            display: none;
         }
     }
 }
