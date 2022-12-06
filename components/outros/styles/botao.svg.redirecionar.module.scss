@@ -1,0 +1,31 @@
+.divBtn {
+    background-color: rgba(0, 0, 0, .5);
+    border: none;
+    border-radius: 50%;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        fill: rgba(255, 255, 255, .7);
+        transition: 0.2s;
+    }
+
+    &:hover:not(.isDisabled) {
+        background-color: rgba(0, 0, 0, .7);
+
+        svg {
+            fill: rgba(255, 255, 255, 1);
+            transition: 0.2s;
+        }
+    }
+}
+
+.isDisabled {
+    cursor: not-allowed !important;
+}

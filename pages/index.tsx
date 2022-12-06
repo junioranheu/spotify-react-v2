@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Fragment, useContext } from 'react';
 import Playlists from '../components/playlists/playlists';
-import Styles from '../styles/home.module.scss';
+import Styles from '../styles/index.module.scss';
 import { Fetch } from '../utils/api/fetch';
 import HabilitarHttp from '../utils/api/habilitarHttp';
 import CONSTS_PLAYLISTS from '../utils/consts/data/constPlaylists';

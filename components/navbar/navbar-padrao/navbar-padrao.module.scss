@@ -11,6 +11,13 @@
     line-height: 1rem;
     font-weight: 700;
 
+    .divEsquerda {
+        // background-color: red;
+        display: flex;
+        gap: 1rem;
+        margin-left: 1.7rem;
+    }
+
     .divDireita {
         margin-left: auto;
         margin-right: 30px;

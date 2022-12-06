@@ -6,6 +6,7 @@ import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { FilaMusicasStorage, MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
 import { Auth, UsuarioContext } from '../../../utils/context/usuarioContext';
 import Botao from '../../outros/botao';
+import BotaoSvgRedirecionar from '../../outros/botao.svg.redirecionar';
 import SetinhaBaixo from '../../svg/setinhaBaixo';
 import SpotifyLogo from '../../svg/spotifyLogo';
 import Styles from './navbar-padrao.module.scss';
@@ -52,6 +53,11 @@ export default function NavbarPadrao() {
         <nav className={Styles.navbar}>
             <div className={Styles.exibirLogoSeWidthPequeno}>
                 <Link href={CONSTS_TELAS.INDEX}><SpotifyLogo width='100px' /></Link>
+            </div>
+
+            <div className={Styles.divEsquerda}>
+                <BotaoSvgRedirecionar width='1.2rem' isDisabled={false} isVoltar={true} />
+                <BotaoSvgRedirecionar width='1.2rem' isDisabled={true} isVoltar={false} />
             </div>
 
             <div className={Styles.divDireita}>
