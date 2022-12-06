@@ -47,7 +47,7 @@
                     width: 100%;
                     background: var(--cor-principal);
                     color: var(--preto);
-            
+
                     &:disabled {
                         background-color: #2f7047;
                         color: var(--preto);
@@ -65,20 +65,19 @@
 @media (max-width:1281px) {}
 
 /* big landscape tablets, laptops, and desktops */
-@media (max-width:1025px) {}
+@media (max-width:1025px) {
+    .main {
+        .mainInner {
+            width: 70%;
+        }
+    }
+}
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
 @media (max-width:801px) {
     .main {
         .mainInner {
-            .sessao {
-                .divInput {
-                    // background-color: blue;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.75rem;
-                }
-            }
+            width: 80%;
         }
     }
 }

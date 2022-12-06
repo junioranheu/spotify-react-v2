@@ -1,6 +1,7 @@
+import moment from 'moment';
 import Head from 'next/head';
 import Router from 'next/router';
-import { ChangeEvent, Fragment, useContext, useRef, useState } from 'react';
+import { ChangeEvent, Fragment, useContext, useState } from 'react';
 import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
@@ -9,16 +10,14 @@ import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
-import validarCompletoEmail from '../../../utils/outros/validacoes/validar.completo.email';
-import validarCompletoNomeCompleto from '../../../utils/outros/validacoes/validar.completo.nomeCompleto';
-import validarCompletoNomeUsuarioSistema from '../../../utils/outros/validacoes/validar.completo.nomeUsuarioSistema';
+import validarDataNascimento from '../../../utils/outros/validacoes/validar.dataNascimento';
 import Styles from './nova.module.scss';
 
 interface iFormData {
-    nomeCompleto: string;
-    nomeUsuarioSistema: string;
-    email: string;
-    senha: string;
+    nome: string;
+    dataLancamento: Date | string | null;
+    mp3Base64: string | null;
+    urlYoutube: string | null;
 }
 
 export default function Index() {
@@ -26,19 +25,15 @@ export default function Index() {
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
 
-    const refBtn = useRef<HTMLButtonElement | any>(null);
-    const [isModalAlterarSenha, setIsModalAlterarSenha] = useState<boolean>(false);
-    const minCaracteresNomeCompleto = 3;
-
-    const [formDataDadosPessoais, setFormDataDadosPessoais] = useState<iFormData>({
-        nomeCompleto: '',
-        email: '',
-        nomeUsuarioSistema: '',
-        senha: ''
+    const [formData, setFormData] = useState<iFormData>({
+        nome: '',
+        dataLancamento: moment().format('yyyy-MM-DD'),
+        mp3Base64: '',
+        urlYoutube: ''
     });
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
-        setFormDataDadosPessoais({ ...formDataDadosPessoais, [e?.target?.name]: e?.target?.value });
+        setFormData({ ...formData, [e?.target?.name]: e?.target?.value });
     }
 
     // Ao clicar no botão para entrar;
@@ -104,19 +99,19 @@ export default function Index() {
 
                     <div className={`${Styles.sessao} margem0_5`}>
                         <Input
-                            titulo='Nome completo'
+                            titulo='Título da música'
                             placeholder=''
-                            name='nomeCompleto'
+                            name='nome'
                             tipo='text'
                             isDisabled={false}
-                            minCaracteres={minCaracteresNomeCompleto}
-                            dataTip={`O seu nome completo deve ter pelo menos ${minCaracteresNomeCompleto} caracteres. E não se esqueça do seu sobrenome!`}
-                            value={formDataDadosPessoais.nomeCompleto}
+                            minCaracteres={2}
+                            dataTip='O título da música deve ter pelo menos 2 caracteres!'
+                            value={formData.nome}
                             mascara=''
                             referencia={null}
                             isExibirIconeDireita={true}
-                            isExisteValidacaoExtra={true}
-                            handleValidacaoExtra={validarCompletoNomeCompleto(false, formDataDadosPessoais.nomeCompleto, null, null, null)}
+                            isExisteValidacaoExtra={false}
+                            handleValidacaoExtra={null}
                             handleChange={handleChange}
                             handleKeyPress={() => null}
                             handleBlur={() => null}
@@ -124,39 +119,19 @@ export default function Index() {
 
                         <span className='separadorHorizontal'></span>
                         <Input
-                            titulo='E-mail'
+                            titulo='Data de lançamento da música'
                             placeholder=''
-                            name='email'
-                            tipo='text'
+                            name='dataLancamento'
+                            tipo='date'
                             isDisabled={false}
                             minCaracteres={0}
-                            dataTip='Coloque seu melhor e-mail aqui 🖖'
-                            value={formDataDadosPessoais.email}
+                            dataTip='Essa é pra quem sabe ou tem memória boa'
+                            value={moment(formData?.dataLancamento).format('yyyy-MM-DD')}
                             mascara=''
                             referencia={null}
                             isExibirIconeDireita={true}
                             isExisteValidacaoExtra={true}
-                            handleValidacaoExtra={validarCompletoEmail(false, formDataDadosPessoais.email, null, null, null)}
-                            handleChange={handleChange}
-                            handleKeyPress={() => null}
-                            handleBlur={() => null}
-                        />
-
-                        <span className='separadorHorizontal'></span>
-                        <Input
-                            titulo='Nome de usuário do sistema'
-                            placeholder=''
-                            name='nomeUsuarioSistema'
-                            tipo='text'
-                            isDisabled={false}
-                            minCaracteres={0}
-                            dataTip={`Esse aqui vai ser seu @ aqui no ${CONSTS_SISTEMA.NOME_SISTEMA}`}
-                            value={formDataDadosPessoais.nomeUsuarioSistema}
-                            mascara=''
-                            referencia={null}
-                            isExibirIconeDireita={true}
-                            isExisteValidacaoExtra={true}
-                            handleValidacaoExtra={validarCompletoNomeUsuarioSistema(false, formDataDadosPessoais.nomeUsuarioSistema, null, null, null)}
+                            handleValidacaoExtra={validarDataNascimento(moment(formData?.dataLancamento).format('yyyy-MM-DD'))}
                             handleChange={handleChange}
                             handleKeyPress={() => null}
                             handleBlur={() => null}
@@ -165,14 +140,14 @@ export default function Index() {
                         <span className='separadorHorizontal'></span>
                         <div className={Styles.divInputSenha}>
                             <Input
-                                titulo='Senha'
+                                titulo='Subir arquivo .mp3'
                                 placeholder=''
-                                name='senha'
-                                tipo='password'
+                                name='mp3Base64'
+                                tipo='text'
                                 isDisabled={true}
                                 minCaracteres={0}
-                                dataTip=''
-                                value={formDataDadosPessoais.senha}
+                                dataTip='Clique no botão à direita para selecionar um arquivo .mp3 do seu computador'
+                                value={formData.mp3Base64}
                                 mascara=''
                                 referencia={null}
                                 isExibirIconeDireita={false}
@@ -184,13 +159,13 @@ export default function Index() {
                             />
 
                             <div>
-                                <Botao texto='Alterar senha' url={null} isNovaAba={false} handleFuncao={() => setIsModalAlterarSenha(true)} Svg={null} refBtn={refBtn} isEnabled={true} />
+                                <Botao texto='Buscar .mp3' url={null} isNovaAba={false} handleFuncao={() => null} Svg={null} refBtn={null} isEnabled={true} />
                             </div>
                         </div>
 
                         <span className='separadorHorizontal'></span>
                         <div className={Styles.divBotao}>
-                            <Botao texto='Salvar alterações' url={null} isNovaAba={false} handleFuncao={() => handleSubmit()} Svg={null} refBtn={refBtn} isEnabled={true} />
+                            <Botao texto='Subir música' url={null} isNovaAba={false} handleFuncao={() => handleSubmit()} Svg={null} refBtn={null} isEnabled={true} />
                         </div>
                     </div>
                 </div>
