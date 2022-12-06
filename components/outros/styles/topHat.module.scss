@@ -1,0 +1,31 @@
+/* =-=-=-=-=-=-=-=-= Padrão =-=-=-=-=-=-=-=-= */
+.topHat {
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    span {
+        font-weight: 600;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+
+/* =-=-=-=-=-=-=-=-= Secundário =-=-=-=-=-=-=-=-= */
+.topHatSecundario {
+    background-color: var(--bege);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+
+    span {
+        color: var(--cinza);
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+}

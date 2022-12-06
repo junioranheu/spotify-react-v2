@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import { ChangeEvent, Fragment, KeyboardEvent, useContext, useRef, useState } from 'react';
+import ReactTooltip from 'react-tooltip';
 import Botao from '../../components/outros/botao';
 import { Fetch } from '../../utils/api/fetch';
 import CONSTS_AUTENTICAR from '../../utils/consts/data/constAutenticar';
@@ -37,6 +38,8 @@ export default function CriarConta() {
     const refSenha = useRef<HTMLInputElement | any>(null);
     const refConfirmarSenha = useRef<HTMLInputElement | any>(null);
     const refBtn = useRef<HTMLButtonElement | any>(null);
+
+    const msgTermos = `Ao criar uma conta,<br/>você está de acordo com os termos de serviço<br/>e a política de privacidade do ${CONSTS_SISTEMA.NOME_SISTEMA}`;
 
     // Ao alterar os valores dos inputs, insira os valores nas variaveis do formData;
     const [formData, setFormData] = useState<iFormData>({ nomeCompleto: '', email: '', nomeUsuarioSistema: '', senha: '', confirmarSenha: '' });
@@ -131,15 +134,16 @@ export default function CriarConta() {
                         />
 
                         <input className='input margem1' type='password' placeholder='Senha'
-                            name='senha' onChange={handleChange} ref={refSenha} onKeyPress={handleKeyPress} 
+                            name='senha' onChange={handleChange} ref={refSenha} onKeyPress={handleKeyPress}
                         />
 
                         <input className='input margem1' type='password' placeholder='Confirme sua senha'
-                            name='confirmarSenha' onChange={handleChange} ref={refConfirmarSenha} onKeyPress={handleKeyPress} 
+                            name='confirmarSenha' onChange={handleChange} ref={refConfirmarSenha} onKeyPress={handleKeyPress}
                         />
 
-                        <div className={`${Styles.botaoCustom} margem1`} onClick={() => handleSubmit()}>
-                            <Botao texto='Entrar' url={null} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={refBtn} isEnabled={true} />
+                        <ReactTooltip multiline={true} />
+                        <div className={`${Styles.botaoCustom} margem1`} onClick={() => handleSubmit()} data-tip={msgTermos}>
+                            <Botao texto='Criar conta' url={null} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={refBtn} isEnabled={true} />
                         </div>
                     </div>
 

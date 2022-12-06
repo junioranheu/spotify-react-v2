@@ -1,0 +1,51 @@
+.divInput {
+    // background-color: coral;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+
+    .flex {
+        // background-color: blue;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 0.025rem;
+        padding-right: 0.05rem;
+
+        .titulo {
+            // background-color: red;
+            color: var(--branco-escuro);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .iconeSucesso {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+
+            // background-color: #73CA70;
+            background-color: var(--cor-principal);
+            border-radius: 50%;
+            width: 13px;
+            height: 13px;
+            color: #FFFF;
+            font-size: 9px;
+            font-weight: 400;
+        }
+
+        .iconeErro {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+ 
+            background-color: var(--vermelho);
+            border-radius: 50%;
+            width: 13px;
+            height: 13px;
+            color: #FFFF;
+            font-size: 9px;
+            font-weight: 400;
+        }
+    }
+}
