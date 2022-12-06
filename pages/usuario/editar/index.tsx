@@ -5,6 +5,7 @@ import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
 import Coracao from '../../../components/svg/coracao';
+import Styles from '../../../styles/form.module.scss';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
@@ -12,7 +13,6 @@ import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import validarCompletoEmail from '../../../utils/outros/validacoes/validar.completo.email';
 import validarCompletoNomeCompleto from '../../../utils/outros/validacoes/validar.completo.nomeCompleto';
 import validarCompletoNomeUsuarioSistema from '../../../utils/outros/validacoes/validar.completo.nomeUsuarioSistema';
-import Styles from './editar.module.scss';
 
 interface iFormData {
     nomeCompleto: string;

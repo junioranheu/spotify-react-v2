@@ -6,12 +6,13 @@ import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
 import BotaoPlay from '../../../components/svg/botaoPlay';
+import Styles from '../../../styles/form.module.scss';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import validarDataNascimento from '../../../utils/outros/validacoes/validar.dataNascimento';
-import Styles from './nova.module.scss';
+import validarUrlYoutube from '../../../utils/outros/validacoes/validar.url.youtube';
 
 interface iFormData {
     nome: string;
@@ -29,7 +30,7 @@ export default function Index() {
         nome: '',
         dataLancamento: moment().format('yyyy-MM-DD'),
         mp3Base64: '',
-        urlYoutube: ''
+        urlYoutube: 'https://www.youtube.com/watch?v=uuFfyIZ8qWI&t=3s&ab_channel=BatalhadoTanque'
     });
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -162,6 +163,26 @@ export default function Index() {
                                 <Botao texto='Buscar .mp3' url={null} isNovaAba={false} handleFuncao={() => null} Svg={null} refBtn={null} isEnabled={true} />
                             </div>
                         </div>
+
+                        <span className='separadorHorizontal'></span>
+                        <Input
+                            titulo='Link do Youtube'
+                            placeholder=''
+                            name='urlYoutube'
+                            tipo='text'
+                            isDisabled={false}
+                            minCaracteres={0}
+                            dataTip='Direitos autorais? Nunca nem vi'
+                            value={formData.urlYoutube}
+                            mascara=''
+                            referencia={null}
+                            isExibirIconeDireita={true}
+                            isExisteValidacaoExtra={true}
+                            handleValidacaoExtra={validarUrlYoutube(formData.urlYoutube ?? '')}
+                            handleChange={handleChange}
+                            handleKeyPress={() => null}
+                            handleBlur={() => null}
+                        />
 
                         <span className='separadorHorizontal'></span>
                         <div className={Styles.divBotao}>
