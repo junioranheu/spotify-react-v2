@@ -23,7 +23,7 @@ export default function Index() {
         if (filaMusicasContext) {
             setFilaMusicasContextFiltrarIsJaTocadaFalse(filaMusicasContext.filter(x => x.musicaId !== musicaContext?.musicaId && x.isJaTocada === false));
         }
-    }, [filaMusicasContext]);
+    }, [filaMusicasContext, musicaContext?.musicaId]);
 
     if (!isAuth) {
         Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.SEM_ACESSO } });

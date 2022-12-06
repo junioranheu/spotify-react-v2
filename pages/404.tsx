@@ -1,9 +1,11 @@
+import Lottie from 'lottie-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 import Botao from '../components/outros/botao';
 import Styles from '../styles/404.module.scss';
 import CONSTS_SISTEMA from '../utils/consts/outros/sistema';
+import Lottie404 from '../utils/lotties/404.json';
 
 export default function Erro() {
 
@@ -29,7 +31,13 @@ export default function Erro() {
             </Head>
 
             <section className={`${Styles.wrapper} paddingPadrao`}>
-                <div className={Styles.divErro}>
+                <div>
+                    <div className={Styles.divLottie}>
+                        <Lottie animationData={Lottie404} loop={true} />
+                    </div>
+                </div>
+
+                <div>
                     <span className={Styles.titulo}>Opa...</span>
                     <span className={`${Styles.texto} margem2`}>Parece que algo deu errado por aqui<br />{msg}</span>
 
