@@ -87,6 +87,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
                         {/* Conteúdo */}
                         {verificarLayout()}
+
+                        {/* Elemento para os modais */}
+                        <div id='modalWrapper'></div>
                     </MusicaProvider>
                 </UsuarioProvider>
             </Fragment>

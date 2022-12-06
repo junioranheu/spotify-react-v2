@@ -1,0 +1,153 @@
+.fundo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(72, 72, 72, 0.6);
+    z-index: 9999999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .modal {
+        position: relative;
+        background: var(--branco);
+        background-clip: padding-box !important; // Desbugar as bordas com cores diferentes (bug do navegador);
+        border-radius: 30px;
+        z-index: 999;
+
+        width: 40vw;
+        max-height: 90vh;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        .divCabecalho {
+            // background-color: red;
+            border-bottom: 1px solid var(--bege);
+            height: 65px;
+            max-height: 65px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .cabecalhoTitulo {
+                // background-color: pink !important;
+                color: var(--preto);
+                font-size: 1.3em;
+                font-weight: 600;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 80%;
+                display: inline-block;
+                text-align: center;
+
+                display: flex;
+                justify-content: center;
+            }
+
+            .botaoFechar {
+                cursor: pointer;
+                padding: 0px;
+                background: transparent;
+                color: var(--preto);
+                transition: 0.2s;
+                position: absolute;
+                top: auto;
+                right: 2rem;
+                border: none;
+
+                &:hover {
+                    color: var(--cor-principal);
+                    transition: 0.2s;
+                }
+            }
+        }
+
+        .divPrincipal {
+            // background-color: red;
+            padding: 1rem 2rem 1.5rem 2rem;
+
+            .titulo {
+                color: rgb(34, 34, 34);
+                font-weight: 800;
+                font-size: 32px;
+                line-height: 36px;
+            }
+
+            .conteudo {
+                // background-color: blue;
+                color: rgb(34, 34, 34);
+                font-weight: 400;
+                font-size: 16px;
+                white-space: pre-wrap;
+
+                display: flex;
+                flex-direction: column;
+            }
+
+            .centralizarConteudo {
+                // background-color: red;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    }
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=- Opções =-=-=-=-=-=-=-=-=-=-=-=- */
+.modalGigante {
+    width: 80vw !important;
+}
+
+.modalGrande {
+    width: 60vw !important;
+}
+
+.modalPequeno {
+    width: 30vw !important;
+}
+
+.modal::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=- Media queries =-=-=-=-=-=-=-=-=-=-=-=- */
+/* hi-res laptops and desktops */
+@media (max-width:1281px) {
+    .modal {
+        width: 65vw !important;
+    }
+}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width:1025px) {
+    .modal {
+        width: 80vw !important;
+
+        .cabecalhoTitulo {
+            // color: pink;
+            font-size: 1em !important;
+        }
+    }
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width:801px) {}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (max-width:600px) {
+    .modal {
+        width: 95vw !important;
+    }
+}

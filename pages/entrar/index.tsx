@@ -2,10 +2,14 @@ import Head from 'next/head';
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import { ChangeEvent, Fragment, KeyboardEvent, useContext, useRef, useState } from 'react';
+import ModalAvisoLogin from '../../components/modal/modal.aviso/login';
+import ModalLayout from '../../components/modal/_modal.layout';
+import ModalWrapper from '../../components/modal/_modal.wrapper';
 import Botao from '../../components/outros/botao';
 import { Fetch } from '../../utils/api/fetch';
 import CONSTS_AUTENTICAR from '../../utils/consts/data/constAutenticar';
 import CONSTS_ERROS from '../../utils/consts/outros/erros';
+import CONSTS_MODAL from '../../utils/consts/outros/modal.tamanho';
 import CONSTS_SISTEMA from '../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../utils/consts/outros/telas';
 import { Auth, UsuarioContext } from '../../utils/context/usuarioContext';
@@ -27,6 +31,9 @@ export default function Index() {
     const refUsuario = useRef<HTMLInputElement | any>(null);
     const refSenha = useRef<HTMLInputElement | any>(null);
     const refBtn = useRef<HTMLButtonElement | any>(null);
+
+    const [modalAvisoLoginDescricao, setModalAvisoLoginDescricao] = useState('');
+    const [isModalAvisoLoginOpen, setIsModalAvisoLoginOpen] = useState(false);
 
     // Ao alterar os valores dos inputs, insira os valores nas variaveis do formData;
     const [formData, setFormData] = useState<iFormData>({ usuario: '', senha: '' });
@@ -53,8 +60,8 @@ export default function Index() {
 
         const resposta = await Fetch.postApi(url, dto) as iUsuario;
         if (!resposta || resposta?.erro) {
-            // setModalAvisoLoginDescricao((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Provavelmente o usuário e/ou a senha estão errados'));
-            // setIsModalAvisoLoginOpen(true);
+            setModalAvisoLoginDescricao((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Provavelmente o usuário e/ou a senha estão errados'));
+            setIsModalAvisoLoginOpen(true);
             instrucaoErro('', false);
             return false;
         }
@@ -97,6 +104,22 @@ export default function Index() {
                 <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Entrar</title>
             </Head>
 
+            {/* Modal de aviso de login */}
+            <ModalWrapper isOpen={isModalAvisoLoginOpen}>
+                <ModalLayout handleModal={() => setIsModalAvisoLoginOpen(!isModalAvisoLoginOpen)} isExibirApenasLogo={true} titulo={null} tamanho={CONSTS_MODAL.PEQUENO} isCentralizado={true} isFecharModalClicandoNoFundo={false}>
+                    <ModalAvisoLogin
+                        handleModal={() => setIsModalAvisoLoginOpen(!isModalAvisoLoginOpen)}
+                        titulo={null}
+                        descricao={modalAvisoLoginDescricao}
+                        isExibirBotao={false}
+                        textoBotao={null}
+                        urlBotao={null}
+                        isNovaAba={null}
+                    />
+                </ModalLayout>
+            </ModalWrapper>
+
+            {/* Conteúdo */}
             <section className={Styles.container}>
                 <div className={Styles.containerInner}>
                     <span className={Styles.titulo}>Bem-vindo ao {CONSTS_SISTEMA.NOME_SISTEMA}</span>

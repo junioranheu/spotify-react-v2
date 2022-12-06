@@ -108,6 +108,14 @@ img {
     color: var(--preto) !important;
 }
 
+.separadorHorizontal {
+    border-top: 1px solid var(--bege);
+    height: 1px;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
 /* =-=-=-=-=-=-=-=-= Container, div, titulo e texto padrão =-=-=-=-=-=-=-=-= */
 .container-padrao {
     background-color: var(--preto2);
