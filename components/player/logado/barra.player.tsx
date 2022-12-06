@@ -230,7 +230,7 @@ export default function BarraPlayer() {
                                 <Image src={imagemBanda} width={56} height={56} alt='' />
 
                                 <div className={Styles.infoMusica}>
-                                    <span className={Styles.infoTitulo} title={'xxxxxx'}>
+                                    <span className={Styles.infoTitulo} title={musicaContext?.nome ?? ''}>
                                         {musicaContext?.nome}
                                     </span>
 

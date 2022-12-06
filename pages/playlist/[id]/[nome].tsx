@@ -115,7 +115,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                 <title>{(playlist?.nome ? `${playlist?.nome} — ${CONSTS_SISTEMA.NOME_SISTEMA}` : CONSTS_SISTEMA.NOME_SISTEMA)}</title>
             </Head>
 
-            <section className='container-padrao'>
+            <section className='container-padrao margem1'>
                 {/* Banner */}
                 <div className={Styles.banner}>
                     {
