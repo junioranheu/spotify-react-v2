@@ -118,15 +118,17 @@ img {
 
 /* =-=-=-=-=-=-=-=-= Container, div, titulo e texto padrão =-=-=-=-=-=-=-=-= */
 .container-padrao {
+    // background-color: red !important;
     background-color: var(--preto2);
     width: 100%;
+    height: fit-content;
 
     overflow-y: auto;
     overflow-x: hidden;
 
-    padding-left: 1.8rem;
-    padding-right: 1.8rem;
-    padding-bottom: 15vh;
+    padding-left: 1.875rem;
+    padding-right: 1.875rem;
+    padding-bottom: 1.875rem;
 }
 
 .div-padrao {
@@ -134,7 +136,7 @@ img {
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
-    margin-top: 1.8rem;
+    margin-top: 1rem;
 }
 
 .titulo {
