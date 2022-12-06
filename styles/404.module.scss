@@ -54,10 +54,35 @@
 @media (max-width:1281px) {}
 
 /* big landscape tablets, laptops, and desktops */
-@media (max-width:1025px) {}
+@media (max-width:1025px) {
+    .wrapper {
+        // background-color: pink !important;
+    
+        div {
+            // background-color: red;
+            margin: auto !important;
+    
+            &:nth-child(1) {
+                display: none;
+            }
+    
+            &:nth-child(2) {
+                background: linear-gradient(90deg, #af2896, #509bf5);;
+                width: 50%;
+                padding: 3rem;
+
+                .texto {
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+    }
+}
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
-@media (max-width:801px) {}
+@media (max-width:801px) {
+ 
+}
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (max-width:600px) {}
