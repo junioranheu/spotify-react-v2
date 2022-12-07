@@ -16,9 +16,9 @@ import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import { Aviso } from '../../../utils/outros/aviso';
 import validarDataNascimento from '../../../utils/outros/validacoes/validar.dataNascimento';
+import iFormMusicaData from '../../../utils/types/iFormMusicaData';
 import iMusica from '../../../utils/types/iMusica';
-import DivSelecionarArquivo from './divSelecionarArquivo';
-import iFormData from './iFormData';
+import DivSelecionarArquivo from './outros/divSelecionarArquivo';
 
 export default function Index() {
 
@@ -27,7 +27,7 @@ export default function Index() {
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
 
-    const [formData, setFormData] = useState<iFormData>({
+    const [formData, setFormData] = useState<iFormMusicaData>({
         nome: '',
         dataLancamento: '00/00/0000',
         localMp3Nome: '',
@@ -69,7 +69,7 @@ export default function Index() {
 
         // Voltar à tela principal;
         Router.push('/').then(() => {
-            Aviso.success(`A música "${formData.nome}" adicionada com sucesso!`, 7000);
+            Aviso.success(`A música <b>${formData.nome}</b> adicionada com sucesso!`, 7000);
             nProgress.done();
         });
     }

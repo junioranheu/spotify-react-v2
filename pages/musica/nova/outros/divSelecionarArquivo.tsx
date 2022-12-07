@@ -1,14 +1,14 @@
 import { ChangeEvent, Dispatch, Fragment, useRef, useState } from 'react';
-import Botao from '../../../components/outros/botao';
-import Input from '../../../components/outros/input';
-import Styles from '../../../styles/form.module.scss';
-import converterArquivoParaBase64 from '../../../utils/outros/converterArquivoParaBase64';
-import validarUrlYoutube from '../../../utils/outros/validacoes/validar.url.youtube';
-import iFormData from './iFormData';
+import Botao from '../../../../components/outros/botao';
+import Input from '../../../../components/outros/input';
+import Styles from '../../../../styles/form.module.scss';
+import converterArquivoParaBase64 from '../../../../utils/outros/converterArquivoParaBase64';
+import validarUrlYoutube from '../../../../utils/outros/validacoes/validar.url.youtube';
+import iFormMusicaData from '../../../../utils/types/iFormMusicaData';
 
 interface iParametros {
-    formData: iFormData;
-    setFormData: Dispatch<iFormData>;
+    formData: iFormMusicaData;
+    setFormData: Dispatch<iFormMusicaData>;
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
