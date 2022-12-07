@@ -15,7 +15,7 @@ import { Aviso } from '../../utils/outros/aviso';
 import horarioBrasilia from '../../utils/outros/horarioBrasilia';
 import padronizarNomeCompletoUsuario from '../../utils/outros/padronizarNomeCompletoUsuario';
 import validarDadosCriarConta from '../../utils/outros/validarDadosCriarConta';
-import iContextDadosUsuario from '../../utils/types/context.dadosUsuario';
+import iContextDadosUsuario from '../../utils/types/iContext.dadosUsuario';
 import iUsuario from '../../utils/types/iUsuario';
 import Styles from './entrar.module.scss';
 

@@ -15,7 +15,7 @@ import CONSTS_SISTEMA from '../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../utils/consts/outros/telas';
 import { Auth, UsuarioContext } from '../../utils/context/usuarioContext';
 import { Aviso } from '../../utils/outros/aviso';
-import iContextDadosUsuario from '../../utils/types/context.dadosUsuario';
+import iContextDadosUsuario from '../../utils/types/iContext.dadosUsuario';
 import iUsuario from '../../utils/types/iUsuario';
 import Styles from './entrar.module.scss';
 

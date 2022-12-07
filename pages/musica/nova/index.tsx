@@ -16,7 +16,7 @@ import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import { Aviso } from '../../../utils/outros/aviso';
 import validarDataNascimento from '../../../utils/outros/validacoes/validar.dataNascimento';
-import iFormMusicaData from '../../../utils/types/iFormMusicaData';
+import iFormDataMusica from '../../../utils/types/iFormData.musica';
 import iMusica from '../../../utils/types/iMusica';
 import DivSelecionarArquivo from './outros/divSelecionarArquivo';
 
@@ -27,7 +27,7 @@ export default function Index() {
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
 
-    const [formData, setFormData] = useState<iFormMusicaData>({
+    const [formData, setFormData] = useState<iFormDataMusica>({
         nome: '',
         dataLancamento: '00/00/0000',
         localMp3Nome: '',

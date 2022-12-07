@@ -10,7 +10,7 @@ import { Aviso } from '../outros/aviso';
 import desabilitarTodosElementos from '../outros/desabilitarTodosElementos';
 import numeroAleatorio from '../outros/gerarNumeroAleatorio';
 import horarioBrasilia from '../outros/horarioBrasilia';
-import iContextDadosUsuario from '../types/context.dadosUsuario';
+import iContextDadosUsuario from '../types/iContext.dadosUsuario';
 
 export const Fetch = {
     async getApi(url: string, isTentarRefreshToken: boolean = true) {

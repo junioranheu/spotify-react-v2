@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import horarioBrasilia from '../outros/horarioBrasilia';
-import iContextDadosUsuario from '../types/context.dadosUsuario';
+import iContextDadosUsuario from '../types/iContext.dadosUsuario';
 
 interface iContext {
     isAuthContext: [isAuth: boolean, setIsAuth: any];

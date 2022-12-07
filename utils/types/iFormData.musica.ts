@@ -1,4 +1,4 @@
-export default interface iFormMusicaData {
+export default interface iFormDataMusica {
     nome: string;
     dataLancamento: Date | string | null;
     localMp3Nome: string | null;

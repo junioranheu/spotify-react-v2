@@ -4,11 +4,11 @@ import Input from '../../../../components/outros/input';
 import Styles from '../../../../styles/form.module.scss';
 import converterArquivoParaBase64 from '../../../../utils/outros/converterArquivoParaBase64';
 import validarUrlYoutube from '../../../../utils/outros/validacoes/validar.url.youtube';
-import iFormMusicaData from '../../../../utils/types/iFormMusicaData';
+import iFormDataMusica from '../../../../utils/types/iFormData.musica';
 
 interface iParametros {
-    formData: iFormMusicaData;
-    setFormData: Dispatch<iFormMusicaData>;
+    formData: iFormDataMusica;
+    setFormData: Dispatch<iFormDataMusica>;
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
