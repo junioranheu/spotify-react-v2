@@ -1,0 +1,43 @@
+.divPlaylists {
+    // background-color: coral;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1.25rem;
+
+    .divNovaPlaylist {
+        // background-color: red !important;
+        background: var(--background-gradient-original);
+        padding: 1.125rem;
+        max-width: 250px;
+        border-radius: 5px;
+        border: var(--branco-escuro) solid 1px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background: linear-gradient(180deg, #1B1039 0%, rgba(18, 18, 18, 1) 60%, rgba(18, 18, 18, 1) 100%);
+            cursor: pointer;
+        }
+
+        .mais {
+            // background-color: red;
+            font-size: 5rem;
+        }
+
+        .texto {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            font-weight: 500;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

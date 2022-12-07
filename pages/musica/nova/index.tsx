@@ -69,7 +69,7 @@ export default function Index() {
 
         // Voltar à tela principal;
         Router.push('/').then(() => {
-            Aviso.success(`A música <b>${formData.nome}</b> adicionada com sucesso!`, 7000);
+            Aviso.success(`A música <b>${formData.nome}</b> foi subida com sucesso!`, 7000);
             nProgress.done();
         });
     }

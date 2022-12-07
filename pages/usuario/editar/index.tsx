@@ -117,7 +117,7 @@ export default function Index() {
                         />
 
                         <span className='separadorHorizontal'></span>
-                        <div className={Styles.divInputSenha}>
+                        <div className={Styles.divInputConjunto}>
                             <Input
                                 titulo='Senha'
                                 placeholder=''

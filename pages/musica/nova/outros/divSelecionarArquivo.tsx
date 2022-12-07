@@ -64,7 +64,7 @@ export default function DivSelecionarArquivo({ formData, setFormData, handleChan
             <span className='separadorHorizontal'></span>
             {
                 radioSelecionado === CONSTS_RADIO_TIPO.LOCAL ? (
-                    <div className={Styles.divInputSenha}>
+                    <div className={Styles.divInputConjunto}>
                         <Input
                             titulo='Subir arquivo .mp3'
                             placeholder=''

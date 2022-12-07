@@ -4,6 +4,7 @@ const CONSTS_TELAS = {
     CRIAR_CONTA: '/criar-conta',
     FILA: '/fila',
     SUBIR_MUSICA: '/musica/nova',
+    GERENCIAR_PLAYLISTS: '/playlist/gerenciar',
     CRIAR_PLAYLIST: '/playlist/nova',
     ATUALIZAR_DADOS: '/usuario/editar',
     ERRO: '/404',

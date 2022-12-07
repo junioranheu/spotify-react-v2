@@ -72,7 +72,7 @@ export default function NavbarPadrao() {
                                     <div className={Styles.subMenu}>
                                         <span onClick={() => Router.push(CONSTS_TELAS.ATUALIZAR_DADOS)}>Atualizar perfil</span>
                                         <span onClick={() => Router.push(CONSTS_TELAS.SUBIR_MUSICA)}>Subir música</span>
-                                        <span onClick={() => Router.push(CONSTS_TELAS.CRIAR_PLAYLIST)}>Nova playlist</span>
+                                        <span onClick={() => Router.push(CONSTS_TELAS.GERENCIAR_PLAYLISTS)}>Gerenciar playlists</span>
                                         <span onClick={() => handleDeslogar()}>Terminar sessão</span>
                                     </div>
                                 )

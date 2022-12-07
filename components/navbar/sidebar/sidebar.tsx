@@ -96,12 +96,12 @@ export default function Sidebar() {
                             <span className='pointer'>Subir nova música</span>
                         </span>
 
-                        <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.CRIAR_PLAYLIST) : [setModalAvisoLoginDescricao('Inicie sua sessão para criar uma nova playlist'), setIsModalAvisoLoginOpen(true)]}>
+                        <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.GERENCIAR_PLAYLISTS) : [setModalAvisoLoginDescricao('Inicie sua sessão para criar uma nova playlist'), setIsModalAvisoLoginOpen(true)]}>
                             <span className={`${Styles.quadrado} ${Styles.quadradoBranco}`}>
                                 <Mais width='0.75rem' cor='var(--preto)' />
                             </span>
 
-                            <span className='pointer'>Criar nova playlist</span>
+                            <span className='pointer'>Gerenciar playlists</span>
                         </span>
 
                         <span>

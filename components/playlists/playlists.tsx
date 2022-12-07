@@ -10,12 +10,12 @@ import BotaoPlay from '../svg/botaoPlay';
 import Styles from './playlists.module.scss';
 
 interface iParametros {
-    listaPlaylists: iPlaylist[];
+    listaPlaylists: iPlaylist[] | undefined;
 }
 
 export default function Playlists({ listaPlaylists }: iParametros) {
     return (
-        listaPlaylists?.length > 0 ? (
+        listaPlaylists && listaPlaylists?.length > 0 ? (
             <ScrollContainer className={Styles.divPlaylists}>
                 {
                     listaPlaylists?.filter(x => x.isAtivo === true).map((p) => (
