@@ -42,7 +42,10 @@ export default function NavbarPadrao() {
         NProgress.done();
 
         // Voltar à tela principal;
-        Router.push('/');
+        Router.push('/').then(() => {
+            // Forçar Control + F5;
+            window.location.href = window.location.href;
+        });
     }
 
     return (
