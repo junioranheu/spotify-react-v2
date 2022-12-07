@@ -321,6 +321,10 @@ img {
     }
 }
 
+input[type=radio] {
+    accent-color: var(--cor-principal);
+}
+
 .svg16px {
     min-width: 16px;
     min-height: 16px;
