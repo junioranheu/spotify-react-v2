@@ -214,8 +214,8 @@ export default function BarraPlayer() {
                         descricao={modalAvisoLoginDescricao}
                         isExibirBotao={false}
                         textoBotao={null}
-                        urlBotao={CONSTS_TELAS.ENTRAR}
-                        isNovaAba={null}
+                        urlBotao={null}
+                        isNovaAba={false}
                     />
                 </ModalLayout>
             </ModalWrapper>

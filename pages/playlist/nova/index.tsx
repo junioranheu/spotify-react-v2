@@ -6,10 +6,13 @@ import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
 import Mais from '../../../components/svg/mais';
+import DivUpload from '../../../components/upload/divUpload';
 import Styles from '../../../styles/form.module.scss';
+import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
+import UPLOAD_SETTINGS from '../../../utils/consts/outros/uploadSettings';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import { Aviso } from '../../../utils/outros/aviso';
 
@@ -26,6 +29,9 @@ export default function Index() {
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
+
+    // xxxxxxxxxx teste;
+    const [arquivoUploadFotoPerfil, setArquivoUploadFotoPerfil] = useState<string>('');
 
     const [formData, setFormData] = useState<iFormDataPlaylist>({
         nome: '',
@@ -140,28 +146,17 @@ export default function Index() {
 
                         <span className='separadorHorizontal'></span>
                         <div className={Styles.divInputConjunto}>
-                            <Input
-                                titulo='Subir foto de capa'
-                                placeholder=''
-                                name='foto'
-                                tipo='text'
-                                isDisabled={true}
-                                minCaracteres={1}
-                                dataTip='Clique no botão à direita para selecionar um arquivo do seu computador'
-                                value={formData.foto}
-                                mascara=''
-                                referencia={null}
-                                isExibirIconeDireita={false}
-                                isExisteValidacaoExtra={false}
-                                handleValidacaoExtra={null}
-                                handleChange={() => null}
-                                handleKeyPress={() => null}
-                                handleBlur={() => null}
+                            <DivUpload
+                                imagem={formData?.foto ?? ''}
+                                apiPasta={CONSTS_UPLOAD.API_URL_GET_CAPA}
+                                titulo='Capa da playlist'
+                                infoAleatoriaUm='Escolhe uma imagem da hora aí'
+                                infoAleatoriaDois={`Peso máximo: ${UPLOAD_SETTINGS.LIMITE_MB} MB`}
+                                textoBotaoDireita='Alterar capa'
+                                limitarAspectRatio={null}
+                                arquivoUpload={arquivoUploadFotoPerfil}
+                                setArquivoUpload={setArquivoUploadFotoPerfil}
                             />
-
-                            <div>
-                                <Botao texto='Buscar imagem' url={null} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
-                            </div>
                         </div>
 
                         <span className='separadorHorizontal'></span>

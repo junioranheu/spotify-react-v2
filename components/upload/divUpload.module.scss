@@ -1,0 +1,120 @@
+.main {
+    // background-color: coral;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+
+    .imgFotoPerfil {
+        // background-color: red;
+        margin-right: 0.25rem;
+
+        img {
+            border-radius: 5px;
+            min-width: 175px;
+        }
+    }
+
+    .imgCapaLojinha {
+        // background-color: red;
+        margin-right: 0.25rem;
+
+        img {
+            border-radius: 5px;
+            height: 125px !important;
+            min-width: 350px !important;
+        }
+    }
+
+    .infos {
+        // background-color: pink;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.25rem;
+        min-width: 15rem;
+        max-width: 15rem;
+
+        .titulo {
+            color: var(--branco-escuro);
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.2rem;
+        }
+
+        .texto {
+            // background-color: blue;
+            color: var(--branco-escuro);
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 1.2rem;
+            width: fit-content;
+        }
+    }
+
+    .divBotao {
+        // background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-left: 1rem;
+    }
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= Media queries =-=-=-=-=-=-=-=-=-=-= */
+@media (max-width:1628px) {
+    .main {
+        // background-color: coral;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: auto;
+        text-align: center;
+
+        .imgFotoPerfil {
+            img {
+                min-width: 125px;
+            }
+        }
+
+        .imgCapaLojinha {
+            img {
+                min-width: 70vw !important;
+                height: 100px !important;
+            }
+        }
+
+        .divBotao {
+            margin: auto;
+
+            button {
+                font-size: 0.75rem !important;
+                width: 100% !important;
+            }
+
+            span {
+                display: none;
+            }
+
+            button {
+                width: 40vw;
+            }
+        }
+    }
+}
+
+/* hi-res laptops and desktops */
+@media (max-width:1281px) {}
+
+/* big landscape tablets, laptops, and desktops */
+@media (max-width:1025px) {}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (max-width:801px) {}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (max-width:600px) {}
+
+/* smartphones, Android phones, landscape iPhone */
+@media (max-width:480px) {}

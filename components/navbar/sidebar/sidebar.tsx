@@ -41,10 +41,10 @@ export default function Sidebar() {
                         handleModal={() => setIsModalAvisoLoginOpen(!isModalAvisoLoginOpen)}
                         titulo={null}
                         descricao={modalAvisoLoginDescricao}
-                        isExibirBotao={false}
-                        textoBotao={null}
+                        isExibirBotao={true}
+                        textoBotao='Entrar agora mesmo'
                         urlBotao={CONSTS_TELAS.ENTRAR}
-                        isNovaAba={null}
+                        isNovaAba={true}
                     />
                 </ModalLayout>
             </ModalWrapper>
