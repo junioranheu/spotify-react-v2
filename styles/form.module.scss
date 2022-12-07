@@ -6,6 +6,8 @@
     align-items: center;
     width: 100%;
 
+    margin-bottom: 10rem; // Corrigir "bug" que o player traz;
+
     svg {
         fill: var(--bege);
         color: var(--bege);

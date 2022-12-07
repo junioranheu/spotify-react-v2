@@ -1,17 +1,22 @@
 import moment from 'moment';
 import Head from 'next/head';
 import Router from 'next/router';
-import { ChangeEvent, Fragment, useContext, useState } from 'react';
+import nProgress from 'nprogress';
+import { ChangeEvent, Fragment, useContext, useRef, useState } from 'react';
 import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
 import Musica from '../../../components/svg/musica';
 import Styles from '../../../styles/form.module.scss';
+import { Fetch } from '../../../utils/api/fetch';
+import CONSTS_MUSICAS from '../../../utils/consts/data/constMusicas';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
+import { Aviso } from '../../../utils/outros/aviso';
 import validarDataNascimento from '../../../utils/outros/validacoes/validar.dataNascimento';
+import iMusica from '../../../utils/types/iMusica';
 import DivSelecionarArquivo from './divSelecionarArquivo';
 import iFormData from './iFormData';
 
@@ -19,65 +24,64 @@ export default function Index() {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
-    
+
+    const refBtn = useRef<HTMLButtonElement | any>(null);
+
     const [formData, setFormData] = useState<iFormData>({
         nome: '',
-        dataLancamento: moment().format('yyyy-MM-DD'),
+        dataLancamento: '00/00/0000',
         localMp3Nome: '',
         localMp3Base64: '',
-        urlYoutube: 'https://www.youtube.com/watch?v=uuFfyIZ8qWI&t=3s&ab_channel=BatalhadoTanque'
+        urlYoutube: ''
     });
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setFormData({ ...formData, [e?.target?.name]: e?.target?.value });
     }
 
-    // Ao clicar no botão para entrar;
     async function handleSubmit() {
-        console.log(formData);
-        // nProgress.start();
-        // refBtn.current.disabled = true;
+        nProgress.start();
+        refBtn.current.disabled = true;
 
-        // if (!formData || !formData.usuario || !formData.senha) {
-        //     instrucaoErro('O <b>nome de usuário</b> e/ou <b>e-mail</b> estão vazios!', true);
-        //     return false;
-        // }
+        if (!formData.nome) {
+            instrucaoErro('O campo <b>título</b> é obrigatório!', true);
+            return false;
+        }
 
-        // const url = CONSTS_AUTENTICAR.API_URL_POST_LOGIN;
-        // const dto = {
-        //     email: formData.usuario,
-        //     nomeUsuarioSistema: formData.usuario,
-        //     senha: formData.senha
-        // };
+        if (!formData.localMp3Base64 && !formData.urlYoutube) {
+            instrucaoErro('Você deve selecionar a música <b>localmente</b> ou usando um <b>link do Youtube</b>', true);
+            return false;
+        }
 
-        // const resposta = await Fetch.postApi(url, dto) as iUsuario;
-        // if (!resposta || resposta?.erro) {
-        //     setModalAvisoLoginDescricao((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Provavelmente o usuário e/ou a senha estão errados'));
-        //     setIsModalAvisoLoginOpen(true);
-        //     instrucaoErro('', false);
-        //     return false;
-        // }
+        const url = CONSTS_MUSICAS.API_URL_POST_ADICIONAR;
+        const dto = {
+            nome: formData.nome,
+            dataLancamento: formData.dataLancamento && formData.dataLancamento !== '00/00/0000' ? moment(formData.dataLancamento).format('yyyy-MM-DD') : null,
+            mp3Base64: formData.localMp3Base64,
+            urlYoutube: formData.urlYoutube
+        };
 
-        // // Voltar à tela principal;
-        // Router.push('/').then(() => {
-        //     // Atribuir autenticação ao contexto de usuário;
-        //     Auth.set(resposta as unknown as iContextDadosUsuario);
-        //     setIsAuth(true);
-        //     nProgress.done();
-        // });
+        const resposta = await Fetch.postApi(url, dto) as iMusica;
+        if (!resposta || resposta?.erro) {
+            instrucaoErro((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Tente novamente mais tarde'), true);
+            return false;
+        }
+
+        // Voltar à tela principal;
+        Router.push('/').then(() => {
+            Aviso.success(`A música "${formData.nome}" adicionada com sucesso!`, 7000);
+            nProgress.done();
+        });
     }
 
-    // function instrucaoErro(msg: string, isExibirAviso: boolean) {
-    //     nProgress.done();
-    //     refSenha.current.value = '';
-    //     formData.senha = '';
-    //     refUsuario.current.select();
-    //     refBtn.current.disabled = false;
+    function instrucaoErro(msg: string, isExibirAviso: boolean) {
+        nProgress.done();
+        refBtn.current.disabled = false;
 
-    //     if (isExibirAviso) {
-    //         Aviso.warn(msg, 5000);
-    //     }
-    // }
+        if (isExibirAviso) {
+            Aviso.warn(msg, 5000);
+        }
+    }
 
     if (!isAuth) {
         Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.SEM_ACESSO } });
@@ -142,7 +146,7 @@ export default function Index() {
 
                         <span className='separadorHorizontal'></span>
                         <div className={Styles.divBotao}>
-                            <Botao texto='Subir música' url={null} isNovaAba={false} handleFuncao={() => handleSubmit()} Svg={null} refBtn={null} isEnabled={true} />
+                            <Botao texto='Subir música' url={null} isNovaAba={false} handleFuncao={() => handleSubmit()} Svg={null} refBtn={refBtn} isEnabled={true} />
                         </div>
                     </div>
                 </div>
