@@ -6,7 +6,8 @@ const CONSTS_TELAS = {
     SUBIR_MUSICA: '/musica/nova',
     CRIAR_PLAYLIST: '/playlist/nova',
     ATUALIZAR_DADOS: '/usuario/editar',
-    ERRO: '/404'
+    ERRO: '/404',
+    SESSAO_EXPIRADA: '/erro/sessao-expirada'
 };
 
 export default CONSTS_TELAS;

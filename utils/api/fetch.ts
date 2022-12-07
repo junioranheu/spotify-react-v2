@@ -3,6 +3,7 @@ import nProgress from 'nprogress';
 import CONSTS_AUTENTICAR from '../../utils/consts/data/constAutenticar';
 import CONSTS_ERROS from '../consts/outros/erros';
 import CONSTS_SISTEMA from '../consts/outros/sistema';
+import CONSTS_TELAS from '../consts/outros/telas';
 import VERBOS_HTTP from '../consts/outros/verbosHTTP';
 import { Auth } from '../context/usuarioContext';
 import { Aviso } from '../outros/aviso';
@@ -222,7 +223,7 @@ export const Fetch = {
         desabilitarTodosElementos(true);
         Aviso.custom(`A sua sessão expirou!<br/><br/>Renove sua sessão fazendo login novamente no ${CONSTS_SISTEMA.NOME_SISTEMA} 😎`, numeroAleatorio(1000, 2000));
 
-        Router.push({ pathname: '/erro/sessao-expirada', query: { erro: CONSTS_ERROS.REFRESH_TOKEN_INVALIDO } }).then(() => {
+        Router.push({ pathname: CONSTS_TELAS.SESSAO_EXPIRADA, query: { erro: CONSTS_ERROS.REFRESH_TOKEN_INVALIDO } }).then(() => {
             Auth.delete();
             nProgress.done();
 
