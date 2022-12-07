@@ -51,6 +51,7 @@ export default function Index() {
                         <div className={Styles.divNovaPlaylist} onClick={() => Router.push(CONSTS_TELAS.CRIAR_PLAYLIST)}>
                             <span className={Styles.mais}>+</span>
                             <span className={Styles.texto}>Criar nova playlist</span>
+                            <span className={Styles.textoPequeno}>Você atualmente tem {listaPlaylists?.length} {listaPlaylists?.length === 1 ? 'playlist' : 'playlists'}</span>
                         </div>
 
                         {

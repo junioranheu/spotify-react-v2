@@ -19,7 +19,7 @@ import { Aviso } from '../../../utils/outros/aviso';
 interface iFormDataPlaylist {
     nome: string;
     sobre: string | null;
-    foto: string;
+    foto: string | null;
     corDominante: string | null;
 }
 
@@ -30,13 +30,11 @@ export default function Index() {
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
 
-    // xxxxxxxxxx teste;
-    const [arquivoUploadFotoPerfil, setArquivoUploadFotoPerfil] = useState<string>('');
-
+    const [arquivoUploadCapa, setArquivoUploadCapa] = useState<string | null>(''); // ('/1.webp');
     const [formData, setFormData] = useState<iFormDataPlaylist>({
         nome: '',
         sobre: '',
-        foto: '',
+        foto: arquivoUploadCapa,
         corDominante: ''
     });
 
@@ -46,6 +44,8 @@ export default function Index() {
 
     async function handleSubmit() {
         nProgress.start();
+        formData.foto = arquivoUploadCapa;
+        console.log(formData);
         // refBtn.current.disabled = true;
 
         // if (!formData.nome) {
@@ -87,7 +87,6 @@ export default function Index() {
             Aviso.warn(msg, 5000);
         }
     }
-
 
     if (!isAuth) {
         Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.SEM_ACESSO } });
@@ -147,15 +146,15 @@ export default function Index() {
                         <span className='separadorHorizontal'></span>
                         <div className={Styles.divInputConjunto}>
                             <DivUpload
-                                imagem={formData?.foto ?? ''}
+                                imagem={formData.foto ?? ''}
                                 apiPasta={CONSTS_UPLOAD.API_URL_GET_CAPA}
                                 titulo='Capa da playlist'
                                 infoAleatoriaUm='Escolhe uma imagem da hora aí'
                                 infoAleatoriaDois={`Peso máximo: ${UPLOAD_SETTINGS.LIMITE_MB} MB`}
                                 textoBotaoDireita='Alterar capa'
                                 limitarAspectRatio={null}
-                                arquivoUpload={arquivoUploadFotoPerfil}
-                                setArquivoUpload={setArquivoUploadFotoPerfil}
+                                arquivoUpload={arquivoUploadCapa}
+                                setArquivoUpload={setArquivoUploadCapa}
                             />
                         </div>
 
