@@ -17,6 +17,7 @@ import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import UPLOAD_SETTINGS from '../../../utils/consts/outros/uploadSettings';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
+import ajustarUrl from '../../../utils/outros/ajustarUrl';
 import { Aviso } from '../../../utils/outros/aviso';
 import emojiAleatorio from '../../../utils/outros/gerarEmojiAleatorio';
 import iPlaylist from '../../../utils/types/iPlaylist';
@@ -77,7 +78,8 @@ export default function Index() {
         }
 
         // Voltar à tela principal;
-        Router.push(CONSTS_TELAS.GERENCIAR_PLAYLISTS).then(() => {
+        const urlAlvo = `${CONSTS_TELAS.GERENCIAR_PLAYLIST_ID}/${resposta.playlistId}/${ajustarUrl(resposta.nome)}`;
+        Router.push(urlAlvo).then(() => {
             Aviso.success(`A playlist <b>${formData.nome}</b> foi criada com sucesso!`, 7000);
             nProgress.done();
         });

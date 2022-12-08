@@ -5,6 +5,7 @@ const CONSTS_TELAS = {
     FILA: '/fila',
     SUBIR_MUSICA: '/musica/nova',
     GERENCIAR_PLAYLISTS: '/playlist/gerenciar',
+    GERENCIAR_PLAYLIST_ID: '/playlist/gerenciar',
     CRIAR_PLAYLIST: '/playlist/nova',
     ATUALIZAR_DADOS: '/usuario/editar',
     ERRO: '/404',
