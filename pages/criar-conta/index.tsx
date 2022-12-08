@@ -104,6 +104,10 @@ export default function CriarConta() {
         }
     }
 
+    function handleKeyPressNaoPermitirEspaco(e: ChangeEvent<HTMLInputElement>) {
+        e.target.value = e.target.value.replace(' ', '');
+    }
+
     if (isAuth) {
         Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.AUTENTICADO } });
         return false;
@@ -130,7 +134,9 @@ export default function CriarConta() {
                         />
 
                         <input className='input margem1' type='text' placeholder='Nome de usuário'
-                            name='nomeUsuarioSistema' onChange={handleChange} ref={refNomeUsuarioSistema} onKeyPress={handleKeyPress}
+                            name='nomeUsuarioSistema'
+                            onChange={(e) => (handleChange(e), handleKeyPressNaoPermitirEspaco(e))}
+                            ref={refNomeUsuarioSistema} onKeyPress={handleKeyPress}
                         />
 
                         <input className='input margem1' type='password' placeholder='Senha'
