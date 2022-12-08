@@ -2,10 +2,10 @@ import Lottie from 'lottie-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
+import Lottie404 from '../assets/lotties/404.json';
 import Botao from '../components/outros/botao';
 import Styles from '../styles/404.module.scss';
 import CONSTS_SISTEMA from '../utils/consts/outros/sistema';
-import Lottie404 from '../utils/lotties/404.json';
 
 export default function Erro() {
 
