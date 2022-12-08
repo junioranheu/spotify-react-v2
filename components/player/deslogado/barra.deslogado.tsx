@@ -12,7 +12,7 @@ export default function BarraDeslogado() {
             </div>
 
             <div className={Styles.botaoCustom}>
-                <Botao texto='Registre-se já gratuitamente' url={CONSTS_TELAS.ENTRAR} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
+                <Botao texto='Registre-se já gratuitamente' url={CONSTS_TELAS.CRIAR_CONTA} isNovaAba={false} handleFuncao={null} Svg={null} refBtn={null} isEnabled={true} />
             </div>
         </section>
     )
