@@ -1,4 +1,5 @@
 import iMusicaBanda from './iMusicaBanda';
+import iUsuario from './iUsuario';
 
 export default interface iMusica {
     musicaId: number;
@@ -6,6 +7,9 @@ export default interface iMusica {
     ouvintes: number;
     duracaoSegundos: number;
     dataLancamento: Date | null;
+
+    usuarioId: number | null;
+    usuarios: iUsuario | null;
 
     isAtivo: boolean;
     dataRegistro: Date | null;

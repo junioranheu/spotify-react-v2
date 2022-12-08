@@ -172,7 +172,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                 </Fragment>
                             ) : (
                                 <div>
-                                    <span className='texto'>Para onde foram as músicas dessa playlist? 🤔</span>
+                                    <span className='titulo'>Essa playlist ainda não tem nenhuma música!</span>
                                 </div>
                             )
                         }

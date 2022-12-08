@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
 
-    color: var(--branco);
+    color: var(--branco-escuro);
     font-size: 0.8rem;
     line-height: 1rem;
     font-weight: 700;
@@ -32,7 +32,7 @@
         .botaoCustom2 {
             button {
                 height: 33px;
-                background-color: var(--branco);
+                background-color: var(--branco-escuro);
             }
         }
 

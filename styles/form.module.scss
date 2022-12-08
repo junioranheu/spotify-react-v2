@@ -58,6 +58,25 @@
                     }
                 }
             }
+
+            .divInputPicker {
+                // background-color: blue;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                color: var(--preto);
+
+                .componenteColorPicker {
+                    background-color: var(--branco-escuro) !important;
+                }
+    
+                .titulo {
+                    // background-color: red;
+                    color: var(--branco-escuro);
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                }
+            }
         }
     }
 }

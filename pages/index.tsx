@@ -1,12 +1,11 @@
 import Head from 'next/head';
-import { Fragment, useContext } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Playlists from '../components/playlists/playlists';
 import Styles from '../styles/index.module.scss';
 import { Fetch } from '../utils/api/fetch';
 import HabilitarHttp from '../utils/api/habilitarHttp';
 import CONSTS_PLAYLISTS from '../utils/consts/data/constPlaylists';
 import CONSTS_SISTEMA from '../utils/consts/outros/sistema';
-import { UsuarioContext } from '../utils/context/usuarioContext';
 import emojiAleatorio from '../utils/outros/gerarEmojiAleatorio';
 import gerarOla from '../utils/outros/gerarOla';
 import iPlaylist from '../utils/types/iPlaylist';
@@ -17,8 +16,16 @@ interface iParametros {
 
 export default function Index({ listaPlaylistsAdm }: iParametros) {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [listaPlaylistsNaoAdm, setListaPlaylistsNaoAdm] = useState<iPlaylist[]>();
+    useEffect(() => {
+        async function getPlaylistsNaoAdm() {
+            const url = CONSTS_PLAYLISTS.API_URL_GET_TODOS_NAO_ADM;
+            const listaPlaylistsNaoAdm = await Fetch.getApi(url) as iPlaylist[] ?? null;
+            setListaPlaylistsNaoAdm(listaPlaylistsNaoAdm);
+        }
+
+        getPlaylistsNaoAdm();
+    }, []);
 
     return (
         <Fragment>
@@ -36,13 +43,7 @@ export default function Index({ listaPlaylistsAdm }: iParametros) {
 
                 <div className={Styles.div}>
                     <span className='titulo'>Outras playlists</span>
-                    <span className='texto margem0_5'>Novas playlists serão criadas e, mais para frente, será permitido criar suas proprias!</span>
-
-                    {
-                        isAuth && (
-                            <span className='texto margem0_5'>Para “renovar” sua playlist por completo, clique no botão abaixo.</span>
-                        )
-                    }
+                    <Playlists listaPlaylists={listaPlaylistsNaoAdm} />
                 </div>
             </section>
         </Fragment>

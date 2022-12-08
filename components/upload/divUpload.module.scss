@@ -37,17 +37,17 @@
 
         .titulo {
             color: var(--branco-escuro);
-            font-weight: 500;
-            font-size: 1rem;
-            line-height: 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.5rem;
         }
 
         .texto {
             // background-color: blue;
             color: var(--branco-escuro);
             font-weight: 400;
-            font-size: 0.9rem;
-            line-height: 1.2rem;
+            font-size: 0.7rem;
+            line-height: 1rem;
             width: fit-content;
         }
     }

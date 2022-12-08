@@ -1,3 +1,4 @@
+import { TwitterPicker } from '@hello-pangea/color-picker'; // https://www.npmjs.com/package/@hello-pangea/color-picker
 import Head from 'next/head';
 import Router from 'next/router';
 import nProgress from 'nprogress';
@@ -8,6 +9,8 @@ import TopHat from '../../../components/outros/topHat';
 import Mais from '../../../components/svg/mais';
 import DivUpload from '../../../components/upload/divUpload';
 import Styles from '../../../styles/form.module.scss';
+import { Fetch } from '../../../utils/api/fetch';
+import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
@@ -15,6 +18,8 @@ import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import UPLOAD_SETTINGS from '../../../utils/consts/outros/uploadSettings';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import { Aviso } from '../../../utils/outros/aviso';
+import emojiAleatorio from '../../../utils/outros/gerarEmojiAleatorio';
+import iPlaylist from '../../../utils/types/iPlaylist';
 
 interface iFormDataPlaylist {
     nome: string;
@@ -45,38 +50,37 @@ export default function Index() {
     async function handleSubmit() {
         nProgress.start();
         formData.foto = arquivoUploadCapa;
-        console.log(formData);
-        // refBtn.current.disabled = true;
+        refBtn.current.disabled = true;
 
-        // if (!formData.nome) {
-        //     instrucaoErro('O campo <b>título</b> é obrigatório!', true);
-        //     return false;
-        // }
+        if (!formData.nome) {
+            instrucaoErro('O campo <b>título da playlist</b> é obrigatório!', true);
+            return false;
+        }
 
-        // if (!formData.localMp3Base64 && !formData.urlYoutube) {
-        //     instrucaoErro('Você deve selecionar a música <b>localmente</b> ou usando um <b>link do Youtube</b>', true);
-        //     return false;
-        // }
+        if (!formData.foto) {
+            instrucaoErro('Você deve selecionar uma <b>imagem de capa</b> para sua playlist!', true);
+            return false;
+        }
 
-        // const url = CONSTS_PLAYLISTS.API_URL_POST_ADICIONAR;
-        // const dto = {
-        //     nome: formData.nome,
-        //     dataLancamento: formData.dataLancamento && formData.dataLancamento !== '00/00/0000' ? moment(formData.dataLancamento).format('yyyy-MM-DD') : null,
-        //     mp3Base64: formData.localMp3Base64,
-        //     urlYoutube: formData.urlYoutube
-        // };
+        const url = CONSTS_PLAYLISTS.API_URL_POST_ADICIONAR;
+        const dto = {
+            nome: formData.nome,
+            sobre: formData.sobre,
+            foto: formData.foto ?? '',
+            corDominante: formData.corDominante ?? '#1B1039'
+        };
 
-        // const resposta = await Fetch.postApi(url, dto) as iPlaylist;
-        // if (!resposta || resposta?.erro) {
-        //     instrucaoErro((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Tente novamente mais tarde'), true);
-        //     return false;
-        // }
+        const resposta = await Fetch.postApi(url, dto) as iPlaylist;
+        if (!resposta || resposta?.erro) {
+            instrucaoErro((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Tente novamente mais tarde'), true);
+            return false;
+        }
 
-        // // Voltar à tela principal;
-        // Router.push('/').then(() => {
-        //     Aviso.success(`A playlist <b>${formData.nome}</b> foi criada com sucesso!`, 7000);
-        //     nProgress.done();
-        // });
+        // Voltar à tela principal;
+        Router.push(CONSTS_TELAS.GERENCIAR_PLAYLISTS).then(() => {
+            Aviso.success(`A playlist <b>${formData.nome}</b> foi criada com sucesso!`, 7000);
+            nProgress.done();
+        });
     }
 
     function instrucaoErro(msg: string, isExibirAviso: boolean) {
@@ -149,12 +153,22 @@ export default function Index() {
                                 imagem={formData.foto ?? ''}
                                 apiPasta={CONSTS_UPLOAD.API_URL_GET_CAPA}
                                 titulo='Capa da playlist'
-                                infoAleatoriaUm='Escolhe uma imagem da hora aí'
+                                infoAleatoriaUm={`Escolhe uma imagem da hora aí ${emojiAleatorio()}`}
                                 infoAleatoriaDois={`Peso máximo: ${UPLOAD_SETTINGS.LIMITE_MB} MB`}
                                 textoBotaoDireita='Alterar capa'
                                 limitarAspectRatio={null}
                                 arquivoUpload={arquivoUploadCapa}
                                 setArquivoUpload={setArquivoUploadCapa}
+                            />
+                        </div>
+
+                        <span className='separadorHorizontal'></span>
+                        <div className={Styles.divInputPicker}>
+                            <span className={Styles.titulo}>Cor predominante da playlist</span>
+                            <TwitterPicker
+                                className={Styles.componenteColorPicker}
+                                defaultColor='#1B1039'
+                                onChange={(e) => setFormData({ ...formData, ['corDominante']: e?.hex })}
                             />
                         </div>
 

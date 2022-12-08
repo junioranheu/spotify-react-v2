@@ -39,7 +39,7 @@ body {
     background: var(--cinza);
     background: var(--background-gradient-original);
 
-    color: var(--branco);
+    color: var(--branco-escuro);
 }
 
 a {
@@ -147,7 +147,7 @@ img {
     line-height: 1.75rem;
     letter-spacing: -0.04em;
     font-weight: 700;
-    color: var(--branco);
+    color: var(--branco-escuro);
 }
 
 .subtitulo {
@@ -193,7 +193,7 @@ img {
     }
 
     &:disabled {
-        background-color: var(--branco);
+        background-color: var(--branco-escuro);
         border: var(--bege) 2px solid;
         cursor: not-allowed;
     }
@@ -299,7 +299,7 @@ img {
 
     &:disabled {
         background-color: #2f7047;
-        color: var(--branco);
+        color: var(--branco-escuro);
         opacity: 0.5;
         cursor: not-allowed;
     }
