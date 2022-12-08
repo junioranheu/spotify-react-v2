@@ -35,11 +35,8 @@ export default function Playlist() {
         if (id) {
             getPlaylist(id.toString());
         }
-    }, [id]);
-
-
-    // SAIR DA TELA SE A PLAYLIST NAO FOR SUA!!!!!!!
-
+    }, [id, usuarioId]);
+    
     return (
         <Fragment>
             <Head>
