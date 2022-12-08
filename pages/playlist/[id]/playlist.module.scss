@@ -5,8 +5,8 @@
     gap: 1.5rem;
     width: 100%;
 
-    .divDireita {
-        // background-color: pink;
+    .divEsquerda {
+        // background-color: pink !important;
         display: flex;
         flex-direction: column;
         padding-bottom: 5px;
@@ -53,6 +53,11 @@
         }
     }
 
+    .divDireita {
+        // background-color: coral;
+        margin-left: auto;
+    }
+
     .capa {
         border-radius: 5px;
     }
@@ -67,11 +72,17 @@
 /* hi-res laptops and desktops */
 @media (max-width:1281px) {
     .banner {
-        .divDireita {
+        // background-color: pink;
+
+        .divEsquerda {
             .span2 {
                 font-size: 3rem;
                 line-height: 3rem;
             }
+        }
+
+        .divDireita {
+            display: none;
         }
     }
 }
@@ -79,7 +90,7 @@
 /* big landscape tablets, laptops, and desktops */
 @media (max-width:1025px) {
     .banner {
-        .divDireita {
+        .divEsquerda {
             .span2 {
                 font-size: 2rem;
                 line-height: 2rem;
@@ -95,6 +106,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        .divDireita {
+            // background-color: coral;
+            display: block;
+            margin: auto;
+        }
     }
 }
 

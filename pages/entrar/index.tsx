@@ -102,7 +102,7 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Entrar</title>
+                <title>Iniciar sessão • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             {/* Modal de aviso de login */}

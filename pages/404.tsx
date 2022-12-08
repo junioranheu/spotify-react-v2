@@ -27,7 +27,7 @@ export default function Erro() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — 404</title>
+                <title>404 • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className={`${Styles.wrapper} paddingPadrao`}>

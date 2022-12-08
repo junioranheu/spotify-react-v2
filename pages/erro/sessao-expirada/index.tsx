@@ -11,7 +11,7 @@ export default function ErroSessaoExpirada() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Sessão expirada</title>
+                <title>Sessão expirada • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className={`${Styles.wrapper} paddingPadrao`}>

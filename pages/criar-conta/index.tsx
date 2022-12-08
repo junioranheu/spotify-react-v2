@@ -116,7 +116,7 @@ export default function CriarConta() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Criar conta</title>
+                <title>Criar conta • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             {/* Conteúdo */}

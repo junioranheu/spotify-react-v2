@@ -91,7 +91,7 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Subir música</title>
+                <title>Subir nova música • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className={Styles.main}>

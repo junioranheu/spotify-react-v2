@@ -8,6 +8,7 @@ import Input from '../../../components/outros/input';
 import TopHat from '../../../components/outros/topHat';
 import Mais from '../../../components/svg/mais';
 import DivUpload from '../../../components/upload/divUpload';
+import useEmoji from '../../../hooks/outros/useEmoji';
 import Styles from '../../../styles/form.module.scss';
 import { Fetch } from '../../../utils/api/fetch';
 import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
@@ -19,7 +20,6 @@ import UPLOAD_SETTINGS from '../../../utils/consts/outros/uploadSettings';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
 import ajustarUrl from '../../../utils/outros/ajustarUrl';
 import { Aviso } from '../../../utils/outros/aviso';
-import emojiAleatorio from '../../../utils/outros/gerarEmojiAleatorio';
 import iPlaylist from '../../../utils/types/iPlaylist';
 
 interface iFormDataPlaylist {
@@ -35,6 +35,7 @@ export default function Index() {
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
+    const emoji = useEmoji();
 
     const [arquivoUploadCapa, setArquivoUploadCapa] = useState<string | null>(''); // ('/1.webp');
     const [formData, setFormData] = useState<iFormDataPlaylist>({
@@ -102,7 +103,7 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Criar nova playlists</title>
+                <title>Criar nova playlist • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className={Styles.main}>
@@ -155,7 +156,7 @@ export default function Index() {
                                 imagem={formData.foto ?? ''}
                                 apiPasta={CONSTS_UPLOAD.API_URL_GET_CAPA}
                                 titulo='Capa da playlist'
-                                infoAleatoriaUm={`Escolhe uma imagem da hora aí ${emojiAleatorio()}`}
+                                infoAleatoriaUm={`Escolhe uma imagem da hora aí ${emoji}`}
                                 infoAleatoriaDois={`Peso máximo: ${UPLOAD_SETTINGS.LIMITE_MB} MB`}
                                 textoBotaoDireita='Alterar capa'
                                 limitarAspectRatio={null}

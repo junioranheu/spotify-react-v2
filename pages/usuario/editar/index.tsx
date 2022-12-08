@@ -49,7 +49,7 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Atualizar dados</title>
+                <title>Atualizar seus dados • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className={Styles.main}>

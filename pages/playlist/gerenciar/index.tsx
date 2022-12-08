@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Router from 'next/router';
+import nProgress from 'nprogress';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import Playlists from '../../../components/playlists/playlists';
 import StylesIndex from '../../../styles/index.module.scss';
@@ -21,10 +22,11 @@ export default function Index() {
     const [listaPlaylists, setListaPlaylists] = useState<iPlaylist[]>();
     useEffect(() => {
         async function getPlaylists(usuarioId: number) {
+            nProgress.start();
             const url = `${CONSTS_PLAYLISTS.API_URL_GET_BY_USUARIO_ID}/${usuarioId}`;
             const listaPlaylists = await Fetch.getApi(url) as iPlaylist[] ?? null;
-            console.log(listaPlaylists);
             setListaPlaylists(listaPlaylists);
+            nProgress.done();
         }
 
         if (usuarioId) {
@@ -40,7 +42,7 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Gerenciar playlists</title>
+                <title>Gerenciar suas playlists • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className={StylesIndex.container}>

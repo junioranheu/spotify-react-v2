@@ -30,7 +30,7 @@ export default function Index({ listaPlaylistsAdm }: iParametros) {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Início</title>
+                <title>Início • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className={Styles.container}>
@@ -41,10 +41,14 @@ export default function Index({ listaPlaylistsAdm }: iParametros) {
                     <Playlists listaPlaylists={listaPlaylistsAdm} />
                 </div>
 
-                <div className={Styles.div}>
-                    <span className='titulo'>Outras playlists</span>
-                    <Playlists listaPlaylists={listaPlaylistsNaoAdm} />
-                </div>
+                {
+                    listaPlaylistsNaoAdm && listaPlaylistsNaoAdm?.length > 0 && (
+                        <div className={Styles.div}>
+                            <span className='titulo'>Outras playlists</span>
+                            <Playlists listaPlaylists={listaPlaylistsNaoAdm} />
+                        </div>
+                    )
+                }
             </section>
         </Fragment>
     )

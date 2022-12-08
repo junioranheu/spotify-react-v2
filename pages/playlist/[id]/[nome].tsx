@@ -2,13 +2,16 @@ import Head from 'next/head';
 import nProgress from 'nprogress';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
+import Botao from '../../../components/outros/botao';
 import ImageWithFallback from '../../../components/outros/imageWithFallback';
 import MusicaRow from '../../../components/playlists/musicaRow';
 import { Fetch } from '../../../utils/api/fetch';
 import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
+import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { FilaMusicasStorage, MusicaContext } from '../../../utils/context/musicaContext';
+import { Auth } from '../../../utils/context/usuarioContext';
 import ajustarUrl from '../../../utils/outros/ajustarUrl';
 import formatarSegundos from '../../../utils/outros/formatarSegundos';
 import iPlaylist from '../../../utils/types/iPlaylist';
@@ -24,6 +27,14 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
 
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
+
+    const usuarioId = Auth?.get()?.usuarioId ?? 0;
+
+    const [isUsuarioOwnerPlaylist, setIsUsuarioOwnerPlaylist] = useState<boolean>(false);
+    useEffect(() => {
+        const isOwner = playlist.usuarioId === usuarioId;
+        setIsUsuarioOwnerPlaylist(isOwner);
+    }, [playlist, usuarioId]);
 
     useEffect(() => {
         function setarCorBackground(background: string) {
@@ -92,7 +103,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
 
         return duracaoFormatada;
     }
- 
+
     // Ao clicar para ouvir uma música da playlist, set essa playlist como a atual;
     const [isMusicaClicadaParaSetarLista, setIsMusicaClicadaParaSetarLista] = useState<boolean>(false);
     useEffect(() => {
@@ -103,7 +114,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
             listaMusicas.forEach((m: iPlaylistMusica) => {
                 m.isJaTocada = false;
             });
- 
+
             FilaMusicasStorage.set(listaMusicas);
             setFilaMusicasContext(listaMusicas);
         }
@@ -112,7 +123,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
     return (
         <Fragment>
             <Head>
-                <title>{(playlist?.nome ? `${playlist?.nome} — ${CONSTS_SISTEMA.NOME_SISTEMA}` : CONSTS_SISTEMA.NOME_SISTEMA)}</title>
+                <title>{(playlist?.nome ? `${playlist?.nome} • ${CONSTS_SISTEMA.NOME_SISTEMA}` : CONSTS_SISTEMA.NOME_SISTEMA)}</title>
             </Head>
 
             <section className='container-padrao margem1'>
@@ -131,15 +142,31 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                             </div>
                         )
                     }
-
-                    <div className={Styles.divDireita}>
+ 
+                    <div className={Styles.divEsquerda}>
                         <span className={Styles.span1}>Lista de reprodução</span>
                         <span className={Styles.span2}>{playlist.nome}</span>
                         <span className={Styles.span3}>{concatenarBandas(playlist)}</span>
                         <span className={Styles.span4}>
-                            {playlist.usuarios?.nomeCompleto} • {playlist.playlistsMusicas?.length} {(playlist.playlistsMusicas?.length > 1 ? 'músicas' : 'música')}, {somarDuracaoPlaylist(playlist)}
+                            {playlist.usuarios?.nomeCompleto} • {playlist.playlistsMusicas?.length} {(playlist.playlistsMusicas?.length === 1 ? 'música' : 'músicas')}, {somarDuracaoPlaylist(playlist)}
                         </span>
                     </div>
+ 
+                    {
+                        isUsuarioOwnerPlaylist && (
+                            <div className={Styles.divDireita}>
+                                <Botao
+                                    texto='Gerenciar playlist'
+                                    url={`${CONSTS_TELAS.GERENCIAR_PLAYLIST_ID}/${playlist.playlistId}/${ajustarUrl(playlist.nome)}`}
+                                    isNovaAba={false}
+                                    handleFuncao={() => null}
+                                    Svg={null}
+                                    refBtn={null}
+                                    isEnabled={true}
+                                />
+                            </div>
+                        )
+                    }
                 </div>
 
                 <div className={Styles.divisao}></div>
@@ -171,8 +198,9 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                     }
                                 </Fragment>
                             ) : (
-                                <div>
-                                    <span className='titulo'>Essa playlist ainda não tem nenhuma música!</span>
+                                <div className='div-padrao'>
+                                    <span className='titulo'>Cri, cri, cri... 🦗</span>
+                                    <span className='texto'>Essa playlist ainda não tem nenhuma música!</span>
                                 </div>
                             )
                         }

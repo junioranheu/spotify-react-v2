@@ -33,7 +33,7 @@ export default function Index() {
     return (
         <Fragment>
             <Head>
-                <title>{CONSTS_SISTEMA.NOME_SISTEMA} — Fila</title>
+                <title>Sua fila • {CONSTS_SISTEMA.NOME_SISTEMA}</title>
             </Head>
 
             <section className='container-padrao'>
