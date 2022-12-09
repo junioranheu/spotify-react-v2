@@ -11,6 +11,7 @@ import CONSTS_TELAS from '../../../../utils/consts/outros/telas';
 import { Auth, UsuarioContext } from '../../../../utils/context/usuarioContext';
 import ajustarUrl from '../../../../utils/outros/ajustarUrl';
 import { Aviso } from '../../../../utils/outros/aviso';
+import converterSrcImagemParaBase64 from '../../../../utils/outros/converterSrcImagemParaBase64';
 import iFormDataPlaylist from '../../../../utils/types/iFormData.playlist';
 import iPlaylist from '../../../../utils/types/iPlaylist';
 import NovaPlaylistComponent from '../../nova/novaPlaylist.component';
@@ -36,9 +37,26 @@ export default function Playlist() {
                 return false;
             }
 
+            // Setar dados da playlist para controle interno;
             setPlaylist(playlist);
+
+            // Setar dados da playlist para os componentes (formData);
             setFormData({ ...formData, ['nome']: playlist.nome, ['sobre']: playlist.sobre, ['corDominante']: playlist.corDominante });
-            playlist.foto && setArquivoUploadCapa(`${CONSTS_UPLOAD.API_URL_GET_PLAYLIST}/${playlist.foto}`);
+
+            // Converter a imagem para base64;
+            if (playlist.foto) {
+                const img = `${CONSTS_UPLOAD.API_URL_GET_PLAYLIST}/${playlist.foto}`;
+
+                converterSrcImagemParaBase64(img)
+                    .then((base64: any) => {
+                        // console.log(apiPasta, '-', imagem, '-', base64);
+
+                        if (base64) {
+                            setArquivoUploadCapa(base64);
+                        }
+                    });
+            }
+
             nProgress.done();
         }
 
@@ -76,24 +94,25 @@ export default function Playlist() {
             return false;
         }
 
-        const url = CONSTS_PLAYLISTS.API_URL_POST_ADICIONAR;
+        const url = CONSTS_PLAYLISTS.API_URL_POST_ATUALIZAR;
         const dto = {
+            playlistId: id,
             nome: formData.nome,
             sobre: formData.sobre,
             foto: formData.foto ?? '',
             corDominante: formData.corDominante ?? '#1B1039'
         };
 
-        const resposta = await Fetch.postApi(url, dto) as iPlaylist;
+        const resposta = await Fetch.putApi(url, dto) as iPlaylist;
         if (!resposta || resposta?.erro) {
             instrucaoErro((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Tente novamente mais tarde'), true);
             return false;
         }
 
         // Voltar à tela principal;
-        const urlAlvo = `${CONSTS_TELAS.GERENCIAR_PLAYLIST_ID}/${resposta.playlistId}/${ajustarUrl(resposta.nome)}`;
+        const urlAlvo = `${CONSTS_TELAS.PLAYLIST}/${resposta.playlistId}/${ajustarUrl(resposta.nome)}`;
         Router.push(urlAlvo).then(() => {
-            Aviso.success(`A playlist <b>${formData.nome}</b> foi criada com sucesso!`, 7000);
+            Aviso.success(`A playlist <b>${formData.nome}</b> foi atualizada com sucesso!`, 7000);
             nProgress.done();
         });
     }
@@ -127,6 +146,7 @@ export default function Playlist() {
                 setArquivoUploadCapa={setArquivoUploadCapa}
                 handleSubmit={handleSubmit}
                 refBtn={refBtn}
+                txtBtn='Atualizar playlist'
             />
         </Fragment>
     )

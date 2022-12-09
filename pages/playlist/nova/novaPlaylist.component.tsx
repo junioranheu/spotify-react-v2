@@ -1,4 +1,4 @@
-import { TwitterPicker } from '@hello-pangea/color-picker'; // https://www.npmjs.com/package/@hello-pangea/color-picker
+import { BlockPicker } from '@hello-pangea/color-picker'; // https://www.npmjs.com/package/@hello-pangea/color-picker
 import { ChangeEvent, Dispatch, MutableRefObject } from 'react';
 import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
@@ -20,9 +20,10 @@ interface iParametros {
     setArquivoUploadCapa: Dispatch<string>;
     handleSubmit: () => Promise<false | undefined>;
     refBtn: MutableRefObject<any>;
+    txtBtn: string;
 }
 
-export default function NovaPlaylistComponent({ tituloTopHat, formData, setFormData, handleChange, arquivoUploadCapa, setArquivoUploadCapa, handleSubmit, refBtn }: iParametros) {
+export default function NovaPlaylistComponent({ tituloTopHat, formData, setFormData, handleChange, arquivoUploadCapa, setArquivoUploadCapa, handleSubmit, refBtn, txtBtn }: iParametros) {
 
     const emoji = useEmoji();
 
@@ -89,7 +90,7 @@ export default function NovaPlaylistComponent({ tituloTopHat, formData, setFormD
                     <span className='separadorHorizontal'></span>
                     <div className={Styles.divInputPicker}>
                         <span className={Styles.titulo}>Cor predominante da playlist</span>
-                        <TwitterPicker
+                        <BlockPicker 
                             className={Styles.componenteColorPicker}
                             defaultColor='#1B1039'
                             onChange={(e) => setFormData({ ...formData, ['corDominante']: e?.hex })}
@@ -98,7 +99,7 @@ export default function NovaPlaylistComponent({ tituloTopHat, formData, setFormD
 
                     <span className='separadorHorizontal'></span>
                     <div className={Styles.divBotao}>
-                        <Botao texto='Criar playlist' url={null} isNovaAba={false} handleFuncao={() => handleSubmit()} Svg={null} refBtn={refBtn} isEnabled={true} />
+                        <Botao texto={txtBtn} url={null} isNovaAba={false} handleFuncao={() => handleSubmit()} Svg={null} refBtn={refBtn} isEnabled={true} />
                     </div>
                 </div>
             </div>

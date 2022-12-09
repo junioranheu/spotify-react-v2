@@ -3,6 +3,7 @@ import ScrollContainer from 'react-indiana-drag-scroll'; // https://www.npmjs.co
 import ImgCinza from '../../assets/image/cinza.webp';
 import ImageWithFallback from '../../components/outros/imageWithFallback';
 import CONSTS_UPLOAD from '../../utils/consts/data/constUpload';
+import CONSTS_TELAS from '../../utils/consts/outros/telas';
 import ajustarUrl from '../../utils/outros/ajustarUrl';
 import iPlaylist from '../../utils/types/iPlaylist';
 import ContentLoaderQuadrado from '../outros/contentLoader.quadrado';
@@ -17,9 +18,9 @@ export default function Playlists({ listaPlaylists }: iParametros) {
     return (
         listaPlaylists && listaPlaylists?.length > 0 ? (
             <ScrollContainer className={Styles.divPlaylists}>
-                {
+                { 
                     listaPlaylists?.filter(x => x.isAtivo === true).map((p) => (
-                        <Link href={`/playlist/${p.playlistId}/${ajustarUrl(p.nome)}`} passHref key={p.playlistId}>
+                        <Link href={`/${CONSTS_TELAS.PLAYLIST}/${p.playlistId}/${ajustarUrl(p.nome)}`} passHref key={p.playlistId}>
                             <div className={Styles.playlist}>
                                 <div className={Styles.divThumbnail}>
                                     <ImageWithFallback

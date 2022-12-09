@@ -21,7 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
         // Scrollar pro top automaticamente;
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        console.clear();
+        // process.env.NODE_ENV === 'production' && console.clear(); 
+        console.clear(); 
     }, [asPath]);
 
     function verificarLayout() {

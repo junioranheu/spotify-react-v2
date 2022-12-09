@@ -3,6 +3,7 @@ const CONSTS_TELAS = {
     ENTRAR: '/entrar',
     CRIAR_CONTA: '/criar-conta',
     FILA: '/fila',
+    PLAYLIST: '/playlist',
     SUBIR_MUSICA: '/musica/nova',
     GERENCIAR_PLAYLISTS: '/playlist/gerenciar',
     GERENCIAR_PLAYLIST_ID: '/playlist/gerenciar',

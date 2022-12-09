@@ -63,7 +63,7 @@ export default function Index() {
         }
 
         // Voltar à tela principal;
-        const urlAlvo = `${CONSTS_TELAS.GERENCIAR_PLAYLIST_ID}/${resposta.playlistId}/${ajustarUrl(resposta.nome)}`;
+        const urlAlvo = `${CONSTS_TELAS.PLAYLIST}/${resposta.playlistId}/${ajustarUrl(resposta.nome)}`;
         Router.push(urlAlvo).then(() => {
             Aviso.success(`A playlist <b>${formData.nome}</b> foi criada com sucesso!`, 7000);
             nProgress.done();
@@ -99,6 +99,7 @@ export default function Index() {
                 setArquivoUploadCapa={setArquivoUploadCapa}
                 handleSubmit={handleSubmit}
                 refBtn={refBtn}
+                txtBtn='Criar playlist'
             />
         </Fragment>
     )
