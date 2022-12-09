@@ -30,7 +30,7 @@ export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExib
 
     return (
         <div className={Styles.main}>
-            <span className={Styles.titulo}>{(titulo ?? comentarioRandom)}</span>
+            <span className={`${Styles.titulo} margem2`}>{(titulo ?? comentarioRandom)}</span>
             <span className={`${Styles.texto} margem0_5`}>{descricao}</span>
 
             {
@@ -49,7 +49,7 @@ export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExib
                 )
             }
 
-            <span className='separadorHorizontal'></span>
+            <span className='separadorHorizontal margem3'></span>
 
             <span className={Styles.termos}>
                 Ao entrar, criar uma conta ou ouvir nossas músicas, você está de acordo com os <a href='https://github.com/junioranheu' rel='noreferrer' target='_blank'>termos de serviço e a política de privacidade</a> do {CONSTS_SISTEMA.NOME_SISTEMA}
