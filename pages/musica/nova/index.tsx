@@ -79,12 +79,21 @@ export default function Index() {
             return false;
         }
 
+        // Tratar o "selectMultiPlaylist" para uma lista de ids;
+        let listaPlaylists = [] as any;
+        if (selectMultiPlaylist) {
+            selectMultiPlaylist.forEach((el: any) => {
+                listaPlaylists.push(el.value);
+            });
+        }
+
         const url = CONSTS_MUSICAS.API_URL_POST_ADICIONAR;
         const dto = {
             nome: formData.nome,
             dataLancamento: formData.dataLancamento && formData.dataLancamento !== '00/00/0000' ? moment(formData.dataLancamento).format('yyyy-MM-DD') : null,
             mp3Base64: formData.localMp3Base64,
-            urlYoutube: formData.urlYoutube
+            urlYoutube: formData.urlYoutube,
+            listaPlaylists: listaPlaylists
         };
 
         const resposta = await Fetch.postApi(url, dto) as iMusica;
@@ -171,7 +180,7 @@ export default function Index() {
                         />
 
                         <span className='separadorHorizontal'></span>
-                        <span className={Styles.titulo}>Cor predominante da playlist</span>
+                        <span className={Styles.titulo}>Para quais playlists essa música vai?</span>
                         <InputSelect
                             selectMulti={selectMultiPlaylist}
                             setSelectMulti={setSelectMultiPlaylist}

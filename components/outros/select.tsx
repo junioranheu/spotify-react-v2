@@ -21,7 +21,13 @@ export default function InputSelect({ selectMulti, setSelectMulti, lista, nomePr
             return {
                 ...base,
                 backgroundColor: 'var(--bege)',
-                color: 'var(--preto)'
+                color: 'var(--preto)',
+                borderRadius: '10px',
+                border: '0px',
+                boxShadow: 'none',
+                '&:hover': {
+                    border: '1px solid var(--cor-principal)',
+                }
             };
         },
         menuList: (base: any) => ({
