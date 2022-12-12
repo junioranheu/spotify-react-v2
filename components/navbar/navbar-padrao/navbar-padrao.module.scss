@@ -5,14 +5,14 @@
 
     display: flex;
     align-items: center;
-
+ 
     color: var(--branco-escuro);
     font-size: 0.8rem;
     line-height: 1rem;
     font-weight: 700;
 
     .divGap {
-        // background-color: red;
+        // background-color: red !important;
         display: flex;
         gap: 1rem;
         margin-left: 1.7rem;
@@ -37,7 +37,6 @@
         }
 
         .divOpcoes {
-            /* background-color: pink; */
             background-color: var(--super-preto);
 
             display: flex;
@@ -55,7 +54,6 @@
         }
 
         .subMenu {
-            /* background-color: pink; */
             background-color: var(--super-preto);
 
             position: absolute;
@@ -85,6 +83,15 @@
                     transition: 0.3s;
                 }
             }
+
+            .separador {
+                // border-top: 1px solid var(--branco-escuro);
+                border-top: 1px solid #252424;
+                height: 1px;
+                width: 100%;
+                margin-top: 0rem;
+                margin-bottom: -0.25rem;
+            }      
         }
     }
 

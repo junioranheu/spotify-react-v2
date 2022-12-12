@@ -97,7 +97,6 @@ export default function Index() {
         };
 
         const resposta = await Fetch.postApi(url, dto) as iMusica;
-        console.log(resposta);
         if (!resposta || resposta?.erro) {
             instrucaoErro((resposta?.mensagemErro ? `Parece que ${resposta?.mensagemErro.toLowerCase()}. Tente novamente mais tarde` : 'Algo deu errado! Tente novamente mais tarde'), true);
             return false;

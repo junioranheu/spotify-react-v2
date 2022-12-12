@@ -73,10 +73,12 @@ export default function NavbarPadrao() {
                                         <span onClick={() => Router.push(CONSTS_TELAS.ATUALIZAR_DADOS)}>Atualizar perfil</span>
                                         <span onClick={() => Router.push(CONSTS_TELAS.SUBIR_MUSICA)}>Subir música</span>
                                         <span onClick={() => Router.push(CONSTS_TELAS.GERENCIAR_PLAYLISTS)}>Gerenciar playlists</span>
+
+                                        <span className={Styles.separador}></span>
                                         <span onClick={() => handleDeslogar()}>Terminar sessão</span>
                                     </div>
                                 )
-                            }
+                            } 
                         </Fragment>
                     ) : (
                         <div className={Styles.divGap}>

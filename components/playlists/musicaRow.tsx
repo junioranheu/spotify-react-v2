@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from 'next/image';
 import { Dispatch, Fragment, useContext, useEffect, useState } from 'react';
+import { debounce } from 'ts-debounce'; // debounce: https://www.npmjs.com/package/ts-debounce | Delay React onMouseOver event: https://stackoverflow.com/a/68349975
 import ImgCinza from '../../assets/image/cinza.webp';
 import GifEqualiser from '../../assets/image/equaliser.gif';
 import Coracao from '../../components/outros/coracao';
@@ -18,6 +19,7 @@ import ModalLayout from '../modal/_modal.layout';
 import ModalWrapper from '../modal/_modal.wrapper';
 import BotaoPlay from '../svg/botaoPlay';
 import Styles from './musicaRow.module.scss';
+import SubMenu from './subMenu';
 
 interface iParametros {
     i: number;
@@ -83,7 +85,21 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
         // Setar que o usuário clicou para ouvir uma música;
         setIsMusicaClicadaParaSetarLista && setIsMusicaClicadaParaSetarLista(true);
     }
- 
+
+    const [posicaoClickIconeReticencias, setPosicaoClickIconeReticencias] = useState<number>(0);
+    const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
+    const debounceFecharSubMenu = debounce(() => setIsSubMenuOpen(false), 500); // Delay React onMouseOver event: https://stackoverflow.com/a/68349975
+    function handleSubMenu(e: any) {
+        setIsSubMenuOpen(true);
+        debounceFecharSubMenu.cancel();
+
+        // Pegar a posição do "reticências" clicado, para ajustar o "css/top" do submenu;
+        const y = e.clientY;
+        if (y) {
+            setPosicaoClickIconeReticencias(y);
+        }
+    }
+
     return (
         <Fragment>
             {/* Modal de aviso de login */}
@@ -100,6 +116,18 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                     />
                 </ModalLayout>
             </ModalWrapper>
+
+            {/* Submenu */}
+            {
+                isSubMenuOpen && (
+                    <SubMenu
+                        posicaoClick={posicaoClickIconeReticencias}
+                        musicaId={musicaId}
+                        debounceFecharSubMenu={debounceFecharSubMenu}
+                        handleSubMenu={handleSubMenu}
+                    />
+                )
+            }
 
             {/* Conteúdo */}
             <div className={Styles.divMusica}>
@@ -148,7 +176,10 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                     </span>
 
                     <span className={Styles.tempo}>{formatarSegundos(tempo ?? 0, false)}</span>
-                    <span className='pointer'><Reticencias width='16' cor='var(--cinza-claro)' /></span>
+
+                    <span className='pointer cor-principal-hover' onClick={(e) => handleSubMenu(e)}  >
+                        <Reticencias width='16' cor='var(--cinza-claro)' />
+                    </span>
                 </div>
             </div>
         </Fragment>
