@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import NProgress from 'nprogress';
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
+import { debounce } from 'ts-debounce'; // debounce: https://www.npmjs.com/package/ts-debounce | Delay React onMouseOver event: https://stackoverflow.com/a/68349975
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
-import { FilaMusicasStorage, MusicaContext, MusicaStorage } from '../../../utils/context/musicaContext';
+import { FilaMusicasStorage, MusicaStorage } from '../../../utils/context/musicaContext';
 import { Auth, UsuarioContext } from '../../../utils/context/usuarioContext';
 import Botao from '../../outros/botao';
 import BotaoSvgRedirecionar from '../../outros/botao.svg.redirecionar';
@@ -17,17 +18,12 @@ export default function NavbarPadrao() {
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
     const nomeUsuario = Auth?.get()?.nomeUsuarioSistema ?? '';
 
-    const _musicaContext = useContext(MusicaContext); // Contexto da música;
-    const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
-    const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
-
     const [isExibirSubmenu, setIsExibirSubmenu] = useState<boolean>(false);
-
-    const asPath = useRouter();
-    useEffect(() => {
-        // Cada reload, setar como false, para fechar submenu;
-        setIsExibirSubmenu(false);
-    }, [asPath]);
+    const debounceFecharSubMenu = debounce(() => setIsExibirSubmenu(false), 1000); // Delay React onMouseOver event: https://stackoverflow.com/a/68349975
+    function handleSubMenu() {
+        setIsExibirSubmenu(true);
+        debounceFecharSubMenu.cancel();
+    }
 
     function handleDeslogar() {
         NProgress.start();
@@ -62,14 +58,22 @@ export default function NavbarPadrao() {
                 {
                     isAuth ? (
                         <Fragment>
-                            <div className={Styles.divOpcoes} onClick={() => setIsExibirSubmenu(!isExibirSubmenu)}>
+                            <div
+                                className={Styles.divOpcoes}
+                                onClick={() => handleSubMenu()}
+                                onMouseLeave={() => debounceFecharSubMenu()}
+                            >
                                 {nomeUsuario}
                                 <SetinhaBaixo width='12' cor='var(--branco)' />
                             </div>
 
                             {
                                 isExibirSubmenu && (
-                                    <div className={Styles.subMenu}>
+                                    <div
+                                        className={Styles.subMenu}
+                                        onMouseEnter={() => handleSubMenu()}
+                                        onMouseLeave={() => debounceFecharSubMenu()}
+                                    >
                                         <span onClick={() => Router.push(CONSTS_TELAS.ATUALIZAR_DADOS)}>Atualizar perfil</span>
                                         <span onClick={() => Router.push(CONSTS_TELAS.SUBIR_MUSICA)}>Subir música</span>
                                         <span onClick={() => Router.push(CONSTS_TELAS.GERENCIAR_PLAYLISTS)}>Gerenciar playlists</span>
@@ -78,7 +82,7 @@ export default function NavbarPadrao() {
                                         <span onClick={() => handleDeslogar()}>Terminar sessão</span>
                                     </div>
                                 )
-                            } 
+                            }
                         </Fragment>
                     ) : (
                         <div className={Styles.divGap}>
