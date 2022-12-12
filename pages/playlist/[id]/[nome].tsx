@@ -195,7 +195,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
 
                 {/* Playlist */}
                 <div className='div-padrao'>
-                    <div>
+                    <Fragment>
                         {
                             listaMusicas && listaMusicas?.length > 0 ? (
                                 <Fragment>
@@ -220,13 +220,13 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                     }
                                 </Fragment>
                             ) : (
-                                <div className='div-padrao'>
+                                <div className='div-padrao animate__animated animate__fadeIn animate__slower'>
                                     <span className='titulo'>Cri, cri, cri... 🦗</span>
                                     <span className='texto'>Essa playlist ainda não tem nenhuma música!</span>
                                 </div>
                             )
                         }
-                    </div>
+                    </Fragment>
                 </div>
             </section>
         </Fragment>
