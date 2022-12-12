@@ -6,6 +6,7 @@ import { Fragment, useContext, useState } from 'react';
 import CONSTS_MODAL from '../../../utils/consts/outros/modal.tamanho';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
 import { UsuarioContext } from '../../../utils/context/usuarioContext';
+import avisoFuncaoNaoDesenvolvida from '../../../utils/outros/avisoFuncaoNaoDesenvolvida';
 import ModalAvisoLogin from '../../modal/modal.aviso/login';
 import ModalLayout from '../../modal/_modal.layout';
 import ModalWrapper from '../../modal/_modal.wrapper';
@@ -72,14 +73,12 @@ export default function Sidebar() {
                             </Link>
                         </span>
 
-                        <span>
+                        <span onClick={() => avisoFuncaoNaoDesenvolvida()}>
                             <Lupa width='24px' /> <span className='pointer'>Procurar</span>
                         </span>
 
-                        <span>
-                            <Link href={CONSTS_TELAS.FILA}>
-                                <Biblioteca width='24px' /> <span>Sua fila</span>
-                            </Link>
+                        <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.FILA) : [setModalAvisoLoginDescricao('Inicie sua sessão para visualizar sua fila'), setIsModalAvisoLoginOpen(true)]}>
+                            <Biblioteca width='24px' /> <span>Sua fila</span>
                         </span>
 
                         <span className='pointer' onClick={() => window.open('https://github.com/junioranheu', '_blank')}>
@@ -104,7 +103,7 @@ export default function Sidebar() {
                             <span className='pointer'>Gerenciar playlists</span>
                         </span>
 
-                        <span>
+                        <span onClick={() => avisoFuncaoNaoDesenvolvida()}>
                             <span className={`${Styles.quadrado} ${Styles.quadradoColorido}`}>
                                 <Coracao width='0.75rem' cor='var(--branco)' />
                             </span>
