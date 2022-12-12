@@ -192,9 +192,13 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
 
                     <span className={Styles.tempo}>{formatarSegundos(tempo ?? 0, false)}</span>
 
-                    <span className='pointer cor-principal-hover' onClick={(e) => handleSubMenu(e)}  >
-                        <Reticencias width='16' cor='var(--cinza-claro)' />
-                    </span>
+                    {
+                        isAuth && (
+                            <span className='pointer cor-principal-hover' onClick={(e) => handleSubMenu(e)}  >
+                                <Reticencias width='16' cor='var(--cinza-claro)' />
+                            </span>
+                        )
+                    }
                 </div>
             </div>
         </Fragment>
