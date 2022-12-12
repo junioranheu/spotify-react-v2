@@ -57,7 +57,7 @@ export default function Index() {
         }
 
         if (!formData.localMp3Base64 && !formData.urlYoutube) {
-            instrucaoErro('Você deve selecionar a música <b>localmente</b> ou usando um <b>link do Youtube</b>', true);
+            instrucaoErro('Você deve selecionar a música <b>localmente</b> ou usando um <b>link do YouTube</b>', true);
             return false;
         }
 

@@ -57,7 +57,7 @@ export default function DivSelecionarArquivo({ formData, setFormData, handleChan
 
                 <div>
                     <input type='radio' name='radioTipo' value={CONSTS_RADIO_TIPO.YOUTUBE} id='radioYoutube' />
-                    <label htmlFor='radioYoutube'>Link do Youtube</label>
+                    <label htmlFor='radioYoutube'>Link do YouTube</label>
                 </div>
             </fieldset>
 
@@ -95,9 +95,9 @@ export default function DivSelecionarArquivo({ formData, setFormData, handleChan
                         placeholder=''
                         name='urlYoutube'
                         tipo='text'
-                        isDisabled={false}
+                        isDisabled={true}
                         minCaracteres={0}
-                        dataTip='Direitos autorais? Nunca nem vi'
+                        dataTip='Essa função está temporariamente desativada (direitos autorais do YouTube)'
                         value={formData.urlYoutube}
                         mascara=''
                         referencia={null}
