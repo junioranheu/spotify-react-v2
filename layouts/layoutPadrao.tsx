@@ -1,10 +1,10 @@
 import { lazy, useContext, useEffect } from 'react';
-import NavbarPadrao from '../components/navbar/navbar-padrao/navbar-padrao';
-import Sidebar from '../components/navbar/sidebar/sidebar';
 import verificarTokenValido from '../utils/api/verificarTokenValido';
 import { UsuarioContext } from '../utils/context/usuarioContext';
 import Styles from './styles/layoutPadrao.module.scss';
 const Barra = lazy(() => import('../components/player/barra'));
+const Sidebar = lazy(() => import('../components/navbar/sidebar/sidebar'));
+const NavbarPadrao = lazy(() => import('../components/navbar/navbar-padrao/navbar-padrao'));
 
 export default function LayoutPadrao({ Component, pageProps }: any) {
 

@@ -2,16 +2,16 @@ import moment from 'moment';
 import Head from 'next/head';
 import Router from 'next/router';
 import nProgress from 'nprogress';
-import { ChangeEvent, Fragment, useContext, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, Fragment, useContext, useRef, useState } from 'react';
 import Botao from '../../../components/outros/botao';
 import Input from '../../../components/outros/input';
 import InputSelect from '../../../components/outros/select';
 import TopHat from '../../../components/outros/topHat';
 import Musica from '../../../components/svg/musica';
+import usePlaylistsByUsuarioId from '../../../hooks/api/usePlaylistsByUsuarioId';
 import Styles from '../../../styles/form.module.scss';
 import { Fetch } from '../../../utils/api/fetch';
 import CONSTS_MUSICAS from '../../../utils/consts/data/constMusicas';
-import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
@@ -31,27 +31,9 @@ export default function Index() {
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
 
-    const [listaPlaylistsUsuario, setListaPlaylistsUsuario] = useState<iPlaylist[]>();
+    const listaPlaylistsUsuario = usePlaylistsByUsuarioId(usuarioId, false) as iPlaylist[];
+    console.log(listaPlaylistsUsuario);
     const [selectMultiPlaylist, setSelectMultiPlaylist] = useState<any>();
-    useEffect(() => {
-        async function getPlaylists(usuarioId: string) {
-            nProgress.start();
-            const url = `${CONSTS_PLAYLISTS.API_URL_GET_BY_USUARIO_ID}/${usuarioId}`;
-            const playlists = await Fetch.getApi(url) as iPlaylist[] ?? null;
-
-            // @ts-ignore;
-            if (playlists.erro) {
-                return false;
-            }
-
-            setListaPlaylistsUsuario(playlists);
-            nProgress.done();
-        }
-
-        if (usuarioId) {
-            getPlaylists(usuarioId.toString());
-        }
-    }, [usuarioId]);
 
     const [formData, setFormData] = useState<iFormDataMusica>({
         nome: '',

@@ -14,6 +14,7 @@ import { MusicaContext, MusicaStorage } from '../../utils/context/musicaContext'
 import { UsuarioContext } from '../../utils/context/usuarioContext';
 import { Aviso } from '../../utils/outros/aviso';
 import formatarSegundos from '../../utils/outros/formatarSegundos';
+import ModalAdicionarMusica from '../modal/modal.adicionarMusicaNaPlaylist/modal.adicionarMusica';
 import ModalAvisoLogin from '../modal/modal.aviso/login';
 import ModalLayout from '../modal/_modal.layout';
 import ModalWrapper from '../modal/_modal.wrapper';
@@ -32,7 +33,7 @@ interface iParametros {
     isDesativarUm: boolean;
     setIsMusicaClicadaParaSetarLista?: Dispatch<boolean> | null; // Setar que o usuário clicou para ouvir uma música;
 }
- 
+
 export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tempo, isDesativarUm, setIsMusicaClicadaParaSetarLista }: iParametros) {
 
     const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
@@ -44,6 +45,8 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
 
     const [modalAvisoLoginDescricao, setModalAvisoLoginDescricao] = useState('');
     const [isModalAvisoLoginOpen, setIsModalAvisoLoginOpen] = useState(false);
+
+    const [isModalAdicionarMusicaNaPlaylistOpen, setIsModalAdicionarMusicaNaPlaylistOpen] = useState(false);
 
     const [isMusicaCurtida, setIsMusicaCurtida] = useState<boolean>(false);
     function handleCoracao() {
@@ -117,6 +120,17 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                 </ModalLayout>
             </ModalWrapper>
 
+            {/* Modal para adicionar nova música à playlist */}
+            <ModalWrapper isOpen={isModalAdicionarMusicaNaPlaylistOpen}>
+                <ModalLayout handleModal={() => setIsModalAdicionarMusicaNaPlaylistOpen(!isModalAdicionarMusicaNaPlaylistOpen)} isExibirApenasLogo={true} titulo={null} tamanho={CONSTS_MODAL.PEQUENO} isCentralizado={true} isFecharModalClicandoNoFundo={false}>
+                    <ModalAdicionarMusica
+                        musicaId={musicaId}
+                        titulo={titulo ?? ''}
+                        setIsModalAdicionarMusicaNaPlaylistOpen={setIsModalAdicionarMusicaNaPlaylistOpen}
+                    />
+                </ModalLayout>
+            </ModalWrapper>
+
             {/* Submenu */}
             {
                 isSubMenuOpen && (
@@ -125,6 +139,7 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
                         musicaId={musicaId}
                         debounceFecharSubMenu={debounceFecharSubMenu}
                         handleSubMenu={handleSubMenu}
+                        setIsModalAdicionarMusicaNaPlaylistOpen={setIsModalAdicionarMusicaNaPlaylistOpen}
                     />
                 )
             }

@@ -1,5 +1,4 @@
-import Router from 'next/router';
-import CONSTS_TELAS from '../../utils/consts/outros/telas';
+import { Dispatch } from 'react';
 import Styles from './subMenu.module.scss';
 
 interface iParametros {
@@ -7,9 +6,10 @@ interface iParametros {
     musicaId: number;
     debounceFecharSubMenu: { (this: unknown, ...args: [] & any[]): Promise<void>; cancel: (reason?: any) => void; }; // debounce;
     handleSubMenu: (musicaId: number) => void;
+    setIsModalAdicionarMusicaNaPlaylistOpen: Dispatch<boolean>;
 }
 
-export default function SubMenu({ posicaoClick, musicaId, debounceFecharSubMenu, handleSubMenu }: iParametros) {
+export default function SubMenu({ posicaoClick, musicaId, debounceFecharSubMenu, handleSubMenu, setIsModalAdicionarMusicaNaPlaylistOpen }: iParametros) {
     return (
         <div
             style={{ top: posicaoClick }}
@@ -17,7 +17,7 @@ export default function SubMenu({ posicaoClick, musicaId, debounceFecharSubMenu,
             onMouseEnter={() => handleSubMenu(musicaId)}
             onMouseLeave={() => debounceFecharSubMenu()}
         >
-            <span onClick={() => Router.push(CONSTS_TELAS.ATUALIZAR_DADOS)}>Adicionar à uma playlist</span>
+            <span onClick={() => setIsModalAdicionarMusicaNaPlaylistOpen(true)}>Adicionar à uma playlist</span>
 
             <span className={Styles.separador}></span>
             <span>Reportar música</span>

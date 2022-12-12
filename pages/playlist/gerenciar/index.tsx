@@ -1,11 +1,9 @@
 import Head from 'next/head';
 import Router from 'next/router';
-import nProgress from 'nprogress';
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, useContext } from 'react';
 import Playlists from '../../../components/playlists/playlists';
+import usePlaylistsByUsuarioId from '../../../hooks/api/usePlaylistsByUsuarioId';
 import StylesIndex from '../../../styles/index.module.scss';
-import { Fetch } from '../../../utils/api/fetch';
-import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
 import CONSTS_ERROS from '../../../utils/consts/outros/erros';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
 import CONSTS_TELAS from '../../../utils/consts/outros/telas';
@@ -19,20 +17,7 @@ export default function Index() {
     const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
     const usuarioId = Auth?.get()?.usuarioId ?? 0;
 
-    const [listaPlaylists, setListaPlaylists] = useState<iPlaylist[]>();
-    useEffect(() => {
-        async function getPlaylists(usuarioId: number) {
-            nProgress.start();
-            const url = `${CONSTS_PLAYLISTS.API_URL_GET_BY_USUARIO_ID}/${usuarioId}`;
-            const listaPlaylists = await Fetch.getApi(url) as iPlaylist[] ?? null;
-            setListaPlaylists(listaPlaylists);
-            nProgress.done();
-        }
-
-        if (usuarioId) {
-            getPlaylists(usuarioId);
-        }
-    }, [usuarioId]);
+    const listaPlaylists = usePlaylistsByUsuarioId(usuarioId, false) as iPlaylist[];
 
     if (!isAuth) {
         Router.push({ pathname: CONSTS_TELAS.ERRO, query: { erro: CONSTS_ERROS.SEM_ACESSO } });
