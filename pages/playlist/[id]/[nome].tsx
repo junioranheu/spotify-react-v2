@@ -6,6 +6,7 @@ import Botao from '../../../components/outros/botao';
 import ImageWithFallback from '../../../components/outros/imageWithFallback';
 import MusicaRow from '../../../components/playlists/musicaRow';
 import { Fetch } from '../../../utils/api/fetch';
+import CONSTS_MUSICAS from '../../../utils/consts/data/constMusicas';
 import CONSTS_PLAYLISTS from '../../../utils/consts/data/constPlaylists';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
 import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
@@ -14,6 +15,7 @@ import { FilaMusicasStorage, MusicaContext } from '../../../utils/context/musica
 import { Auth } from '../../../utils/context/usuarioContext';
 import ajustarUrl from '../../../utils/outros/ajustarUrl';
 import formatarSegundos from '../../../utils/outros/formatarSegundos';
+import iMusica from '../../../utils/types/iMusica';
 import iPlaylist from '../../../utils/types/iPlaylist';
 import iPlaylistMusica from '../../../utils/types/iPlaylistMusica';
 import Styles from './playlist.module.scss';
@@ -85,6 +87,10 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
             return `${bandas} e mais`;
         }
 
+        if (bandas === undefined || bandas === null || bandas === 'undefined') {
+            bandas = '';
+        }
+
         nProgress.done();
         return bandas;
     }
@@ -120,6 +126,22 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
         }
     }, [isMusicaClicadaParaSetarLista, playlist?.playlistsMusicas, setFilaMusicasContext]);
 
+    // Buscar músicas novamente (forçar getStaticProps);
+    const [listaMusicas, setListaMusicas] = useState<iMusica[]>();
+    useEffect(() => {
+        async function getMusicasByPlaylistId(playlistId: string) {
+            nProgress.start()
+            const url = `${CONSTS_MUSICAS.API_URL_BY_PLAYLIST}/${playlistId}`;
+            const musicas = await Fetch.getApi(url) as iMusica[];
+            setListaMusicas(musicas);
+            nProgress.done();
+        }
+
+        if (playlist?.playlistId) {
+            getMusicasByPlaylistId(playlist?.playlistId.toString());
+        }
+    }, [playlist?.playlistId]);
+
     return (
         <Fragment>
             <Head>
@@ -142,7 +164,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                             </div>
                         )
                     }
- 
+
                     <div className={Styles.divEsquerda}>
                         <span className={Styles.span1}>Lista de reprodução</span>
                         <span className={Styles.span2}>{playlist.nome}</span>
@@ -151,7 +173,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                             {playlist.usuarios?.nomeCompleto} • {playlist.playlistsMusicas?.length} {(playlist.playlistsMusicas?.length === 1 ? 'música' : 'músicas')}, {somarDuracaoPlaylist(playlist)}
                         </span>
                     </div>
- 
+
                     {
                         isUsuarioOwnerPlaylist && (
                             <div className={Styles.divDireita}>
@@ -175,22 +197,22 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                 <div className='div-padrao'>
                     <div>
                         {
-                            playlist?.playlistsMusicas?.length > 0 ? (
+                            listaMusicas && listaMusicas?.length > 0 ? (
                                 <Fragment>
                                     {
-                                        playlist.playlistsMusicas.map((m: iPlaylistMusica, i: number) => (
+                                        listaMusicas && listaMusicas.map((m: iMusica, i: number) => (
                                             <MusicaRow
-                                                key={m.musicas?.musicaId}
-                                                musicaId={m.musicas?.musicaId ?? 0}
+                                                key={m?.musicaId}
+                                                musicaId={m?.musicaId ?? 0}
                                                 i={(i + 1)} // A ordem tem que começar no 1;   
                                                 // @ts-ignore;    
-                                                foto={m.musicas?.musicasBandas[0]?.bandas?.foto}
-                                                titulo={m.musicas?.nome}
+                                                foto={m?.musicasBandas[0]?.bandas?.foto}
+                                                titulo={m?.nome}
                                                 // @ts-ignore;
-                                                banda={m.musicas?.musicasBandas[0]?.bandas?.nome}
+                                                banda={m?.musicasBandas[0]?.bandas?.nome}
                                                 // @ts-ignore;
-                                                album={m.musicas?.albunsMusicas?.albuns?.nome}
-                                                tempo={m.musicas?.duracaoSegundos}
+                                                album={m?.albunsMusicas?.albuns?.nome}
+                                                tempo={m?.duracaoSegundos}
                                                 isDesativarUm={false}
                                                 setIsMusicaClicadaParaSetarLista={setIsMusicaClicadaParaSetarLista}
                                             />
