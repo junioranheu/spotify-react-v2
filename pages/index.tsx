@@ -1,6 +1,5 @@
 import Head from 'next/head';
-import { Fragment, useEffect, useState } from 'react';
-import Playlists from '../components/playlists/playlists';
+import { Fragment, lazy, useEffect, useState } from 'react';
 import Styles from '../styles/index.module.scss';
 import { Fetch } from '../utils/api/fetch';
 import HabilitarHttp from '../utils/api/habilitarHttp';
@@ -9,6 +8,7 @@ import CONSTS_SISTEMA from '../utils/consts/outros/sistema';
 import emojiAleatorio from '../utils/outros/gerarEmojiAleatorio';
 import gerarOla from '../utils/outros/gerarOla';
 import iPlaylist from '../utils/types/iPlaylist';
+const Playlists = lazy(() => import('../components/playlists/playlists'));
 
 interface iParametros {
     listaPlaylistsAdm: iPlaylist[];

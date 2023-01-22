@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, lazy, useContext, useEffect, useState } from 'react';
 import ImgCinza from '../../../assets/image/cinza.webp';
 import useIsTelaModoProibirMusicasAtributoIsJaTocada from '../../../hooks/outros/useIsTelaModoProibirMusicasAtributoIsJaTocada';
 import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
@@ -28,9 +28,9 @@ import Loop from '../../svg/barra.player/loop';
 import Microfone from '../../svg/barra.player/microfone';
 import Toggle from '../../svg/barra.player/toggle';
 import Styles from './barra.player.module.scss';
-import ProgressBarPlayer from './outros/progressBar.player';
 import ProgressBarVolume from './outros/progressBar.volume';
 import ProgressBarVolumeIcone from './outros/progressBar.volume.icone';
+const ProgressBarPlayer = lazy(() => import('./outros/progressBar.player'));
 
 export default function BarraPlayer() {
 

@@ -63,11 +63,11 @@ export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tem
 
     async function handleSetarMusica(musicaId: number) {
         // Se o usuário estiver deslogado;
-        if (!isAuth) {
-            setModalAvisoLoginDescricao('Inicie uma sessão para escutar essa música!');
-            setIsModalAvisoLoginOpen(true);
-            return false;
-        }
+        // if (!isAuth) {
+        //     setModalAvisoLoginDescricao('Inicie uma sessão para escutar essa música!');
+        //     setIsModalAvisoLoginOpen(true);
+        //     return false;
+        // }
 
         if (!musicaId) {
             Aviso.custom('Houve um erro ao identificar esta música', 5000);
