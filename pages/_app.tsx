@@ -1,3 +1,6 @@
+import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
+import { MusicaProvider } from '@utils/context/musicaContext';
+import { UsuarioProvider } from '@utils/context/usuarioContext';
 import 'animate.css/animate.min.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -8,9 +11,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LayoutPadrao from '../layouts/layoutPadrao';
 import '../styles/globals.scss';
-import CONSTS_SISTEMA from '../utils/consts/outros/sistema';
-import { MusicaProvider } from '../utils/context/musicaContext';
-import { UsuarioProvider } from '../utils/context/usuarioContext';
 
 export default function App({ Component, pageProps }: AppProps) {
 

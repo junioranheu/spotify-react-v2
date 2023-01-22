@@ -1,4 +1,4 @@
-import iSvg from '../../utils/types/iSvg';
+import iSvg from '@utils/types/iSvg';
 
 export default function Github({ width }: iSvg) {
     return (

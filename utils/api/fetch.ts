@@ -1,6 +1,6 @@
+import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
 import Router from 'next/router';
 import nProgress from 'nprogress';
-import CONSTS_AUTENTICAR from '../../utils/consts/data/constAutenticar';
 import CONSTS_ERROS from '../consts/outros/erros';
 import CONSTS_SISTEMA from '../consts/outros/sistema';
 import CONSTS_TELAS from '../consts/outros/telas';

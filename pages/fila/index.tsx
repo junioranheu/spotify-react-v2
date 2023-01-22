@@ -1,13 +1,13 @@
+import MusicaRow from '@components//playlists/musicaRow';
+import CONSTS_ERROS from '@utils/consts/outros/erros';
+import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
+import CONSTS_TELAS from '@utils/consts/outros/telas';
+import { MusicaContext } from '@utils/context/musicaContext';
+import { UsuarioContext } from '@utils/context/usuarioContext';
+import iPlaylistMusica from '@utils/types/iPlaylistMusica';
 import Head from 'next/head';
 import Router from 'next/router';
 import { Fragment, useContext, useEffect, useState } from 'react';
-import MusicaRow from '../../components/playlists/musicaRow';
-import CONSTS_ERROS from '../../utils/consts/outros/erros';
-import CONSTS_SISTEMA from '../../utils/consts/outros/sistema';
-import CONSTS_TELAS from '../../utils/consts/outros/telas';
-import { MusicaContext } from '../../utils/context/musicaContext';
-import { UsuarioContext } from '../../utils/context/usuarioContext';
-import iPlaylistMusica from '../../utils/types/iPlaylistMusica';
 
 export default function Index() {
 

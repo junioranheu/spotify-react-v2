@@ -1,6 +1,6 @@
+import { Aviso } from '@utils/outros/aviso';
 import { Dispatch, Fragment, ReactNode } from 'react';
 import { FileUploader } from 'react-drag-drop-files'; // https://www.npmjs.com/package/react-drag-drop-files
-import { Aviso } from '../../utils/outros/aviso';
 
 interface iParametros {
     nomeElemento: string;

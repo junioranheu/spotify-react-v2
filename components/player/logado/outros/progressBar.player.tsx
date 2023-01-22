@@ -1,14 +1,14 @@
+import useWindowSize from '@hooks//outros/useWindowSize';
+import { Fetch } from '@utils/api/fetch';
+import CONSTS_UPLOAD_PROTEGIDO from '@utils/consts/data/constUploadProtegido';
+import { FilaMusicasStorage, MusicaContext } from '@utils/context/musicaContext';
+import { Aviso } from '@utils/outros/aviso';
+import converterStreamEmObjectURL from '@utils/outros/converterStreamEmObjectURL';
+import formatarSegundos from '@utils/outros/formatarSegundos';
+import UUID from '@utils/outros/UUID';
 import nProgress from 'nprogress';
 import { Fragment, MouseEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useLongPress } from 'use-long-press'; // https://www.npmjs.com/package/use-long-press
-import useWindowSize from '../../../../hooks/outros/useWindowSize';
-import { Fetch } from '../../../../utils/api/fetch';
-import CONSTS_UPLOAD_PROTEGIDO from '../../../../utils/consts/data/constUploadProtegido';
-import { FilaMusicasStorage, MusicaContext } from '../../../../utils/context/musicaContext';
-import { Aviso } from '../../../../utils/outros/aviso';
-import converterStreamEmObjectURL from '../../../../utils/outros/converterStreamEmObjectURL';
-import formatarSegundos from '../../../../utils/outros/formatarSegundos';
-import UUID from '../../../../utils/outros/UUID';
 import Styles from '../outros/progressBar.module.scss';
 
 interface iParametros {

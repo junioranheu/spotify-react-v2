@@ -1,11 +1,11 @@
+import ImgCinza from '@assets//image/cinza.webp';
+import ImageWithFallback from '@components//outros/imageWithFallback';
+import CONSTS_UPLOAD from '@utils/consts/data/constUpload';
+import CONSTS_TELAS from '@utils/consts/outros/telas';
+import ajustarUrl from '@utils/outros/ajustarUrl';
+import iPlaylist from '@utils/types/iPlaylist';
 import Link from 'next/link';
 import ScrollContainer from 'react-indiana-drag-scroll'; // https://www.npmjs.com/package/react-indiana-drag-scroll
-import ImgCinza from '../../assets/image/cinza.webp';
-import ImageWithFallback from '../../components/outros/imageWithFallback';
-import CONSTS_UPLOAD from '../../utils/consts/data/constUpload';
-import CONSTS_TELAS from '../../utils/consts/outros/telas';
-import ajustarUrl from '../../utils/outros/ajustarUrl';
-import iPlaylist from '../../utils/types/iPlaylist';
 import ContentLoaderQuadrado from '../outros/contentLoader.quadrado';
 import BotaoPlay from '../svg/botaoPlay';
 import Styles from './playlists.module.scss';

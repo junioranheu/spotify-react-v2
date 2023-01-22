@@ -1,22 +1,22 @@
+import Botao from '@components//outros/botao';
+import { Fetch } from '@utils/api/fetch';
+import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
+import CONSTS_ERROS from '@utils/consts/outros/erros';
+import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
+import CONSTS_TELAS from '@utils/consts/outros/telas';
+import { Auth, UsuarioContext } from '@utils/context/usuarioContext';
+import { Aviso } from '@utils/outros/aviso';
+import horarioBrasilia from '@utils/outros/horarioBrasilia';
+import padronizarNomeCompletoUsuario from '@utils/outros/padronizarNomeCompletoUsuario';
+import validarDadosCriarConta from '@utils/outros/validarDadosCriarConta';
+import iContextDadosUsuario from '@utils/types/iContext.dadosUsuario';
+import iUsuario from '@utils/types/iUsuario';
 import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import { ChangeEvent, Fragment, KeyboardEvent, useContext, useRef, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
-import Botao from '../../components/outros/botao';
-import { Fetch } from '../../utils/api/fetch';
-import CONSTS_AUTENTICAR from '../../utils/consts/data/constAutenticar';
-import CONSTS_ERROS from '../../utils/consts/outros/erros';
-import CONSTS_SISTEMA from '../../utils/consts/outros/sistema';
-import CONSTS_TELAS from '../../utils/consts/outros/telas';
-import { Auth, UsuarioContext } from '../../utils/context/usuarioContext';
-import { Aviso } from '../../utils/outros/aviso';
-import horarioBrasilia from '../../utils/outros/horarioBrasilia';
-import padronizarNomeCompletoUsuario from '../../utils/outros/padronizarNomeCompletoUsuario';
-import validarDadosCriarConta from '../../utils/outros/validarDadosCriarConta';
-import iContextDadosUsuario from '../../utils/types/iContext.dadosUsuario';
-import iUsuario from '../../utils/types/iUsuario';
 import Styles from './entrar.module.scss';
 
 interface iFormData {

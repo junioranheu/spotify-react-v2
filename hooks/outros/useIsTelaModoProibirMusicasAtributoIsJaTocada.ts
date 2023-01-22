@@ -1,6 +1,6 @@
+import CONSTS_TELAS from '@utils/consts/outros/telas';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import CONSTS_TELAS from '../../utils/consts/outros/telas';
 
 export default function useIsTelaModoProibirMusicasAtributoIsJaTocada() {
 

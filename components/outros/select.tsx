@@ -1,6 +1,6 @@
+import formatarDadosParaDropDown from '@utils/outros/formatarDadosParaDropDown';
 import { Dispatch } from 'react';
 import Select from 'react-select'; // https://www.npmjs.com/package/react-select
-import formatarDadosParaDropDown from '../../utils/outros/formatarDadosParaDropDown';
 
 interface iParametros {
     selectMulti: any;

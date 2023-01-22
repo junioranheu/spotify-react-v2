@@ -1,12 +1,12 @@
+import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
+import CONSTS_TELAS from '@utils/consts/outros/telas';
+import { UsuarioContext } from '@utils/context/usuarioContext';
+import avisoFuncaoNaoDesenvolvida from '@utils/outros/avisoFuncaoNaoDesenvolvida';
 import { loremIpsum } from 'lorem-ipsum';
 import Link from 'next/link';
 import Router from 'next/router';
 import { Resizable } from 're-resizable';
 import { Fragment, useContext, useState } from 'react';
-import CONSTS_MODAL from '../../../utils/consts/outros/modal.tamanho';
-import CONSTS_TELAS from '../../../utils/consts/outros/telas';
-import { UsuarioContext } from '../../../utils/context/usuarioContext';
-import avisoFuncaoNaoDesenvolvida from '../../../utils/outros/avisoFuncaoNaoDesenvolvida';
 import ModalAvisoLogin from '../../modal/modal.aviso/login';
 import ModalLayout from '../../modal/_modal.layout';
 import ModalWrapper from '../../modal/_modal.wrapper';

@@ -1,8 +1,8 @@
+import ImgCinza from '@assets//image/cinza.webp';
+import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
+import converterSrcImagemParaBase64 from '@utils/outros/converterSrcImagemParaBase64';
 import Image from 'next/image';
 import { Dispatch, Fragment, useEffect, useState } from 'react';
-import ImgCinza from '../../assets/image/cinza.webp';
-import CONSTS_MODAL from '../../utils/consts/outros/modal.tamanho';
-import converterSrcImagemParaBase64 from '../../utils/outros/converterSrcImagemParaBase64';
 import ModalUpload from '../modal/modal.upload/modal.upload';
 import ModalLayout from '../modal/_modal.layout';
 import ModalWrapper from '../modal/_modal.wrapper';

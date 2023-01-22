@@ -1,15 +1,15 @@
+import Botao from '@components//outros/botao';
+import Input from '@components//outros/input';
+import TopHat from '@components//outros/topHat';
+import Mais from '@components//svg/mais';
+import DivUpload from '@components//upload/divUpload';
 import { BlockPicker } from '@hello-pangea/color-picker'; // https://www.npmjs.com/package/@hello-pangea/color-picker
+import useEmoji from '@hooks//outros/useEmoji';
+import CONSTS_UPLOAD from '@utils/consts/data/constUpload';
+import UPLOAD_SETTINGS from '@utils/consts/outros/uploadSettings';
+import iFormDataPlaylist from '@utils/types/iFormData.playlist';
 import { ChangeEvent, Dispatch, MutableRefObject } from 'react';
-import Botao from '../../../components/outros/botao';
-import Input from '../../../components/outros/input';
-import TopHat from '../../../components/outros/topHat';
-import Mais from '../../../components/svg/mais';
-import DivUpload from '../../../components/upload/divUpload';
-import useEmoji from '../../../hooks/outros/useEmoji';
 import Styles from '../../../styles/form.module.scss';
-import CONSTS_UPLOAD from '../../../utils/consts/data/constUpload';
-import UPLOAD_SETTINGS from '../../../utils/consts/outros/uploadSettings';
-import iFormDataPlaylist from '../../../utils/types/iFormData.playlist';
 
 interface iParametros {
     tituloTopHat: string;

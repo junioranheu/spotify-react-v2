@@ -1,4 +1,4 @@
-import iSvg from '../../utils/types/iSvg';
+import iSvg from '@utils/types/iSvg';
 
 export default function Mais({ width, cor }: iSvg) {
     return (

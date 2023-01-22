@@ -1,6 +1,6 @@
+import useWindowSize from '@hooks//outros/useWindowSize';
 import { MouseEvent, useCallback, useEffect, useState } from 'react';
 import { useLongPress } from 'use-long-press'; // https://www.npmjs.com/package/use-long-press
-import useWindowSize from '../../../../hooks/outros/useWindowSize';
 import Styles from './progressBar.module.scss';
 
 interface iParametros {

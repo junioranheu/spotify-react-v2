@@ -1,9 +1,9 @@
+import { Fetch } from '@utils/api/fetch';
+import CONSTS_PLAYLISTS from '@utils/consts/data/constPlaylists';
+import formatarDadosParaDropDown from '@utils/outros/formatarDadosParaDropDown';
+import iPlaylist from '@utils/types/iPlaylist';
 import nProgress from 'nprogress';
 import { useEffect, useState } from 'react';
-import { Fetch } from '../../utils/api/fetch';
-import CONSTS_PLAYLISTS from '../../utils/consts/data/constPlaylists';
-import formatarDadosParaDropDown from '../../utils/outros/formatarDadosParaDropDown';
-import iPlaylist from '../../utils/types/iPlaylist';
 
 export default function usePlaylistsByUsuarioId(usuarioId: number, isFormatarDadosParaDropdown: boolean) {
      

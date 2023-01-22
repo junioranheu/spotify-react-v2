@@ -1,11 +1,11 @@
+import CONSTS_TELAS from '@utils/consts/outros/telas';
+import { FilaMusicasStorage, MusicaStorage } from '@utils/context/musicaContext';
+import { Auth, UsuarioContext } from '@utils/context/usuarioContext';
 import Link from 'next/link';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { Fragment, useContext, useState } from 'react';
 import { debounce } from 'ts-debounce'; // debounce: https://www.npmjs.com/package/ts-debounce | Delay React onMouseOver event: https://stackoverflow.com/a/68349975
-import CONSTS_TELAS from '../../../utils/consts/outros/telas';
-import { FilaMusicasStorage, MusicaStorage } from '../../../utils/context/musicaContext';
-import { Auth, UsuarioContext } from '../../../utils/context/usuarioContext';
 import Botao from '../../outros/botao';
 import BotaoSvgRedirecionar from '../../outros/botao.svg.redirecionar';
 import SetinhaBaixo from '../../svg/setinhaBaixo';

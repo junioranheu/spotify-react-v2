@@ -1,14 +1,14 @@
+import Playlists from '@components//playlists/playlists';
+import usePlaylistsByUsuarioId from '@hooks//api/usePlaylistsByUsuarioId';
+import CONSTS_ERROS from '@utils/consts/outros/erros';
+import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
+import CONSTS_TELAS from '@utils/consts/outros/telas';
+import { Auth, UsuarioContext } from '@utils/context/usuarioContext';
+import iPlaylist from '@utils/types/iPlaylist';
 import Head from 'next/head';
 import Router from 'next/router';
 import { Fragment, useContext } from 'react';
-import Playlists from '../../../components/playlists/playlists';
-import usePlaylistsByUsuarioId from '../../../hooks/api/usePlaylistsByUsuarioId';
 import StylesIndex from '../../../styles/index.module.scss';
-import CONSTS_ERROS from '../../../utils/consts/outros/erros';
-import CONSTS_SISTEMA from '../../../utils/consts/outros/sistema';
-import CONSTS_TELAS from '../../../utils/consts/outros/telas';
-import { Auth, UsuarioContext } from '../../../utils/context/usuarioContext';
-import iPlaylist from '../../../utils/types/iPlaylist';
 import Styles from './gerenciar.module.scss';
 
 export default function Index() {

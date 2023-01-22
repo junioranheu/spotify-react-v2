@@ -1,6 +1,6 @@
+import UUID from '@utils/outros/UUID';
 import { Dispatch, FocusEventHandler, KeyboardEventHandler, MutableRefObject } from 'react';
 import InputMask from 'react-input-mask';
-import UUID from '../../utils/outros/UUID';
 
 interface iParametros {
     placeholder: string | null;
