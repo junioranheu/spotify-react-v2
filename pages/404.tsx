@@ -1,5 +1,5 @@
 import Lottie404 from '@assets//lotties/404.json';
-import Botao from '@components//outros/botao';
+import Botao from '@components/outros/botao';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import Lottie from 'lottie-react';
 import Head from 'next/head';

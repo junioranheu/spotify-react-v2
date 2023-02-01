@@ -1,7 +1,7 @@
-import ModalAvisoLogin from '@components//modal/modal.aviso/login';
-import ModalLayout from '@components//modal/_modal.layout';
-import ModalWrapper from '@components//modal/_modal.wrapper';
-import Botao from '@components//outros/botao';
+import ModalAvisoLogin from '@components/modal/modal.aviso/login';
+import ModalLayout from '@components/modal/_modal.layout';
+import ModalWrapper from '@components/modal/_modal.wrapper';
+import Botao from '@components/outros/botao';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
 import CONSTS_ERROS from '@utils/consts/outros/erros';

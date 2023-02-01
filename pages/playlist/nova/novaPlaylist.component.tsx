@@ -1,8 +1,8 @@
-import Botao from '@components//outros/botao';
-import Input from '@components//outros/input';
-import TopHat from '@components//outros/topHat';
-import Mais from '@components//svg/mais';
-import DivUpload from '@components//upload/divUpload';
+import Botao from '@components/outros/botao';
+import Input from '@components/outros/input';
+import TopHat from '@components/outros/topHat';
+import Mais from '@components/svg/mais';
+import DivUpload from '@components/upload/divUpload';
 import { BlockPicker } from '@hello-pangea/color-picker'; // https://www.npmjs.com/package/@hello-pangea/color-picker
 import useEmoji from '@hooks//outros/useEmoji';
 import CONSTS_UPLOAD from '@utils/consts/data/constUpload';

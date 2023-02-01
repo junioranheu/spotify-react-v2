@@ -1,7 +1,7 @@
 import ImgCinza from '@assets//image/cinza.webp';
-import Botao from '@components//outros/botao';
-import ImageWithFallback from '@components//outros/imageWithFallback';
-import MusicaRow from '@components//playlists/musicaRow';
+import Botao from '@components/outros/botao';
+import ImageWithFallback from '@components/outros/imageWithFallback';
+import MusicaRow from '@components/playlists/musicaRow';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_MUSICAS from '@utils/consts/data/constMusicas';
 import CONSTS_PLAYLISTS from '@utils/consts/data/constPlaylists';

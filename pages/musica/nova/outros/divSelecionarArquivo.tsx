@@ -1,5 +1,5 @@
-import Botao from '@components//outros/botao';
-import Input from '@components//outros/input';
+import Botao from '@components/outros/botao';
+import Input from '@components/outros/input';
 import converterArquivoParaBase64 from '@utils/outros/converterArquivoParaBase64';
 import validarUrlYoutube from '@utils/outros/validacoes/validar.url.youtube';
 import iFormDataMusica from '@utils/types/iFormData.musica';

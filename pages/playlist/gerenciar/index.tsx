@@ -1,4 +1,4 @@
-import Playlists from '@components//playlists/playlists';
+import Playlists from '@components/playlists/playlists';
 import usePlaylistsByUsuarioId from '@hooks//api/usePlaylistsByUsuarioId';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';

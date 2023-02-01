@@ -1,4 +1,4 @@
-import MusicaRow from '@components//playlists/musicaRow';
+import MusicaRow from '@components/playlists/musicaRow';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';

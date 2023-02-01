@@ -1,7 +1,7 @@
 import ImgCinza from '@assets//image/cinza.webp';
 import GifEqualiser from '@assets//image/equaliser.gif';
-import Coracao from '@components//outros/coracao';
-import Reticencias from '@components//svg/reticencias';
+import Coracao from '@components/outros/coracao';
+import Reticencias from '@components/svg/reticencias';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_MUSICAS from '@utils/consts/data/constMusicas';
 import CONSTS_UPLOAD from '@utils/consts/data/constUpload';

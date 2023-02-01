@@ -1,4 +1,4 @@
-import Botao from '@components//outros/botao';
+import Botao from '@components/outros/botao';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
 import CONSTS_ERROS from '@utils/consts/outros/erros';

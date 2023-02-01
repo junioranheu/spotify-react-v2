@@ -1,8 +1,8 @@
-import Botao from '@components//outros/botao';
-import Input from '@components//outros/input';
-import InputSelect from '@components//outros/select';
-import TopHat from '@components//outros/topHat';
-import Musica from '@components//svg/musica';
+import Botao from '@components/outros/botao';
+import Input from '@components/outros/input';
+import InputSelect from '@components/outros/select';
+import TopHat from '@components/outros/topHat';
+import Musica from '@components/svg/musica';
 import usePlaylistsByUsuarioId from '@hooks//api/usePlaylistsByUsuarioId';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_MUSICAS from '@utils/consts/data/constMusicas';

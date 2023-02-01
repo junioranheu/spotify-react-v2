@@ -1,5 +1,5 @@
 import ImgCinza from '@assets//image/cinza.webp';
-import ImageWithFallback from '@components//outros/imageWithFallback';
+import ImageWithFallback from '@components/outros/imageWithFallback';
 import CONSTS_UPLOAD from '@utils/consts/data/constUpload';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import ajustarUrl from '@utils/outros/ajustarUrl';
