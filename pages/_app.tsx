@@ -1,6 +1,8 @@
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import { MusicaProvider } from '@utils/context/musicaContext';
 import { UsuarioProvider } from '@utils/context/usuarioContext';
+import { Aviso } from '@utils/outros/aviso';
+import pegarNomeNavegador from '@utils/outros/pegarNomeNavegador';
 import 'animate.css/animate.min.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -22,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         // Scrollar pro top automaticamente;
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         // process.env.NODE_ENV === 'production' && console.clear(); 
-        console.clear(); 
+        console.clear();
     }, [asPath]);
 
     function verificarLayout() {
@@ -68,6 +70,16 @@ export default function App({ Component, pageProps }: AppProps) {
                 }
             }
         }
+    }, []);
+
+    useEffect(() => {
+        async function handleAvisoNavegador() {
+            if (await pegarNomeNavegador() !== 'Chrome') {
+                Aviso.warn('Parece que seu navegador não é o <b>Google Chrome</b>! Isso talvez possa afetar negativamente em alguns pontos, como: imagens e até mesmo ao tocar alguma música!', 10000);
+            }
+        }
+
+        handleAvisoNavegador();
     }, []);
 
     return url ?
