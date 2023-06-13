@@ -1,3 +1,4 @@
+import Styles from '@styles/index.module.scss';
 import { Fetch } from '@utils/api/fetch';
 import HabilitarHttp from '@utils/api/habilitarHttp';
 import CONSTS_PLAYLISTS from '@utils/consts/data/constPlaylists';
@@ -7,7 +8,6 @@ import gerarOla from '@utils/outros/gerarOla';
 import iPlaylist from '@utils/types/iPlaylist';
 import Head from 'next/head';
 import { Fragment, lazy, useEffect, useState } from 'react';
-import Styles from '../styles/index.module.scss';
 const Playlists = lazy(() => import('@components/playlists/playlists'));
 
 interface iParametros {

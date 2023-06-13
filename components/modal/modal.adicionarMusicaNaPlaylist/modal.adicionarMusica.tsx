@@ -1,3 +1,4 @@
+import Botao from '@components/outros/botao';
 import usePlaylistsByUsuarioId from '@hooks//api/usePlaylistsByUsuarioId';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_MUSICAS from '@utils/consts/data/constMusicas';
@@ -7,7 +8,6 @@ import { Aviso } from '@utils/outros/aviso';
 import iMusica from '@utils/types/iMusica';
 import iPlaylist from '@utils/types/iPlaylist';
 import { Dispatch, useRef, useState } from 'react';
-import Botao from '../../outros/botao';
 import InputSelect from '../../outros/select';
 import Styles from './modal.adicionarMusica.module.scss';
 

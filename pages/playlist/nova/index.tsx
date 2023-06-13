@@ -1,9 +1,9 @@
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_PLAYLISTS from '@utils/consts/data/constPlaylists';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
-import { UsuarioContext } from '@utils/context/usuarioContext';
 import ajustarUrl from '@utils/outros/ajustarUrl';
 import { Aviso } from '@utils/outros/aviso';
 import iFormDataPlaylist from '@utils/types/iFormData.playlist';
@@ -11,13 +11,12 @@ import iPlaylist from '@utils/types/iPlaylist';
 import Head from 'next/head';
 import Router from 'next/router';
 import nProgress from 'nprogress';
-import { ChangeEvent, Fragment, useContext, useRef, useState } from 'react';
+import { ChangeEvent, Fragment, useRef, useState } from 'react';
 import NovaPlaylistComponent from './novaPlaylist.component';
 
 export default function Index() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
 

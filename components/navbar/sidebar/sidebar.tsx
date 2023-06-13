@@ -1,15 +1,15 @@
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
-import { UsuarioContext } from '@utils/context/usuarioContext';
 import avisoFuncaoNaoDesenvolvida from '@utils/outros/avisoFuncaoNaoDesenvolvida';
 import { loremIpsum } from 'lorem-ipsum';
 import Link from 'next/link';
 import Router from 'next/router';
 import { Resizable } from 're-resizable';
-import { Fragment, useContext, useState } from 'react';
-import ModalAvisoLogin from '../../modal/modal.aviso/login';
+import { Fragment, useState } from 'react';
 import ModalLayout from '../../modal/_modal.layout';
 import ModalWrapper from '../../modal/_modal.wrapper';
+import ModalAvisoLogin from '../../modal/modal.aviso/login';
 import Biblioteca from '../../svg/biblioteca';
 import Casa from '../../svg/casa';
 import Coracao from '../../svg/coracao';
@@ -22,8 +22,7 @@ import Styles from './sidebar.module.scss';
 
 export default function Sidebar() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     const [msg1, setMsg1] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
     const [msg2, setMsg2] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));

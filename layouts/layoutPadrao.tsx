@@ -1,6 +1,6 @@
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import verificarTokenValido from '@utils/api/verificarTokenValido';
-import { UsuarioContext } from '@utils/context/usuarioContext';
-import { lazy, useContext, useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import Styles from './styles/layoutPadrao.module.scss';
 const Barra = lazy(() => import('@components/player/barra'));
 const Sidebar = lazy(() => import('@components/navbar/sidebar/sidebar'));
@@ -8,8 +8,7 @@ const NavbarPadrao = lazy(() => import('@components/navbar/navbar-padrao/navbar-
 
 export default function LayoutPadrao({ Component, pageProps }: any) {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     // Verificar se o token ainda é válido;
     useEffect(() => {

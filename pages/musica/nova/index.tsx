@@ -4,12 +4,14 @@ import InputSelect from '@components/outros/select';
 import TopHat from '@components/outros/topHat';
 import Musica from '@components/svg/musica';
 import usePlaylistsByUsuarioId from '@hooks//api/usePlaylistsByUsuarioId';
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
+import Styles from '@styles/form.module.scss';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_MUSICAS from '@utils/consts/data/constMusicas';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
-import { Auth, UsuarioContext } from '@utils/context/usuarioContext';
+import { Auth } from '@utils/context/usuarioContext';
 import { Aviso } from '@utils/outros/aviso';
 import validarDataNascimento from '@utils/outros/validacoes/validar.dataNascimento';
 import iFormDataMusica from '@utils/types/iFormData.musica';
@@ -19,14 +21,12 @@ import moment from 'moment';
 import Head from 'next/head';
 import Router from 'next/router';
 import nProgress from 'nprogress';
-import { ChangeEvent, Fragment, useContext, useRef, useState } from 'react';
-import Styles from '../../../styles/form.module.scss';
+import { ChangeEvent, Fragment, useRef, useState } from 'react';
 import DivSelecionarArquivo from './outros/divSelecionarArquivo';
 
 export default function Index() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
     const usuarioId = Auth?.get()?.usuarioId ?? 0;
 
     const refBtn = useRef<HTMLButtonElement | any>(null);

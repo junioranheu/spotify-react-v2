@@ -1,11 +1,11 @@
+import Botao from '@components/outros/botao';
 import TIPOS_ARQUIVOS_UPLOAD_IMAGEM from '@utils/consts/outros/tiposArquivosUpload.imagem';
 import UPLOAD_SETTINGS from '@utils/consts/outros/uploadSettings';
+import UUID from '@utils/outros/UUID';
 import { Aviso } from '@utils/outros/aviso';
 import dataUrltoFile from '@utils/outros/dataURLToFile';
-import UUID from '@utils/outros/UUID';
 import NProgress from 'nprogress';
 import { Dispatch, Fragment, useEffect, useState } from 'react';
-import Botao from '../../outros/botao';
 import DragDropFile from '../../upload/dragDropFile';
 import { FecharModal } from '../fecharModal';
 import ModalUploadConteudo from './modal.upload.conteudo';

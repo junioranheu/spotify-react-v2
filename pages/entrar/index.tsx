@@ -1,14 +1,15 @@
-import ModalAvisoLogin from '@components/modal/modal.aviso/login';
 import ModalLayout from '@components/modal/_modal.layout';
 import ModalWrapper from '@components/modal/_modal.wrapper';
+import ModalAvisoLogin from '@components/modal/modal.aviso/login';
 import Botao from '@components/outros/botao';
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
-import { Auth, UsuarioContext } from '@utils/context/usuarioContext';
+import { Auth } from '@utils/context/usuarioContext';
 import { Aviso } from '@utils/outros/aviso';
 import iContextDadosUsuario from '@utils/types/iContext.dadosUsuario';
 import iUsuario from '@utils/types/iUsuario';
@@ -16,7 +17,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import nProgress from 'nprogress';
-import { ChangeEvent, Fragment, KeyboardEvent, useContext, useRef, useState } from 'react';
+import { ChangeEvent, Fragment, KeyboardEvent, useRef, useState } from 'react';
 import Styles from './entrar.module.scss';
 
 interface iFormData {
@@ -26,8 +27,7 @@ interface iFormData {
 
 export default function Index() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     const refUsuario = useRef<HTMLInputElement | any>(null);
     const refSenha = useRef<HTMLInputElement | any>(null);

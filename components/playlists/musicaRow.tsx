@@ -2,22 +2,22 @@ import ImgCinza from '@assets//image/cinza.webp';
 import GifEqualiser from '@assets//image/equaliser.gif';
 import Coracao from '@components/outros/coracao';
 import Reticencias from '@components/svg/reticencias';
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_MUSICAS from '@utils/consts/data/constMusicas';
 import CONSTS_UPLOAD from '@utils/consts/data/constUpload';
 import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import { MusicaContext, MusicaStorage } from '@utils/context/musicaContext';
-import { UsuarioContext } from '@utils/context/usuarioContext';
 import { Aviso } from '@utils/outros/aviso';
 import formatarSegundos from '@utils/outros/formatarSegundos';
 import Image, { StaticImageData } from 'next/image';
 import { Dispatch, Fragment, useContext, useEffect, useState } from 'react';
 import { debounce } from 'ts-debounce'; // debounce: https://www.npmjs.com/package/ts-debounce | Delay React onMouseOver event: https://stackoverflow.com/a/68349975
-import ModalAdicionarMusica from '../modal/modal.adicionarMusicaNaPlaylist/modal.adicionarMusica';
-import ModalAvisoLogin from '../modal/modal.aviso/login';
 import ModalLayout from '../modal/_modal.layout';
 import ModalWrapper from '../modal/_modal.wrapper';
+import ModalAdicionarMusica from '../modal/modal.adicionarMusicaNaPlaylist/modal.adicionarMusica';
+import ModalAvisoLogin from '../modal/modal.aviso/login';
 import BotaoPlay from '../svg/botaoPlay';
 import Styles from './musicaRow.module.scss';
 import SubMenu from './subMenu';
@@ -36,8 +36,7 @@ interface iParametros {
 
 export default function MusicaRow({ i, musicaId, foto, titulo, banda, album, tempo, isDesativarUm, setIsMusicaClicadaParaSetarLista }: iParametros) {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];

@@ -1,12 +1,12 @@
 import ImgCinza from '@assets//image/cinza.webp';
+import Botao from '@components/outros/botao';
 import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
 import converterSrcImagemParaBase64 from '@utils/outros/converterSrcImagemParaBase64';
 import Image from 'next/image';
 import { Dispatch, Fragment, useEffect, useState } from 'react';
-import ModalUpload from '../modal/modal.upload/modal.upload';
 import ModalLayout from '../modal/_modal.layout';
 import ModalWrapper from '../modal/_modal.wrapper';
-import Botao from '../outros/botao';
+import ModalUpload from '../modal/modal.upload/modal.upload';
 import Styles from './divUpload.module.scss';
 
 interface iParametros {

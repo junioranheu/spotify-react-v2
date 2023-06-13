@@ -5,11 +5,11 @@ import Mais from '@components/svg/mais';
 import DivUpload from '@components/upload/divUpload';
 import { BlockPicker } from '@hello-pangea/color-picker'; // https://www.npmjs.com/package/@hello-pangea/color-picker
 import useEmoji from '@hooks//outros/useEmoji';
+import Styles from '@styles/form.module.scss';
 import CONSTS_UPLOAD from '@utils/consts/data/constUpload';
 import UPLOAD_SETTINGS from '@utils/consts/outros/uploadSettings';
 import iFormDataPlaylist from '@utils/types/iFormData.playlist';
 import { ChangeEvent, Dispatch, MutableRefObject } from 'react';
-import Styles from '../../../styles/form.module.scss';
 
 interface iParametros {
     tituloTopHat: string;
@@ -90,7 +90,7 @@ export default function NovaPlaylistComponent({ tituloTopHat, formData, setFormD
                     <span className='separadorHorizontal'></span>
                     <div className={Styles.divInputPicker}>
                         <span className={Styles.titulo}>Cor predominante da playlist</span>
-                        <BlockPicker 
+                        <BlockPicker
                             className={Styles.componenteColorPicker}
                             defaultColor='#1B1039'
                             onChange={(e) => setFormData({ ...formData, ['corDominante']: e?.hex })}

@@ -1,9 +1,9 @@
 import MusicaRow from '@components/playlists/musicaRow';
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import { MusicaContext } from '@utils/context/musicaContext';
-import { UsuarioContext } from '@utils/context/usuarioContext';
 import iPlaylistMusica from '@utils/types/iPlaylistMusica';
 import Head from 'next/head';
 import Router from 'next/router';
@@ -11,8 +11,7 @@ import { Fragment, useContext, useEffect, useState } from 'react';
 
 export default function Index() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     const _musicaContext = useContext(MusicaContext); // Contexto da música;
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];

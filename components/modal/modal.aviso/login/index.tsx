@@ -1,8 +1,8 @@
+import Botao from '@components/outros/botao';
+import Styles from '@styles/index.module.scss';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import { Dispatch, useEffect, useState } from 'react';
-import Botao from '../../../outros/botao';
-import Styles from './index.module.scss';
 
 interface iParametros {
     handleModal: Dispatch<boolean>;

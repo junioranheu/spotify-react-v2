@@ -1,10 +1,11 @@
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_PLAYLISTS from '@utils/consts/data/constPlaylists';
 import CONSTS_UPLOAD from '@utils/consts/data/constUpload';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
-import { Auth, UsuarioContext } from '@utils/context/usuarioContext';
+import { Auth } from '@utils/context/usuarioContext';
 import ajustarUrl from '@utils/outros/ajustarUrl';
 import { Aviso } from '@utils/outros/aviso';
 import converterSrcImagemParaBase64 from '@utils/outros/converterSrcImagemParaBase64';
@@ -13,13 +14,12 @@ import iPlaylist from '@utils/types/iPlaylist';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import nProgress from 'nprogress';
-import { ChangeEvent, Fragment, useContext, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react';
 import NovaPlaylistComponent from '../../nova/novaPlaylist.component';
 
 export default function Playlist() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     const router = useRouter();
     const { id } = router.query;

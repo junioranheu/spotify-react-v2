@@ -1,12 +1,13 @@
+import Botao from '@components/outros/botao';
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import { FilaMusicasStorage, MusicaStorage } from '@utils/context/musicaContext';
-import { Auth, UsuarioContext } from '@utils/context/usuarioContext';
+import { Auth } from '@utils/context/usuarioContext';
 import Link from 'next/link';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { debounce } from 'ts-debounce'; // debounce: https://www.npmjs.com/package/ts-debounce | Delay React onMouseOver event: https://stackoverflow.com/a/68349975
-import Botao from '../../outros/botao';
 import BotaoSvgRedirecionar from '../../outros/botao.svg.redirecionar';
 import SetinhaBaixo from '../../svg/setinhaBaixo';
 import SpotifyLogo from '../../svg/spotifyLogo';
@@ -14,8 +15,7 @@ import Styles from './navbar-padrao.module.scss';
 
 export default function NavbarPadrao() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
     const nomeUsuario = Auth?.get()?.nomeUsuarioSistema ?? '';
 
     const [isExibirSubmenu, setIsExibirSubmenu] = useState<boolean>(false);

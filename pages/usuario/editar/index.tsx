@@ -2,17 +2,17 @@ import Botao from '@components/outros/botao';
 import Input from '@components/outros/input';
 import TopHat from '@components/outros/topHat';
 import Coracao from '@components/svg/coracao';
+import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
+import Styles from '@styles/form.module.scss';
 import CONSTS_ERROS from '@utils/consts/outros/erros';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
-import { UsuarioContext } from '@utils/context/usuarioContext';
 import validarCompletoEmail from '@utils/outros/validacoes/validar.completo.email';
 import validarCompletoNomeCompleto from '@utils/outros/validacoes/validar.completo.nomeCompleto';
 import validarCompletoNomeUsuarioSistema from '@utils/outros/validacoes/validar.completo.nomeUsuarioSistema';
 import Head from 'next/head';
 import Router from 'next/router';
-import { ChangeEvent, Fragment, useContext, useRef, useState } from 'react';
-import Styles from '../../../styles/form.module.scss';
+import { ChangeEvent, Fragment, useRef, useState } from 'react';
 
 interface iFormData {
     nomeCompleto: string;
@@ -23,8 +23,7 @@ interface iFormData {
 
 export default function Index() {
 
-    const usuarioContext = useContext(UsuarioContext); // Contexto do usuário;
-    const [isAuth, setIsAuth] = [usuarioContext?.isAuthContext[0], usuarioContext?.isAuthContext[1]];
+    const [isAuth, setIsAuth] = useUsuarioContext();
 
     const refBtn = useRef<HTMLButtonElement | any>(null);
     const [isModalAlterarSenha, setIsModalAlterarSenha] = useState<boolean>(false);
@@ -55,7 +54,7 @@ export default function Index() {
             <section className={Styles.main}>
                 <div className={Styles.mainInner}>
                     <TopHat Svg={<Coracao width='0.75rem' cor='var(--branco-escuro)' />} titulo='Atualizar dados' backgroundColor='var(--super-preto)' fontColor='var(--branco-escuro)' />
- 
+
                     <div className={`${Styles.sessao} margem0_5`}>
                         <Input
                             titulo='Nome completo'
