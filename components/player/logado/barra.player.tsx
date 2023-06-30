@@ -12,9 +12,9 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, lazy, useContext, useEffect, useState } from 'react';
-import ModalAvisoLogin from '../../modal/modal.aviso/login';
 import ModalLayout from '../../modal/_modal.layout';
 import ModalWrapper from '../../modal/_modal.wrapper';
+import ModalAvisoLogin from '../../modal/modal.aviso/login';
 import Coracao from '../../outros/coracao';
 import Aleatorio from '../../svg/barra.player/aleatorio';
 import BotaoAvancar from '../../svg/barra.player/botaoAvancar';
@@ -63,7 +63,7 @@ export default function BarraPlayer() {
 
     function handlePlay() {
         if (!musicaContext?.musicaId) {
-            setModalAvisoLoginDescricao('Nenhuma música foi selecionada. Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
+            setModalAvisoLoginDescricao('Nenhuma música foi selecionada.<br/>Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
             setIsModalAvisoLoginOpen(true);
             return false;
         }
@@ -74,7 +74,7 @@ export default function BarraPlayer() {
     // Função normal;
     function handleAvancar() {
         if (!musicaContext?.musicaId) {
-            setModalAvisoLoginDescricao('Nenhuma música foi selecionada. Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
+            setModalAvisoLoginDescricao('Nenhuma música foi selecionada.<br/>Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
             setIsModalAvisoLoginOpen(true);
             return false;
         }
@@ -149,7 +149,7 @@ export default function BarraPlayer() {
 
     function handleVoltar() {
         if (!musicaContext?.musicaId) {
-            setModalAvisoLoginDescricao('Nenhuma música foi selecionada. Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
+            setModalAvisoLoginDescricao('Nenhuma música foi selecionada.<br/>Entre em alguma playlist e comece ouvir suas músicas agora mesmo!');
             setIsModalAvisoLoginOpen(true);
             return false;
         }

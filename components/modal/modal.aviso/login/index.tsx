@@ -1,8 +1,8 @@
 import Botao from '@components/outros/botao';
-import Styles from '@styles/index.module.scss';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import { Dispatch, useEffect, useState } from 'react';
+import Styles from './index.module.scss';
 
 interface iParametros {
     handleModal: Dispatch<boolean>;
@@ -31,7 +31,7 @@ export default function ModalAvisoLogin({ handleModal, titulo, descricao, isExib
     return (
         <div className={Styles.main}>
             <span className={`${Styles.titulo} margem2`}>{(titulo ?? comentarioRandom)}</span>
-            <span className={`${Styles.texto} margem0_5`}>{descricao}</span>
+            <span className={`${Styles.texto} margem0_5`} dangerouslySetInnerHTML={{ __html: descricao }} />
 
             {
                 isExibirBotao && (

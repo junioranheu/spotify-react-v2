@@ -1,5 +1,5 @@
 .main {
-    // background-color: red;
+    // background-color: orange !important;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -16,6 +16,7 @@
         width: 90%;
         color: var(--branco-escuro);
         font-size: 1.1rem;
+        line-height: 1.75rem;
         font-weight: 400;
         opacity: 0.8;
     }
