@@ -1,7 +1,7 @@
 const CONSTS_SISTEMA = {
     NOME_SISTEMA: 'Spotify Anheu',
-    SLOGAN: 'xxx',
-    DESCRICAO_SISTEMA: 'yyy'
+    SLOGAN: '',
+    DESCRICAO_SISTEMA: ''
 };
 
 export default CONSTS_SISTEMA;

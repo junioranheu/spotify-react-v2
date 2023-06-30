@@ -1,3 +1,4 @@
+import useInstrucoesPadroes from '@hooks/outros/useInstrucoesPadroes';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import { MusicaProvider } from '@utils/context/musicaContext';
 import { UsuarioProvider } from '@utils/context/usuarioContext';
@@ -16,62 +17,10 @@ import '../styles/globals.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
 
+    useInstrucoesPadroes();
+
     const { asPath } = useRouter();
     const [url, setUrl] = useState<string>('');
-    useEffect(() => {
-        setUrl(asPath);
-
-        // Scrollar pro top automaticamente;
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-        // process.env.NODE_ENV === 'production' && console.clear(); 
-        console.clear();
-    }, [asPath]);
-
-    function verificarLayout() {
-        // console.log(`Url: ${url}`);
-
-        // if (url.includes('/yyy') || url.includes('/usuario/xxx')) {
-        //     return <LayoutDisciplinas Component={Component} pageProps={pageProps} />
-        // } if (url.includes('/zzz')) {
-        //     return <LayoutPosts Component={Component} pageProps={pageProps} />
-        // } else {
-        //     return <LayoutPadrao Component={Component} pageProps={pageProps} />
-        // }
-
-        return <LayoutPadrao Component={Component} pageProps={pageProps} />
-    }
-
-    // Não permitir F12 e clicar com o direito para inspecionar elemento;
-    useEffect(() => {
-        if (process.env.NODE_ENV === 'production') {
-            document.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-            });
-
-            document.onkeydown = function (e) {
-                if (e.keyCode == 123) {
-                    return false;
-                }
-
-                if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-                    return false;
-                }
-
-                if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-                    return false;
-                }
-
-                if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-                    return false;
-                }
-
-                if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-                    return false;
-                }
-            }
-        }
-    }, []);
-
     useEffect(() => {
         async function handleAvisoNavegador() {
             if (await pegarNomeNavegador() !== 'Chrome') {
@@ -80,7 +29,15 @@ export default function App({ Component, pageProps }: AppProps) {
         }
 
         handleAvisoNavegador();
-    }, []);
+
+        setUrl(asPath);
+
+        Aviso.warn('A API está publicada na Azure com uma subscrição free, portanto a primeira requisição pode demorar uns instantes.', 7500);
+    }, [asPath]);
+
+    function verificarLayout() {
+        return <LayoutPadrao Component={Component} pageProps={pageProps} />
+    }
 
     return url ?
         (
