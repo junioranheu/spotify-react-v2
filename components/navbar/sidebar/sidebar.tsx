@@ -2,6 +2,7 @@ import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import avisoFuncaoNaoDesenvolvida from '@utils/outros/avisoFuncaoNaoDesenvolvida';
+import emojiAleatorio from '@utils/outros/gerarEmojiAleatorio';
 import { loremIpsum } from 'lorem-ipsum';
 import Link from 'next/link';
 import Router from 'next/router';
@@ -24,11 +25,7 @@ export default function Sidebar() {
 
     const [isAuth, setIsAuth] = useUsuarioContext();
 
-    const [msg1, setMsg1] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
-    const [msg2, setMsg2] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
-    const [msg3, setMsg3] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
-    const [msg4, setMsg4] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
-
+    const [loremIpsum1] = useState<string>(loremIpsum({ count: 1, sentenceUpperBound: 5 }));
     const [modalAvisoLoginDescricao, setModalAvisoLoginDescricao] = useState('');
     const [isModalAvisoLoginOpen, setIsModalAvisoLoginOpen] = useState(false);
 
@@ -77,7 +74,7 @@ export default function Sidebar() {
                         </span>
 
                         <span onClick={() => isAuth ? Router.push(CONSTS_TELAS.FILA) : [setModalAvisoLoginDescricao('Inicie sua sessão para visualizar sua fila'), setIsModalAvisoLoginOpen(true)]}>
-                            <Biblioteca width='24px' /> <span>Sua fila</span>
+                            <Biblioteca width='24px' /> <span className='pointer'>Sua fila</span>
                         </span>
 
                         <span className='pointer' onClick={() => window.open('https://github.com/junioranheu', '_blank')}>
@@ -114,10 +111,10 @@ export default function Sidebar() {
                     <div className={Styles.divisao}></div>
 
                     <div className={Styles.divPlaylists}>
-                        <span><Link href={CONSTS_TELAS.INDEX}>{msg1}</Link></span>
-                        <span><Link href={CONSTS_TELAS.INDEX}>{msg2}</Link></span>
-                        <span><Link href={CONSTS_TELAS.INDEX}>{msg3}</Link></span>
-                        <span><Link href={CONSTS_TELAS.INDEX}>{msg4}</Link></span>
+                        <span>Playlist do carro 🚗</span>
+                        <span>Academia 🗿🍷</span>
+                        <span>Daily mix 😊</span>
+                        <span>{loremIpsum1.substring(0, 15)} {emojiAleatorio()}</span>
                     </div>
                 </aside>
             </Resizable>

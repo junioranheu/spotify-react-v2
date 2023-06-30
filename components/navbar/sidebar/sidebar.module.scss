@@ -84,7 +84,10 @@
         gap: 1.1rem;
 
         span {
+            // background-color: orange;
+            width: fit-content;
             font-weight: 400;
+            cursor: not-allowed;
         }
     }
 }
