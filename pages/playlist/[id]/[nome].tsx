@@ -198,7 +198,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                 <div className='div-padrao'>
                     <Fragment>
                         {
-                            listaMusicas && listaMusicas?.length === 0 ? (
+                            listaMusicas && listaMusicas?.length > 0 ? (
                                 <Fragment>
                                     {
                                         listaMusicas && listaMusicas.map((m: iMusica, i: number) => (

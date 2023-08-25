@@ -2,10 +2,10 @@ import useWindowSize from '@hooks//outros/useWindowSize';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_UPLOAD_PROTEGIDO from '@utils/consts/data/constUploadProtegido';
 import { FilaMusicasStorage, MusicaContext } from '@utils/context/musicaContext';
+import UUID from '@utils/outros/UUID';
 import { Aviso } from '@utils/outros/aviso';
 import converterStreamEmObjectURL from '@utils/outros/converterStreamEmObjectURL';
 import formatarSegundos from '@utils/outros/formatarSegundos';
-import UUID from '@utils/outros/UUID';
 import nProgress from 'nprogress';
 import { Fragment, MouseEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useLongPress } from 'use-long-press'; // https://www.npmjs.com/package/use-long-press
@@ -24,7 +24,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume, handleAvancar }:
     const [musicaContext, setMusicaContext] = [_musicaContext?._musicaContext[0], _musicaContext?._musicaContext[1]];
     const [isPlayingContext, setIsPlayingContext] = [_musicaContext?._isPlaying[0], _musicaContext?._isPlaying[1]];
     const [filaMusicasContext, setFilaMusicasContext] = [_musicaContext?._filaMusicasContext[0], _musicaContext?._filaMusicasContext[1]];
-    
+
     const elementoId = 'progressWrapperPlayer';
     const refMusica = useRef<HTMLMediaElement>(null);
     const [tempoSegundosMaximo, setTempoSegundosMaximo] = useState<number>(0);
@@ -154,7 +154,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume, handleAvancar }:
                 // Setar o "isJaTocada" para true para controle interno (remover da fila);
                 const listaMusicasUpdate = FilaMusicasStorage.updateIsJaTocada(musicaId, true);
                 listaMusicasUpdate && setFilaMusicasContext(listaMusicasUpdate);
- 
+
                 process.env.NODE_ENV === 'development' && Aviso.success(`Música importada com sucesso: <b>${nome}</b>`, 3000);
                 nProgress.done();
             } catch (error) {
@@ -175,7 +175,7 @@ export default function ProgressBarPlayer({ isModoLoop, volume, handleAvancar }:
     useEffect(() => {
         if (refMusica?.current && musicaContext?.musicaId) {
             // Volume;
-            const volumeAjustado = volume / 100;
+            const volumeAjustado = volume / 200;
             refMusica.current.volume = volumeAjustado;
 
             // Play ou pause;
