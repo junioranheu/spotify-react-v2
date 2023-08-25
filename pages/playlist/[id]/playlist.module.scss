@@ -63,6 +63,18 @@
     }
 }
 
+.divloading {
+    // background-color: orange !important;
+    max-width: 50rem;
+
+    .flexRow {
+        // background-color: orange !important;
+        display: flex;
+        flex-direction: row !important;
+        gap: 0rem;
+    }
+}
+
 .divisao {
     border-bottom: 1px solid rgba(42, 42, 42, 0.4);
     margin-top: 2.5rem;

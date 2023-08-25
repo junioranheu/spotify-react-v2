@@ -18,6 +18,7 @@ import iPlaylistMusica from '@utils/types/iPlaylistMusica';
 import Head from 'next/head';
 import nProgress from 'nprogress';
 import { Fragment, useContext, useEffect, useState } from 'react';
+import { Facebook, List } from 'react-content-loader';
 import Styles from './playlist.module.scss';
 
 interface iParametros {
@@ -197,7 +198,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                 <div className='div-padrao'>
                     <Fragment>
                         {
-                            listaMusicas && listaMusicas?.length > 0 ? (
+                            listaMusicas && listaMusicas?.length === 0 ? (
                                 <Fragment>
                                     {
                                         listaMusicas && listaMusicas.map((m: iMusica, i: number) => (
@@ -220,9 +221,33 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                     }
                                 </Fragment>
                             ) : (
-                                <div className='div-padrao animate__animated animate__fadeIn animate__slower'>
-                                    <span className='titulo'>Cri, cri, cri... 🦗</span>
-                                    <span className='texto'>Essa playlist ainda não tem nenhuma música!</span>
+                                <div className={`${Styles.divloading} animate__animated animate__fadeIn animate__slower`}>
+                                    <Facebook style={{ width: '100%' }} />
+
+                                    <div className={Styles.flexRow}>
+                                        <List style={{ width: '100%' }} />
+                                        <List style={{ width: '100%' }} />
+                                    </div>
+
+                                    <div className={`${Styles.flexRow} margem3`}>
+                                        <List style={{ width: '100%' }} />
+                                        <List style={{ width: '100%' }} />
+                                    </div>
+
+                                    <div className={`${Styles.flexRow} margem3`}>
+                                        <List style={{ width: '100%' }} />
+                                        <List style={{ width: '100%' }} />
+                                    </div>
+
+                                    <div className={`${Styles.flexRow} margem3`}>
+                                        <List style={{ width: '100%' }} />
+                                        <List style={{ width: '100%' }} />
+                                    </div>
+
+                                    <div className={`${Styles.flexRow} margem3`}>
+                                        <List style={{ width: '100%' }} />
+                                        <List style={{ width: '100%' }} />
+                                    </div>
                                 </div>
                             )
                         }
