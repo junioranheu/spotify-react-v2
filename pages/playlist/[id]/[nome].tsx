@@ -198,7 +198,7 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                 <div className='div-padrao'>
                     <Fragment>
                         {
-                            listaMusicas && listaMusicas?.length > 0 ? (
+                            listaMusicas && listaMusicas?.length > 1000 ? (
                                 <Fragment>
                                     {
                                         listaMusicas && listaMusicas.map((m: iMusica, i: number) => (
@@ -222,32 +222,11 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                                 </Fragment>
                             ) : (
                                 <div className={`${Styles.divloading} animate__animated animate__fadeIn animate__slower`}>
-                                    <Facebook style={{ width: '100%' }} />
-
-                                    <div className={Styles.flexRow}>
-                                        <List style={{ width: '100%' }} />
-                                        <List style={{ width: '100%' }} />
-                                    </div>
-
-                                    <div className={`${Styles.flexRow} margem3`}>
-                                        <List style={{ width: '100%' }} />
-                                        <List style={{ width: '100%' }} />
-                                    </div>
-
-                                    <div className={`${Styles.flexRow} margem3`}>
-                                        <List style={{ width: '100%' }} />
-                                        <List style={{ width: '100%' }} />
-                                    </div>
-
-                                    <div className={`${Styles.flexRow} margem3`}>
-                                        <List style={{ width: '100%' }} />
-                                        <List style={{ width: '100%' }} />
-                                    </div>
-
-                                    <div className={`${Styles.flexRow} margem3`}>
-                                        <List style={{ width: '100%' }} />
-                                        <List style={{ width: '100%' }} />
-                                    </div>
+                                    <Loader isModoAlt={true} isMargem={false} />
+                                    <Loader isModoAlt={false} isMargem={false} />
+                                    <Loader isModoAlt={false} isMargem={true} />
+                                    <Loader isModoAlt={false} isMargem={true} />
+                                    <Loader isModoAlt={false} isMargem={true} />
                                 </div>
                             )
                         }
@@ -255,6 +234,24 @@ export default function Playlist({ playlist, imgCapa }: iParametros) {
                 </div>
             </section>
         </Fragment>
+    )
+}
+
+interface iParametrosLoader {
+    isModoAlt: boolean;
+    isMargem: boolean;
+}
+
+function Loader({ isModoAlt, isMargem }: iParametrosLoader) {
+    return (
+        isModoAlt ? (
+            <Facebook style={{ width: '100%' }} speed={1.75} animate={true} backgroundOpacity={0.7} />
+        ) : (
+            <div className={`${Styles.flexRow} ${(isMargem ? 'margem3' : '')}`}>
+                <List style={{ width: '100%' }} speed={1.75} animate={true} backgroundOpacity={0.7} />
+                <List style={{ width: '100%' }} speed={1.75} animate={true} backgroundOpacity={0.7} />
+            </div>
+        )
     )
 }
 
