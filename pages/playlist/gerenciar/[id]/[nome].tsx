@@ -25,16 +25,6 @@ export default function Playlist() {
     const { id } = router.query;
     const usuarioId = Auth?.get()?.usuarioId ?? 0;
 
-    const refBtn = useRef<HTMLButtonElement | any>(null);
-
-    const [arquivoUploadCapa, setArquivoUploadCapa] = useState<string | null>(''); // ('/1.webp');
-    const [formData, setFormData] = useState<iFormDataPlaylist>({
-        nome: '',
-        sobre: '',
-        foto: arquivoUploadCapa,
-        corDominante: ''
-    });
-
     const [playlist, setPlaylist] = useState<iPlaylist>();
     useEffect(() => {
         async function getPlaylist(playlistId: string) {
@@ -73,7 +63,17 @@ export default function Playlist() {
         if (id) {
             getPlaylist(id.toString());
         }
-    }, [id, usuarioId, formData]);
+    }, [id, usuarioId]);
+
+    const refBtn = useRef<HTMLButtonElement | any>(null);
+
+    const [arquivoUploadCapa, setArquivoUploadCapa] = useState<string | null>(''); // ('/1.webp');
+    const [formData, setFormData] = useState<iFormDataPlaylist>({
+        nome: '',
+        sobre: '',
+        foto: arquivoUploadCapa,
+        corDominante: ''
+    });
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setFormData({ ...formData, [e?.target?.name]: e?.target?.value });
