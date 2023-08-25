@@ -13,6 +13,7 @@ const ImageWithFallback = (props: any) => {
                 setImgSrc(fallbackSrc);
             }}
             alt=''
+            priority={true}
         />
     );
 };

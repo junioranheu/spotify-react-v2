@@ -15,12 +15,17 @@ interface iParametros {
 }
 
 export default function Playlists({ listaPlaylists }: iParametros) {
+
+    // useEffect(() => {
+    //     console.log(listaPlaylists);
+    // }, listaPlaylists);
+
     return (
         listaPlaylists && listaPlaylists?.length > 0 ? (
             <ScrollContainer className={Styles.divPlaylists}>
-                { 
+                {
                     listaPlaylists?.filter(x => x.isAtivo === true).map((p) => (
-                        <Link href={`/${CONSTS_TELAS.PLAYLIST}/${p.playlistId}/${ajustarUrl(p.nome)}`} passHref key={p.playlistId}>
+                        <Link href={`${CONSTS_TELAS.PLAYLIST}/${p.playlistId}/${ajustarUrl(p.nome)}`} passHref key={p.playlistId}>
                             <div className={Styles.playlist}>
                                 <div className={Styles.divThumbnail}>
                                     <ImageWithFallback

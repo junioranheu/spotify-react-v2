@@ -23,7 +23,7 @@ export default async function verificarTokenValido(isAuth: boolean | undefined) 
                     'Tempo até a expiração': converterTempoDecimalEmFormatoPadrao(diferencaDatasEmHoras(dataExpiracaoToken, horaAgora), TIPOS_DURACAO_MOMENT.HORAS)
                 }
 
-                console.table(info);
+                // console.table(info);
             } catch (error) {
 
             }
