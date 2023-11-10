@@ -34,7 +34,7 @@ export default function useCheckServidorAzure() {
         const timeout = setTimeout(() => {
             if (loading) {
                 Swal.fire({
-                    html: '<p>A API está publicada na Azure com uma subscrição free, portanto a primeira requisição pode demorar um pouco.<p><br/><p><b>Aguarde uns instantes</b> enquanto o servidor está iniciando!</p>',
+                    html: '<p>A API está publicada na Azure com uma subscrição free, portanto a primeira requisição pode demorar um pouco.<p><p><b>Aguarde uns instantes</b> enquanto o servidor está iniciando!</p>',
                     allowOutsideClick: false,
                     didOpen: () => {
                         Swal.showLoading();
