@@ -33,10 +33,6 @@ export default function App({ Component, pageProps }: AppProps) {
         setUrl(asPath);
     }, [asPath]);
 
-    useEffect(() => {
-        Aviso.warn('A API está publicada na Azure com uma subscrição free, portanto a primeira requisição pode demorar uns instantes.', 7500);
-    }, []);
-
     function verificarLayout() {
         return <LayoutPadrao Component={Component} pageProps={pageProps} />
     }

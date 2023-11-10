@@ -337,6 +337,38 @@ input[type=radio] {
     max-height: 16px;
 }
 
+/* =-=-=-=-=-=-=-=-=-=-= Swal =-=-=-=-=-=-=-=-=-=-= */
+.swal2-popup {
+    padding: 2.5rem !important;
+    border-radius: 0.85rem !important;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1) !important;
+
+    .swal2-html-container {
+        // background-color: orange;
+        font-weight: 500 !important;
+        font-size: 1rem !important;
+        font-family: inherit !important;
+        text-align: left !important;
+    }
+
+    button {
+        background-color: var(--principal) !important;
+        font-weight: 600 !important;
+        font-size: 0.85rem !important;
+        letter-spacing: 1px !important;
+        padding: 1rem 2rem !important;
+        color: var(--branco) !important;
+        box-shadow: none !important;
+        min-width: 10rem !important;
+        border-radius: 0.4rem !important;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    img {
+        border-radius: 0.25rem;
+    }
+}
+
 /* =-=-=-=-=-=-=-=-=-=-= Scroll =-=-=-=-=-=-=-=-=-=-= */
 ::-webkit-scrollbar {
     width: 7px;
