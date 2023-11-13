@@ -367,6 +367,11 @@ input[type=radio] {
     img {
         border-radius: 0.25rem;
     }
+
+    .swal2-loader {
+        border-bottom-color: var(--cor-principal);
+        border-top-color: var(--cor-principal);
+    }
 }
 
 /* =-=-=-=-=-=-=-=-=-=-= Scroll =-=-=-=-=-=-=-=-=-=-= */
