@@ -17,6 +17,6 @@ export default function swalAvisoBancoDeDados(videoPath: string) {
         allowOutsideClick: false,
         allowEscapeKey: false,
         showDenyButton: false,
-        showConfirmButton: false
+        showConfirmButton: true
     });
 }
