@@ -1,4 +1,5 @@
 import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
+import swalAvisoBancoDeDados from '@utils/outros/swal.avisoBancoDeDados';
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import CONSTS_ERROS from '../consts/outros/erros';
@@ -162,6 +163,15 @@ export const Fetch = {
     },
 
     async refreshToken(token: string, erro: any, verboHTTP: string, url: string | null, body: string | null, isTentarRefreshToken: boolean): Promise<any> {
+        // RIP banco de dados;
+        if (true) {
+            setTimeout(() => {
+                swalAvisoBancoDeDados('/videos/sample.mp4');
+            }, 1250);
+
+            return null;
+        }
+
         if (token && erro === 'Unexpected end of JSON input' && isTentarRefreshToken) {
             const urlRefreshToken = CONSTS_AUTENTICAR.API_URL_POST_REFRESH_TOKEN;
             const dto = {

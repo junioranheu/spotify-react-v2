@@ -339,7 +339,7 @@ input[type=radio] {
 
 /* =-=-=-=-=-=-=-=-=-=-= Swal =-=-=-=-=-=-=-=-=-=-= */
 .swal2-popup {
-    padding: 2.5rem !important;
+    padding: 1rem 1.5rem !important;
     border-radius: 0.85rem !important;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1) !important;
 
@@ -349,10 +349,17 @@ input[type=radio] {
         font-size: 1rem !important;
         font-family: inherit !important;
         text-align: left !important;
+
+        video {
+            // background-color: tomato !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.4rem !important;
+        }
     }
 
     button {
-        background-color: var(--principal) !important;
+        background-color: var(--cor-principal) !important;
         font-weight: 600 !important;
         font-size: 0.85rem !important;
         letter-spacing: 1px !important;
@@ -364,8 +371,31 @@ input[type=radio] {
         box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15) !important;
     }
 
-    img {
-        border-radius: 0.25rem;
+    .swal2-cancel {
+        background-color: var(--branco) !important;
+        color: var(--preto) !important;
+        box-shadow: none !important;
+    }
+
+    .swal2-title {
+        font-size: 1.35rem !important;
+        color: var(--preto) !important;
+    }
+
+    .swal2-input {
+        // box-shadow: none !important;
+
+        &::-webkit-input-placeholder {
+            font-size: 1.05rem;
+        }
+    }
+
+    .swal2-image {
+        // background-color: orange !important;
+        border-radius: 0.3rem !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        width: 100% !important;
+        height: auto !important;
     }
 
     .swal2-loader {
