@@ -1,4 +1,5 @@
-import swalAvisoBancoDeDados from '@utils/outros/swal.avisoBancoDeDados';
+import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
+import iContextDadosUsuario from '@utils/types/iContext.dadosUsuario';
 import Router from 'next/router';
 import nProgress from 'nprogress';
 import CONSTS_ERROS from '../consts/outros/erros';
@@ -161,69 +162,69 @@ export const Fetch = {
     },
 
     async refreshToken(token: string, erro: any, verboHTTP: string, url: string | null, body: string | null, isTentarRefreshToken: boolean): Promise<any> {
-        // RIP banco de dados;
-        if (true) {
-            setTimeout(() => {
-                swalAvisoBancoDeDados('/videos/sample.mp4');
-            }, 1250);
+        // // RIP banco de dados;
+        // if (true) {
+        //     setTimeout(() => {
+        //         swalAvisoBancoDeDados('/videos/sample.mp4');
+        //     }, 1250);
 
-            return null;
-        }
-
-        // if (token && erro === 'Unexpected end of JSON input' && isTentarRefreshToken) {
-        //     const urlRefreshToken = CONSTS_AUTENTICAR.API_URL_POST_REFRESH_TOKEN;
-        //     const dto = {
-        //         token: token,
-        //         refreshToken: (Auth?.get()?.refreshToken ?? '')
-        //     };
-
-        //     // Fazer requisição para o end-point de refresh token
-        //     const respostaRefreshToken = await Fetch.postApi(urlRefreshToken, dto);
-        //     if (!respostaRefreshToken || respostaRefreshToken?.erro) {
-        //         console.log(respostaRefreshToken?.mensagemErro ?? 'Houve um erro ao gerar o refresh token');
-        //         Fetch.deslogarUsuarioRefreshTokenInvalido();
-        //         return false;
-        //     }
-
-        //     // Atualizar dados no local storage;
-        //     const dadosUsuario = {
-        //         token: respostaRefreshToken.token,
-        //         refreshToken: respostaRefreshToken.refreshToken
-        //     } as iContextDadosUsuario;
-
-        //     Auth.update(dadosUsuario);
-
-        //     const msgRefreshTokenAtualizado = 'Refresh token atualizado';
-        //     console.log(msgRefreshTokenAtualizado);
-
-        //     if (process.env.NODE_ENV === 'development') {
-        //         Aviso.success(msgRefreshTokenAtualizado, 5000);
-        //     }
-
-        //     // Tentar novamente a chamada para o end-point requisitado, mas agora com o novo token;
-        //     let respostaJson;
-
-        //     if (url) {
-        //         try {
-        //             if (verboHTTP === VERBOS_HTTP.GET) {
-        //                 respostaJson = await Fetch.getApi(url, false);
-        //             } else if (verboHTTP === VERBOS_HTTP.POST) {
-        //                 respostaJson = await Fetch.postApi(url, body, false);
-        //             } else if (verboHTTP === VERBOS_HTTP.PUT) {
-        //                 respostaJson = await Fetch.putApi(url, body, false);
-        //             } else if (verboHTTP === VERBOS_HTTP.DELETE) {
-        //                 respostaJson = await Fetch.deleteApi(url, body, false);
-        //             } else if (verboHTTP === 'GET_STREAM') {
-        //                 respostaJson = await Fetch.getApiStream(url, false);
-        //             }
-        //         } catch (error) {
-        //             Fetch.deslogarUsuarioRefreshTokenInvalido();
-        //             return false;
-        //         }
-        //     }
-
-        //     return respostaJson;
+        //     return null;
         // }
+
+        if (token && erro === 'Unexpected end of JSON input' && isTentarRefreshToken) {
+            const urlRefreshToken = CONSTS_AUTENTICAR.API_URL_POST_REFRESH_TOKEN;
+            const dto = {
+                token: token,
+                refreshToken: (Auth?.get()?.refreshToken ?? '')
+            };
+
+            // Fazer requisição para o end-point de refresh token
+            const respostaRefreshToken = await Fetch.postApi(urlRefreshToken, dto);
+            if (!respostaRefreshToken || respostaRefreshToken?.erro) {
+                console.log(respostaRefreshToken?.mensagemErro ?? 'Houve um erro ao gerar o refresh token');
+                Fetch.deslogarUsuarioRefreshTokenInvalido();
+                return false;
+            }
+
+            // Atualizar dados no local storage;
+            const dadosUsuario = {
+                token: respostaRefreshToken.token,
+                refreshToken: respostaRefreshToken.refreshToken
+            } as iContextDadosUsuario;
+
+            Auth.update(dadosUsuario);
+
+            const msgRefreshTokenAtualizado = 'Refresh token atualizado';
+            console.log(msgRefreshTokenAtualizado);
+
+            if (process.env.NODE_ENV === 'development') {
+                Aviso.success(msgRefreshTokenAtualizado, 5000);
+            }
+
+            // Tentar novamente a chamada para o end-point requisitado, mas agora com o novo token;
+            let respostaJson;
+
+            if (url) {
+                try {
+                    if (verboHTTP === VERBOS_HTTP.GET) {
+                        respostaJson = await Fetch.getApi(url, false);
+                    } else if (verboHTTP === VERBOS_HTTP.POST) {
+                        respostaJson = await Fetch.postApi(url, body, false);
+                    } else if (verboHTTP === VERBOS_HTTP.PUT) {
+                        respostaJson = await Fetch.putApi(url, body, false);
+                    } else if (verboHTTP === VERBOS_HTTP.DELETE) {
+                        respostaJson = await Fetch.deleteApi(url, body, false);
+                    } else if (verboHTTP === 'GET_STREAM') {
+                        respostaJson = await Fetch.getApiStream(url, false);
+                    }
+                } catch (error) {
+                    Fetch.deslogarUsuarioRefreshTokenInvalido();
+                    return false;
+                }
+            }
+
+            return respostaJson;
+        }
     },
 
     deslogarUsuarioRefreshTokenInvalido() {
