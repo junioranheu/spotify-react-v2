@@ -21,10 +21,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
     const { asPath } = useRouter();
     const [url, setUrl] = useState<string>('');
+    
     useEffect(() => {
         async function handleAvisoNavegador() {
             if (await pegarNomeNavegador() !== 'Chrome') {
-                Aviso.warn('Parece que seu navegador não é o <b>Google Chrome</b>! Isso talvez possa afetar negativamente em alguns pontos, como: imagens e até mesmo ao tocar alguma música!', 10000);
+                // Aviso.warn('Parece que seu navegador não é o <b>Google Chrome</b>! Isso talvez possa afetar negativamente em alguns pontos, como: imagens e até mesmo ao tocar alguma música!', 10000);
             }
         }
 
