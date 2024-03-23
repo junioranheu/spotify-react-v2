@@ -171,6 +171,23 @@ img {
     color: var(--cinza-claro);
 }
 
+.div-logo {
+    // background-color: pink !important;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'NanumPenScript';
+
+    span {
+        // background-color: orange;
+        color: var(--branco) !important;
+        font-weight: normal !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.075rem !important;
+    }
+}
+
 /* =-=-=-=-=-=-=-=-= Input, textarea e select "padrão" =-=-=-=-=-=-=-=-= */
 .input {
     font-size: 1rem;

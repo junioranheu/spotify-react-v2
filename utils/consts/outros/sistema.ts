@@ -1,5 +1,5 @@
 const CONSTS_SISTEMA = {
-    NOME_SISTEMA: 'Spotify Anheu',
+    NOME_SISTEMA: '@SpotifyAnheu',
     SLOGAN: '',
     DESCRICAO_SISTEMA: ''
 };

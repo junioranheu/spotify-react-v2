@@ -2,7 +2,6 @@ import useInstrucoesPadroes from '@hooks/outros/useInstrucoesPadroes';
 import CONSTS_SISTEMA from '@utils/consts/outros/sistema';
 import { MusicaProvider } from '@utils/context/musicaContext';
 import { UsuarioProvider } from '@utils/context/usuarioContext';
-import { Aviso } from '@utils/outros/aviso';
 import pegarNomeNavegador from '@utils/outros/pegarNomeNavegador';
 import 'animate.css/animate.min.css';
 import type { AppProps } from 'next/app';
@@ -14,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LayoutPadrao from '../layouts/layoutPadrao';
 import '../styles/globals.scss';
+import '../utils/fonts/NanumPenScript/NanumPenScript.css';
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     const { asPath } = useRouter();
     const [url, setUrl] = useState<string>('');
-    
+
     useEffect(() => {
         async function handleAvisoNavegador() {
             if (await pegarNomeNavegador() !== 'Chrome') {

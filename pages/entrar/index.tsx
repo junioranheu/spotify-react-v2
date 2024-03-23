@@ -2,6 +2,7 @@ import ModalLayout from '@components/modal/_modal.layout';
 import ModalWrapper from '@components/modal/_modal.wrapper';
 import ModalAvisoLogin from '@components/modal/modal.aviso/login';
 import Botao from '@components/outros/botao';
+import SpotifyLogo from '@components/svg/spotifyLogo';
 import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
@@ -123,7 +124,11 @@ export default function Index() {
             {/* Conteúdo */}
             <section className={Styles.container}>
                 <div className={Styles.containerInner}>
-                    <span className={Styles.titulo}>Bem-vindo ao {CONSTS_SISTEMA.NOME_SISTEMA}</span>
+                    <div>
+                        <SpotifyLogo width='8rem' />
+                    </div>
+
+                    <span className={`${Styles.titulo} margem1`}>Bem-vindo ao {CONSTS_SISTEMA.NOME_SISTEMA}</span>
 
                     <div>
                         <input className='input margem1' type='text' placeholder='E-mail ou nome de usuário'

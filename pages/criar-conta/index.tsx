@@ -1,4 +1,5 @@
 import Botao from '@components/outros/botao';
+import SpotifyLogo from '@components/svg/spotifyLogo';
 import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import { Fetch } from '@utils/api/fetch';
 import CONSTS_AUTENTICAR from '@utils/consts/data/constAutenticar';
@@ -122,7 +123,11 @@ export default function CriarConta() {
             {/* Conteúdo */}
             <section className={Styles.container}>
                 <div className={Styles.containerInner}>
-                    <span className={Styles.titulo}>Crie sua conta no {CONSTS_SISTEMA.NOME_SISTEMA}</span>
+                    <div>
+                        <SpotifyLogo width='8rem' />
+                    </div>
+
+                    <span className={`${Styles.titulo} margem1`}>Crie sua conta no {CONSTS_SISTEMA.NOME_SISTEMA}</span>
 
                     <div>
                         <input className='input margem1' type='text' placeholder='Nome completo'

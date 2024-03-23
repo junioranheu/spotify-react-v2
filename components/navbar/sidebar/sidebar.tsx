@@ -2,7 +2,6 @@ import useUsuarioContext from '@hooks/api/context/useUsuarioContext';
 import CONSTS_MODAL from '@utils/consts/outros/modal.tamanho';
 import CONSTS_TELAS from '@utils/consts/outros/telas';
 import avisoFuncaoNaoDesenvolvida from '@utils/outros/avisoFuncaoNaoDesenvolvida';
-import emojiAleatorio from '@utils/outros/gerarEmojiAleatorio';
 import { loremIpsum } from 'lorem-ipsum';
 import Link from 'next/link';
 import Router from 'next/router';
@@ -112,9 +111,10 @@ export default function Sidebar() {
 
                     <div className={Styles.divPlaylists}>
                         <span>Playlist do carro 🚗</span>
+                        <span>Oasis 🎵</span>
                         <span>Academia 🗿🍷</span>
                         <span>Daily mix 😊</span>
-                        <span>{loremIpsum1.substring(0, 15)} {emojiAleatorio()}</span>
+                        <span>The Shins & Broken Bells 🎶</span>
                     </div>
                 </aside>
             </Resizable>
