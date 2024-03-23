@@ -27,6 +27,7 @@
     "re-resizable": "^6.9.9",
     "react": "18.2.0",
     "react-content-loader": "^6.2.1",
+    "react-cookie-gpdr": "^1.0.2",
     "react-cropper": "^2.1.8",
     "react-dom": "18.2.0",
     "react-drag-drop-files": "^2.3.8",

@@ -181,7 +181,7 @@ img {
 
     span {
         // background-color: orange;
-        color: var(--branco) !important;
+        color: var(--branco-escuro) !important;
         font-weight: normal !important;
         font-size: 0.75rem !important;
         letter-spacing: 0.075rem !important;
@@ -418,6 +418,75 @@ input[type=radio] {
     .swal2-loader {
         border-bottom-color: var(--cor-principal);
         border-top-color: var(--cor-principal);
+    }
+}
+
+/* =-=-=-=-=-=-=-=-=-=-= react-cookie-gpdr =-=-=-=-=-=-=-=-=-=-= */
+.cookie_widget_container {
+    background: rgba(255, 255, 255, 0.925) !important;
+    border: none !important;
+    min-width: 27rem !important;
+    font-family: inherit !important;
+
+    .cookie_widget_shape_2 {
+        background-color: rgba(29, 208, 94, 0.5);
+    }
+
+    .cookie_widget_title {
+        // background-color: orange;
+        min-height: 3rem;
+        font-size: 1.5rem;
+        color: var(--preto) !important;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cookie_widget_subtitle {
+        // background-color: orange;
+        margin-top: 1.25rem !important;
+        margin-bottom: -0.75rem !important;
+
+        color: var(--preto) !important;
+        opacity: 0.9;
+        font-size: 0.9rem;
+        font-weight: 400;
+    }
+
+    .cookie_widget_text {
+        color: var(--preto) !important;
+        opacity: 0.9 !important;
+        font-weight: 400;
+    }
+
+    .cookie_widget_footer {
+        // background-color: orange;
+        // border-color: var(--preto-alternativo) !important;
+
+        .cookie_widget_button_reject {
+            // background-color: orange;
+            color: var(--preto) !important;
+        }
+
+        .cookie_widget_button_accept {
+            // background-color: orange;
+            color: var(--cor-principal) !important;
+        }
+
+        .cookie_widget_button_reject,
+        .cookie_widget_button_accept {
+            opacity: 0.9;
+            font-family: inherit !important;
+            // border-color: var(--preto-alternativo) !important;
+            transition: 0.2s;
+
+            &:hover {
+                background-color: var(--principal);
+                color: var(--branco-alt) !important;
+                transition: 0.2s;
+            }
+        }
     }
 }
 
