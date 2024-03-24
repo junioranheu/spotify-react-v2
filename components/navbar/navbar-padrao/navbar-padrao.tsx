@@ -51,7 +51,7 @@ export default function NavbarPadrao() {
             </div>
 
             <div className={Styles.divGap}>
-                <BotaoSvgRedirecionar width='1.2rem' isVoltar={true} />
+                <BotaoSvgRedirecionar isVoltar={true} />
             </div>
 
             <div className={Styles.divDireita}>
