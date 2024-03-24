@@ -449,15 +449,15 @@ input[type=radio] {
         margin-bottom: -0.75rem !important;
 
         color: var(--preto) !important;
-        opacity: 0.9;
-        font-size: 0.9rem;
-        font-weight: 400;
+        opacity: 0.9 !important;
+        font-size: 0.9rem !important;
+        font-weight: 400 !important;
     }
 
     .cookie_widget_text {
         color: var(--preto) !important;
         opacity: 0.9 !important;
-        font-weight: 400;
+        font-weight: 400 !important;
     }
 
     .cookie_widget_footer {
