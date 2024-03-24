@@ -1,4 +1,6 @@
+import verificarIsIframe from '@utils/outros/verificar.isIframe';
 import { useRouter } from 'next/router';
+import { Fragment, useEffect, useState } from 'react';
 import Styles from './styles/botao.svg.redirecionar.module.scss';
 
 interface iParametros {
@@ -19,11 +21,21 @@ export default function BotaoSvgRedirecionar({ width, isVoltar }: iParametros) {
         }
     }
 
+    const [isIFrame, setIsIFrame] = useState(false);
+
+    useEffect(() => {
+        setIsIFrame(verificarIsIframe())
+    }, []);
+
     return (
-        <div className={Styles.divBtn} onClick={() => handleRota()}>
-            <svg role='img' width={width ?? '1rem'} aria-hidden='true' viewBox='0 0 24 24'>
-                <path d={(isVoltar ? svgVoltar : svgIr)}></path>
-            </svg>
-        </div>
+        isIFrame ? (
+            <Fragment></Fragment>
+        ) : (
+            <div className={Styles.divBtn} onClick={() => handleRota()}>
+                <svg role='img' width={width ?? '1rem'} aria-hidden='true' viewBox='0 0 24 24'>
+                    <path d={(isVoltar ? svgVoltar : svgIr)}></path>
+                </svg>
+            </div>
+        )
     )
 }
