@@ -1,6 +1,6 @@
 # Disclaimer de dezembro de 2023
 
-Esse código foi desenvolvido em 2022, portanto não está super consistente ou limpo.
+Esse código foi desenvolvido no começo de 2022, portanto não está super consistente ou limpo (melhorei bastante já! haha).
 
 # Clone do Spotify v2
 
