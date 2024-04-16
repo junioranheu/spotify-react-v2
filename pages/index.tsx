@@ -37,7 +37,7 @@ export default function Index({ listaPlaylistsAdm }: iParametros) {
                 <span className={Styles.bomDia}>{gerarOla()}</span>
 
                 <div className={Styles.div}>
-                    <span className='titulo'>Playlists oficiais {emojiAleatorio()}</span>
+                    <span className='titulo'>Playlists oficiais {emojiAleatorio()} {emojiAleatorio()}</span>
                     <Playlists listaPlaylists={listaPlaylistsAdm} />
                 </div>
 
